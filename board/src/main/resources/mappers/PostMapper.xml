@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="plming.board.mapper.PostMapper">
+    <sql id="postColumns">
+        id, user, title, category, status, participant_num, period,
+        content, view_cnt, create_date, update_date, delete_yn
+    </sql>
+
+    <insert id="insertPost" parameterType="PostDTO">
+        INSERT INTO post (<include refid="postColumns" />)
+        VALUES (
+                #{id}, #{user}, #{title}, #{category}, #{status}, 0, #{period},
+                #{content}, 0, NOW(), NULL, 'N'
+        )
+    </insert>
+
+    <select id="selectPostDetail" parameterType="long" resultType="PostDTO">
+        SELECT <include refid="postColumns" />
+        FROM post
+        WHERE delete_yn = 'N'
+        AND id = #{id}
+    </select>
+
+    <update id="updatePost" parameterType="PostDTO">
+        UPDATE post
+        SET update_date = NOW(), title = #{title},
+            content = #{content}, user = #{user}
+        WHERE id = #{id}
+    </update>
+
+    <update id="deletePost" parameterType="long">
+        UPDATE post
+        SET delete_yn = 'Y'
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectPostList" parameterType="PostDTO" resultType="PostDTO">
+        SELECT <include refid="postColumns"/>
+        FROM post
+        WHERE delete_yn = 'N'
+        ORDER BY id DESC, create_date DESC
+    </select>
+
+    <select id="selectPostTotalCount" parameterType="PostDTO" resultType="int">
+        SELECT COUNT(*)
+        FROM post
+        WHERE delete_yn = 'N'
+    </select>
+
+</mapper>
