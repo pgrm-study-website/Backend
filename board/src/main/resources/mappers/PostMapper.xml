@@ -7,7 +7,7 @@
         content, view_cnt, create_date, update_date, delete_yn
     </sql>
 
-    <insert id="insertPost" parameterType="PostDTO">
+    <insert id="insertPost" parameterType="PostDTO" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO post (<include refid="postColumns" />)
         VALUES (
                 #{id}, #{user}, #{title}, #{category}, #{status}, 0, #{period},
@@ -22,14 +22,14 @@
         AND id = #{id}
     </select>
 
-    <update id="updatePost" parameterType="PostDTO">
+    <update id="updatePost" parameterType="PostDTO" useGeneratedKeys="true" keyProperty="id">
         UPDATE post
         SET update_date = NOW(), title = #{title},
             content = #{content}, user = #{user}
         WHERE id = #{id}
     </update>
 
-    <update id="deletePost" parameterType="long">
+    <update id="deletePost" parameterType="long" useGeneratedKeys="true" keyProperty="id">
         UPDATE post
         SET delete_yn = 'Y'
         WHERE id = #{id}
@@ -47,5 +47,9 @@
         FROM post
         WHERE delete_yn = 'N'
     </select>
+
+    <delete id="clearStore">
+        DELETE FROM post
+    </delete>
 
 </mapper>

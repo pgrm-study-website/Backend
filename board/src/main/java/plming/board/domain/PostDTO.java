@@ -43,4 +43,7 @@ public class PostDTO {
 
     /** 삭제 여부 */
     private String deleteYn;
+
+    public PostDTO() {
+    }
 }

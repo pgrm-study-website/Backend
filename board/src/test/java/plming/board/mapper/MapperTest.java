@@ -1,4 +1,4 @@
-package plming.board;
+package plming.board.mapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -117,6 +117,12 @@ public class MapperTest {
                 }
             }
         }
+    }
+
+    @Test
+    public void clearStoreTest() {
+        postMapper.clearStore();
+        System.out.println("모든 데이터가 삭제 되었습니다.");
     }
 }
 

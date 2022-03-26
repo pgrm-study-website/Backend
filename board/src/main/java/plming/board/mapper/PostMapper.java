@@ -8,15 +8,17 @@ import java.util.List;
 @Mapper
 public interface PostMapper {
 
-    public int insertPost(PostDTO post);
+    int insertPost(PostDTO post);
 
-    public int updatePost(PostDTO post);
+    int updatePost(PostDTO post);
 
-    public int deletePost(Long id);
+    int deletePost(Long id);
 
-    public PostDTO selectPostDetail(Long id);
+    PostDTO selectPostDetail(Long id);
 
-    public List<PostDTO> selectPostList();
+    List<PostDTO> selectPostList();
 
-    public int selectPostTotalCount();
+    int selectPostTotalCount();
+
+    void clearStore();
 }
