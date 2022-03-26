@@ -4,86 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="addc3023-d2a9-4fdb-8bc4-952b98ad117f" name="Changes" comment="Feat: 게시글 등록 기능 구현&#10;&#10;게시글 등록 기능 구현&#10;&#9;- PostService.java: 게시글 등록 로직 인터페이스&#10;&#9;- PostServiceImpl.java: 게시글 등록 로직을 구현한 클래스&#10;&#9;- ServiceTest.java: PostServiceImpl.java에 구현된 메서드를 테스트하는 클래스&#10;&#9;- PostController.java: 게시글 등록을 관리하는 컨트롤러 클래스&#10;&#9;- src/main/resources: 부트스트랩 관련 파일 추가">
+    <list default="true" id="addc3023-d2a9-4fdb-8bc4-952b98ad117f" name="Changes" comment="">
       <changelist_data name="SulimChoi" email="66582313+sulimchoi@users.noreply.github.com" date="1648278626000" />
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/PostController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/domain/PostDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/mapper/PostMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/PostService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/PostServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/PostMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/style.css.bak" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/css/font-awesome.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/css/font-awesome.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/fonts/FontAwesome.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/fonts/fontawesome-webfont.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/fonts/fontawesome-webfont.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/fonts/fontawesome-webfont.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/fonts/fontawesome-webfont.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/fonts/fontawesome-webfont.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/less/animated.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/less/bordered-pulled.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/less/core.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/less/fixed-width.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/less/font-awesome.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/less/icons.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/less/larger.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/less/list.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/less/mixins.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/less/path.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/less/rotated-flipped.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/less/screen-reader.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/less/stacked.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/less/variables.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/scss/_animated.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/scss/_bordered-pulled.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/scss/_core.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/scss/_fixed-width.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/scss/_icons.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/scss/_larger.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/scss/_list.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/scss/_mixins.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/scss/_path.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/scss/_rotated-flipped.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/scss/_screen-reader.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/scss/_stacked.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/scss/_variables.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/font-awesome/scss/font-awesome.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/bootstrap/css/bootstrap-theme.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/bootstrap/css/bootstrap-theme.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/bootstrap/css/bootstrap-theme.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/bootstrap/css/bootstrap-theme.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/bootstrap/css/bootstrap.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/bootstrap/css/bootstrap.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/bootstrap/css/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/bootstrap/css/bootstrap.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/bootstrap/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/bootstrap/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/bootstrap/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/bootstrap/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/bootstrap/js/bootstrap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/bootstrap/js/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/bootstrap/js/npm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/plugin/mCustomScrollbar/mCSB_buttons.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/scripts/common.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/scripts/jquery.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/scripts/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/posts/fragments/body.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/posts/fragments/header.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/posts/layout/basic.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/posts/write.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/plming/board/mapper/MapperTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/plming/board/service/ServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,7 +161,7 @@
       <workItem from="1648162361738" duration="33809000" />
       <workItem from="1648255548976" duration="11384000" />
       <workItem from="1648269450105" duration="15810000" />
-      <workItem from="1648299538189" duration="1080000" />
+      <workItem from="1648299538189" duration="1356000" />
     </task>
     <servers />
   </component>
