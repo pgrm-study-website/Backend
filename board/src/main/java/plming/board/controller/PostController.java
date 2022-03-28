@@ -1,15 +1,16 @@
 package plming.board.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import plming.board.domain.PostDTO;
 import plming.board.service.PostService;
 
+@Slf4j
 @Controller
 public class PostController {
 
@@ -17,7 +18,7 @@ public class PostController {
     private PostService postService;
 
     @GetMapping("/posts/write")
-    public String postWrite(@RequestParam(value = "id", required = false) Long id, Model model) {
+    public String writePost(@RequestParam(value = "id", required = false) Long id, Model model) {
         if (id == null) {
             model.addAttribute("post", new PostDTO());
         } else {
@@ -31,10 +32,15 @@ public class PostController {
         return "posts/write";
     }
 
+    @ResponseBody
     @PostMapping("/posts/register")
-    public String registerPost(final PostDTO post) {
+    public String registerPost(@RequestBody PostDTO post, RedirectAttributes redirectAttributes) {
+        log.info("title: {}, writer = {}", post.getTitle(), post.getUser());
         try {
             boolean isRegistered = postService.registerPost(post);
+            redirectAttributes.addAttribute("postId", post.getId());
+            redirectAttributes.addAttribute("status", true);
+
             if (isRegistered == false) {
                 // 게시글 등록에 실패했다는 메시지 전달
             }
@@ -43,7 +49,6 @@ public class PostController {
         } catch (Exception e) {
             // 시스템에 문제가 생겼다는 메시지 전달
         }
-
-        return "redirect: /posts/list";
+        return "redirect: /posts/{postId}";
     }
 }
