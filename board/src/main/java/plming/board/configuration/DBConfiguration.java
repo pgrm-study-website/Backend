@@ -1,7 +1,6 @@
 package plming.board.configuration;
 
 import javax.sql.DataSource;
-
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -11,7 +10,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -28,18 +26,18 @@ public class DBConfiguration {
         return new HikariConfig();
     }
 
-    @Bean
-    public DataSource dataSource() {
+    @Bean public DataSource dataSource() {
         return new HikariDataSource(hikariConfig());
     }
 
-    @Bean
-    public SqlSessionFactory sqlSessionFactory() throws Exception {
+    @Bean public SqlSessionFactory sqlSessionFactory() throws Exception {
+
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource());
-		factoryBean.setMapperLocations(applicationContext.getResources("classpath:/mappers/**/*Mapper.xml"));
+        factoryBean.setMapperLocations(applicationContext.getResources("classpath:/mappers/**/*Mapper.xml"));
         factoryBean.setTypeAliasesPackage("plming.board.domain");
         factoryBean.setConfiguration(mybatisConfig());
+
         return factoryBean.getObject();
     }
 
@@ -49,9 +47,7 @@ public class DBConfiguration {
         return new org.apache.ibatis.session.Configuration();
     }
 
-    @Bean
-    public SqlSessionTemplate sqlSession() throws Exception {
+    @Bean public SqlSessionTemplate sqlSession() throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory());
     }
-
 }
