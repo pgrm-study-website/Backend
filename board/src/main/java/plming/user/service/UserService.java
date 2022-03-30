@@ -11,4 +11,5 @@ public interface UserService {
     UserResponseDto getUser(Long userId);
     boolean updateUser(UserUpdateRequestDto userUpdateDto);
     boolean deleteUser(Long userId);
+    boolean isEmailOverlap(String email);
 }

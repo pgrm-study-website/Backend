@@ -55,4 +55,10 @@ public class UserController {
         return ResponseEntity.status(204).build();
     }
 
+    // 이메일 중복확인
+    @GetMapping("/exist")
+    public ResponseEntity confirmEmailOverlap(@RequestParam String email){
+        System.out.println(email);
+        return ResponseEntity.ok().body(userService.isEmailOverlap(email));
+    }
 }

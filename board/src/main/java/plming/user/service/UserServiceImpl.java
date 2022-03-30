@@ -55,4 +55,9 @@ public class UserServiceImpl implements UserService{
         }
         return false;
     }
+
+    @Override
+    public boolean isEmailOverlap(String email) {
+        return userRepository.existsByEmail(email);
+    }
 }
