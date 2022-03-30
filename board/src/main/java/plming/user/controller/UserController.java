@@ -29,7 +29,6 @@ public class UserController {
     // R
     @GetMapping("/{userId}")
     public ResponseEntity getUser(@NotNull @PathVariable(value = "userId") Long userId){
-        System.out.println(userId);
         UserResponseDto userDto = userService.getUser(userId);
         if(userDto != null){
             return ResponseEntity.status(200).body(userDto);
@@ -42,9 +41,18 @@ public class UserController {
     public ResponseEntity updateUser(@NotNull @PathVariable(value = "userId") Long userId,@RequestBody UserUpdateRequestDto userUpdateDto){
         userUpdateDto.setId(userId);
         if(userService.updateUser(userUpdateDto)){
-            return ResponseEntity.status(201).build();
+            return ResponseEntity.status(200).build();
         }
-        return ResponseEntity.status(500).build();
+        return ResponseEntity.status(204).build();
+    }
+
+    // D
+    @DeleteMapping("/{userId}")
+    public ResponseEntity deleteUser(@NotNull @PathVariable(value = "userId") Long userId){
+        if(userService.deleteUser(userId)){
+            return ResponseEntity.status(200).build();
+        }
+        return ResponseEntity.status(204).build();
     }
 
 }
