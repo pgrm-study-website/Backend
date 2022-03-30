@@ -28,7 +28,7 @@ public class BoardApiController {
      * 게시글 수정
      */
     @PatchMapping("/{id}")
-    public Long save(@PathVariable final Long id, @RequestBody final BoardRequestDto post) {
+    public Long update(@PathVariable final Long id, @RequestBody final BoardRequestDto post) {
 
         return boardService.update(id, post);
     }

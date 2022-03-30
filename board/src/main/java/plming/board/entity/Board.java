@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import plming.user.entity.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,14 +12,20 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@Table(name = "post")
 public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;    // PK
 
-    @Column(columnDefinition = "varchar")
-    private String user;    // 사용자
+//    @Column(columnDefinition = "bigint")
+//    private Long userId;    // 작성자 id
+
+    /* 추가 */
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(columnDefinition = "enum")
     private String category;    // 카테고리
@@ -51,7 +58,7 @@ public class Board {
     private char deleteYn = '0';
 
     @Builder
-    public Board(String user, String category, String status, String period, String title, String content) {
+    public Board(User user, String category, String status, String period, String title, String content) {
         this.user = user;
         this.category = category;
         this.status = status;

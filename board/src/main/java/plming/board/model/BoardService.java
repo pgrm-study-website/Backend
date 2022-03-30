@@ -10,6 +10,8 @@ import plming.board.entity.Board;
 import plming.board.entity.BoardRepository;
 import plming.board.exception.CustomException;
 import plming.board.exception.ErrorCode;
+import plming.user.entity.User;
+import plming.user.entity.UserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +23,7 @@ import static org.springframework.data.domain.Sort.Direction.*;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final UserRepository userRepository;
 
     /**
      * 게시글 생성
@@ -28,7 +31,9 @@ public class BoardService {
     @Transactional
     public Long save(final BoardRequestDto params) {
 
-        Board entity = boardRepository.save(params.toEntity());
+        User user = userRepository.getById(params.getUserId());
+        Board entity = boardRepository.save(params.toEntity(user));
+
         return entity.getId();
     }
 

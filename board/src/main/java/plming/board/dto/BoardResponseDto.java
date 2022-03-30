@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class BoardResponseDto {
 
     private Long id;
-    private String user;
+    private Long userId;
     private String category;
     private String status;
     private String period;
@@ -23,7 +23,7 @@ public class BoardResponseDto {
 
     public BoardResponseDto(Board entity) {
         this.id = entity.getId();
-        this.user = entity.getUser();
+        this.userId = entity.getUser().getId();
         this.category = entity.getCategory();
         this.status = entity.getStatus();
         this.period = entity.getPeriod();
