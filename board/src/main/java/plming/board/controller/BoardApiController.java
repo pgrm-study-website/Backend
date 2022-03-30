@@ -9,7 +9,7 @@ import plming.board.model.BoardService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/board")
+@RequestMapping("/posts")
 @RequiredArgsConstructor
 public class BoardApiController {
 
@@ -20,15 +20,8 @@ public class BoardApiController {
      */
     @PostMapping
     public Long save(@RequestBody final BoardRequestDto post) {
-        return boardService.save(post);
-    }
 
-    /**
-     * 게시글 리스트 조회
-     */
-    @GetMapping
-    public List<BoardResponseDto> findAll() {
-        return boardService.findAll();
+        return boardService.save(post);
     }
 
     /**
@@ -36,6 +29,35 @@ public class BoardApiController {
      */
     @PatchMapping("/{id}")
     public Long save(@PathVariable final Long id, @RequestBody final BoardRequestDto post) {
+
         return boardService.update(id, post);
     }
+
+    /**
+     * 게시글 삭제
+     */
+    @DeleteMapping("/{id}")
+    public Long delete(@PathVariable final Long id) {
+
+        return boardService.delete(id);
+    }
+
+    /**
+     * 게시글 리스트 조회
+     */
+    @GetMapping
+    public List<BoardResponseDto> findAll(@RequestParam final char deleteYn) {
+
+        return boardService.findAllByDeleteYn(deleteYn);
+    }
+
+    /**
+     * 게시글 상세정보 조회
+     */
+    @GetMapping("/{id}")
+    public BoardResponseDto findById(@PathVariable final Long id) {
+
+        return boardService.findById(id);
+    }
+
 }

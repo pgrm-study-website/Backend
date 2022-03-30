@@ -48,7 +48,7 @@ public class Board {
     private LocalDateTime updateDate;
 
     @Column(columnDefinition = "enum")
-    private char deleteYn = 'N';
+    private char deleteYn = '0';
 
     @Builder
     public Board(String user, String category, String status, String period, String title, String content) {
@@ -60,6 +60,9 @@ public class Board {
         this.content = content;
     }
 
+    /**
+     * 게시글 수정
+     */
     public void update(String title, String content, String category, String status, String period) {
         this.title = title;
         this.content = content;
@@ -67,5 +70,19 @@ public class Board {
         this.status = status;
         this.period = period;
         this.updateDate = LocalDateTime.now();
+    }
+
+    /**
+     * 게시글 조회 수 증가
+     */
+    public void increaseCount() {
+        this.viewCnt++;
+    }
+
+    /**
+     * 게시글 삭제
+     */
+    public void delete() {
+        this.deleteYn = '1';
     }
 }
