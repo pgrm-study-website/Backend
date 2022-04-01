@@ -44,7 +44,6 @@ public class User {
         Assert.hasText(email,"email must not be null");
         Assert.hasText(role,"role must not be null");
         Assert.isTrue(social >= 0 && social <= 3,"social must be '0 <= social <= 2'");
-        this.id = id;
         this.nickname = nickname;
         this.email = email;
         this.password = password;
@@ -57,9 +56,17 @@ public class User {
 
     public void update(UserUpdateRequestDto userUpdateDto){
         this.nickname = userUpdateDto.getNickname();
-        this.password = userUpdateDto.getPassword();
         this.image = userUpdateDto.getImage();
         this.introduce = userUpdateDto.getIntroduce();
         this.github = userUpdateDto.getGithub();
     }
+
+    public void updatePassword(String password){
+        this.password = password;
+    }
+
 }
+
+
+
+

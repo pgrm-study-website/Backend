@@ -4,10 +4,13 @@ import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import plming.user.dto.UserResponseDto;
+import plming.user.dto.UserJoinResponseDto;
+import plming.user.dto.UserReadResponseDto;
 import plming.user.dto.UserJoinRequestDto;
 import plming.user.dto.UserUpdateRequestDto;
 import plming.user.service.UserService;
+
+import java.util.Map;
 
 
 @RestController
@@ -20,16 +23,17 @@ public class UserController {
     // C
     @PostMapping("/")
     public ResponseEntity joinUser(@RequestBody UserJoinRequestDto userJoinRequestDto){
-        if(userService.createUser(userJoinRequestDto)){
-            return ResponseEntity.status(201).build();
+        UserJoinResponseDto userJoinResponseDto = userService.createUser(userJoinRequestDto);
+        if(userJoinResponseDto != null){
+            return ResponseEntity.status(201).body(userJoinResponseDto);
         }
-        return ResponseEntity.status(500).build();
+        return ResponseEntity.status(400).build();
     }
 
     // R
     @GetMapping("/{userId}")
     public ResponseEntity getUser(@NotNull @PathVariable(value = "userId") Long userId){
-        UserResponseDto userDto = userService.getUser(userId);
+        UserReadResponseDto userDto = userService.getUser(userId);
         if(userDto != null){
             return ResponseEntity.status(200).body(userDto);
         }
@@ -55,10 +59,25 @@ public class UserController {
         return ResponseEntity.status(204).build();
     }
 
-    // 이메일 중복확인
-    @GetMapping("/exist")
-    public ResponseEntity confirmEmailOverlap(@RequestParam String email){
-        System.out.println(email);
-        return ResponseEntity.ok().body(userService.isEmailOverlap(email));
+    // 비밀번호 확인
+    @PostMapping("/{userId}/password-check")
+    public ResponseEntity checkPassword(@PathVariable(value = "userId") Long userId,@RequestBody Map<String,String> requestBody){
+        String password = requestBody.get("password");
+        if(userService.checkPassword(userId,password)){
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.status(400).build();
+
     }
+
+    // 비밀번호 변경
+    @PatchMapping("/{userId}/password")
+    public ResponseEntity updatePassword(@PathVariable(value = "userId") Long userId,@RequestBody Map<String,String> requestBody){
+        String password = requestBody.get("password");
+        if(userService.updatePassword(userId,password)){
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.status(500).build();
+    }
+
 }

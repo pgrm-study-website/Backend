@@ -2,7 +2,8 @@ package plming.user.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import plming.user.dto.UserResponseDto;
+import plming.user.dto.UserJoinResponseDto;
+import plming.user.dto.UserReadResponseDto;
 import plming.user.dto.UserJoinRequestDto;
 import plming.user.dto.UserUpdateRequestDto;
 import plming.user.entity.User;
@@ -19,17 +20,21 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public boolean createUser(UserJoinRequestDto userJoinRequestDto) {
+    public UserJoinResponseDto createUser(UserJoinRequestDto userJoinRequestDto) {
         User user = userJoinRequestDto.toEntity();
-        return userRepository.save(user) != null;
+        if(isEmailOverlap(user.getEmail())){
+            return null;
+        }
+        userRepository.save(user);
+        return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
     }
 
     @Override
-    public UserResponseDto getUser(Long userId) {
+    public UserReadResponseDto getUser(Long userId) {
         try{
             // 결과가 null일 경우 get()에서 exception을 throw
             User user = userRepository.findById(userId).get();
-            return new UserResponseDto(user);
+            return new UserReadResponseDto(user);
         }catch (NoSuchElementException e){
             return null;
         }
@@ -54,6 +59,23 @@ public class UserServiceImpl implements UserService{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean checkPassword(Long userId, String password) {
+        return userRepository.existsByIdAndPassword(userId,password);
+    }
+
+    @Override
+    @Transactional
+    public boolean updatePassword(Long userId,String password) {
+        try {
+            User updateUser = userRepository.findById(userId).get();
+            updateUser.updatePassword(password);
+            return true;
+        } catch (NoSuchElementException e){
+            return false;
+        }
     }
 
     @Override

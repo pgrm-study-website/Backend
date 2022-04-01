@@ -3,7 +3,6 @@ package plming.user.dto;
 import lombok.*;
 import plming.user.entity.User;
 
-// User엔터티에서 image를 실제 프로필 사진으로 치환한 객체
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor

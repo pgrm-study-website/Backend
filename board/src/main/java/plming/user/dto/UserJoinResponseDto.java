@@ -9,15 +9,9 @@ import plming.user.entity.User;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class UserUpdateRequestDto {
+public class UserJoinResponseDto {
     private Long id;
     private String nickname;
     private String image;
-    private String introduce;
-    private String github;
 
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }
