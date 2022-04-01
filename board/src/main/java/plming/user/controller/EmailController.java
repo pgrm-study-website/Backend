@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import plming.user.service.EmailService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @RestController
@@ -15,16 +17,23 @@ public class EmailController {
     private EmailService emailService;
 
     @PostMapping("/send-code")
-    public ResponseEntity<String> emailAuth(@RequestBody Map<String, String> email) throws Exception {
-        if(emailService.sendSimpleMessage(email.get("email"))){
+    public ResponseEntity<String> emailAuth(HttpServletRequest request, @RequestBody Map<String, String> email) throws Exception {
+        HttpSession session = request.getSession();
+        if(emailService.sendSimpleMessage(session,email.get("email"))){
             return ResponseEntity.ok().build();
         }
-        return ResponseEntity.badRequest().body("잘못된 이메일입니다.");
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/verify-code")
-    public ResponseEntity<?> verifyCode(@RequestBody Map<String, String> code) {
-        String email = code.get("email");
-        return ResponseEntity.ok(emailService.ePw.contains(code.get("code")));
+    public ResponseEntity<?> verifyCode(HttpServletRequest request, @RequestBody Map<String, String> requestBody) {
+        HttpSession session = request.getSession();
+        String email = requestBody.get("email");
+        String code = requestBody.get("code");
+
+        if(emailService.certificateEmailCode(session,email,code)){
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
     }
 }
