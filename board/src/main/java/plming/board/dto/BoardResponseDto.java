@@ -4,6 +4,7 @@ import lombok.Getter;
 import plming.board.entity.Board;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 public class BoardResponseDto {
@@ -20,8 +21,9 @@ public class BoardResponseDto {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
     private char deleteYn;
+    private List<String> tags;
 
-    public BoardResponseDto(Board entity) {
+    public BoardResponseDto(Board entity, List<String> tags) {
         this.id = entity.getId();
         this.userId = entity.getUser().getId();
         this.category = entity.getCategory();
@@ -34,5 +36,6 @@ public class BoardResponseDto {
         this.createDate = entity.getCreateDate();
         this.updateDate = entity.getUpdateDate();
         this.deleteYn = entity.getDeleteYn();
+        this.tags = tags;
     }
 }

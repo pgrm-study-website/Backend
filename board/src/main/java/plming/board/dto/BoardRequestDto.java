@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import plming.board.entity.Board;
 import plming.user.entity.User;
 
-import java.util.Optional;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,6 +18,7 @@ public class BoardRequestDto {
     private String period;  // 진행 기간
     private String title;   // 제목
     private String content; // 내용
+    private List<Long> boardTagIds;
 
     public Board toEntity(User user) {
         return Board.builder()
@@ -29,5 +30,4 @@ public class BoardRequestDto {
                 .content(content)
                 .build();
     }
-
 }

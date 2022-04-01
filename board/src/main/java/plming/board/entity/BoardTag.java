@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import plming.tag.entity.Tag;
 
 import javax.persistence.*;
 
@@ -11,21 +12,23 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "post_tag")
-public class PostTag {
+public class BoardTag {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Long id;
 
-    @Column(columnDefinition = "bigint")
-    private Long postId;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Board board;
 
-    @Column(columnDefinition = "bigint")
-    private Long tagId;
+    @ManyToOne
+    @JoinColumn(name = "tag_id")
+    private Tag tag;
 
     @Builder
-    public PostTag(Long postId, Long tagId) {
-        this.postId = postId;
-        this.tagId = tagId;
+    public BoardTag(Board board, Tag tag) {
+        this.board = board;
+        this.tag = tag;
     }
 }

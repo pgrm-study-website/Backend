@@ -3,18 +3,23 @@ package plming.board;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import plming.board.dto.BoardRequestDto;
 import plming.board.entity.Board;
 import plming.board.entity.BoardRepository;
+import plming.board.entity.BoardTag;
+import plming.board.entity.BoardTagRepository;
+import plming.board.model.BoardTagService;
 import plming.tag.entity.TagRepository;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class RelationMappingTest {
+public class BoardTagTest {
 
     @Autowired
     private BoardRepository boardRepository;
@@ -24,6 +29,12 @@ public class RelationMappingTest {
 
     @Autowired
     private TagRepository tagRepository;
+
+    @Autowired
+    private BoardTagRepository boardTagRepository;
+
+    @Autowired
+    private BoardTagService boardTagService;
 
     @Test
     public void BoardTagTest() {
@@ -72,6 +83,26 @@ public class RelationMappingTest {
                 .build();
         boardRepository.save(post2);
 
+
+        BoardTag boardTag = BoardTag.builder()
+                .board(post1)
+                .tag(tagRepository.getById(0L))
+                .build();
+        boardTagRepository.save(boardTag);
+
+        System.out.println(post1.getBoardTags());
+    }
+
+    @Test
+    public void boardTag() {
+        //Board post = boardRepository.getById(54L);
+        System.out.println(boardTagService.findTagNameByBoardId(54L).toString());
+        //List<BoardTag> boardTagList = boardTagRepository.findAllByBoardId(54L);
+//        return tagIds.stream().map(tagRepository :: getById).collect(Collectors.toList());
+//        List<BoardTag> boardTagList = boardTagRepository.findAllByBoardId(54L);
+//        List<R> boardTagIdList = boardTagList.stream().map((BoardTag id) -> tagRepository.getById(id)).collect(Collectors.toList());
+//        System.out.println(boardTagRepository.findAllByBoardId(54L).stream());
+        //System.out.println("boardTagList = " + boardTagList.get(0).getTag().getName());
     }
 
     @Test
@@ -93,13 +124,5 @@ public class RelationMappingTest {
 
         // then
         assertEquals(4, boardRepository.count());
-    }
-
-    @Test
-    public void userTest() {
-
-        Long userId = 4L;
-        System.out.println(userRepository.findById(userId));
-
     }
 }

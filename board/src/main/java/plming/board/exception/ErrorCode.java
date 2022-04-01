@@ -18,6 +18,8 @@ public enum ErrorCode {
      */
     POSTS_NOT_FOUND(HttpStatus.NOT_FOUND, "게시글 정보를 찾을 수 없습니다."),
 
+    TAGS_NOT_FOUND(HttpStatus.NOT_FOUND, "태그 정보를 찾을 수 없습니다."),
+
     /*
      * 405 METHOD_NOT_ALLOWED: 허용되지 않은 Request Method 호출
      */

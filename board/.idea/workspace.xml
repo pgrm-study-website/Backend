@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd26514-9bde-418e-8bb5-6a38047c07f1" name="Changes" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/PostTag.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/plming/tag/entity/Tag.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/plming/user/entity/User.java" afterDir="false" />
@@ -18,13 +19,33 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/BoardApplication.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/configuration/DBConfiguration.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/BoardTag.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/BoardTagRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/model/BoardTagService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/tag/entity/TagRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/plming/board/BoardTagTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/application.properties" afterDir="false" />
+>>>>>>> 632d22e... Feat: 태그 테이블 연관 관계 매핑
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardRequestDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardResponseDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/BoardRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/BoardRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/PostTag.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorCode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/model/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/model/BoardService.java" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/BoardApplicationTests.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/BoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/BoardTest.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/tag/entity/Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/tag/entity/Tag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/BoardTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/RelationMappingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/RelationMappingTest.java" afterDir="false" />
+>>>>>>> 632d22e... Feat: 태그 테이블 연관 관계 매핑
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,12 +57,43 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="board" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="board" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="board" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -107,7 +159,28 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.BoardApplication">
-    <configuration name="BoardTest.delete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="board [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--stacktrace" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="BoardTagTest.BoardTagTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
         <pattern>
@@ -116,40 +189,40 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="plming.board" />
-      <option name="MAIN_CLASS_NAME" value="plming.board.BoardTest" />
+      <option name="MAIN_CLASS_NAME" value="plming.board.BoardTagTest" />
+      <option name="METHOD_NAME" value="BoardTagTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BoardTagTest.boardTag" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="board.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="plming.board.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="plming.board" />
+      <option name="MAIN_CLASS_NAME" value="plming.board.BoardTagTest" />
+      <option name="METHOD_NAME" value="boardTag" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RelationMappingTest.delete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="board.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="plming.board.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="plming.board" />
+      <option name="MAIN_CLASS_NAME" value="plming.board.RelationMappingTest" />
       <option name="METHOD_NAME" value="delete" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BoardTest.findAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="board.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="plming.board.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="plming.board" />
-      <option name="MAIN_CLASS_NAME" value="plming.board.BoardTest" />
-      <option name="METHOD_NAME" value="findAll" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BoardTest.save" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="board.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="plming.board.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="plming.board" />
-      <option name="MAIN_CLASS_NAME" value="plming.board.BoardTest" />
-      <option name="METHOD_NAME" value="save" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -171,22 +244,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RelationMappingTest.userTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="board.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="plming.board.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="plming.board" />
-      <option name="MAIN_CLASS_NAME" value="plming.board.RelationMappingTest" />
-      <option name="METHOD_NAME" value="userTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="BoardApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="board.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="plming.BoardApplication" />
@@ -196,20 +253,29 @@
       </method>
     </configuration>
     <list>
+<<<<<<< HEAD
       <item itemvalue="JUnit.BoardTest.delete" />
       <item itemvalue="JUnit.BoardTest.findAll" />
       <item itemvalue="JUnit.BoardTest.save" />
       <item itemvalue="Spring Boot.BoardApplication" />
       <item itemvalue="JUnit.RelationMappingTest.testManyToOneInsert" />
       <item itemvalue="JUnit.RelationMappingTest.userTest" />
+=======
+      <item itemvalue="Gradle.board [build]" />
+      <item itemvalue="JUnit.RelationMappingTest.testManyToOneInsert" />
+      <item itemvalue="JUnit.RelationMappingTest.delete" />
+      <item itemvalue="JUnit.BoardTagTest.BoardTagTest" />
+      <item itemvalue="JUnit.BoardTagTest.boardTag" />
+      <item itemvalue="Spring Boot.BoardApplication" />
+>>>>>>> 632d22e... Feat: 태그 테이블 연관 관계 매핑
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BoardTest.findAll" />
-        <item itemvalue="JUnit.RelationMappingTest.userTest" />
+        <item itemvalue="JUnit.BoardTagTest.boardTag" />
+        <item itemvalue="JUnit.BoardTagTest.BoardTagTest" />
         <item itemvalue="JUnit.RelationMappingTest.testManyToOneInsert" />
-        <item itemvalue="JUnit.BoardTest.save" />
-        <item itemvalue="JUnit.BoardTest.delete" />
+        <item itemvalue="Gradle.board [build]" />
+        <item itemvalue="JUnit.RelationMappingTest.delete" />
       </list>
     </recent_temporary>
   </component>
@@ -227,7 +293,13 @@
       <workItem from="1648519154724" duration="8630000" />
       <workItem from="1648529148713" duration="182000" />
       <workItem from="1648529373064" duration="14416000" />
+<<<<<<< HEAD
       <workItem from="1648595277728" duration="31499000" />
+=======
+      <workItem from="1648595277728" duration="31981000" />
+      <workItem from="1648680840789" duration="33490000" />
+      <workItem from="1648767017208" duration="4735000" />
+>>>>>>> 632d22e... Feat: 태그 테이블 연관 관계 매핑
     </task>
     <servers />
   </component>
@@ -257,6 +329,7 @@
       </map>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -323,6 +396,8 @@
       </breakpoints>
     </breakpoint-manager>
   </component>
+=======
+>>>>>>> 632d22e... Feat: 태그 테이블 연관 관계 매핑
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />

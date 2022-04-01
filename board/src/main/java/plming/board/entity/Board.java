@@ -8,6 +8,7 @@ import plming.user.entity.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,9 +19,6 @@ public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;    // PK
-
-//    @Column(columnDefinition = "bigint")
-//    private Long userId;    // 작성자 id
 
     /* 추가 */
     @ManyToOne
@@ -57,14 +55,29 @@ public class Board {
     @Column(columnDefinition = "enum")
     private char deleteYn = '0';
 
+    // 역방향
+    @OneToMany(mappedBy = "board")
+    private List<BoardTag> boardTags;
+
+//    @Builder
+//    public Board(User user, String category, String status, String period, String title, String content) {
+//        this.user = user;
+//        this.category = category;
+//        this.status = status;
+//        this.period = period;
+//        this.title = title;
+//        this.content = content;
+//    }
+
     @Builder
-    public Board(User user, String category, String status, String period, String title, String content) {
+    public Board(User user, String category, String status, String period, String title, String content, List<BoardTag> boardTags) {
         this.user = user;
         this.category = category;
         this.status = status;
         this.period = period;
         this.title = title;
         this.content = content;
+        this.boardTags = boardTags;
     }
 
     /**
@@ -92,4 +105,5 @@ public class Board {
     public void delete() {
         this.deleteYn = '1';
     }
+
 }
