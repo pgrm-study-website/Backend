@@ -52,6 +52,15 @@ public class BoardApiController {
     }
 
     /**
+     * 게시글 리스트 조회 - 사용자 ID 기준
+     */
+    @GetMapping("/user")
+    public List<BoardResponseDto> findAllByUserId(@RequestParam final Long userId) {
+
+        return boardService.findAllByUserId(userId);
+    }
+
+    /**
      * 게시글 상세정보 조회
      */
     @GetMapping("/{id}")

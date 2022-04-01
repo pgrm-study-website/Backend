@@ -18,7 +18,7 @@ public class BoardRequestDto {
     private String period;  // 진행 기간
     private String title;   // 제목
     private String content; // 내용
-    private List<Long> boardTagIds;
+    private List<Long> tagIds;
 
     public Board toEntity(User user) {
         return Board.builder()

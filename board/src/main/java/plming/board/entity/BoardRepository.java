@@ -12,4 +12,9 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
      */
     List<Board> findAllByDeleteYn(final char deleteYn, final Sort sort);
 
+    /**
+     * 게시글 리스트 조회 - (사용자 Id 기준)
+     */
+    List<Board> findAllByUserId(final Long userId, final Sort sort);
+
 }

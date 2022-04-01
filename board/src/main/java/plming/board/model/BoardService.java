@@ -36,7 +36,7 @@ public class BoardService {
 
         User user = userRepository.getById(params.getUserId());
         Board entity = boardRepository.save(params.toEntity(user));
-        List<Long> boardTagIds = params.getBoardTagIds();
+        List<Long> boardTagIds = params.getTagIds();
         boardTagService.save(boardTagIds, entity);
 
         return entity.getId();
@@ -52,7 +52,7 @@ public class BoardService {
         entity.update(params.getTitle(), params.getContent(), params.getCategory(), params.getStatus(), params.getPeriod());
 
         boardTagRepository.deleteAllByBoardId(id);
-        boardTagService.save(params.getBoardTagIds(), entity);
+        boardTagService.save(params.getTagIds(), entity);
 
         return id;
     }
@@ -71,8 +71,6 @@ public class BoardService {
 
     /**
      * 게시글 리스트 조회
-<<<<<<< HEAD
-=======
      */
     public List<BoardResponseDto> findAll() {
 
@@ -82,19 +80,13 @@ public class BoardService {
     }
 
     /**
-     * 게시글 리스트 조회 - (삭제 여부 기준)
->>>>>>> 632d22e... Feat: 태그 테이블 연관 관계 매핑
+     * 게시글 리스트 조회 - (사용자 ID 기준)
      */
-    public List<BoardResponseDto> findAll() {
+    public List<BoardResponseDto> findAllByUserId(final Long userId) {
 
         Sort sort = Sort.by(DESC, "id", "createDate");
-<<<<<<< HEAD
-        List<Board> list = boardRepository.findAll(sort);
-        return list.stream().map(BoardResponseDto::new).collect(Collectors.toList());
-=======
-        List<Board> list = boardRepository.findAllByDeleteYn(deleteYn, sort);
+        List<Board> list = boardRepository.findAllByUserId(userId, sort);
         return getTagName(list);
->>>>>>> 632d22e... Feat: 태그 테이블 연관 관계 매핑
     }
 
     /**
@@ -103,11 +95,7 @@ public class BoardService {
     public List<BoardResponseDto> findAllByDeleteYn(final char deleteYn) {
 
         Sort sort = Sort.by(DESC, "id", "createDate");
-<<<<<<< HEAD
         List<Board> list = boardRepository.findAllByDeleteYn(deleteYn, sort);
-        return list.stream().map(BoardResponseDto::new).collect(Collectors.toList());
-=======
-        List<Board> list = boardRepository.findAllByUserId(userId, sort);
         return getTagName(list);
     }
 
@@ -122,7 +110,6 @@ public class BoardService {
                 result.add(new BoardResponseDto(post, tagName));
         }
         return result;
->>>>>>> 632d22e... Feat: 태그 테이블 연관 관계 매핑
     }
 
     /**
