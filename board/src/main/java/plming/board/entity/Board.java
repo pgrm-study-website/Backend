@@ -59,16 +59,6 @@ public class Board {
     @OneToMany(mappedBy = "board")
     private List<BoardTag> boardTags;
 
-//    @Builder
-//    public Board(User user, String category, String status, String period, String title, String content) {
-//        this.user = user;
-//        this.category = category;
-//        this.status = status;
-//        this.period = period;
-//        this.title = title;
-//        this.content = content;
-//    }
-
     @Builder
     public Board(User user, String category, String status, String period, String title, String content, List<BoardTag> boardTags) {
         this.user = user;

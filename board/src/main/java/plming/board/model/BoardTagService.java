@@ -33,8 +33,12 @@ public class BoardTagService {
         }
     }
 
+    /**
+     * 게시글 id로 태그 이름 조회
+     */
     public List<String> findTagNameByBoardId (final Long id) {
         List<BoardTag> boardTagList = boardTagRepository.findAllByBoardId(id);
         return boardTagList.stream().map(BoardTag::getTag).map(Tag::getName).collect(Collectors.toList());
     }
+
 }

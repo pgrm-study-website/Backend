@@ -6,9 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import plming.board.dto.BoardRequestDto;
 import plming.board.dto.BoardResponseDto;
-import plming.board.entity.Board;
-import plming.board.entity.BoardRepository;
-import plming.board.entity.BoardTagRepository;
+import plming.board.entity.*;
 import plming.board.exception.CustomException;
 import plming.board.exception.ErrorCode;
 import plming.user.entity.User;
@@ -16,6 +14,7 @@ import plming.user.entity.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.data.domain.Sort.Direction.*;
 
@@ -27,6 +26,8 @@ public class BoardService {
     private final UserRepository userRepository;
     private final BoardTagRepository boardTagRepository;
     private final BoardTagService boardTagService;
+    private final ApplicationRepository applicationRepository;
+    private final ApplicationService applicationService;
 
     /**
      * 게시글 생성
@@ -102,9 +103,9 @@ public class BoardService {
     /**
      * 각 게시글의 태그 이름 조회
      */
-    private List<BoardResponseDto> getTagName(List<Board> list) {
+    public List<BoardResponseDto> getTagName(List<Board> list) {
         List<BoardResponseDto> result = new ArrayList<BoardResponseDto>();
-        // List<List<String>> tags= list.stream().map(Board::getId).map(boardTagService::findTagNameByBoardId).collect(Collectors.toList());
+//        List<List<String>> tags= list.stream().map(Board::getId).map(boardTagService::findTagNameByBoardId).collect(Collectors.toList());
         for (Board post : list) {
                 List<String> tagName = boardTagService.findTagNameByBoardId(post.getId());
                 result.add(new BoardResponseDto(post, tagName));
@@ -123,4 +124,30 @@ public class BoardService {
         List<String> boardTagName = boardTagService.findTagNameByBoardId(id);
         return new BoardResponseDto(entity, boardTagName);
     }
+
+    /**
+     * 게시글 신청 하기
+     */
+    @Transactional
+    public Long apply(final Long boardId, final Long userId) {
+
+        return applicationService.save(boardId, userId);
+    }
+
+    /**
+     * 신청 게시글 리스트 조회 - (사용자 ID 기준)
+     */
+    public List<BoardResponseDto> findApplicationByUserId(final Long userId) {
+
+        Sort sort = Sort.by(DESC, "id", "createDate");
+        List<Application> applications = applicationRepository.findAllByUserId(userId, sort);
+        List<Board> boards = applications.stream().map(Application::getBoard).collect(Collectors.toList());
+        // System.out.println(boardService.getTagName(boards).toString());
+
+        return getTagName(boards);
+    }
+
+//    public Long update(final Long boardId, final Long userId) {
+//
+//    }
 }
