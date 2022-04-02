@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import plming.board.dto.BoardRequestDto;
 import plming.board.dto.BoardResponseDto;
-import plming.board.model.ApplicationService;
 import plming.board.model.BoardService;
 
 import java.util.List;
@@ -83,9 +82,9 @@ public class BoardApiController {
      * 신청 게시글 리스트 조회 - 사용자 ID 기준
      */
     @GetMapping("/application")
-    public List<BoardResponseDto> findApplicationByUserId(@RequestParam final Long userId) {
+    public List<BoardResponseDto> findAppliedBoardByUserID(@RequestParam final Long userId) {
 
-        return boardService.findApplicationByUserId(userId);
+        return boardService.findAppliedBoardByUserId(userId);
     }
 
 }

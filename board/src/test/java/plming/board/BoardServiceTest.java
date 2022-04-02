@@ -11,8 +11,10 @@ import plming.board.dto.BoardResponseDto;
 import plming.board.entity.Board;
 import plming.board.entity.BoardRepository;
 import plming.board.model.BoardService;
+import plming.user.dto.UserJoinRequestDto;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
+import plming.user.service.UserService;
 
 import java.util.List;
 
@@ -39,6 +41,7 @@ public class BoardServiceTest {
 
     @BeforeEach
     void beforeEach() {
+
         user1 = User.builder().email("email@email.com").github("github")
                 .image("no image").introduce("introduce").nickname("nickname")
                 .password("password").role("ROLE_USER").social(1)
@@ -54,8 +57,6 @@ public class BoardServiceTest {
         post2 = Board.builder().user(user2).content("사용자2의 첫 번째 게시글입니다.")
                 .period("1개월").category("프로젝트").status("모집 중").title("사용자2의 게시글 1")
                 .build();
-        userRepository.save(user1);
-        userRepository.save(user2);
         boardRepository.save(post1);
         boardRepository.save(post2);
     }

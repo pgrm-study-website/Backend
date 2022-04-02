@@ -137,17 +137,11 @@ public class BoardService {
     /**
      * 신청 게시글 리스트 조회 - (사용자 ID 기준)
      */
-    public List<BoardResponseDto> findApplicationByUserId(final Long userId) {
+    public List<BoardResponseDto> findAppliedBoardByUserId(final Long userId) {
 
-        Sort sort = Sort.by(DESC, "id", "createDate");
-        List<Application> applications = applicationRepository.findAllByUserId(userId, sort);
-        List<Board> boards = applications.stream().map(Application::getBoard).collect(Collectors.toList());
-        // System.out.println(boardService.getTagName(boards).toString());
+        List<Board> appliedBoards = applicationService.findByAppliedBoardByUserId(userId);
 
-        return getTagName(boards);
+        return getTagName(appliedBoards);
     }
 
-//    public Long update(final Long boardId, final Long userId) {
-//
-//    }
 }
