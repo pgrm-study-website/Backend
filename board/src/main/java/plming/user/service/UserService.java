@@ -29,7 +29,7 @@ public class UserService{
 
     public UserResponseDto getUser(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(()-> new CustomException(ErrorCode.INTERNAL_SERVER_ERROR));
+                .orElseThrow(()-> new CustomException(ErrorCode.NO_CONTENT));
         return new UserResponseDto(user);
     }
 
