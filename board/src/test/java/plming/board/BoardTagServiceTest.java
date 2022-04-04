@@ -29,7 +29,7 @@ public class BoardTagServiceTest {
     private BoardTagRepository boardTagRepository;
 
     @Autowired
-    private plming.board.model.BoardTagService boardTagService;
+    private plming.board.service.BoardTagService boardTagService;
 
     private User user1;
     private User user2;

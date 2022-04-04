@@ -11,4 +11,9 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
      */
     List<Application> findAllByUserId(final Long userId);
 
+    /**
+     * 신청 사용자 리스트 조회 - (게시글 ID 기준)
+     */
+    List<Application> findAllByBoardId(final Long boardId);
+
 }

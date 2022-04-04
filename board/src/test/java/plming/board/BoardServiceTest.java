@@ -10,11 +10,9 @@ import org.springframework.data.domain.Sort;
 import plming.board.dto.BoardResponseDto;
 import plming.board.entity.Board;
 import plming.board.entity.BoardRepository;
-import plming.board.model.BoardService;
-import plming.user.dto.UserJoinRequestDto;
+import plming.board.service.BoardService;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
-import plming.user.service.UserService;
 
 import java.util.List;
 

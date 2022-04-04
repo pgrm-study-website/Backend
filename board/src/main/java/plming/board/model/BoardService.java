@@ -1,4 +1,4 @@
-package plming.board.model;
+package plming.board.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -9,8 +9,10 @@ import plming.board.dto.BoardResponseDto;
 import plming.board.entity.*;
 import plming.board.exception.CustomException;
 import plming.board.exception.ErrorCode;
+import plming.user.dto.UserResponseDto;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
+import plming.user.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +28,9 @@ public class BoardService {
     private final UserRepository userRepository;
     private final BoardTagRepository boardTagRepository;
     private final BoardTagService boardTagService;
-    private final ApplicationRepository applicationRepository;
+    private final UserService userService;
     private final ApplicationService applicationService;
+    private final ApplicationRepository applicationRepository;
 
     /**
      * 게시글 생성
@@ -144,4 +147,23 @@ public class BoardService {
         return getTagName(appliedBoards);
     }
 
+    /**
+     * 신청 사용자 리스트 조회 - (게시글 ID 기준)
+     */
+    public List<UserResponseDto> findAppliedUserByBoardId(final Long boardId) {
+
+        List<User> appliedUsers = applicationService.findAppliedUserByBoardId(boardId);
+
+        return appliedUsers.stream().map(User::getId).map(userService::getUser).collect(Collectors.toList());
+    }
+
+    /**
+     * 게시글 신청 정보 업데이트
+     */
+    public String updateAppliedStatus(final Long boardId, final Long userId, final String status) {
+
+        Application application = applicationService.updateStatus(boardId, userId, status);
+
+        return application.getStatus();
+    }
 }

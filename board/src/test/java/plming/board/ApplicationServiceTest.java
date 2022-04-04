@@ -1,28 +1,25 @@
 package plming.board;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Sort;
 import plming.board.dto.BoardResponseDto;
 import plming.board.entity.Application;
 import plming.board.entity.ApplicationRepository;
 import plming.board.entity.Board;
 import plming.board.entity.BoardRepository;
-import plming.board.model.ApplicationService;
-import plming.board.model.BoardService;
+import plming.board.service.ApplicationService;
+import plming.board.service.BoardService;
+import plming.user.dto.UserResponseDto;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @SpringBootTest
 public class ApplicationServiceTest {
@@ -49,14 +46,19 @@ public class ApplicationServiceTest {
 
     @BeforeEach
     void beforeEach() {
-        user1 = User.builder().email("email@email.com").github("github")
-                .image("no image").introduce("introduce").nickname("nickname")
-                .password("password").role("ROLE_USER").social(1)
+        user1 = User.builder()
+                .nickname("nickname1")
+                .email("email1@gmail.com")
+                .role("ROLE_USER")
+                .social(0)
                 .build();
-        user2 = User.builder().email("email2@email.com").github("github2")
-                .image("no image").introduce("introduce2").nickname("nickname2")
-                .password("password2").role("ROLE_ADMIN").social(1)
+        user2 = User.builder()
+                .nickname("nickname1")
+                .email("email@gmail1.com")
+                .role("ROLE_USER")
+                .social(0)
                 .build();
+
         post1 = Board.builder().user(user1).content("사용자1의 첫 번째 게시글입니다.")
                 .period("1개월").category("스터디").status("모집 중").title("사용자1의 게시글1")
                 .build();
@@ -107,7 +109,7 @@ public class ApplicationServiceTest {
     }
 
     @Test
-    @DisplayName("게시글 ID 기준 신청한 사용자 리스트 조회")
+    @DisplayName("게시글 신청한 사용자 리스트 조회")
     void findAppliedUserIdByBoardId() {
 
         // given
@@ -115,23 +117,25 @@ public class ApplicationServiceTest {
         boardService.apply(post2.getId(), user1.getId());
 
         // when
+        List<UserResponseDto> appliedUsers = boardService.findAppliedUserByBoardId(post1.getId());
 
         // then
+        assertEquals(user2.getNickname(), appliedUsers.get(0).getNickname());
     }
 
-//    @Test
-//    @DisplayName("지원 상태 업데이트")
-//    void update() {
-//        // given
-//        boardService.apply(post1.getId(), user2.getId());
-//        boardService.apply(post2.getId(), user1.getId());
-//
-//        // when
-//        boardService.updateAppliedStatus(post1.getId(), user2.getId());
-//        boardService.updateAppliedStatus(post2.getId(), user1.getId());
-//
-//        // then
-//        boardService.findAppliedBoardByUserId(user2.getId()).stream().map(BoardResponseDto::getId)
-//                .allMatch(boardId -> post1.getId() == boardId);
-//    }
+    @Test
+    @DisplayName("지원 상태 업데이트")
+    void update() {
+        // given
+        boardService.apply(post1.getId(), user2.getId());
+        boardService.apply(post2.getId(), user1.getId());
+
+        // when
+        String status1 = boardService.updateAppliedStatus(post1.getId(), user2.getId(), "승인");
+        String status2 = boardService.updateAppliedStatus(post2.getId(), user1.getId(), "거절");
+
+        // then
+        assertEquals("승인", status1);
+        assertEquals("거절", status2);
+    }
 }

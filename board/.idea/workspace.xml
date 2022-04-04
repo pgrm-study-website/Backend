@@ -5,29 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd26514-9bde-418e-8bb5-6a38047c07f1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/user/configuration/EmailConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/user/controller/EmailController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/user/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/user/dto/UserJoinRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/user/dto/UserJoinResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/user/dto/UserResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/user/dto/UserUpdateRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/user/service/EmailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/user/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/plming/user/entity/UserTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/plming/user/service/UserServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/META-INF/spring-configuration-metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/META-INF/spring-configuration-metadata.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/ApplicationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/ApplicationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/model/ApplicationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/model/ApplicationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/model/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/model/BoardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/entity/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/entity/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/model/ApplicationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/ApplicationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/model/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/model/BoardTagService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardTagService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/configuration/EmailConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/configuration/EmailConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/controller/EmailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/service/EmailService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/BoardServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/BoardServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/BoardTagServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/BoardTagServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,6 +162,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ApplicationServiceTest.findAppliedUserIdByBoardId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="board.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="plming.board.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="plming.board" />
+      <option name="MAIN_CLASS_NAME" value="plming.board.ApplicationServiceTest" />
+      <option name="METHOD_NAME" value="findAppliedUserIdByBoardId" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ApplicationServiceTest.findByApplicationByUserId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
@@ -204,7 +210,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BoardTagServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ApplicationServiceTest.update" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
         <pattern>
@@ -213,23 +219,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="plming.board" />
-      <option name="MAIN_CLASS_NAME" value="plming.board.BoardTagServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BoardTagServiceTest.findTagNameByBoard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="board.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="plming.board.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="plming.board" />
-      <option name="MAIN_CLASS_NAME" value="plming.board.BoardTagServiceTest" />
-      <option name="METHOD_NAME" value="findTagNameByBoard" />
+      <option name="MAIN_CLASS_NAME" value="plming.board.ApplicationServiceTest" />
+      <option name="METHOD_NAME" value="update" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -244,20 +235,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.BoardTagServiceTest.findTagNameByBoard" />
-      <item itemvalue="JUnit.BoardTagServiceTest" />
       <item itemvalue="JUnit.ApplicationServiceTest.save" />
       <item itemvalue="JUnit.ApplicationServiceTest.findByApplicationByUserId" />
       <item itemvalue="JUnit.ApplicationServiceTest.findAppliedBoardByUserId" />
+      <item itemvalue="JUnit.ApplicationServiceTest.findAppliedUserIdByBoardId" />
+      <item itemvalue="JUnit.ApplicationServiceTest.update" />
       <item itemvalue="Spring Boot.BoardApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ApplicationServiceTest.update" />
+        <item itemvalue="JUnit.ApplicationServiceTest.findAppliedUserIdByBoardId" />
         <item itemvalue="JUnit.ApplicationServiceTest.findAppliedBoardByUserId" />
         <item itemvalue="JUnit.ApplicationServiceTest.save" />
         <item itemvalue="JUnit.ApplicationServiceTest.findByApplicationByUserId" />
-        <item itemvalue="JUnit.BoardTagServiceTest" />
-        <item itemvalue="JUnit.BoardTagServiceTest.findTagNameByBoard" />
       </list>
     </recent_temporary>
   </component>
@@ -280,7 +271,8 @@
       <workItem from="1648767017208" duration="4735000" />
       <workItem from="1648854994863" duration="28785000" />
       <workItem from="1648901571011" duration="2950000" />
-      <workItem from="1648904621137" duration="1574000" />
+      <workItem from="1648904621137" duration="7144000" />
+      <workItem from="1649026412226" duration="21249000" />
     </task>
     <servers />
   </component>
@@ -309,6 +301,27 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java</url>
+          <line>133</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="plming.board.entity.Application" memberName="board" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="boardId" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

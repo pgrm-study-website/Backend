@@ -4,7 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import plming.board.dto.BoardRequestDto;
 import plming.board.dto.BoardResponseDto;
-import plming.board.model.BoardService;
+import plming.board.service.BoardService;
+import plming.user.dto.UserResponseDto;
 
 import java.util.List;
 
@@ -79,12 +80,30 @@ public class BoardApiController {
     }
 
     /**
-     * 신청 게시글 리스트 조회 - 사용자 ID 기준
+     * 신청 게시글 리스트 조회 - 사용자 ID 기준 (User 부분으로 옮겨져야 할 것 같음)
      */
     @GetMapping("/application")
     public List<BoardResponseDto> findAppliedBoardByUserID(@RequestParam final Long userId) {
 
         return boardService.findAppliedBoardByUserId(userId);
+    }
+
+    /**
+     * 신청 사용자 리스트 조회 - 게시글 ID 기준
+     */
+    @GetMapping("/{id}/application")
+    public List<UserResponseDto> findAppliedUserByBoardId(@PathVariable final Long id) {
+
+        return boardService.findAppliedUserByBoardId(id);
+    }
+
+    /**
+     * 게시글 신청 상태 업데이트
+     */
+    @PatchMapping("/{id}/application")
+    public String updateAppliedStatus(@PathVariable final Long id, @RequestParam final Long userId, @RequestParam final String status) {
+
+        return boardService.updateAppliedStatus(id, userId, status);
     }
 
 }
