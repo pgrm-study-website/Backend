@@ -30,7 +30,6 @@ public class BoardService {
     private final BoardTagService boardTagService;
     private final UserService userService;
     private final ApplicationService applicationService;
-    private final ApplicationRepository applicationRepository;
 
     /**
      * 게시글 생성
