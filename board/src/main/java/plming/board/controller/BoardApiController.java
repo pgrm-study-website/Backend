@@ -7,6 +7,9 @@ import plming.auth.service.JwtTokenProvider;
 import plming.board.dto.BoardListResponseDto;
 import plming.board.dto.BoardRequestDto;
 import plming.board.dto.BoardResponseDto;
+import plming.board.exception.CustomException;
+import plming.board.exception.ErrorCode;
+import plming.board.exception.ErrorResponse;
 import plming.board.service.BoardService;
 import plming.user.dto.UserResponseDto;
 
@@ -60,9 +63,9 @@ public class BoardApiController {
      * 게시글 리스트 조회 - 사용자 ID 기준
      */
     @GetMapping("/user")
-    public List<BoardListResponseDto> findAllByUserId(@CookieValue String token) {
-        Long userId = jwtTokenProvider.getUserId(token);
+    public List<BoardListResponseDto> findAllByUserId(@CookieValue final Long userId) {
         return boardService.findAllByUserId(userId);
+//        return boardService.findAllByUserId(jwtTokenProvider.getUserId(token));
     }
 
     /**
@@ -78,21 +81,26 @@ public class BoardApiController {
      * 게시글 신청
      */
     @PostMapping("/{id}/application")
-    public ResponseEntity<String> apply(@PathVariable final Long id, @CookieValue final Long userId) {
+    public ResponseEntity<Object> apply(@PathVariable final Long id, @CookieValue final Long userId) {
 
+        //Long userId = jwtTokenProvider.getUserId(token);
         String appliedStatus = boardService.apply(id, userId);
+        CustomException e = new CustomException(ErrorCode.NOT_ACCEPTABLE);
 
-        if (appliedStatus.equals("마감")) {
-            return ResponseEntity.status(204).build();
+        if (appliedStatus.equals("거절")) {
+            return ResponseEntity.status(e.getErrorCode().getStatus().value())
+                    .body(new ErrorResponse(e.getErrorCode(), "참여 승인이 거절된 게시글입니다."));
         }
         if (appliedStatus.equals("신청")) {
-            return ResponseEntity.status(204).build();
+            return ResponseEntity.status(e.getErrorCode().getStatus().value())
+                    .body(new ErrorResponse(e.getErrorCode(), "이미 신청한 게시글입니다."));
         }
-        if (appliedStatus.equals("거절")) {
-            return ResponseEntity.status(204).build();
+        if (appliedStatus.equals("마감")) {
+            return ResponseEntity.status(e.getErrorCode().getStatus().value())
+                    .body(new ErrorResponse(e.getErrorCode(), "신청 마감된 게시글입니다."));
         }
 
-        return ResponseEntity.status(200).body(appliedStatus);
+        return ResponseEntity.status(201).body(appliedStatus);
     }
 
 
@@ -101,8 +109,8 @@ public class BoardApiController {
      */
     @GetMapping("/application")
     public List<BoardListResponseDto> findAppliedBoardByUserID(@CookieValue final Long userId) {
-
         return boardService.findAppliedBoardByUserId(userId);
+//        return boardService.findAppliedBoardByUserId(jwtTokenProvider.getUserId(token));
     }
 
     /**
@@ -115,11 +123,21 @@ public class BoardApiController {
     }
 
     /**
+     * 참여 사용자 리스트 조회 - 게시글 ID 기준
+     */
+    @GetMapping("/{id}/participant")
+    public List<UserResponseDto> findParticipantUserByBoardId(@PathVariable final Long id) {
+
+        return boardService.findParticipantUserByBoardId(id);
+    }
+
+    /**
      * 게시글 신청 상태 업데이트
      */
     @PatchMapping("/{id}/application")
-    public String updateAppliedStatus(@PathVariable final Long id, @RequestParam final Long userId, @RequestParam final String status) {
+    public String updateAppliedStatus(@PathVariable final Long id, @CookieValue final Long userId, @RequestParam final String status) {
 
         return boardService.updateAppliedStatus(id, userId, status);
+//        return boardService.updateAppliedStatus(id, jwtTokenProvider.getUserId(token), status);
     }
 }

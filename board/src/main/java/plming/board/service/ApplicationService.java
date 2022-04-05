@@ -3,7 +3,6 @@ package plming.board.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import plming.board.dto.BoardRequestDto;
 import plming.board.entity.Application;
 import plming.board.entity.ApplicationRepository;
 import plming.board.entity.Board;
@@ -38,15 +37,19 @@ public class ApplicationService {
             return applicationRepository.getById(application.getId()).getBoard().getId().toString();
         }
 
-        if(!(findApplication(boardId, userId).size() == 0)) {
-            return "신청";
-        } else if (!isMaxNum(boardId)) {
+        if (findApplication(boardId, userId).size() == 0 && !isMaxNum(boardId)) {
             return "마감";
-        } else {
+        } else if (!isStatusTrue(boardId, userId)) {
             return "거절";
+        } else {
+            return "신청";
         }
     }
 
+    /**
+     * 게시글 참여 인원이 최대 인원인지 확인
+     * 최대 인원이 아닌 경우 true 반환
+     */
     public boolean isMaxNum(final Long boardId) {
 
         Board board = boardRepository.findById(boardId).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
@@ -56,12 +59,16 @@ public class ApplicationService {
         return (participantNum == 0) || (participantMax > participantNum) ? true : false;
     }
 
+    /**
+     * 신청 상태가 거절인지 확인
+     * 신청 상태가 거절이 아닌 경우 true 반환
+     */
     public boolean isStatusTrue(final Long boardId, final Long userId) {
         if (findApplication(boardId, userId).size() == 0) {
             return true;
         }
 
-        return findApplication(boardId, userId).get(0).getStatus().equals("거절") ? true : false;
+        return !findApplication(boardId, userId).get(0).getStatus().equals("거절") ? true : false;
     }
 
     /**
@@ -136,5 +143,4 @@ public class ApplicationService {
         List<Application> applicationList = boardApplications.stream().filter(app -> app.getUser().getId().equals(userId)).collect(Collectors.toList());
         applicationRepository.deleteById(applicationList.get(0).getId());
     }
-
 }

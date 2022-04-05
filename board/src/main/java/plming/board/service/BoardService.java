@@ -10,7 +10,6 @@ import plming.board.dto.BoardResponseDto;
 import plming.board.entity.*;
 import plming.board.exception.CustomException;
 import plming.board.exception.ErrorCode;
-import plming.tag.entity.Tag;
 import plming.tag.entity.TagRepository;
 import plming.user.dto.UserResponseDto;
 import plming.user.entity.User;
@@ -49,10 +48,6 @@ public class BoardService {
         return entity.getId();
     }
 
-    private List<String> getTagName(final List<Long> boardTagIds) {
-        return boardTagIds.stream().map(tagRepository::getById).map(Tag::getName).collect(Collectors.toList());
-    }
-
     /**
      * 게시글 수정
      */
@@ -81,16 +76,6 @@ public class BoardService {
     }
 
     /**
-     * 게시글 리스트 조회
-     */
-    public List<BoardResponseDto> findAll() {
-
-        Sort sort = Sort.by(DESC, "id", "createDate");
-        List<Board> list = boardRepository.findAll(sort);
-        return getBoardResponse(list);
-    }
-
-    /**
      * 게시글 리스트 조회 - (사용자 ID 기준)
      */
     public List<BoardListResponseDto> findAllByUserId(final Long userId) {
@@ -115,7 +100,7 @@ public class BoardService {
      */
     public List<BoardResponseDto> getBoardResponse(List<Board> list) {
         List<BoardResponseDto> result = new ArrayList<BoardResponseDto>();
-//        List<List<String>> tags= list.stream().map(Board::getId).map(boardTagService::findTagNameByBoardId).collect(Collectors.toList());
+
         for (Board post : list) {
                 List<String> tagName = boardTagService.findTagNameByBoardId(post.getId());
                 Integer participantNum = applicationService.countParticipantNum(post.getId());
@@ -129,7 +114,6 @@ public class BoardService {
      */
     public List<BoardListResponseDto> getBoardListResponse(List<Board> list) {
         List<BoardListResponseDto> result = new ArrayList<BoardListResponseDto>();
-//        List<List<String>> tags= list.stream().map(Board::getId).map(boardTagService::findTagNameByBoardId).collect(Collectors.toList());
         for (Board post : list) {
             List<String> tagName = boardTagService.findTagNameByBoardId(post.getId());
             Integer participantNum = applicationService.countParticipantNum(post.getId());
