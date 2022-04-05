@@ -4,11 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import plming.board.dto.BoardListResponseDto;
 import plming.board.dto.BoardRequestDto;
 import plming.board.dto.BoardResponseDto;
 import plming.board.entity.*;
 import plming.board.exception.CustomException;
 import plming.board.exception.ErrorCode;
+import plming.tag.entity.Tag;
+import plming.tag.entity.TagRepository;
 import plming.user.dto.UserResponseDto;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
@@ -26,6 +29,7 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
+    private final TagRepository tagRepository;
     private final BoardTagRepository boardTagRepository;
     private final BoardTagService boardTagService;
     private final UserService userService;
@@ -45,6 +49,10 @@ public class BoardService {
         return entity.getId();
     }
 
+    private List<String> getTagName(final List<Long> boardTagIds) {
+        return boardTagIds.stream().map(tagRepository::getById).map(Tag::getName).collect(Collectors.toList());
+    }
+
     /**
      * 게시글 수정
      */
@@ -52,12 +60,12 @@ public class BoardService {
     public Long update(final Long id, final BoardRequestDto params) {
 
         Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
-        entity.update(params.getTitle(), params.getContent(), params.getCategory(), params.getStatus(), params.getPeriod());
+        entity.update(params.getParticipantMax(), params.getTitle(), params.getContent(), params.getCategory(), params.getStatus(), params.getPeriod());
 
         boardTagRepository.deleteAllByBoardId(id);
         boardTagService.save(params.getTagIds(), entity);
 
-        return id;
+        return entity.getId();
     }
 
     /**
@@ -79,38 +87,53 @@ public class BoardService {
 
         Sort sort = Sort.by(DESC, "id", "createDate");
         List<Board> list = boardRepository.findAll(sort);
-        return getTagName(list);
+        return getBoardResponse(list);
     }
 
     /**
      * 게시글 리스트 조회 - (사용자 ID 기준)
      */
-    public List<BoardResponseDto> findAllByUserId(final Long userId) {
+    public List<BoardListResponseDto> findAllByUserId(final Long userId) {
 
         Sort sort = Sort.by(DESC, "id", "createDate");
         List<Board> list = boardRepository.findAllByUserId(userId, sort);
-        return getTagName(list);
+        return getBoardListResponse(list);
     }
 
     /**
      * 게시글 리스트 조회 - (삭제 여부 기준)
      */
-    public List<BoardResponseDto> findAllByDeleteYn(final char deleteYn) {
+    public List<BoardListResponseDto> findAllByDeleteYn(final char deleteYn) {
 
         Sort sort = Sort.by(DESC, "id", "createDate");
         List<Board> list = boardRepository.findAllByDeleteYn(deleteYn, sort);
-        return getTagName(list);
+        return getBoardListResponse(list);
     }
 
     /**
-     * 각 게시글의 태그 이름 조회
+     * 각 게시글의 태그 이름 조회 후 ResponseDto 반환
      */
-    public List<BoardResponseDto> getTagName(List<Board> list) {
+    public List<BoardResponseDto> getBoardResponse(List<Board> list) {
         List<BoardResponseDto> result = new ArrayList<BoardResponseDto>();
 //        List<List<String>> tags= list.stream().map(Board::getId).map(boardTagService::findTagNameByBoardId).collect(Collectors.toList());
         for (Board post : list) {
                 List<String> tagName = boardTagService.findTagNameByBoardId(post.getId());
-                result.add(new BoardResponseDto(post, tagName));
+                Integer participantNum = applicationService.countParticipantNum(post.getId());
+                result.add(new BoardResponseDto(post, participantNum, tagName));
+        }
+        return result;
+    }
+
+    /**
+     * 각 게시글의 태그 이름 조회 후 BoardListResponseDto 반환
+     */
+    public List<BoardListResponseDto> getBoardListResponse(List<Board> list) {
+        List<BoardListResponseDto> result = new ArrayList<BoardListResponseDto>();
+//        List<List<String>> tags= list.stream().map(Board::getId).map(boardTagService::findTagNameByBoardId).collect(Collectors.toList());
+        for (Board post : list) {
+            List<String> tagName = boardTagService.findTagNameByBoardId(post.getId());
+            Integer participantNum = applicationService.countParticipantNum(post.getId());
+            result.add(new BoardListResponseDto(post, participantNum, tagName));
         }
         return result;
     }
@@ -124,14 +147,15 @@ public class BoardService {
         Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
         entity.increaseCount();
         List<String> boardTagName = boardTagService.findTagNameByBoardId(id);
-        return new BoardResponseDto(entity, boardTagName);
+
+        return new BoardResponseDto(entity, applicationService.countParticipantNum(id) ,boardTagName);
     }
 
     /**
      * 게시글 신청 하기
      */
     @Transactional
-    public Long apply(final Long boardId, final Long userId) {
+    public String apply(final Long boardId, final Long userId) {
 
         return applicationService.save(boardId, userId);
     }
@@ -139,11 +163,11 @@ public class BoardService {
     /**
      * 신청 게시글 리스트 조회 - (사용자 ID 기준)
      */
-    public List<BoardResponseDto> findAppliedBoardByUserId(final Long userId) {
+    public List<BoardListResponseDto> findAppliedBoardByUserId(final Long userId) {
 
         List<Board> appliedBoards = applicationService.findByAppliedBoardByUserId(userId);
 
-        return getTagName(appliedBoards);
+        return getBoardListResponse(appliedBoards);
     }
 
     /**
@@ -157,6 +181,16 @@ public class BoardService {
     }
 
     /**
+     * 참여 사용자 리스트 조회 - (게시글 ID 기준)
+     */
+    public List<UserResponseDto> findParticipantUserByBoardId(final Long boardId) {
+
+        List<User> participatedUsers = applicationService.findParticipantUserByBoardId(boardId);
+
+        return participatedUsers.stream().map(User::getId).map(userService::getUser).collect(Collectors.toList());
+    }
+
+    /**
      * 게시글 신청 정보 업데이트
      */
     public String updateAppliedStatus(final Long boardId, final Long userId, final String status) {
@@ -164,5 +198,21 @@ public class BoardService {
         Application application = applicationService.updateStatus(boardId, userId, status);
 
         return application.getStatus();
+    }
+
+    /**
+     * 게시글 참여자 수 계산
+     */
+    public Integer countParticipantNum(final Long boardId) {
+
+        return applicationService.countParticipantNum(boardId);
+    }
+
+    /**
+     * 지원 취소하기 - Application에서 데이터 삭제
+     */
+    public void cancelApplied(final Long boardId, final Long userId) {
+
+        applicationService.cancelApplied(boardId, userId);
     }
 }

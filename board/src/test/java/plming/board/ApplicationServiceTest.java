@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import plming.board.dto.BoardListResponseDto;
 import plming.board.dto.BoardResponseDto;
 import plming.board.entity.Application;
 import plming.board.entity.ApplicationRepository;
@@ -35,9 +36,6 @@ public class ApplicationServiceTest {
 
     @Autowired
     private BoardService boardService;
-
-    @Autowired
-    private ApplicationService applicationService;
 
     private User user1;
     private User user2;
@@ -84,13 +82,21 @@ public class ApplicationServiceTest {
     @DisplayName("게시글 신청")
     void save() {
 
-        // when
-        Long board1Id = boardService.apply(post1.getId(), user2.getId());
-        Long board2Id = boardService.apply(post2.getId(), user1.getId());
+        // when (신청 성공)
+        String board1Id = boardService.apply(post1.getId(), user2.getId());
+        String board2Id = boardService.apply(post2.getId(), user1.getId());
 
-        // then
-        assertEquals(post1.getId(), board1Id);
-        assertEquals(post2.getId(), board2Id);
+        // when (신청 실패)
+        String board3Id = boardService.apply(post1.getId(), user2.getId());
+        String board4Id = boardService.apply(post1.getId(), user2.getId());
+
+        // then (신청 성공)
+        assertEquals(post1.getId().toString(), board1Id);
+        assertEquals(post2.getId().toString(), board2Id);
+
+        // then (신청 실패)
+        assertEquals("신청", board3Id);
+        assertEquals("신청", board4Id);
     }
 
     @Test
@@ -102,7 +108,7 @@ public class ApplicationServiceTest {
         boardService.apply(post2.getId(), user1.getId());
 
         // when
-        List<BoardResponseDto> appliedBoards = boardService.findAppliedBoardByUserId(user1.getId());
+        List<BoardListResponseDto> appliedBoards = boardService.findAppliedBoardByUserId(user1.getId());
 
         // then
         assertEquals(1, appliedBoards.size());
@@ -137,5 +143,39 @@ public class ApplicationServiceTest {
         // then
         assertEquals("승인", status1);
         assertEquals("거절", status2);
+    }
+
+    @Test
+    @DisplayName("참여자 수 계산")
+    void findParticipateNum() {
+        // given
+        boardService.apply(post1.getId(), user2.getId());
+        boardService.apply(post2.getId(), user1.getId());
+        boardService.updateAppliedStatus(post1.getId(), user2.getId(), "승인");
+        boardService.updateAppliedStatus(post2.getId(), user1.getId(), "거절");
+
+        // when
+        Integer post1ParticipateNum = boardService.countParticipantNum(post1.getId());
+        Integer post2ParticipateNum = boardService.countParticipantNum(post2.getId());
+
+        // then
+        assertEquals(1, post1ParticipateNum);
+        assertEquals(0, post2ParticipateNum);
+    }
+
+    @Test
+    @DisplayName("신청 취소하기")
+    void cancelApplied() {
+
+        // given
+        boardService.apply(post1.getId(), user2.getId());
+        boardService.apply(post2.getId(), user1.getId());
+        long count = applicationRepository.count();
+
+        // when
+        boardService.cancelApplied(post1.getId(), user2.getId());
+
+        // then
+        assertEquals(count - 1, applicationRepository.count());
     }
 }

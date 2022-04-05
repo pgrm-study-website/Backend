@@ -1,7 +1,10 @@
 package plming.board.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import plming.auth.service.JwtTokenProvider;
+import plming.board.dto.BoardListResponseDto;
 import plming.board.dto.BoardRequestDto;
 import plming.board.dto.BoardResponseDto;
 import plming.board.service.BoardService;
@@ -15,14 +18,15 @@ import java.util.List;
 public class BoardApiController {
 
     private final BoardService boardService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     /**
      * 게시글 생성
      */
     @PostMapping
-    public Long save(@RequestBody final BoardRequestDto post) {
+    public ResponseEntity<Long> save(@RequestBody final BoardRequestDto post) {
 
-        return boardService.save(post);
+        return ResponseEntity.status(201).body(boardService.save(post));
     }
 
     /**
@@ -47,17 +51,17 @@ public class BoardApiController {
      * 게시글 리스트 조회
      */
     @GetMapping
-    public List<BoardResponseDto> findAll(@RequestParam final char deleteYn) {
+    public List<BoardListResponseDto> findAll() {
 
-        return boardService.findAllByDeleteYn(deleteYn);
+        return boardService.findAllByDeleteYn('0');
     }
 
     /**
      * 게시글 리스트 조회 - 사용자 ID 기준
      */
     @GetMapping("/user")
-    public List<BoardResponseDto> findAllByUserId(@RequestParam final Long userId) {
-
+    public List<BoardListResponseDto> findAllByUserId(@CookieValue String token) {
+        Long userId = jwtTokenProvider.getUserId(token);
         return boardService.findAllByUserId(userId);
     }
 
@@ -74,16 +78,29 @@ public class BoardApiController {
      * 게시글 신청
      */
     @PostMapping("/{id}/application")
-    public Long apply(@PathVariable final Long id, @RequestParam final Long userId) {
+    public ResponseEntity<String> apply(@PathVariable final Long id, @CookieValue final Long userId) {
 
-        return boardService.apply(id, userId);
+        String appliedStatus = boardService.apply(id, userId);
+
+        if (appliedStatus.equals("마감")) {
+            return ResponseEntity.status(204).build();
+        }
+        if (appliedStatus.equals("신청")) {
+            return ResponseEntity.status(204).build();
+        }
+        if (appliedStatus.equals("거절")) {
+            return ResponseEntity.status(204).build();
+        }
+
+        return ResponseEntity.status(200).body(appliedStatus);
     }
+
 
     /**
      * 신청 게시글 리스트 조회 - 사용자 ID 기준 (User 부분으로 옮겨져야 할 것 같음)
      */
     @GetMapping("/application")
-    public List<BoardResponseDto> findAppliedBoardByUserID(@RequestParam final Long userId) {
+    public List<BoardListResponseDto> findAppliedBoardByUserID(@CookieValue final Long userId) {
 
         return boardService.findAppliedBoardByUserId(userId);
     }
@@ -105,5 +122,4 @@ public class BoardApiController {
 
         return boardService.updateAppliedStatus(id, userId, status);
     }
-
 }

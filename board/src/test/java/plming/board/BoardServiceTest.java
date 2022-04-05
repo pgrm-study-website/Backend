@@ -39,29 +39,40 @@ public class BoardServiceTest {
 
     @BeforeEach
     void beforeEach() {
-
-        user1 = User.builder().email("email@email.com").github("github")
-                .image("no image").introduce("introduce").nickname("nickname")
-                .password("password").role("ROLE_USER").social(1)
+        user1 = User.builder()
+                .nickname("nickname1")
+                .email("email1@gmail.com")
+                .role("ROLE_USER")
+                .social(0)
                 .build();
-        user2 = User.builder().email("email2@email.com").github("github2")
-                .image("no image").introduce("introduce2").nickname("nickname2")
-                .password("password2").role("ROLE_ADMIN").social(1)
+        user2 = User.builder()
+                .nickname("nickname1")
+                .email("email@gmail1.com")
+                .role("ROLE_USER")
+                .social(0)
                 .build();
 
         post1 = Board.builder().user(user1).content("사용자1의 첫 번째 게시글입니다.")
                 .period("1개월").category("스터디").status("모집 중").title("사용자1의 게시글1")
+                .participantMax(5)
                 .build();
         post2 = Board.builder().user(user2).content("사용자2의 첫 번째 게시글입니다.")
                 .period("1개월").category("프로젝트").status("모집 중").title("사용자2의 게시글 1")
+                .participantMax(3)
                 .build();
+
+        userRepository.save(user1);
+        userRepository.save(user2);
         boardRepository.save(post1);
         boardRepository.save(post2);
+
     }
 
     @AfterEach
     void afterEach() {
+
         boardRepository.deleteAll();
+        userRepository.deleteAll();
     }
 
 
@@ -167,7 +178,7 @@ public class BoardServiceTest {
         assertEquals(post2.getContent(), board2.getContent());
 
         // then
-        assertThat(board1.getTitle() == post2.getTitle()).isFalse();
-        assertThat(board2.getContent() == post2.getContent()).isFalse();
+        assertThat(board1.getTitle().equals(post2.getTitle())).isFalse();
+        assertThat(board2.getContent().equals(post1.getContent())).isFalse();
     }
 }

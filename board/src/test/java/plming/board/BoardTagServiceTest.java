@@ -40,14 +40,19 @@ public class BoardTagServiceTest {
 
     @BeforeEach
     void beforeEach() {
-        user1 = User.builder().email("email@email.com").github("github")
-                .image("no image").introduce("introduce").nickname("nickname")
-                .password("password").role("ROLE_USER").social(1)
+        user1 = User.builder()
+                .nickname("nickname1")
+                .email("email1@gmail.com")
+                .role("ROLE_USER")
+                .social(0)
                 .build();
-        user2 = User.builder().email("email2@email.com").github("github2")
-                .image("no image").introduce("introduce2").nickname("nickname2")
-                .password("password2").role("ROLE_ADMIN").social(1)
+        user2 = User.builder()
+                .nickname("nickname1")
+                .email("email@gmail1.com")
+                .role("ROLE_USER")
+                .social(0)
                 .build();
+
         post1 = Board.builder().user(user1).content("사용자1의 첫 번째 게시글입니다.")
                 .period("1개월").category("스터디").status("모집 중").title("사용자1의 게시글1")
                 .build();
