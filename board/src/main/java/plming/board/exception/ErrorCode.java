@@ -19,6 +19,12 @@ public enum ErrorCode {
      */
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
 
+
+    /*
+     * 403 FORBIDDEN: 권한이 없음
+     */
+    FORBIDDEN(HttpStatus.FORBIDDEN,"요청 권합이 없습니다."),
+
     /*
      * 404 NOT_FOUND: 리소스를 찾을 수 없음
      */

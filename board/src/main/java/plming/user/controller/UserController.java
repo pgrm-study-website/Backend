@@ -10,6 +10,7 @@ import plming.user.dto.UserJoinRequestDto;
 import plming.user.dto.UserUpdateRequestDto;
 import plming.user.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 
@@ -43,9 +44,9 @@ public class UserController {
 
     // U
     @PatchMapping("/{userId}")
-    public UserResponseDto updateUser(@NotNull @PathVariable Long userId,@RequestBody UserUpdateRequestDto userUpdateDto){
+    public UserResponseDto updateUser(@NotNull @PathVariable Long userId, @RequestBody UserUpdateRequestDto userUpdateDto, HttpServletRequest request){
         userUpdateDto.setId(userId);
-        return userService.updateUser(userUpdateDto);
+        return userService.updateUser(userUpdateDto, request);
     }
 
     /*
