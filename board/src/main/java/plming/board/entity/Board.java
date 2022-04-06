@@ -31,8 +31,8 @@ public class Board {
     @Column(columnDefinition = "enum")
     private String status;  // 모집 상태
 
-    @Column(columnDefinition = "varchar")
-    private String period;  // 진행 기간
+    @Column(columnDefinition = "integer")
+    private Integer period;  // 진행 기간
 
     @Column(columnDefinition = "varchar")
     private String title;   // 제목
@@ -60,7 +60,7 @@ public class Board {
     private List<BoardTag> boardTags;
 
     @Builder
-    public Board(User user, Integer participantMax, String category, String status, String period, String title, String content, List<BoardTag> boardTags) {
+    public Board(User user, Integer participantMax, String category, String status, Integer period, String title, String content, List<BoardTag> boardTags) {
         this.user = user;
         this.participantMax = participantMax;
         this.category = category;
@@ -74,7 +74,7 @@ public class Board {
     /**
      * 게시글 수정
      */
-    public void update(Integer participantMax, String title, String content, String category, String status, String period) {
+    public void update(Integer participantMax, String title, String content, String category, String status, Integer period) {
         this.participantMax = participantMax;
         this.title = title;
         this.content = content;
@@ -82,6 +82,13 @@ public class Board {
         this.status = status;
         this.period = period;
         this.updateDate = LocalDateTime.now();
+    }
+
+    /**
+     * 게시글 모집 상태 업데이트
+     */
+    public void updateStatus(String status) {
+        this.status = status;
     }
 
     /**

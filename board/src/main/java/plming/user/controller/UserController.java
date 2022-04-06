@@ -10,6 +10,7 @@ import plming.user.dto.UserJoinRequestDto;
 import plming.user.dto.UserUpdateRequestDto;
 import plming.user.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 
@@ -20,7 +21,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    /**
+    /*
      * 회원가입을 진행할 때 이메일 중복확인도 함께 진행한다.
      * 이메일이 중복되어 있다면, userService.createUser()는 null을 반환한다.
      * null check를 통해, 정상적으로 회원가입이 되었는지 확인한다.
@@ -43,9 +44,9 @@ public class UserController {
 
     // U
     @PatchMapping("/{userId}")
-    public UserResponseDto updateUser(@NotNull @PathVariable Long userId,@RequestBody UserUpdateRequestDto userUpdateDto){
+    public UserResponseDto updateUser(@NotNull @PathVariable Long userId, @RequestBody UserUpdateRequestDto userUpdateDto, HttpServletRequest request){
         userUpdateDto.setId(userId);
-        return userService.updateUser(userUpdateDto);
+        return userService.updateUser(userUpdateDto, request);
     }
 
     /*

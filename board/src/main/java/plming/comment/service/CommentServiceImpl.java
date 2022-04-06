@@ -7,7 +7,6 @@ import plming.board.entity.BoardRepository;
 import plming.board.exception.CustomException;
 import plming.board.exception.ErrorCode;
 import plming.comment.dto.CommentRequestDto;
-import plming.comment.dto.CommentResponseDto;
 import plming.comment.entity.Comment;
 import plming.comment.entity.CommentRepository;
 import plming.user.entity.User;

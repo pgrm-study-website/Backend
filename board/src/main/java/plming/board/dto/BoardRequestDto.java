@@ -3,7 +3,6 @@ package plming.board.dto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import plming.board.entity.Board;
 import plming.user.entity.User;
 
@@ -17,7 +16,7 @@ public class BoardRequestDto {
     private Integer participantMax; // 최대 참여 인원 수
     private String category;    // 카테고리
     private String status;  // 모집 상태
-    private String period;  // 진행 기간
+    private Integer period;  // 진행 기간
     private String title;   // 제목
     private String content; // 내용
     private List<Long> tagIds;  // tag ID 리스트

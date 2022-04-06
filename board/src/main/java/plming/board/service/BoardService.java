@@ -11,13 +11,15 @@ import plming.board.entity.*;
 import plming.board.exception.CustomException;
 import plming.board.exception.ErrorCode;
 import plming.tag.entity.TagRepository;
-import plming.user.dto.UserResponseDto;
+import plming.user.dto.UserListResponseDto;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 import plming.user.service.UserService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.springframework.data.domain.Sort.Direction.*;
@@ -28,7 +30,6 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
-    private final TagRepository tagRepository;
     private final BoardTagRepository boardTagRepository;
     private final BoardTagService boardTagService;
     private final UserService userService;
@@ -52,27 +53,35 @@ public class BoardService {
      * 게시글 수정
      */
     @Transactional
-    public Long update(final Long id, final BoardRequestDto params) {
+    public String update(final Long id, final BoardRequestDto params) {
 
         Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
-        entity.update(params.getParticipantMax(), params.getTitle(), params.getContent(), params.getCategory(), params.getStatus(), params.getPeriod());
 
+        if(entity.getStatus().equals("모집 완료")) {
+            return "모집 완료";
+        }
+
+        if((!(params.getParticipantMax() == null)) && (params.getParticipantMax() < countParticipantNum(id))) {
+            return "인원 수";
+        }
+
+        entity.update(params.getParticipantMax(), params.getTitle(), params.getContent(), params.getCategory(), params.getStatus(), params.getPeriod());
         boardTagRepository.deleteAllByBoardId(id);
         boardTagService.save(params.getTagIds(), entity);
 
-        return entity.getId();
+        return entity.getId().toString();
     }
 
     /**
      * 게시글 삭제
      */
     @Transactional
-    public Long delete(final Long id) {
+    public void delete(final Long id) {
 
         Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
         entity.delete();
         boardTagRepository.deleteAllByBoardId(id);
-        return id;
+
     }
 
     /**
@@ -88,11 +97,17 @@ public class BoardService {
     /**
      * 게시글 리스트 조회 - (삭제 여부 기준)
      */
-    public List<BoardListResponseDto> findAllByDeleteYn(final char deleteYn) {
+    public Map<String, Object> findAllByDeleteYn(final char deleteYn) {
 
         Sort sort = Sort.by(DESC, "id", "createDate");
         List<Board> list = boardRepository.findAllByDeleteYn(deleteYn, sort);
-        return getBoardListResponse(list);
+        Integer count = list.size();
+
+        Map<String, Object> result = new HashMap<>(2);
+        result.put("posts", getBoardListResponse(list));
+        result.put("postCount", count);
+
+        return result;
     }
 
     /**
@@ -157,21 +172,21 @@ public class BoardService {
     /**
      * 신청 사용자 리스트 조회 - (게시글 ID 기준)
      */
-    public List<UserResponseDto> findAppliedUserByBoardId(final Long boardId) {
+    public List<UserListResponseDto> findAppliedUserByBoardId(final Long boardId) {
 
         List<User> appliedUsers = applicationService.findAppliedUserByBoardId(boardId);
 
-        return appliedUsers.stream().map(User::getId).map(userService::getUser).collect(Collectors.toList());
+        return appliedUsers.stream().map(User::getId).map(userService::getUserList).collect(Collectors.toList());
     }
 
     /**
      * 참여 사용자 리스트 조회 - (게시글 ID 기준)
      */
-    public List<UserResponseDto> findParticipantUserByBoardId(final Long boardId) {
+    public List<UserListResponseDto> findParticipantUserByBoardId(final Long boardId) {
 
         List<User> participatedUsers = applicationService.findParticipantUserByBoardId(boardId);
 
-        return participatedUsers.stream().map(User::getId).map(userService::getUser).collect(Collectors.toList());
+        return participatedUsers.stream().map(User::getId).map(userService::getUserList).collect(Collectors.toList());
     }
 
     /**
@@ -179,7 +194,7 @@ public class BoardService {
      */
     public String updateAppliedStatus(final Long boardId, final Long userId, final String status) {
 
-        Application application = applicationService.updateStatus(boardId, userId, status);
+        Application application = applicationService.updateAppliedStatus(boardId, userId, status);
 
         return application.getStatus();
     }
@@ -200,3 +215,4 @@ public class BoardService {
         applicationService.cancelApplied(boardId, userId);
     }
 }
+

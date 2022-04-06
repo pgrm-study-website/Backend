@@ -21,7 +21,7 @@ public enum ErrorCode {
     /*
      * 403 Forbidden: 서버에 요청이 전달되었지만, 권한 때문에 거절된 경우
      */
-    FORBIDDEN(HttpStatus.FORBIDDEN, "권한이 없습니다."),
+    FORBIDDEN(HttpStatus.FORBIDDEN, "요청 권한이 없습니다."),
 
     /*
      * 404 NOT_FOUND: 리소스를 찾을 수 없음

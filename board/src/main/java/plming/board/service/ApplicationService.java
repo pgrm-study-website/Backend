@@ -37,7 +37,15 @@ public class ApplicationService {
             return applicationRepository.getById(application.getId()).getBoard().getId().toString();
         }
 
-        if (findApplication(boardId, userId).size() == 0 && !isMaxNum(boardId)) {
+        /**
+         * 신청 인원이 가득 찼을 경우 자동으로 모집 완료 상태로 변경
+         */
+        if(!isMaxNum(boardId)) {
+            Board board = boardRepository.getById(boardId);
+            board.updateStatus("모집 완료");
+        }
+
+        if ((findApplication(boardId, userId).size() == 0 && !isMaxNum(boardId))) {
             return "마감";
         } else if (!isStatusTrue(boardId, userId)) {
             return "거절";
@@ -124,7 +132,7 @@ public class ApplicationService {
      * 게시글 신청 상태 업데이트
      */
     @Transactional
-    public Application updateStatus(final Long boardId, final Long userId, final String status) {
+    public Application updateAppliedStatus(final Long boardId, final Long userId, final String status) {
 
         List<Application> boardApplications = applicationRepository.findAllByBoardId(boardId);
         List<Application> applicationList = boardApplications.stream().filter(app -> app.getUser().getId().equals(userId)).collect(Collectors.toList());

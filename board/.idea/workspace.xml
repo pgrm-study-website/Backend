@@ -5,14 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd26514-9bde-418e-8bb5-6a38047c07f1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/auth/config/PrincipalDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/auth/config/PrincipalDetailsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/auth/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/auth/controller/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/auth/service/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/auth/service/JwtAuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/user/dto/UserListResponseDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/META-INF/spring-configuration-metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/META-INF/spring-configuration-metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/auth/service/JwtTokenProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/auth/service/JwtTokenProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/exception/CustomException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/exception/CustomException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardListResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardListResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/ApplicationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/ApplicationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/controller/CommentApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/controller/CommentApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/service/CommentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/service/CommentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/configuration/EmailConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/configuration/EmailConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/dto/UserJoinRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/dto/UserJoinRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/entity/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/entity/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/BoardServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/BoardServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/BoardTagServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/BoardTagServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,10 +136,14 @@
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="plming.auth.config" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\slc\Desktop\plming\Backend\board\src\main\resources\templates" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="plming.auth.config" />
       <recent name="plming" />
     </key>
   </component>
@@ -254,6 +277,9 @@
       <workItem from="1649026412226" duration="21681000" />
       <workItem from="1649058979789" duration="13190000" />
       <workItem from="1649112550258" duration="24495000" />
+      <workItem from="1649199122720" duration="12673000" />
+      <workItem from="1649240276045" duration="5278000" />
+      <workItem from="1649248696060" duration="1501000" />
     </task>
     <servers />
   </component>
@@ -271,7 +297,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="board-application" />
+                        <option value="feature-comment" />
                       </list>
                     </value>
                   </entry>

@@ -11,9 +11,10 @@ import plming.board.exception.CustomException;
 import plming.board.exception.ErrorCode;
 import plming.board.exception.ErrorResponse;
 import plming.board.service.BoardService;
-import plming.user.dto.UserResponseDto;
+import plming.user.dto.UserListResponseDto;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/posts")
@@ -36,25 +37,38 @@ public class BoardApiController {
      * 게시글 수정
      */
     @PatchMapping("/{id}")
-    public Long update(@PathVariable final Long id, @RequestBody final BoardRequestDto post) {
+    public ResponseEntity update(@PathVariable final Long id, @RequestBody final BoardRequestDto post) {
 
-        return boardService.update(id, post);
+        CustomException e = new CustomException(ErrorCode.NOT_ACCEPTABLE);
+
+        if (boardService.update(id, post).equals("인원 수")) {
+            return ResponseEntity.status(e.getErrorCode().getStatus().value())
+                    .body(new ErrorResponse(e.getErrorCode(), "현재 게시글에 참여한 인원 수보다 참여 가능한 인원 수를 더 작게 수정할 수 없습니다."));
+        }
+        if (boardService.update(id, post).equals("모집 완료")) {
+            return ResponseEntity.status(e.getErrorCode().getStatus().value())
+                    .body(new ErrorResponse(e.getErrorCode(), "현재 게시글은 모집 완료된 게시글로 수정이 불가능합니다."));
+        }
+
+        return ResponseEntity.ok(boardService.update(id, post));
     }
 
     /**
      * 게시글 삭제
      */
     @DeleteMapping("/{id}")
-    public Long delete(@PathVariable final Long id) {
+    public ResponseEntity delete(@PathVariable final Long id) {
 
-        return boardService.delete(id);
+        boardService.delete(id);
+
+        return ResponseEntity.ok().build();
     }
 
     /**
      * 게시글 리스트 조회
      */
     @GetMapping
-    public List<BoardListResponseDto> findAll() {
+    public Map<String, Object> findAll() {
 
         return boardService.findAllByDeleteYn('0');
     }
@@ -63,9 +77,9 @@ public class BoardApiController {
      * 게시글 리스트 조회 - 사용자 ID 기준
      */
     @GetMapping("/user")
-    public List<BoardListResponseDto> findAllByUserId(@CookieValue final Long userId) {
-        return boardService.findAllByUserId(userId);
-//        return boardService.findAllByUserId(jwtTokenProvider.getUserId(token));
+    public List<BoardListResponseDto> findAllByUserId(@CookieValue final String token) {
+//        return boardService.findAllByUserId(userId);
+        return boardService.findAllByUserId(jwtTokenProvider.getUserId(token));
     }
 
     /**
@@ -81,9 +95,9 @@ public class BoardApiController {
      * 게시글 신청
      */
     @PostMapping("/{id}/application")
-    public ResponseEntity<Object> apply(@PathVariable final Long id, @CookieValue final Long userId) {
+    public ResponseEntity<Object> apply(@PathVariable final Long id, @CookieValue final String token) {
 
-        //Long userId = jwtTokenProvider.getUserId(token);
+        Long userId = jwtTokenProvider.getUserId(token);
         String appliedStatus = boardService.apply(id, userId);
         CustomException e = new CustomException(ErrorCode.NOT_ACCEPTABLE);
 
@@ -108,16 +122,16 @@ public class BoardApiController {
      * 신청 게시글 리스트 조회 - 사용자 ID 기준 (User 부분으로 옮겨져야 할 것 같음)
      */
     @GetMapping("/application")
-    public List<BoardListResponseDto> findAppliedBoardByUserID(@CookieValue final Long userId) {
-        return boardService.findAppliedBoardByUserId(userId);
-//        return boardService.findAppliedBoardByUserId(jwtTokenProvider.getUserId(token));
+    public List<BoardListResponseDto> findAppliedBoardByUserID(@CookieValue final String token) {
+//        return boardService.findAppliedBoardByUserId(userId);
+        return boardService.findAppliedBoardByUserId(jwtTokenProvider.getUserId(token));
     }
 
     /**
      * 신청 사용자 리스트 조회 - 게시글 ID 기준
      */
     @GetMapping("/{id}/application")
-    public List<UserResponseDto> findAppliedUserByBoardId(@PathVariable final Long id) {
+    public List<UserListResponseDto> findAppliedUserByBoardId(@PathVariable final Long id) {
 
         return boardService.findAppliedUserByBoardId(id);
     }
@@ -126,7 +140,7 @@ public class BoardApiController {
      * 참여 사용자 리스트 조회 - 게시글 ID 기준
      */
     @GetMapping("/{id}/participant")
-    public List<UserResponseDto> findParticipantUserByBoardId(@PathVariable final Long id) {
+    public List<UserListResponseDto> findParticipantUserByBoardId(@PathVariable final Long id) {
 
         return boardService.findParticipantUserByBoardId(id);
     }
@@ -135,9 +149,9 @@ public class BoardApiController {
      * 게시글 신청 상태 업데이트
      */
     @PatchMapping("/{id}/application")
-    public String updateAppliedStatus(@PathVariable final Long id, @CookieValue final Long userId, @RequestParam final String status) {
+    public String updateAppliedStatus(@PathVariable final Long id, @CookieValue final String token, @RequestParam final String status) {
 
-        return boardService.updateAppliedStatus(id, userId, status);
-//        return boardService.updateAppliedStatus(id, jwtTokenProvider.getUserId(token), status);
+//        return boardService.updateAppliedStatus(id, userId, status);
+        return boardService.updateAppliedStatus(id, jwtTokenProvider.getUserId(token), status);
     }
 }

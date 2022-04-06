@@ -53,11 +53,11 @@ public class BoardServiceTest {
                 .build();
 
         post1 = Board.builder().user(user1).content("사용자1의 첫 번째 게시글입니다.")
-                .period("1개월").category("스터디").status("모집 중").title("사용자1의 게시글1")
+                .period(1).category("스터디").status("모집 중").title("사용자1의 게시글1")
                 .participantMax(5)
                 .build();
         post2 = Board.builder().user(user2).content("사용자2의 첫 번째 게시글입니다.")
-                .period("1개월").category("프로젝트").status("모집 중").title("사용자2의 게시글 1")
+                .period(1).category("프로젝트").status("모집 중").title("사용자2의 게시글 1")
                 .participantMax(3)
                 .build();
 

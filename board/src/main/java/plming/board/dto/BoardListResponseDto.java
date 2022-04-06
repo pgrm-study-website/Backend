@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import plming.board.entity.Board;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter

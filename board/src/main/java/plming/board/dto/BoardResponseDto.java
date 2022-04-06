@@ -13,7 +13,7 @@ public class BoardResponseDto {
     private Long userId;
     private String category;
     private String status;
-    private String period;
+    private Integer period;
     private String title;
     private String content;
     private Integer participantMax;

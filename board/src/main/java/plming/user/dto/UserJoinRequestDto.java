@@ -12,6 +12,10 @@ public class UserJoinRequestDto {
     private String email;
     private int social;
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public User toEntity(){
         return User.builder()
                 .nickname(nickname)
