@@ -2,6 +2,7 @@ package plming.board.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import plming.board.dto.BoardListResponseDto;
 import plming.board.entity.Board;
 import plming.board.entity.BoardRepository;
 
@@ -17,7 +18,7 @@ public class SearchService {
     private final BoardService boardService;
 
     /**
-     * 게시글 검색 - 제목
+     * 제목으로 검색
      */
     public Map<String, Object> searchTitle(final String keyword) {
 
@@ -25,11 +26,27 @@ public class SearchService {
     }
 
     /**
-     * 게시글 검색 - 내용
+     * 내용으로 검색
      */
     public Map<String, Object> searchContent(final String keyword) {
 
         return toBoardListDto(boardRepository.searchContent(keyword));
+    }
+
+    /**
+     * 카테고리로 검색
+     */
+    public Map<String, Object> searchCategory(final List<String> keywords) {
+
+        return toBoardListDto(boardRepository.searchCategory(keywords));
+    }
+
+    /**
+     * 태그로 검색
+     */
+    public Map<String, Object> searchTag(final List<Integer> keywords) {
+
+        return toBoardListDto(boardRepository.searchTag(keywords));
     }
 
 

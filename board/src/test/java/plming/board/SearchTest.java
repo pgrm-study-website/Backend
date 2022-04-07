@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import plming.board.entity.Board;
 import plming.board.entity.BoardRepository;
+import plming.board.entity.BoardTagRepository;
+import plming.board.service.BoardTagService;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 
@@ -20,6 +22,12 @@ public class SearchTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BoardTagService boardTagService;
+
+    @Autowired
+    private BoardTagRepository boardTagRepository;
 
     private User user1;
     private User user2;
@@ -90,5 +98,48 @@ public class SearchTest {
         // then
         assertEquals(2, result.size());
 
+    }
+
+    @Test
+    @DisplayName("카테고리로 검색하기")
+    void searchCategory() {
+
+        // when
+        List<Board> result1 = boardRepository.searchCategory(List.of("스터디"));
+        List<Board> result2 = boardRepository.searchCategory(List.of("프로젝트", "공모전"));
+        List<Board> result3 = boardRepository.searchCategory(List.of("스터디", "프로젝트", "공모전"));
+        List<Board> result4 = boardRepository.searchCategory(List.of("기타"));
+
+        // then
+        assertEquals(1, result1.size());
+        assertEquals(2, result2.size());
+        assertEquals(3, result3.size());
+        assertEquals(0, result4.size());
+
+    }
+
+    @Test
+    @DisplayName("태그로 검색하기")
+    void searchTag() {
+
+        // given
+        Long[] post1TagIds = {10L, 20L};
+        Long[] post2TagIds = {40L, 50L, 60L};
+        Long[] post3TagIds = {40L, 20L};
+        boardTagService.save(List.of(post1TagIds), post1);
+        boardTagService.save(List.of(post2TagIds), post2);
+        boardTagService.save(List.of(post3TagIds), post3);
+
+        // when
+        List<Board> result1 = boardRepository.searchTag(List.of(10));
+        List<Board> result2 = boardRepository.searchTag(List.of(40, 50));
+        List<Board> result3 = boardRepository.searchTag(List.of(10, 40));
+
+        // then
+        assertEquals(1, result1.size());
+        assertEquals(2, result2.size());
+        assertEquals(3, result3.size());
+
+        boardTagRepository.deleteAll();
     }
 }

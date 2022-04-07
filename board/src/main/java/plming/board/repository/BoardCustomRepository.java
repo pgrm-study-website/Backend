@@ -41,4 +41,14 @@ public interface BoardCustomRepository {
      */
     List<Board> searchContent(final String keyword);
 
+    /**
+     * 게시글 검색 - 카테고리
+     */
+    List<Board> searchCategory(final List<String> keywords);
+
+    /**
+     * 게시글 검색 - 태그
+     */
+    List<Board> searchTag(final List<Integer> keywords);
+
 }

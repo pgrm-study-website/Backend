@@ -76,4 +76,31 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
         return jpaQueryFactory.selectFrom(board)
                 .where(builder).fetch();
     }
+
+    @Override
+    public List<Board> searchCategory(List<String> keywords) {
+
+        BooleanBuilder builder = new BooleanBuilder();
+
+        keywords.stream().map(board.category::eq).forEach(builder::or);
+
+        return jpaQueryFactory.selectFrom(board)
+                .where(builder).fetch();
+    }
+
+    @Override
+    public List<Board> searchTag(List<Integer> keywords) {
+
+        BooleanBuilder builder = new BooleanBuilder();
+
+        // keywords.stream().map(boardTag.tag.id::eq).forEach(builder::or);
+
+        for(int i = 0; i < keywords.size(); i++) {
+
+            builder.or(boardTag.tag.id.eq(Long.valueOf(keywords.get(i))));
+        }
+
+        return jpaQueryFactory.select(board).from(boardTag)
+                .where(builder).distinct().fetch();
+    }
 }

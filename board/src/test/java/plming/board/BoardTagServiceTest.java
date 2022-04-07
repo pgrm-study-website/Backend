@@ -64,16 +64,16 @@ public class BoardTagServiceTest {
         userRepository.save(user2);
         boardRepository.save(post1);
         boardRepository.save(post2);
-        boardTagService.save(List.of(post1TagIds), post1);
-        boardTagService.save(List.of(post2TagIds), post2);
+//        boardTagService.save(List.of(post1TagIds), post1);
+//        boardTagService.save(List.of(post2TagIds), post2);
 
     }
 
     @AfterEach
     void afterEach() {
-        boardTagRepository.deleteAll();
-        boardRepository.deleteAll();
-        userRepository.deleteAll();
+//        boardTagRepository.deleteAll();
+//        boardRepository.deleteAll();
+//        userRepository.deleteAll();
     }
 
     @Test
