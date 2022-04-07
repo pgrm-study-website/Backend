@@ -29,16 +29,25 @@ public class UserService{
     public UserJoinResponseDto createUser(UserJoinRequestDto userJoinRequestDto) {
         userJoinRequestDto.setPassword(bCryptPasswordEncoder.encode(userJoinRequestDto.getPassword()));
         User user = userJoinRequestDto.toEntity();
+      
         if(isEmailOverlap(user.getEmail())) throw new CustomException(ErrorCode.EMAIL_OVERLAP);
         if(isNickNameOverlap(user.getNickname())) throw new CustomException(ErrorCode.NICKNAME_OVERLAP);
+
         userRepository.save(user);
         return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
     }
 
+
     public UserResponseDto getUser(String nickName) {
         User user = userRepository.findByNickname(nickName)
-                .orElseThrow(()-> new CustomException(ErrorCode.NO_CONTENT));
+          .orElseThrow(()-> new CustomException(ErrorCode.NO_CONTENT));
         return new UserResponseDto(user);
+    }
+
+    public UserListResponseDto getUserList(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(()-> new CustomException(ErrorCode.NO_CONTENT));
+        return new UserListResponseDto(user);
     }
 
     @Transactional
@@ -46,9 +55,11 @@ public class UserService{
         if(!jwtTokenProvider.validateTokenAndUserId(request,userUpdateDto.getId())){
             throw new CustomException(ErrorCode.FORBIDDEN);
         }
+      
         if(isNickNameOverlap(userUpdateDto.getNickname())){
             throw new CustomException(ErrorCode.NICKNAME_OVERLAP);
         }
+        
         User user = userRepository.findById(userUpdateDto.getId())
                 .orElseThrow(()-> new CustomException(ErrorCode.INTERNAL_SERVER_ERROR));
         user.update(userUpdateDto);

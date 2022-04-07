@@ -38,7 +38,7 @@ public enum ErrorCode {
      * 403 FORBIDDEN: 권한이 없음
      */
     FORBIDDEN(HttpStatus.FORBIDDEN,"요청 권한이 없습니다."),
-
+    
     /*
      * 404 NOT_FOUND: 리소스를 찾을 수 없음
      */
@@ -48,6 +48,11 @@ public enum ErrorCode {
      * 405 METHOD_NOT_ALLOWED: 허용되지 않은 Request Method 호출
      */
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "허용되지 않은 메서드입니다."),
+
+    /*
+     * 406 NOT_ALLOWED: 허용되지 않음. 요청한 페이지가 요청한 콘텐츠 특성으로 응답 불가
+     */
+    NOT_ACCEPTABLE(HttpStatus.NOT_ACCEPTABLE, "허용되지 않는 요청입니다."),
 
     /*
      * 500 INTERNAL_SERVER_ERROR: 내부 서버 오류
