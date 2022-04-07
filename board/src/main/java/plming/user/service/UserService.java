@@ -29,15 +29,14 @@ public class UserService{
     public UserJoinResponseDto createUser(UserJoinRequestDto userJoinRequestDto) {
         userJoinRequestDto.setPassword(bCryptPasswordEncoder.encode(userJoinRequestDto.getPassword()));
         User user = userJoinRequestDto.toEntity();
-        if(isEmailOverlap(user.getEmail())){
-            return null;
-        }
+        if(isEmailOverlap(user.getEmail())) throw new CustomException(ErrorCode.EMAIL_OVERLAP);
+        if(isNickNameOverlap(user.getNickname())) throw new CustomException(ErrorCode.NICKNAME_OVERLAP);
         userRepository.save(user);
         return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
     }
 
-    public UserResponseDto getUser(Long userId) {
-        User user = userRepository.findById(userId)
+    public UserResponseDto getUser(String nickName) {
+        User user = userRepository.findByNickname(nickName)
                 .orElseThrow(()-> new CustomException(ErrorCode.NO_CONTENT));
         return new UserResponseDto(user);
     }
@@ -46,6 +45,9 @@ public class UserService{
     public UserResponseDto updateUser(UserUpdateRequestDto userUpdateDto, HttpServletRequest request) {
         if(!jwtTokenProvider.validateTokenAndUserId(request,userUpdateDto.getId())){
             throw new CustomException(ErrorCode.FORBIDDEN);
+        }
+        if(isNickNameOverlap(userUpdateDto.getNickname())){
+            throw new CustomException(ErrorCode.NICKNAME_OVERLAP);
         }
         User user = userRepository.findById(userUpdateDto.getId())
                 .orElseThrow(()-> new CustomException(ErrorCode.INTERNAL_SERVER_ERROR));
@@ -77,5 +79,9 @@ public class UserService{
 
     public boolean isEmailOverlap(String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    public boolean isNickNameOverlap(String nickName){
+        return userRepository.existsByNickname(nickName);
     }
 }

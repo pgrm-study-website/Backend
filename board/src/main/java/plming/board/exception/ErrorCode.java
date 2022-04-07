@@ -19,11 +19,25 @@ public enum ErrorCode {
      */
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
 
+    /*
+     * 400 BAD_REQUEST: 닉네임 중복
+     */
+    NICKNAME_OVERLAP(HttpStatus.BAD_REQUEST, "중복된 닉네임입니다."),
+
+    /*
+     * 400 BAD_REQUEST: 이메일 중복
+     */
+    EMAIL_OVERLAP(HttpStatus.BAD_REQUEST, "중복된 이메일입니다."),
+
+    /*
+     * 401 UNAUTHORIZED: 로그인 실패
+     */
+    LOGIN_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "계정정보가 잘못되었습니다."),
 
     /*
      * 403 FORBIDDEN: 권한이 없음
      */
-    FORBIDDEN(HttpStatus.FORBIDDEN,"요청 권합이 없습니다."),
+    FORBIDDEN(HttpStatus.FORBIDDEN,"요청 권한이 없습니다."),
 
     /*
      * 404 NOT_FOUND: 리소스를 찾을 수 없음

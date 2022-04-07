@@ -37,9 +37,9 @@ public class UserController {
     }
 
     // R
-    @GetMapping("/{userId}")
-    public UserResponseDto getUser(@NotNull @PathVariable Long userId){
-        return userService.getUser(userId);
+    @GetMapping("/{nickName}")
+    public UserResponseDto getUser(@NotNull @PathVariable String nickName){
+        return userService.getUser(nickName);
     }
 
     // U
