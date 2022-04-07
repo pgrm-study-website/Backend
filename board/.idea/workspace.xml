@@ -5,12 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd26514-9bde-418e-8bb5-6a38047c07f1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/auth/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/auth/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/auth/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/auth/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/auth/service/JwtTokenProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/auth/service/JwtTokenProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/ApplicationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/ApplicationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/auth/config/PrincipalDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/auth/config/PrincipalDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/auth/config/PrincipalDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/auth/config/PrincipalDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/auth/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/auth/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/auth/controller/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/BoardApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/BoardApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/auth/service/JwtTokenProviderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/auth/service/JwtTokenProviderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/BoardServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/BoardServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/BoardTagServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/BoardTagServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/comment/CommentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/comment/CommentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/user/entity/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/user/entity/UserTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/user/service/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/user/service/UserServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +48,12 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="board" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="board" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -238,12 +253,12 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.board [build]" />
       <item itemvalue="JUnit.ApplicationServiceTest.save" />
       <item itemvalue="JUnit.ApplicationServiceTest.cancelApplied" />
       <item itemvalue="JUnit.BoardServiceTest.save" />
       <item itemvalue="JUnit.CommentTest.save" />
       <item itemvalue="Spring Boot.BoardApplication" />
+      <item itemvalue="Gradle.board [build]" />
     </list>
     <recent_temporary>
       <list>
@@ -298,7 +313,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="board-querydsl" />
+                        <option value="develope" />
                       </list>
                     </value>
                   </entry>
