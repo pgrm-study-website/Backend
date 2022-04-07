@@ -77,9 +77,9 @@ public class BoardApiController {
      * 게시글 리스트 조회 - 사용자 ID 기준
      */
     @GetMapping("/user")
-    public List<BoardListResponseDto> findAllByUserId(@CookieValue final String token) {
-//        return boardService.findAllByUserId(userId);
-        return boardService.findAllByUserId(jwtTokenProvider.getUserId(token));
+    public List<BoardListResponseDto> findAllByUserId(@CookieValue final Long userId) {
+        return boardService.findAllByUserId(userId);
+//        String token return boardService.findAllByUserId(jwtTokenProvider.getUserId(token));
     }
 
     /**
@@ -95,9 +95,9 @@ public class BoardApiController {
      * 게시글 신청
      */
     @PostMapping("/{id}/application")
-    public ResponseEntity<Object> apply(@PathVariable final Long id, @CookieValue final String token) {
+    public ResponseEntity<Object> apply(@PathVariable final Long id, @CookieValue final Long userId) {
 
-        Long userId = jwtTokenProvider.getUserId(token);
+//        String token Long userId = jwtTokenProvider.getUserId(token);
         String appliedStatus = boardService.apply(id, userId);
         CustomException e = new CustomException(ErrorCode.NOT_ACCEPTABLE);
 
@@ -122,9 +122,9 @@ public class BoardApiController {
      * 신청 게시글 리스트 조회 - 사용자 ID 기준 (User 부분으로 옮겨져야 할 것 같음)
      */
     @GetMapping("/application")
-    public List<BoardListResponseDto> findAppliedBoardByUserID(@CookieValue final String token) {
-//        return boardService.findAppliedBoardByUserId(userId);
-        return boardService.findAppliedBoardByUserId(jwtTokenProvider.getUserId(token));
+    public List<BoardListResponseDto> findAppliedBoardByUserID(@CookieValue final Long userId) {
+        return boardService.findAppliedBoardByUserId(userId);
+//        String token return boardService.findAppliedBoardByUserId(jwtTokenProvider.getUserId(token));
     }
 
     /**
@@ -149,9 +149,9 @@ public class BoardApiController {
      * 게시글 신청 상태 업데이트
      */
     @PatchMapping("/{id}/application")
-    public String updateAppliedStatus(@PathVariable final Long id, @CookieValue final String token, @RequestParam final String status) {
+    public String updateAppliedStatus(@PathVariable final Long id, @CookieValue final Long userId, @RequestParam final String status) {
 
-//        return boardService.updateAppliedStatus(id, userId, status);
-        return boardService.updateAppliedStatus(id, jwtTokenProvider.getUserId(token), status);
+        return boardService.updateAppliedStatus(id, userId, status);
+//        String token return boardService.updateAppliedStatus(id, jwtTokenProvider.getUserId(token), status);
     }
 }

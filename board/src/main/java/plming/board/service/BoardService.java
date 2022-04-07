@@ -10,7 +10,8 @@ import plming.board.dto.BoardResponseDto;
 import plming.board.entity.*;
 import plming.board.exception.CustomException;
 import plming.board.exception.ErrorCode;
-import plming.tag.entity.TagRepository;
+import plming.board.entity.BoardRepository;
+import plming.board.entity.BoardTagRepository;
 import plming.user.dto.UserListResponseDto;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
@@ -101,11 +102,10 @@ public class BoardService {
 
         Sort sort = Sort.by(DESC, "id", "createDate");
         List<Board> list = boardRepository.findAllByDeleteYn(deleteYn, sort);
-        Integer count = list.size();
 
         Map<String, Object> result = new HashMap<>(2);
+        result.put("postCount", list.size());
         result.put("posts", getBoardListResponse(list));
-        result.put("postCount", count);
 
         return result;
     }
@@ -164,7 +164,7 @@ public class BoardService {
      */
     public List<BoardListResponseDto> findAppliedBoardByUserId(final Long userId) {
 
-        List<Board> appliedBoards = applicationService.findByAppliedBoardByUserId(userId);
+        List<Board> appliedBoards = applicationService.findAppliedBoardByUserId(userId);
 
         return getBoardListResponse(appliedBoards);
     }

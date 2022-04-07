@@ -61,18 +61,18 @@ public class BoardServiceTest {
                 .participantMax(3)
                 .build();
 
-        userRepository.save(user1);
-        userRepository.save(user2);
-        boardRepository.save(post1);
-        boardRepository.save(post2);
+//        userRepository.save(user1);
+//        userRepository.save(user2);
+//        boardRepository.save(post1);
+//        boardRepository.save(post2);
 
     }
 
     @AfterEach
     void afterEach() {
 
-        boardRepository.deleteAll();
-        userRepository.deleteAll();
+        //boardRepository.deleteAll();
+        //userRepository.deleteAll();
     }
 
 
@@ -181,4 +181,5 @@ public class BoardServiceTest {
         assertThat(board1.getTitle().equals(post2.getTitle())).isFalse();
         assertThat(board2.getContent().equals(post1.getContent())).isFalse();
     }
+
 }

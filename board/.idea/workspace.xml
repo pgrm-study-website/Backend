@@ -5,33 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd26514-9bde-418e-8bb5-6a38047c07f1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/auth/config/PrincipalDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/auth/config/PrincipalDetailsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/auth/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/auth/controller/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/auth/service/AuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/auth/service/JwtAuthenticationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/user/dto/UserListResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/SearchApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/SearchRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/SearchService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/config/QueryDslConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/plming/board/SearchTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/auth/service/JwtTokenProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/auth/service/JwtTokenProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/META-INF/spring-configuration-metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/META-INF/spring-configuration-metadata.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardListResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardListResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/ApplicationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/ApplicationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/BoardRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/BoardRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/BoardTagRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/BoardTagRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/ApplicationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/ApplicationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/controller/CommentApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/controller/CommentApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/service/CommentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/service/CommentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardTagService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardTagService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/config/SecurityConfig.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/configuration/EmailConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/configuration/EmailConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/dto/UserJoinRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/dto/UserJoinRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/entity/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/entity/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/BoardServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/BoardServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/BoardTagServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/BoardTagServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/comment/CommentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/comment/CommentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/user/service/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/user/service/UserServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +51,23 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="board" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="board" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="board" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -117,6 +133,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
+    <option name="abbreviatePackageNames" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -143,11 +160,28 @@
       <recent name="C:\Users\slc\Desktop\plming\Backend\board\src\main\resources\templates" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="plming.board.entity" />
+      <recent name="plming.board.repository" />
       <recent name="plming.auth.config" />
       <recent name="plming" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.BoardApplication">
+    <configuration name="ApplicationServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="board.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="plming.board.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="plming.board" />
+      <option name="MAIN_CLASS_NAME" value="plming.board.ApplicationServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ApplicationServiceTest.cancelApplied" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
@@ -159,38 +193,6 @@
       <option name="PACKAGE_NAME" value="plming.board" />
       <option name="MAIN_CLASS_NAME" value="plming.board.ApplicationServiceTest" />
       <option name="METHOD_NAME" value="cancelApplied" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ApplicationServiceTest.save" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="board.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="plming.board.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="plming.board" />
-      <option name="MAIN_CLASS_NAME" value="plming.board.ApplicationServiceTest" />
-      <option name="METHOD_NAME" value="save" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ApplicationServiceTest.update" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="board.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="plming.board.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="plming.board" />
-      <option name="MAIN_CLASS_NAME" value="plming.board.ApplicationServiceTest" />
-      <option name="METHOD_NAME" value="update" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -212,17 +214,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CommentTest.save" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SearchTest.searchContent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="plming.comment.*" />
+          <option name="PATTERN" value="plming.board.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="plming.comment" />
-      <option name="MAIN_CLASS_NAME" value="plming.comment.CommentTest" />
-      <option name="METHOD_NAME" value="save" />
+      <option name="PACKAGE_NAME" value="plming.board" />
+      <option name="MAIN_CLASS_NAME" value="plming.board.SearchTest" />
+      <option name="METHOD_NAME" value="searchContent" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SearchTest.searchTitle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="board.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="plming.board.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="plming.board" />
+      <option name="MAIN_CLASS_NAME" value="plming.board.SearchTest" />
+      <option name="METHOD_NAME" value="searchTitle" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -237,20 +255,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.ApplicationServiceTest.update" />
-      <item itemvalue="JUnit.ApplicationServiceTest.save" />
-      <item itemvalue="JUnit.ApplicationServiceTest.cancelApplied" />
-      <item itemvalue="JUnit.BoardServiceTest.save" />
-      <item itemvalue="JUnit.CommentTest.save" />
       <item itemvalue="Spring Boot.BoardApplication" />
+      <item itemvalue="JUnit.ApplicationServiceTest.cancelApplied" />
+      <item itemvalue="JUnit.ApplicationServiceTest" />
+      <item itemvalue="JUnit.SearchTest.searchTitle" />
+      <item itemvalue="JUnit.BoardServiceTest.save" />
+      <item itemvalue="JUnit.SearchTest.searchContent" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CommentTest.save" />
-        <item itemvalue="JUnit.ApplicationServiceTest.save" />
         <item itemvalue="JUnit.BoardServiceTest.save" />
+        <item itemvalue="JUnit.SearchTest.searchContent" />
+        <item itemvalue="JUnit.SearchTest.searchTitle" />
+        <item itemvalue="JUnit.ApplicationServiceTest" />
         <item itemvalue="JUnit.ApplicationServiceTest.cancelApplied" />
-        <item itemvalue="JUnit.ApplicationServiceTest.update" />
       </list>
     </recent_temporary>
   </component>
@@ -297,7 +315,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="feature-comment" />
+                        <option value="board-querydsl" />
                       </list>
                     </value>
                   </entry>
@@ -310,24 +328,11 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.NullPointerException" package="java.lang" />
-          <option name="timeStamp" value="13" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="plming.board.entity.Application" memberName="board" />
       </pinned-members>
     </pin-to-top-manager>
-    <watches-manager>
-      <configuration name="JUnit">
-        <watch expression="boardId" />
-      </configuration>
-    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
