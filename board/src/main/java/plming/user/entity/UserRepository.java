@@ -2,8 +2,12 @@ package plming.user.entity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    Optional<User> findByNickname(String nickName);
     boolean existsByEmail(String email);
-    boolean existsByIdAndPassword(Long id, String password);
+    boolean existsByNickname(String nickName);
+    User findByEmail(String email);
 }
