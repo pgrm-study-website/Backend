@@ -1,4 +1,4 @@
-package plming.board.model;
+package plming.board.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,17 +24,22 @@ public class BoardTagService {
      */
     @Transactional
     public void save(List<Long> tagIdList, Board entity) {
-        for (Long tagId : tagIdList) {
-            BoardTag boardTag = BoardTag.builder()
-                    .board(entity)
-                    .tag(tagRepository.getById(tagId))
-                    .build();
-            boardTagRepository.save(boardTag);
-        }
+
+        tagIdList.stream().map(tagId -> BoardTag.builder()
+                .board(entity)
+                .tag(tagRepository.getById(tagId))
+                .build()).forEach(boardTagRepository::save);
     }
 
+    /**
+     * 게시글 id로 태그 이름 조회
+     */
     public List<String> findTagNameByBoardId (final Long id) {
+
         List<BoardTag> boardTagList = boardTagRepository.findAllByBoardId(id);
-        return boardTagList.stream().map(BoardTag::getTag).map(Tag::getName).collect(Collectors.toList());
+        List<String> boardTagNameList = boardTagList.stream().map(BoardTag::getTag).map(Tag::getName).collect(Collectors.toList());
+
+        return boardTagNameList;
     }
+
 }

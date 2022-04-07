@@ -13,16 +13,18 @@ import java.util.List;
 public class BoardRequestDto {
 
     private Long userId;    // 사용자
+    private Integer participantMax; // 최대 참여 인원 수
     private String category;    // 카테고리
     private String status;  // 모집 상태
-    private String period;  // 진행 기간
+    private Integer period;  // 진행 기간
     private String title;   // 제목
     private String content; // 내용
-    private List<Long> tagIds;
+    private List<Long> tagIds;  // tag ID 리스트
 
     public Board toEntity(User user) {
         return Board.builder()
                 .user(user)
+                .participantMax(participantMax)
                 .title(title)
                 .status(status)
                 .category(category)
