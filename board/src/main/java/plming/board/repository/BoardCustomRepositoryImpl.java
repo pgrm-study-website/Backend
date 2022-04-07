@@ -58,10 +58,11 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
 
         if (keyword != null) {
             builder.and(board.title.contains(keyword));
+            return jpaQueryFactory.selectFrom(board)
+                    .where(builder).fetch();
         }
 
-        return jpaQueryFactory.selectFrom(board)
-                .where(builder).fetch();
+        return null;
     }
 
     @Override
@@ -93,12 +94,7 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
 
         BooleanBuilder builder = new BooleanBuilder();
 
-        // keywords.stream().map(boardTag.tag.id::eq).forEach(builder::or);
-
-        for(int i = 0; i < keywords.size(); i++) {
-
-            builder.or(boardTag.tag.id.eq(Long.valueOf(keywords.get(i))));
-        }
+        keywords.stream().map(keyword -> boardTag.tag.id.eq(Long.valueOf(keyword))).forEach(builder::or);
 
         return jpaQueryFactory.select(board).from(boardTag)
                 .where(builder).distinct().fetch();

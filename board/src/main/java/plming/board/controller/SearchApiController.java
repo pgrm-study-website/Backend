@@ -1,6 +1,7 @@
 package plming.board.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import plming.board.dto.SearchRequestDto;
 import plming.board.service.SearchService;
@@ -34,8 +35,9 @@ public class SearchApiController {
 //        return null;
 //    }
 
+
     @GetMapping()
-    public Map<String, Object> searchTitle(@RequestBody final SearchRequestDto params) {
+    public ResponseEntity<Object> searchTitle(@RequestBody final SearchRequestDto params) {
 
         Map<String, Object> search = params.toEntity();
         String type = search.get("type").toString();

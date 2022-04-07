@@ -1,10 +1,13 @@
 package plming.board.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import plming.board.dto.BoardListResponseDto;
 import plming.board.entity.Board;
 import plming.board.entity.BoardRepository;
+import plming.board.exception.CustomException;
+import plming.board.exception.ErrorCode;
+import plming.board.exception.ErrorResponse;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,39 +19,64 @@ public class SearchService {
 
     private final BoardRepository boardRepository;
     private final BoardService boardService;
+    private final CustomException e = new CustomException(ErrorCode.BAD_SEARCH);
 
     /**
      * 제목으로 검색
      */
-    public Map<String, Object> searchTitle(final String keyword) {
+    public ResponseEntity<Object> searchTitle(final String keyword) {
 
-        return toBoardListDto(boardRepository.searchTitle(keyword));
+        boolean isNull = isResultNull(keyword);
+
+        return isNull ? ResponseEntity.status(e.getErrorCode().getStatus().value()).body(new ErrorResponse(e.getErrorCode())) :
+                ResponseEntity.ok(toBoardListDto(boardRepository.searchTitle(keyword)));
     }
 
     /**
      * 내용으로 검색
      */
-    public Map<String, Object> searchContent(final String keyword) {
+    public ResponseEntity<Object> searchContent(final String keyword) {
 
-        return toBoardListDto(boardRepository.searchContent(keyword));
+        boolean isNull = isResultNull(keyword);
+
+        return isNull ? ResponseEntity.status(e.getErrorCode().getStatus().value()).body(new ErrorResponse(e.getErrorCode())) :
+                ResponseEntity.ok(toBoardListDto(boardRepository.searchContent(keyword)));
     }
 
     /**
      * 카테고리로 검색
      */
-    public Map<String, Object> searchCategory(final List<String> keywords) {
+    public ResponseEntity<Object> searchCategory(final List<String> keywords) {
 
-        return toBoardListDto(boardRepository.searchCategory(keywords));
+        boolean isNull = isResultNull(keywords);
+
+        return isNull ? ResponseEntity.status(e.getErrorCode().getStatus().value()).body(new ErrorResponse(e.getErrorCode())) :
+                ResponseEntity.ok(toBoardListDto(boardRepository.searchCategory(keywords)));
     }
 
     /**
      * 태그로 검색
      */
-    public Map<String, Object> searchTag(final List<Integer> keywords) {
+    public ResponseEntity<Object> searchTag(final List<Integer> keywords) {
 
-        return toBoardListDto(boardRepository.searchTag(keywords));
+        boolean isNull = isResultNull(keywords);
+
+        return isNull ? ResponseEntity.status(e.getErrorCode().getStatus().value()).body(new ErrorResponse(e.getErrorCode())) :
+                ResponseEntity.ok(toBoardListDto(boardRepository.searchTag(keywords)));
     }
 
+    /**
+     * 검색 결과가 null인지 검사
+     */
+    private boolean isResultNull(final Object keyword) {
+
+        if(keyword == null) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     /**
      * BoardListDto 로 변환
