@@ -27,8 +27,6 @@ public class AuthService {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    @Autowired
-    private GoogleOauth googleOauth;
 
 
     public Map<String,Object> loginWithEmail(String email, String password){
