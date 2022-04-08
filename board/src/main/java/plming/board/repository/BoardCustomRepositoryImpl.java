@@ -6,16 +6,14 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
+import plming.board.dto.SearchRequestDto;
 import plming.board.entity.Board;
 import plming.board.entity.BoardTag;
 
-import static org.springframework.util.StringUtils.trimAllWhitespace;
 import static plming.board.entity.QBoard.board;
 import static plming.board.entity.QBoardTag.boardTag;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class BoardCustomRepositoryImpl implements BoardCustomRepository {
@@ -56,77 +54,27 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
     }
 
     @Override
-    public List<Board> searchTitle(String keyword) {
-
-        return jpaQueryFactory.selectFrom(board)
-                    .where(keywordInTitle(keyword)).fetch();
-    }
-
-    @Override
-    public List<Board> searchContent(String keyword) {
-
-        return jpaQueryFactory.selectFrom(board)
-                .where(keywordInContent(keyword)).fetch();
-    }
-
-    @Override
-    public List<Board> searchCategory(List<String> keywords) {
-
-        return jpaQueryFactory.selectFrom(board)
-                .where(keywordInCategory(keywords)).fetch();
-    }
-
-    @Override
-    public List<Board> searchTag(List<Integer> keywords) {
-
-        return jpaQueryFactory.select(board).from(boardTag)
-                .where(keywordInTag(keywords)).distinct().fetch();
-    }
-
-    @Override
-    public List<Board> searchTitleAndContent(String keyword) {
-
-        return jpaQueryFactory.selectFrom(board)
-                .where(keywordInTitleAndContent(keyword))
-                .distinct().fetch();
-    }
-
-    @Override
-    public List<Board> searchTitleAndCategory(String keyword, List<String> categories) {
-
-        return jpaQueryFactory.selectFrom(board)
-                .where(keywordInTitleAndCategory(keyword, categories))
-                .distinct().fetch();
-    }
-
-    @Override
-    public List<Board> searchTitleAndTag(String keyword, List<Integer> tags) {
+    public List<Board> searchAllCondition(SearchRequestDto params) {
 
         return jpaQueryFactory.select(board).from(board)
                 .leftJoin(board.boardTags, boardTag)
                 .fetchJoin()
-                .where(keywordInTitle(keyword), keywordInTag(tags))
+                .where(keywordInTitleAndContent(params.getKeyword()).and(keywordInCategory(params.getCategories()))
+                        .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTags())))
                 .distinct()
                 .fetch();
     }
 
-    @Override
-    public List<Board> searchContentAndCategory(String keyword, List<String> categories) {
+    private BooleanBuilder keywordInStatus(List<String> keywords) {
 
-        return jpaQueryFactory.selectFrom(board)
-                .where(keywordInContentAndCategory(keyword, categories))
-                .distinct().fetch();
-    }
+        if(keywords != null ) {
+            BooleanBuilder builder = new BooleanBuilder();
+            keywords.stream().map(board.status::eq).forEach(builder::or);
 
-    @Override
-    public List<Board> searchContentAndTag(String keyword, List<Integer> tags) {
+            return builder;
+        }
 
-        return jpaQueryFactory.select(board).from(board)
-                .leftJoin(board.boardTags, boardTag)
-                .fetchJoin()
-                .where(keywordInContent(keyword), keywordInTag(tags))
-                .distinct()
-                .fetch();
+        return null;
     }
 
     private BooleanExpression keywordInTitle(String keyword) {
@@ -167,16 +115,4 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
 
         return keywordInTitle(keyword).or(keywordInContent(keyword));
     }
-
-    private BooleanExpression keywordInTitleAndCategory(String keyword, List<String> categories) {
-
-        return keywordInTitle(keyword).and(keywordInCategory(categories));
-    }
-
-    private BooleanExpression keywordInContentAndCategory(String keyword, List<String> categories) {
-
-        return keywordInContent(keyword).and(keywordInCategory(categories));
-    }
-
-
 }

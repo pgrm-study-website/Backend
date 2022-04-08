@@ -84,10 +84,7 @@ public class ApplicationService {
      */
     public List<Board> findAppliedBoardByUserId(final Long userId) {
 
-        List<Application> applications = applicationRepository.findAppliedBoardByUserId(userId);
-        List<Board> appliedBoards = applications.stream().map(Application::getBoard).collect(Collectors.toList());
-
-        return appliedBoards;
+        return applicationRepository.findAppliedBoardByUserId(userId);
     }
 
     /**
@@ -95,10 +92,7 @@ public class ApplicationService {
      */
     public List<User> findAppliedUserByBoardId(final Long boardId) {
 
-        List<Application> applications = applicationRepository.findAppliedUserByBoardId(boardId);
-        List<User> appliedUsers = applications.stream().map(Application::getUser).collect(Collectors.toList());
-
-        return appliedUsers;
+        return applicationRepository.findAppliedUserByBoardId(boardId);
     }
 
     /**
@@ -106,10 +100,7 @@ public class ApplicationService {
      */
     public List<User> findParticipantUserByBoardId(final Long boardId) {
 
-        List<Application> applicationList = applicationRepository.findParticipantByBoardId(boardId);
-        List<User> participatedUser = applicationList.stream().map(Application::getUser).collect(Collectors.toList());
-
-        return participatedUser;
+        return applicationRepository.findParticipantByBoardId(boardId);
     }
 
     /**
@@ -123,8 +114,9 @@ public class ApplicationService {
     /**
      * 게시글 신청 조회
      */
-    private List<Application> findApplication(Long boardId, Long userId) {
-        return applicationRepository.findAppliedUserByBoardId(boardId).stream().filter(app -> app.getUser().getId().equals(userId)).collect(Collectors.toList());
+    private List<Application> findApplication(final Long boardId, final Long userId) {
+
+        return applicationRepository.findApplication(boardId, userId);
     }
 
     /**

@@ -147,7 +147,7 @@ public class BoardService {
         entity.increaseCount();
         List<String> boardTagName = boardTagService.findTagNameByBoardId(id);
 
-        return new BoardResponseDto(entity, applicationService.countParticipantNum(id) ,boardTagName);
+        return new BoardResponseDto(entity, applicationService.countParticipantNum(id), boardTagName);
     }
 
     /**
