@@ -12,14 +12,5 @@ import java.util.Map;
 public class SearchRequestDto {
 
     private String type;
-    private Object keyword;
-
-    public Map<String, Object> toEntity() {
-
-        Map<String, Object> map = new HashMap<String, Object>(2);
-        map.put("type", this.type);
-        map.put("keyword", this.keyword);
-
-        return map;
-    }
+    private Object keywords;
 }
