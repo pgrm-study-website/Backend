@@ -1,5 +1,7 @@
 package plming.board.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import plming.board.entity.Application;
 import plming.board.entity.Board;
@@ -12,7 +14,7 @@ public interface ApplicationCustomRepository {
     /**
      * 신청 게시글 리스트 조회 - (사용자 Id 기준)
      */
-    List<Board> findAppliedBoardByUserId(final Long userId);
+    Page<Board> findAppliedBoardByUserId(final Long userId, final Pageable pageable);
 
     /**
      * 신청 사용자 리스트 조회 - (게시글 ID 기준)

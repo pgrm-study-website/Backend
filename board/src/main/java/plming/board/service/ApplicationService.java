@@ -1,6 +1,8 @@
 package plming.board.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import plming.board.entity.Application;
@@ -13,7 +15,6 @@ import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -82,9 +83,9 @@ public class ApplicationService {
     /**
      * 신청한 게시글 리스트 조회
      */
-    public List<Board> findAppliedBoardByUserId(final Long userId) {
+    public Page<Board> findAppliedBoardByUserId(final Long userId, final Pageable pageable) {
 
-        return applicationRepository.findAppliedBoardByUserId(userId);
+        return applicationRepository.findAppliedBoardByUserId(userId, pageable);
     }
 
     /**

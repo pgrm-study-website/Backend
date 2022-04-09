@@ -1,6 +1,10 @@
 package plming.board.repository;
 
+import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import plming.board.entity.Application;
 import plming.board.entity.Board;
@@ -9,6 +13,7 @@ import plming.user.entity.User;
 import java.util.List;
 
 import static plming.board.entity.QApplication.application;
+import static plming.board.entity.QBoard.board;
 
 @Repository
 public class ApplicationCustomRepositoryImpl implements ApplicationCustomRepository {
@@ -24,10 +29,22 @@ public class ApplicationCustomRepositoryImpl implements ApplicationCustomReposit
      * 신청 게시글 리스트 조회 - (사용자 Id 기준)
      */
     @Override
-    public List<Board> findAppliedBoardByUserId(Long userId) {
-        return jpaQueryFactory.select(application.board).from(application)
+    public Page<Board> findAppliedBoardByUserId(Long userId, Pageable pageable) {
+
+        // content를 가져오는 쿼리
+        List<Board> query = jpaQueryFactory
+                .select(application.board).from(application)
                 .where(application.user.id.eq(userId))
+                .orderBy(board.id.desc(), board.createDate.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetch();
+
+        // count만 가져오는 쿼리
+        JPQLQuery<Board> count = jpaQueryFactory.selectFrom(application.board)
+                .where(application.user.id.eq(userId));
+
+        return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
     }
 
     /**

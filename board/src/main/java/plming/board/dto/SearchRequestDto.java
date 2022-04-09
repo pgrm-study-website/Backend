@@ -3,17 +3,20 @@ package plming.board.dto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class SearchRequestDto {
 
+    private String searchType;
     private String keyword;
-    private List<String> categories;
+    private List<String> category;
     private List<String> status;
-    private List<Integer> tags;
+    private List<Integer> tagIds;
+    private List<Integer> period;
+    private List<Integer> participantMax;
 }

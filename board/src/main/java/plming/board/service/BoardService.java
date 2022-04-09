@@ -1,7 +1,9 @@
 package plming.board.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import plming.board.dto.BoardListResponseDto;
@@ -17,13 +19,9 @@ import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 import plming.user.service.UserService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.springframework.data.domain.Sort.Direction.*;
 
 @Service
 @RequiredArgsConstructor
@@ -40,9 +38,9 @@ public class BoardService {
      * 게시글 생성
      */
     @Transactional
-    public Long save(final BoardRequestDto params) {
+    public Long save(final BoardRequestDto params, final Long userId) {
 
-        User user = userRepository.getById(params.getUserId());
+        User user = userRepository.getById(userId);
         Board entity = boardRepository.save(params.toEntity(user));
         List<Long> boardTagIds = params.getTagIds();
         boardTagService.save(boardTagIds, entity);
@@ -86,42 +84,20 @@ public class BoardService {
     }
 
     /**
+     * 게시글 리스트 조회 - (삭제 여부 기준) + 페이징 적용
+     */
+    public Page<BoardListResponseDto> findAllByDeleteYn(final Pageable pageable) {
+
+        return getBoardListResponseFromPage(boardRepository.findAllPageSort(pageable));
+    }
+
+    /**
      * 게시글 리스트 조회 - (사용자 ID 기준)
      */
-    public List<BoardListResponseDto> findAllByUserId(final Long userId) {
+    public Page<BoardListResponseDto> findAllByUserId(final Long userId, final Pageable pageable) {
 
-        Sort sort = Sort.by(DESC, "id", "createDate");
-        List<Board> list = boardRepository.findAllByUserId(userId, sort);
-        return getBoardListResponse(list);
-    }
-
-    /**
-     * 게시글 리스트 조회 - (삭제 여부 기준)
-     */
-    public Map<String, Object> findAllByDeleteYn(final char deleteYn) {
-
-        Sort sort = Sort.by(DESC, "id", "createDate");
-        List<Board> list = boardRepository.findAllByDeleteYn(deleteYn, sort);
-
-        Map<String, Object> result = new HashMap<>(2);
-        result.put("postCount", list.size());
-        result.put("posts", getBoardListResponse(list));
-
-        return result;
-    }
-
-    /**
-     * 각 게시글의 태그 이름 조회 후 ResponseDto 반환
-     */
-    public List<BoardResponseDto> getBoardResponse(List<Board> list) {
-        List<BoardResponseDto> result = new ArrayList<BoardResponseDto>();
-
-        for (Board post : list) {
-                List<String> tagName = boardTagService.findTagNameByBoardId(post.getId());
-                Integer participantNum = applicationService.countParticipantNum(post.getId());
-                result.add(new BoardResponseDto(post, participantNum, tagName));
-        }
-        return result;
+        Page<Board> list = boardRepository.findAllByUserId(userId, pageable);
+        return getBoardListResponseFromPage(list);
     }
 
     /**
@@ -151,6 +127,21 @@ public class BoardService {
     }
 
     /**
+     * 각 게시글의 태그 이름 조회 후 BoardListResponseDto 반환
+     */
+    public Page<BoardListResponseDto> getBoardListResponseFromPage(Page<Board> list) {
+
+        List<BoardListResponseDto> result = new ArrayList<BoardListResponseDto>();
+        List<Board> boards = list.getContent();
+        for (Board post : boards) {
+            Integer participantNum = applicationService.countParticipantNum(post.getId());
+            result.add(new BoardListResponseDto(post, participantNum));
+        }
+
+        return new PageImpl<>(result);
+    }
+
+    /**
      * 게시글 신청 하기
      */
     @Transactional
@@ -162,11 +153,11 @@ public class BoardService {
     /**
      * 신청 게시글 리스트 조회 - (사용자 ID 기준)
      */
-    public List<BoardListResponseDto> findAppliedBoardByUserId(final Long userId) {
+    public Page<BoardListResponseDto> findAppliedBoardByUserId(final Long userId, final Pageable pageable) {
 
-        List<Board> appliedBoards = applicationService.findAppliedBoardByUserId(userId);
+        Page<Board> appliedBoards = applicationService.findAppliedBoardByUserId(userId, pageable);
 
-        return getBoardListResponse(appliedBoards);
+        return getBoardListResponseFromPage(appliedBoards);
     }
 
     /**

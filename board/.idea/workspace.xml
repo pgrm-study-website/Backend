@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd26514-9bde-418e-8bb5-6a38047c07f1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/SearchApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/SearchApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardListResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardListResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardRequestDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/SearchRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/SearchRequestDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepositoryImpl.java" afterDir="false" />
@@ -15,6 +19,9 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/ApplicationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/ApplicationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/SearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/SearchService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/BoardServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/BoardServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/SearchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/SearchTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,8 +68,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -150,7 +157,28 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.BoardApplication">
-    <configuration name="ApplicationServiceTest.findAppliedBoardByUserId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="board [compileJava]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="compileJava" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="BoardServiceTest.findAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
         <pattern>
@@ -159,14 +187,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="plming.board" />
-      <option name="MAIN_CLASS_NAME" value="plming.board.ApplicationServiceTest" />
-      <option name="METHOD_NAME" value="findAppliedBoardByUserId" />
+      <option name="MAIN_CLASS_NAME" value="plming.board.BoardServiceTest" />
+      <option name="METHOD_NAME" value="findAll" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ApplicationServiceTest.findAppliedUserIdByBoardId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BoardServiceTest.findAllPageSort" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
         <pattern>
@@ -175,24 +203,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="plming.board" />
-      <option name="MAIN_CLASS_NAME" value="plming.board.ApplicationServiceTest" />
-      <option name="METHOD_NAME" value="findAppliedUserIdByBoardId" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ApplicationServiceTest.findParticipantByBoardId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="board.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="plming.board.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="plming.board" />
-      <option name="MAIN_CLASS_NAME" value="plming.board.ApplicationServiceTest" />
-      <option name="METHOD_NAME" value="findParticipantByBoardId" />
+      <option name="MAIN_CLASS_NAME" value="plming.board.BoardServiceTest" />
+      <option name="METHOD_NAME" value="findAllPageSort" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -214,7 +226,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SearchTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SearchTest.searchAllCondition" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
         <pattern>
@@ -224,7 +236,8 @@
       </extension>
       <option name="PACKAGE_NAME" value="plming.board" />
       <option name="MAIN_CLASS_NAME" value="plming.board.SearchTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="searchAllCondition" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -238,20 +251,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Spring Boot.BoardApplication" />
       <item itemvalue="JUnit.BoardTagServiceTest.save" />
-      <item itemvalue="JUnit.SearchTest" />
-      <item itemvalue="JUnit.ApplicationServiceTest.findAppliedBoardByUserId" />
-      <item itemvalue="JUnit.ApplicationServiceTest.findAppliedUserIdByBoardId" />
-      <item itemvalue="JUnit.ApplicationServiceTest.findParticipantByBoardId" />
+      <item itemvalue="JUnit.BoardServiceTest.findAllPageSort" />
+      <item itemvalue="Spring Boot.BoardApplication" />
+      <item itemvalue="Gradle.board [compileJava]" />
+      <item itemvalue="JUnit.SearchTest.searchAllCondition" />
+      <item itemvalue="JUnit.BoardServiceTest.findAll" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.BoardServiceTest.findAll" />
+        <item itemvalue="JUnit.SearchTest.searchAllCondition" />
+        <item itemvalue="JUnit.BoardServiceTest.findAllPageSort" />
+        <item itemvalue="Gradle.board [compileJava]" />
         <item itemvalue="JUnit.BoardTagServiceTest.save" />
-        <item itemvalue="JUnit.ApplicationServiceTest.findParticipantByBoardId" />
-        <item itemvalue="JUnit.ApplicationServiceTest.findAppliedUserIdByBoardId" />
-        <item itemvalue="JUnit.ApplicationServiceTest.findAppliedBoardByUserId" />
-        <item itemvalue="JUnit.SearchTest" />
       </list>
     </recent_temporary>
   </component>
@@ -283,6 +296,7 @@
       <workItem from="1649248696060" duration="1501000" />
       <workItem from="1649337680018" duration="287000" />
       <workItem from="1649338008772" duration="4416000" />
+      <workItem from="1649465485979" duration="17669000" />
     </task>
     <servers />
   </component>
@@ -313,30 +327,6 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/plming/board/controller/SearchApiController.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/plming/board/service/SearchService.java</url>
-          <line>28</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/plming/board/service/SearchService.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/plming/board/service/SearchService.java</url>
-          <line>145</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="plming.board.entity.Application" memberName="board" />

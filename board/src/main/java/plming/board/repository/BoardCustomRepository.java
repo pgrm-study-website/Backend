@@ -1,6 +1,7 @@
 package plming.board.repository;
 
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import plming.board.dto.SearchRequestDto;
 import plming.board.entity.Board;
@@ -11,14 +12,14 @@ import java.util.List;
 public interface BoardCustomRepository {
 
     /**
-     * 게시글 리스트 조회 - (삭제 여부 기준)
+     * 게시글 리스트 조회 - 페이징 적용
      */
-    List<Board> findAllByDeleteYn(final char deleteYn, final Sort sort);
+    Page<Board> findAllPageSort(final Pageable pageable);
 
     /**
      * 게시글 리스트 조회 - (사용자 Id 기준)
      */
-    List<Board> findAllByUserId(final Long userId, final Sort sort);
+    Page<Board> findAllByUserId(final Long userId, final Pageable pageable);
 
     /**
      * 게시글 ID 기준 태그 id 리스트 조회
@@ -34,6 +35,6 @@ public interface BoardCustomRepository {
     /**
      * 게시글 검색 - 모든 조건
      */
-    List<Board> searchAllCondition(final SearchRequestDto params);
+    Page<Board> searchAllCondition(final SearchRequestDto params, final Pageable pageable);
 
 }

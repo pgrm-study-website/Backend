@@ -2,8 +2,11 @@ package plming.board.repository;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import plming.board.dto.SearchRequestDto;
@@ -26,17 +29,47 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
     }
 
     @Override
-    public List<Board> findAllByDeleteYn(char deleteYn, Sort sort) {
-        return jpaQueryFactory.selectFrom(board)
-                .where(board.deleteYn.eq(deleteYn))
+    public Page<Board> findAllPageSort(Pageable pageable) {
+
+        // content를 가져오는 쿼리
+        List<Board> query = jpaQueryFactory
+                .select(board).from(board)
+                .leftJoin(board.boardTags, boardTag)
+                .fetchJoin()
+                .where(board.deleteYn.eq('0'))
+                .orderBy(board.id.desc(), board.createDate.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetch();
+
+        // count만 가져오는 쿼리
+        JPQLQuery<Board> count = jpaQueryFactory.selectFrom(board)
+                .leftJoin(board.boardTags, boardTag)
+                .where(board.deleteYn.eq('0'));
+
+        return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
     }
 
     @Override
-    public List<Board> findAllByUserId(Long userId, Sort sort) {
-        return jpaQueryFactory.selectFrom(board)
+    public Page<Board> findAllByUserId(Long userId, Pageable pageable) {
+
+        // content를 가져오는 쿼리
+        List<Board> query = jpaQueryFactory
+                .select(board).from(board)
+                .leftJoin(board.boardTags, boardTag)
+                .fetchJoin()
                 .where(board.user.id.eq(userId))
+                .orderBy(board.id.desc(), board.createDate.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetch();
+
+        // count만 가져오는 쿼리
+        JPQLQuery<Board> count = jpaQueryFactory.selectFrom(board)
+                .leftJoin(board.boardTags, boardTag)
+                .where(board.deleteYn.eq('0'));
+
+        return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
     }
 
     @Override
@@ -54,15 +87,86 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
     }
 
     @Override
-    public List<Board> searchAllCondition(SearchRequestDto params) {
+    public Page<Board> searchAllCondition(SearchRequestDto params, Pageable pageable) {
 
-        return jpaQueryFactory.select(board).from(board)
-                .leftJoin(board.boardTags, boardTag)
-                .fetchJoin()
-                .where(keywordInTitleAndContent(params.getKeyword()).and(keywordInCategory(params.getCategories()))
-                        .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTags())))
-                .distinct()
-                .fetch();
+        if(params.getSearchType().equals("제목")) {
+
+            // content를 가져오는 쿼리
+            List<Board> query = jpaQueryFactory
+                    .select(board).from(board)
+                    .leftJoin(board.boardTags, boardTag)
+                    .fetchJoin()
+                    .where(
+                            keywordInTitle(params.getKeyword()).and(keywordInCategory(params.getCategory()))
+                            .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTagIds()))
+                            .and(isPeriod(params.getPeriod())).and(isParticipantMax(params.getParticipantMax()))
+                    )
+                    .orderBy(board.id.desc(), board.createDate.desc())
+                    .offset(pageable.getOffset())
+                    .limit(pageable.getPageSize())
+                    .fetch();
+
+            // count만 가져오는 쿼리
+            JPQLQuery<Board> count = jpaQueryFactory.selectFrom(board)
+                    .leftJoin(board.boardTags, boardTag)
+                    .where(keywordInTitle(params.getKeyword()).and(keywordInCategory(params.getCategory()))
+                            .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTagIds()))
+                            .and(isPeriod(params.getPeriod())).and(isParticipantMax(params.getParticipantMax())));
+
+            return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
+
+        } else if(params.getSearchType().equals("내용")) {
+
+            // content를 가져오는 쿼리
+            List<Board> query = jpaQueryFactory
+                    .select(board).from(board)
+                    .leftJoin(board.boardTags, boardTag)
+                    .fetchJoin()
+                    .where(
+                            keywordInContent(params.getKeyword()).and(keywordInCategory(params.getCategory()))
+                            .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTagIds()))
+                            .and(isPeriod(params.getPeriod())).and(isParticipantMax(params.getParticipantMax()))
+                    )
+                    .orderBy(board.id.desc(), board.createDate.desc())
+                    .offset(pageable.getOffset())
+                    .limit(pageable.getPageSize())
+                    .fetch();
+
+            // count만 가져오는 쿼리
+            JPQLQuery<Board> count = jpaQueryFactory.selectFrom(board)
+                    .leftJoin(board.boardTags, boardTag)
+                    .where(keywordInContent(params.getKeyword()).and(keywordInCategory(params.getCategory()))
+                            .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTagIds()))
+                            .and(isPeriod(params.getPeriod())).and(isParticipantMax(params.getParticipantMax())));
+
+            return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
+
+        } else {
+
+            // content를 가져오는 쿼리
+            List<Board> query = jpaQueryFactory
+                    .select(board).from(board)
+                    .leftJoin(board.boardTags, boardTag)
+                    .fetchJoin()
+                    .where(
+                            keywordInTitleAndContent(params.getKeyword()).and(keywordInCategory(params.getCategory()))
+                            .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTagIds()))
+                            .and(isPeriod(params.getPeriod())).and(isParticipantMax(params.getParticipantMax()))
+                    )
+                    .orderBy(board.id.desc(), board.createDate.desc())
+                    .offset(pageable.getOffset())
+                    .limit(pageable.getPageSize())
+                    .fetch();
+
+            // count만 가져오는 쿼리
+            JPQLQuery<Board> count = jpaQueryFactory.selectFrom(board)
+                    .leftJoin(board.boardTags, boardTag)
+                    .where(keywordInTitleAndContent(params.getKeyword()).and(keywordInCategory(params.getCategory()))
+                            .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTagIds()))
+                            .and(isPeriod(params.getPeriod())).and(isParticipantMax(params.getParticipantMax())));
+
+            return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
+        }
     }
 
     private BooleanBuilder keywordInStatus(List<String> keywords) {
@@ -114,5 +218,15 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
     private BooleanExpression keywordInTitleAndContent(String keyword) {
 
         return keywordInTitle(keyword).or(keywordInContent(keyword));
+    }
+
+    private BooleanExpression isPeriod(List<Integer> period) {
+
+        return period != null ? board.period.between(period.get(0), period.get(1)) : null;
+    }
+
+    private BooleanExpression isParticipantMax(List<Integer> participantMax) {
+
+        return participantMax != null ? board.participantMax.between(participantMax.get(0), participantMax.get(1)) : null;
     }
 }

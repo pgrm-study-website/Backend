@@ -1,6 +1,7 @@
 package plming.board.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +16,8 @@ public class SearchApiController {
     private final SearchService searchService;
 
     @GetMapping
-    public ResponseEntity<Object> search(@Nullable @RequestParam final String type, @Nullable @RequestBody final SearchRequestDto params) {
+    public ResponseEntity<Object> search(@Nullable @RequestBody final SearchRequestDto params, final Pageable pageable) {
 
-        return searchService.search(type, params);
+        return searchService.search(params, pageable);
     }
 }
