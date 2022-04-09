@@ -83,6 +83,12 @@ public class BoardService {
 
     }
 
+    public Page<BoardListResponseDto> findAllByDeleteYn(final Pageable pageable) {
+
+        Page<Board> list = boardRepository.findAllPageSort(pageable);
+        return getBoardListResponseFromPage(list);
+    }
+
     /**
      * 게시글 리스트 조회 - (사용자 ID 기준)
      */
