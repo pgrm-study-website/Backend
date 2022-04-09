@@ -1,6 +1,8 @@
 package plming.board.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import plming.auth.service.JwtTokenProvider;
@@ -14,7 +16,6 @@ import plming.board.service.BoardService;
 import plming.user.dto.UserListResponseDto;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/posts")
@@ -28,9 +29,10 @@ public class BoardApiController {
      * 게시글 생성
      */
     @PostMapping
-    public ResponseEntity<Long> save(@RequestBody final BoardRequestDto post) {
+    public ResponseEntity<Long> save(@RequestBody final BoardRequestDto post, @CookieValue String token) {
 
-        return ResponseEntity.status(201).body(boardService.save(post));
+       Long userId = jwtTokenProvider.getUserId(token);
+        return ResponseEntity.status(201).body(boardService.save(post, userId));
     }
 
     /**
@@ -39,15 +41,15 @@ public class BoardApiController {
     @PatchMapping("/{id}")
     public ResponseEntity update(@PathVariable final Long id, @RequestBody final BoardRequestDto post) {
 
-        CustomException e = new CustomException(ErrorCode.NOT_ACCEPTABLE);
+        CustomException e1 = new CustomException(ErrorCode.NOT_ACCEPTABLE);
 
         if (boardService.update(id, post).equals("인원 수")) {
-            return ResponseEntity.status(e.getErrorCode().getStatus().value())
-                    .body(new ErrorResponse(e.getErrorCode(), "현재 게시글에 참여한 인원 수보다 참여 가능한 인원 수를 더 작게 수정할 수 없습니다."));
+            return ResponseEntity.status(e1.getErrorCode().getStatus().value())
+                    .body(new ErrorResponse(e1.getErrorCode(), "현재 게시글에 참여한 인원 수보다 참여 가능한 인원 수를 더 작게 수정할 수 없습니다."));
         }
         if (boardService.update(id, post).equals("모집 완료")) {
-            return ResponseEntity.status(e.getErrorCode().getStatus().value())
-                    .body(new ErrorResponse(e.getErrorCode(), "현재 게시글은 모집 완료된 게시글로 수정이 불가능합니다."));
+            return ResponseEntity.status(e1.getErrorCode().getStatus().value())
+                    .body(new ErrorResponse(e1.getErrorCode(), "현재 게시글은 모집 완료된 게시글로 수정이 불가능합니다."));
         }
 
         return ResponseEntity.ok(boardService.update(id, post));
@@ -68,18 +70,18 @@ public class BoardApiController {
      * 게시글 리스트 조회
      */
     @GetMapping
-    public Map<String, Object> findAll() {
+    public Page<BoardListResponseDto> findAll(Pageable pageable) {
 
-        return boardService.findAllByDeleteYn('0');
+        return boardService.findAllByDeleteYn(pageable);
     }
 
     /**
      * 게시글 리스트 조회 - 사용자 ID 기준
      */
     @GetMapping("/user")
-    public List<BoardListResponseDto> findAllByUserId(@CookieValue final String token) {
-//        return boardService.findAllByUserId(userId);
-        return boardService.findAllByUserId(jwtTokenProvider.getUserId(token));
+    public Page<BoardListResponseDto> findAllByUserId(@CookieValue final String token, final Pageable pageable) {
+
+        return boardService.findAllByUserId(jwtTokenProvider.getUserId(token), pageable);
     }
 
     /**
@@ -122,9 +124,8 @@ public class BoardApiController {
      * 신청 게시글 리스트 조회 - 사용자 ID 기준 (User 부분으로 옮겨져야 할 것 같음)
      */
     @GetMapping("/application")
-    public List<BoardListResponseDto> findAppliedBoardByUserID(@CookieValue final String token) {
-//        return boardService.findAppliedBoardByUserId(userId);
-        return boardService.findAppliedBoardByUserId(jwtTokenProvider.getUserId(token));
+    public Page<BoardListResponseDto> findAppliedBoardByUserID(@CookieValue final String token, Pageable pageable) {
+        return boardService.findAppliedBoardByUserId(jwtTokenProvider.getUserId(token), pageable);
     }
 
     /**
@@ -151,7 +152,6 @@ public class BoardApiController {
     @PatchMapping("/{id}/application")
     public String updateAppliedStatus(@PathVariable final Long id, @CookieValue final String token, @RequestParam final String status) {
 
-//        return boardService.updateAppliedStatus(id, userId, status);
         return boardService.updateAppliedStatus(id, jwtTokenProvider.getUserId(token), status);
     }
 }

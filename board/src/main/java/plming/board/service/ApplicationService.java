@@ -1,6 +1,8 @@
 package plming.board.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import plming.board.entity.Application;
@@ -13,7 +15,6 @@ import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -82,12 +83,9 @@ public class ApplicationService {
     /**
      * 신청한 게시글 리스트 조회
      */
-    public List<Board> findByAppliedBoardByUserId(final Long userId) {
+    public Page<Board> findAppliedBoardByUserId(final Long userId, final Pageable pageable) {
 
-        List<Application> applications = applicationRepository.findAllByUserId(userId);
-        List<Board> appliedBoards = applications.stream().map(Application::getBoard).collect(Collectors.toList());
-
-        return appliedBoards;
+        return applicationRepository.findAppliedBoardByUserId(userId, pageable);
     }
 
     /**
@@ -95,10 +93,7 @@ public class ApplicationService {
      */
     public List<User> findAppliedUserByBoardId(final Long boardId) {
 
-        List<Application> applications = applicationRepository.findAllByBoardId(boardId);
-        List<User> appliedUsers = applications.stream().map(Application::getUser).collect(Collectors.toList());
-
-        return appliedUsers;
+        return applicationRepository.findAppliedUserByBoardId(boardId);
     }
 
     /**
@@ -106,11 +101,7 @@ public class ApplicationService {
      */
     public List<User> findParticipantUserByBoardId(final Long boardId) {
 
-        List<Application> boardApplications = applicationRepository.findAllByBoardId(boardId);
-        List<Application> applicationList = boardApplications.stream().filter(app -> app.getStatus().equals("승인")).collect(Collectors.toList());
-        List<User> participatedUser = applicationList.stream().map(Application::getUser).collect(Collectors.toList());
-
-        return participatedUser;
+        return applicationRepository.findParticipantByBoardId(boardId);
     }
 
     /**
@@ -124,21 +115,17 @@ public class ApplicationService {
     /**
      * 게시글 신청 조회
      */
-    private List<Application> findApplication(Long boardId, Long userId) {
-        return applicationRepository.findAllByBoardId(boardId).stream().filter(app -> app.getUser().getId().equals(userId)).collect(Collectors.toList());
+    private List<Application> findApplication(final Long boardId, final Long userId) {
+
+        return applicationRepository.findApplication(boardId, userId);
     }
 
     /**
      * 게시글 신청 상태 업데이트
      */
-    @Transactional
     public Application updateAppliedStatus(final Long boardId, final Long userId, final String status) {
 
-        List<Application> boardApplications = applicationRepository.findAllByBoardId(boardId);
-        List<Application> applicationList = boardApplications.stream().filter(app -> app.getUser().getId().equals(userId)).collect(Collectors.toList());
-        applicationList.get(0).update(status);
-
-        return applicationList.get(0);
+        return applicationRepository.updateAppliedStatus(boardId, userId, status).get(0);
     }
 
     /**
@@ -147,8 +134,6 @@ public class ApplicationService {
     @Transactional
     public void cancelApplied(final Long boardId, final Long userId) {
 
-        List<Application> boardApplications = applicationRepository.findAllByBoardId(boardId);
-        List<Application> applicationList = boardApplications.stream().filter(app -> app.getUser().getId().equals(userId)).collect(Collectors.toList());
-        applicationRepository.deleteById(applicationList.get(0).getId());
+        applicationRepository.cancelApplied(boardId, userId);
     }
 }

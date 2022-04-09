@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BoardRequestDto {
 
-    private Long userId;    // 사용자
     private Integer participantMax; // 최대 참여 인원 수
     private String category;    // 카테고리
     private String status;  // 모집 상태

@@ -1,10 +1,11 @@
 package plming.board.entity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import plming.board.repository.ApplicationCustomRepository;
 
 import java.util.List;
 
-public interface ApplicationRepository extends JpaRepository<Application, Long> {
+public interface ApplicationRepository extends JpaRepository<Application, Long>, ApplicationCustomRepository {
 
     /**
      * 신청 게시글 리스트 조회 - (사용자 Id 기준)

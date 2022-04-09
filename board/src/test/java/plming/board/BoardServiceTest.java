@@ -6,6 +6,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import plming.board.dto.BoardResponseDto;
 import plming.board.entity.Board;
@@ -15,8 +17,10 @@ import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.data.domain.Sort.Direction.*;
 
@@ -34,6 +38,8 @@ public class BoardServiceTest {
 
     private Board post1;
     private Board post2;
+    private Board post3;
+    private Board post4;
     private User user1;
     private User user2;
 
@@ -52,12 +58,20 @@ public class BoardServiceTest {
                 .social(0)
                 .build();
 
-        post1 = Board.builder().user(user1).content("사용자1의 첫 번째 게시글입니다.")
+        post1 = Board.builder().user(user1).content("user1의 첫 번째 게시글입니다.")
                 .period(1).category("스터디").status("모집 중").title("사용자1의 게시글1")
                 .participantMax(5)
                 .build();
         post2 = Board.builder().user(user2).content("사용자2의 첫 번째 게시글입니다.")
-                .period(1).category("프로젝트").status("모집 중").title("사용자2의 게시글 1")
+                .period(2).category("프로젝트").status("모집 중").title("user2의 게시글 1")
+                .participantMax(3)
+                .build();
+        post3 = Board.builder().user(user1).content("user1의 두 번째 게시글입니다.")
+                .period(3).category("공모전").status("모집 중").title("사용자1의 게시글2")
+                .participantMax(5)
+                .build();
+        post4 = Board.builder().user(user2).content("사용자2의 두 번째 게시글입니다.")
+                .period(4).category("기타").status("모집 중").title("user2의 게시글 2")
                 .participantMax(3)
                 .build();
 
@@ -65,14 +79,16 @@ public class BoardServiceTest {
         userRepository.save(user2);
         boardRepository.save(post1);
         boardRepository.save(post2);
+        boardRepository.save(post3);
+        boardRepository.save(post4);
 
     }
 
     @AfterEach
     void afterEach() {
 
-        boardRepository.deleteAll();
-        userRepository.deleteAll();
+        //boardRepository.deleteAll();
+        //userRepository.deleteAll();
     }
 
 
@@ -142,26 +158,30 @@ public class BoardServiceTest {
     }
 
     @Test
-    @DisplayName("게시글 리스트 조회 - 삭제 여부 기준")
-    public void findAllByDeleteYn() {
+    @DisplayName("페이징 적용된 게시글 리스트 조회 테스트")
+    public void findAllPageSort() {
 
         // when
-        boardService.delete(post1.getId());
-        List<Board> boardList = boardRepository.findAllByDeleteYn('0', Sort.by(DESC, "id", "createDate"));
+        Page<Board> results = boardRepository.findAllPageSort(PageRequest.of(1, 2));
+
+        Board board1 = results.get().collect(Collectors.toList()).get(0);
+        Board board2 = results.get().collect(Collectors.toList()).get(1);
 
         // then
-        assertEquals(1, boardList.size());
+        assertAll("page : 1, size : 2",
+                () -> assertEquals(board1.getId(), post2.getId()),
+                () -> assertEquals(board2.getId(), post1.getId()));
     }
 
     @Test
     @DisplayName("게시글 리스트 조회 - 사용자 id 기준")
     public void findAllByUserId() {
-
-        // when
-        List<Board> boardList = boardRepository.findAllByUserId(user1.getId(), Sort.by(DESC, "id", "createDate"));
-
-        // then
-        assertEquals(1, boardList.size());
+//
+//        // when
+//        List<Board> boardList = boardRepository.findAllByUserId(user1.getId());
+//
+//        // then
+//        assertEquals(1, boardList.size());
 
     }
 
@@ -181,4 +201,5 @@ public class BoardServiceTest {
         assertThat(board1.getTitle().equals(post2.getTitle())).isFalse();
         assertThat(board2.getContent().equals(post1.getContent())).isFalse();
     }
+
 }
