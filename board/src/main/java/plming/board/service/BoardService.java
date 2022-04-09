@@ -84,14 +84,6 @@ public class BoardService {
     }
 
     /**
-     * 게시글 리스트 조회 - (삭제 여부 기준) + 페이징 적용
-     */
-    public Page<BoardListResponseDto> findAllByDeleteYn(final Pageable pageable) {
-
-        return getBoardListResponseFromPage(boardRepository.findAllPageSort(pageable));
-    }
-
-    /**
      * 게시글 리스트 조회 - (사용자 ID 기준)
      */
     public Page<BoardListResponseDto> findAllByUserId(final Long userId, final Pageable pageable) {
@@ -104,6 +96,7 @@ public class BoardService {
      * 각 게시글의 태그 이름 조회 후 BoardListResponseDto 반환
      */
     public List<BoardListResponseDto> getBoardListResponse(List<Board> list) {
+
         List<BoardListResponseDto> result = new ArrayList<BoardListResponseDto>();
         for (Board post : list) {
             List<String> tagName = boardTagService.findTagNameByBoardId(post.getId());

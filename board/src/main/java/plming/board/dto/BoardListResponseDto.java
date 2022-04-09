@@ -42,6 +42,6 @@ public class BoardListResponseDto {
         this.participantMax = entity.getParticipantMax();
         this.participantNum = participantNum;
         this.viewCnt = entity.getViewCnt();
-        this.tags = entity.getBoardTags().stream().map(BoardTag::getTag).map(Tag::getName).collect(Collectors.toList());
+        this.tags = entity.getBoardTags().stream().map(BoardTag::getTag).map(Tag::getName).collect(Collectors.toList());;
     }
 }

@@ -5,8 +5,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import plming.board.exception.CustomException;
 import plming.board.exception.ErrorCode;
+import plming.user.dto.UserJoinResponseDto;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class AuthService {
@@ -20,12 +24,20 @@ public class AuthService {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-
-    public String loginWithEmail(String email, String password){
+    public Map<String,Object> loginWithEmail(String email, String password){
         User user = userRepository.findByEmail(email);
         if(user == null || !bCryptPasswordEncoder.matches(password,user.getPassword())){
-            throw new CustomException(ErrorCode.BAD_REQUEST);
+            throw new CustomException(ErrorCode.LOGIN_UNAUTHORIZED);
         }
-        return jwtTokenProvider.createToken(user.getId());
+        String token = jwtTokenProvider.createToken(user.getId());
+        UserJoinResponseDto userJoinResponseDto = new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("token",token);
+        resultMap.put("responseDto",userJoinResponseDto);
+        return resultMap;
     }
+
+//    public void loginWithGoogle(String code){
+//        googleOauth.requestAccessToken(code);
+//    }
 }

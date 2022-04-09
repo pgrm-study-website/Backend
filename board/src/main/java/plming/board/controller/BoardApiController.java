@@ -31,7 +31,7 @@ public class BoardApiController {
     @PostMapping
     public ResponseEntity<Long> save(@RequestBody final BoardRequestDto post, @CookieValue String token) {
 
-        Long userId = jwtTokenProvider.getUserId(token);
+       Long userId = jwtTokenProvider.getUserId(token);
         return ResponseEntity.status(201).body(boardService.save(post, userId));
     }
 
@@ -67,7 +67,7 @@ public class BoardApiController {
     }
 
     /**
-     * 게시글 리스트 조회 - 페이징 적용
+     * 게시글 리스트 조회
      */
     @GetMapping
     public Page<BoardListResponseDto> findAll(Pageable pageable) {

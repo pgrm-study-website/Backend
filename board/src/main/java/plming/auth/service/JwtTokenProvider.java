@@ -88,5 +88,4 @@ public class JwtTokenProvider {
             throw new CustomException(ErrorCode.FORBIDDEN);
         }
     }
-
 }

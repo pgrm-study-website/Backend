@@ -45,28 +45,28 @@
 //        assertThat(user.getRole()).isEqualTo("ROLE_USER");
 //    }
 //
-//    @Test
-//    public void updateUserTest(){
-//        UserJoinRequestDto userJoinRequestDto = new UserJoinRequestDto("nickname","password","email@gamil.com",0);
-//        userService.createUser(userJoinRequestDto);
-//
-//        List<User> userList = userRepository.findAll();
-//
-//        Long id = userList.get(0).getId();
-//        String nickname = "newNickName";
-//        String image = "image.jpg";
-//        String introduce = "test introduce";
-//        String github = "githubID";
-//
-//        UserUpdateRequestDto userUpdateRequestDto = new UserUpdateRequestDto(id,nickname,image,introduce,github);
-//        userService.updateUser(userUpdateRequestDto);
-//
-//        List<User> updateUserList = userRepository.findAll();
-//        User user = updateUserList.get(0);
-//
-//        assertThat(user.getNickname()).isEqualTo(nickname);
-//        assertThat(user.getImage()).isEqualTo(image);
-//        assertThat(user.getGithub()).isEqualTo(github);
-//        assertThat(user.getIntroduce()).isEqualTo(introduce);
-//    }
+////    @Test
+////    public void updateUserTest(){
+////        UserJoinRequestDto userJoinRequestDto = new UserJoinRequestDto("nickname","password","email@gamil.com",0);
+////        userService.createUser(userJoinRequestDto);
+////
+////        List<User> userList = userRepository.findAll();
+////
+////        Long id = userList.get(0).getId();
+////        String nickname = "newNickName";
+////        String image = "image.jpg";
+////        String introduce = "test introduce";
+////        String github = "githubID";
+////
+////        UserUpdateRequestDto userUpdateRequestDto = new UserUpdateRequestDto(id,nickname,image,introduce,github);
+////        userService.updateUser(userUpdateRequestDto);
+////
+////        List<User> updateUserList = userRepository.findAll();
+////        User user = updateUserList.get(0);
+////
+////        assertThat(user.getNickname()).isEqualTo(nickname);
+////        assertThat(user.getImage()).isEqualTo(image);
+////        assertThat(user.getGithub()).isEqualTo(github);
+////        assertThat(user.getIntroduce()).isEqualTo(introduce);
+////    }
 //}

@@ -6,8 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import plming.board.dto.BoardListResponseDto;
 import plming.board.entity.ApplicationRepository;
 import plming.board.entity.Board;
 import plming.board.entity.BoardRepository;
