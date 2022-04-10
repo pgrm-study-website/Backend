@@ -1,8 +1,6 @@
 package plming.board.service;
 
-import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.query.criteria.internal.TupleElementImplementor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

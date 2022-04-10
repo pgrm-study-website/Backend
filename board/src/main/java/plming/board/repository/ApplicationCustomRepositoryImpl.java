@@ -1,6 +1,5 @@
 package plming.board.repository;
 
-import com.querydsl.core.Tuple;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
@@ -9,14 +8,12 @@ import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import plming.board.entity.Application;
 import plming.board.entity.Board;
-import plming.user.dto.UserListResponseDto;
 import plming.user.entity.User;
 
 import java.util.List;
 
 import static plming.board.entity.QApplication.application;
 import static plming.board.entity.QBoard.board;
-import static plming.user.entity.QUser.user;
 
 @Repository
 public class ApplicationCustomRepositoryImpl implements ApplicationCustomRepository {
@@ -59,10 +56,6 @@ public class ApplicationCustomRepositoryImpl implements ApplicationCustomReposit
         return jpaQueryFactory.selectFrom(application)
                 .where(application.board.id.eq(boardId))
                 .fetch();
-
-//        return jpaQueryFactory.select(application.user).from(application)
-//                .where(application.board.id.eq(boardId))
-//                .fetch();
     }
 
     /**
@@ -104,6 +97,4 @@ public class ApplicationCustomRepositoryImpl implements ApplicationCustomReposit
                 .where(application.board.id.eq(boardId), application.user.id.eq(userId))
                 .execute();
     }
-
-
 }
