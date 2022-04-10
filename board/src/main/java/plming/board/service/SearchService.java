@@ -19,8 +19,6 @@ public class SearchService {
 
     public ResponseEntity<Object> search(final SearchRequestDto params, final Pageable pageable) {
 
-        CustomException e = new CustomException(ErrorCode.POSTS_NOT_FOUND);
-
         if(params == null) {
             return ResponseEntity.status(200).body(boardService.findAllByDeleteYn(pageable));
         } else {

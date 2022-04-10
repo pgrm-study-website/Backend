@@ -15,6 +15,7 @@ import plming.board.exception.ErrorCode;
 import plming.board.entity.BoardRepository;
 import plming.board.entity.BoardTagRepository;
 import plming.user.dto.UserListResponseDto;
+import plming.user.dto.UserResponseDto;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 import plming.user.service.UserService;
@@ -40,7 +41,7 @@ public class BoardService {
     @Transactional
     public Long save(final BoardRequestDto params, final Long userId) {
 
-        User user = userRepository.getById(userId);
+        User user = userRepository.findById(userId).orElseThrow(() -> new CustomException(ErrorCode.BAD_REQUEST));
         Board entity = boardRepository.save(params.toEntity(user));
         List<Long> boardTagIds = params.getTagIds();
         boardTagService.save(boardTagIds, entity);
@@ -52,35 +53,46 @@ public class BoardService {
      * 게시글 수정
      */
     @Transactional
-    public String update(final Long id, final BoardRequestDto params) {
+    public String update(final Long id, final Long userId ,final BoardRequestDto params) {
 
         Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
 
-        if(entity.getStatus().equals("모집 완료")) {
-            return "모집 완료";
+        if(entity.getUser().getId().equals(userId)) {
+            if (entity.getStatus().equals("모집 완료")) {
+                return "모집 완료";
+            }
+            if ((!(params.getParticipantMax() == null)) && (params.getParticipantMax() < countParticipantNum(id))) {
+                return "인원 수";
+            }
+
+            entity.update(params.getParticipantMax(), params.getTitle(), params.getContent(), params.getCategory(), params.getStatus(), params.getPeriod());
+            boardTagRepository.deleteAllByBoardId(id);
+            boardTagService.save(params.getTagIds(), entity);
+
+            return entity.getId().toString();
+        } else {
+            throw new CustomException(ErrorCode.FORBIDDEN);
         }
-
-        if((!(params.getParticipantMax() == null)) && (params.getParticipantMax() < countParticipantNum(id))) {
-            return "인원 수";
-        }
-
-        entity.update(params.getParticipantMax(), params.getTitle(), params.getContent(), params.getCategory(), params.getStatus(), params.getPeriod());
-        boardTagRepository.deleteAllByBoardId(id);
-        boardTagService.save(params.getTagIds(), entity);
-
-        return entity.getId().toString();
     }
 
     /**
      * 게시글 삭제
      */
     @Transactional
-    public void delete(final Long id) {
+    public void delete(final Long id, final Long userId) {
 
-        Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
-        entity.delete();
-        boardTagRepository.deleteAllByBoardId(id);
+        if(boardRepository.getById(id).getUser().getId().equals(userId)) {
 
+            Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
+            if(entity.getDeleteYn() == '1') {
+                throw new CustomException(ErrorCode.ALREADY_DELETE);
+            }
+            entity.delete();
+            boardTagRepository.deleteAllByBoardId(id);
+        }
+        else {
+            throw new CustomException(ErrorCode.FORBIDDEN);
+        }
     }
 
     public Page<BoardListResponseDto> findAllByDeleteYn(final Pageable pageable) {
@@ -119,6 +131,11 @@ public class BoardService {
     public BoardResponseDto findById(final Long id) {
 
         Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
+
+        if (entity.getDeleteYn() == '1') {
+            throw new CustomException(ErrorCode.POSTS_NOT_FOUND);
+        }
+
         entity.increaseCount();
         List<String> boardTagName = boardTagService.findTagNameByBoardId(id);
 
@@ -160,13 +177,36 @@ public class BoardService {
     }
 
     /**
+     * 신청 사용자 리스트 조회 + 참여자 리스트 조회
+     */
+    public Object findAppliedUsers(final Long boardId, final Long userId) {
+
+        Board board = boardRepository.findById(boardId).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
+
+        if(board.getUser().getId().equals(userId)) {
+            return findAppliedUserByBoardId(boardId);
+        } else {
+            return findParticipantUserByBoardId(boardId);
+        }
+    }
+
+    /**
      * 신청 사용자 리스트 조회 - (게시글 ID 기준)
      */
-    public List<UserListResponseDto> findAppliedUserByBoardId(final Long boardId) {
+    public List<Map<String, Object>> findAppliedUserByBoardId(final Long boardId) {
 
-        List<User> appliedUsers = applicationService.findAppliedUserByBoardId(boardId);
+        List<Application> applicationList = applicationService.findAppliedUserByBoardId(boardId);
 
-        return appliedUsers.stream().map(User::getId).map(userService::getUserList).collect(Collectors.toList());
+        List<Map<String, Object>> result = new ArrayList<>();
+
+        applicationList.forEach(application -> {
+            Map<String, Object> map = new HashMap<>(2);
+            map.put("user", userService.getUserList(application.getUser().getId()));
+            map.put("status", application.getStatus());
+            result.add(map);
+        });
+
+        return result;
     }
 
     /**
@@ -182,11 +222,16 @@ public class BoardService {
     /**
      * 게시글 신청 정보 업데이트
      */
-    public String updateAppliedStatus(final Long boardId, final Long userId, final String status) {
+    public String updateAppliedStatus(final Long boardId, final Long userId, final String nickname, final String status) {
 
-        Application application = applicationService.updateAppliedStatus(boardId, userId, status);
+        if(userId.equals(boardRepository.getById(boardId).getUser().getId())) {
+            Application application = applicationService.updateAppliedStatus(boardId, nickname, status);
 
-        return application.getStatus();
+            return application.getStatus();
+        }
+        else {
+            throw new CustomException(ErrorCode.FORBIDDEN);
+        }
     }
 
     /**

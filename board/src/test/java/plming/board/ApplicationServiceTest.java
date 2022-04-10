@@ -6,20 +6,16 @@
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
-//import plming.board.dto.BoardListResponseDto;
-//import plming.board.dto.BoardResponseDto;
-//import plming.board.entity.Application;
 //import plming.board.entity.ApplicationRepository;
 //import plming.board.entity.Board;
 //import plming.board.entity.BoardRepository;
-//import plming.board.service.ApplicationService;
 //import plming.board.service.BoardService;
 //import plming.user.dto.UserListResponseDto;
-//import plming.user.dto.UserResponseDto;
 //import plming.user.entity.User;
 //import plming.user.entity.UserRepository;
 //
 //import java.util.List;
+//import java.util.Map;
 //
 //import static org.junit.jupiter.api.Assertions.*;
 //
@@ -100,20 +96,20 @@
 //        assertEquals("신청", board4Id);
 //    }
 //
-//    @Test
-//    @DisplayName("사용자가 신청한 게시글 조회")
-//    void findAppliedBoardByUserId() {
-//
-//        // given
-//        boardService.apply(post1.getId(), user2.getId());
-//        boardService.apply(post2.getId(), user1.getId());
-//
-//        // when
-//        List<BoardListResponseDto> appliedBoards = boardService.findAppliedBoardByUserId(user1.getId());
-//
-//        // then
-//        assertEquals(1, appliedBoards.size());
-//    }
+////    @Test
+////    @DisplayName("사용자가 신청한 게시글 조회")
+////    void findAppliedBoardByUserId() {
+////
+////        // given
+////        boardService.apply(post1.getId(), user2.getId());
+////        boardService.apply(post2.getId(), user1.getId());
+////
+////        // when
+////        List<BoardListResponseDto> appliedBoards = boardService.findAppliedBoardByUserId(user1.getId());
+////
+////        // then
+////        assertEquals(1, appliedBoards.size());
+////    }
 //
 //    @Test
 //    @DisplayName("게시글 신청한 사용자 리스트 조회")
@@ -124,45 +120,45 @@
 //        boardService.apply(post2.getId(), user1.getId());
 //
 //        // when
-//        List<UserListResponseDto> appliedUsers = boardService.findAppliedUserByBoardId(post1.getId());
+//        List<Map<String, Object>> appliedUsers = boardService.findAppliedUserByBoardId(post1.getId());
 //
 //        // then
-//        assertEquals(user2.getNickname(), appliedUsers.get(0).getNickname());
+//        assertEquals(appliedUsers.get(0).get("user").getClass(), UserListResponseDto.class);
 //    }
 //
-//    @Test
-//    @DisplayName("지원 상태 업데이트")
-//    void update() {
-//        // given
-//        boardService.apply(post1.getId(), user2.getId());
-//        boardService.apply(post2.getId(), user1.getId());
+////    @Test
+////    @DisplayName("지원 상태 업데이트")
+////    void update() {
+////        // given
+////        boardService.apply(post1.getId(), user2.getId());
+////        boardService.apply(post2.getId(), user1.getId());
+////
+////        // when
+////        String status1 = boardService.updateAppliedStatus(post1.getId(), user2.getId(), "승인");
+////        String status2 = boardService.updateAppliedStatus(post2.getId(), user1.getId(), "거절");
+////
+////        // then
+////        assertEquals("승인", status1);
+////        assertEquals("거절", status2);
+////    }
 //
-//        // when
-//        String status1 = boardService.updateAppliedStatus(post1.getId(), user2.getId(), "승인");
-//        String status2 = boardService.updateAppliedStatus(post2.getId(), user1.getId(), "거절");
-//
-//        // then
-//        assertEquals("승인", status1);
-//        assertEquals("거절", status2);
-//    }
-//
-//    @Test
-//    @DisplayName("참여자 수 계산")
-//    void findParticipateNum() {
-//        // given
-//        boardService.apply(post1.getId(), user2.getId());
-//        boardService.apply(post2.getId(), user1.getId());
-//        boardService.updateAppliedStatus(post1.getId(), user2.getId(), "승인");
-//        boardService.updateAppliedStatus(post2.getId(), user1.getId(), "거절");
-//
-//        // when
-//        Integer post1ParticipateNum = boardService.countParticipantNum(post1.getId());
-//        Integer post2ParticipateNum = boardService.countParticipantNum(post2.getId());
-//
-//        // then
-//        assertEquals(1, post1ParticipateNum);
-//        assertEquals(0, post2ParticipateNum);
-//    }
+////    @Test
+////    @DisplayName("참여자 수 계산")
+////    void findParticipateNum() {
+////        // given
+////        boardService.apply(post1.getId(), user2.getId());
+////        boardService.apply(post2.getId(), user1.getId());
+////        boardService.updateAppliedStatus(post1.getId(), user2.getId(), "승인");
+////        boardService.updateAppliedStatus(post2.getId(), user1.getId(), "거절");
+////
+////        // when
+////        Integer post1ParticipateNum = boardService.countParticipantNum(post1.getId());
+////        Integer post2ParticipateNum = boardService.countParticipantNum(post2.getId());
+////
+////        // then
+////        assertEquals(1, post1ParticipateNum);
+////        assertEquals(0, post2ParticipateNum);
+////    }
 //
 //    @Test
 //    @DisplayName("신청 취소하기")
