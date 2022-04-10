@@ -9,7 +9,7 @@ import plming.board.dto.SearchRequestDto;
 import plming.board.service.SearchService;
 
 @RestController
-@RequestMapping("/search")
+@RequestMapping("/posts")
 @RequiredArgsConstructor
 public class SearchApiController {
 

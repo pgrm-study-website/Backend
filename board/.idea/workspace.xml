@@ -7,8 +7,18 @@
     <list default="true" id="2dd26514-9bde-418e-8bb5-6a38047c07f1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/auth/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/auth/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/SearchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/SearchTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/SearchApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/SearchApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/ApplicationStatusRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/ApplicationStatusRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/ApplicationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/ApplicationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/SearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/SearchService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +85,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="board-querydsl" />
+        <entry key="$PROJECT_DIR$/.." value="develope" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -147,7 +157,7 @@
       <recent name="plming" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.board [compileJava]">
+  <component name="RunManager" selected="JUnit.ApplicationServiceTest.findAppliedUserIdByBoardId">
     <configuration name="board [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -190,7 +200,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ApplicationServiceTest.cancelApplied" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ApplicationServiceTest.findAppliedUserIdByBoardId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
         <pattern>
@@ -200,7 +210,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="plming.board" />
       <option name="MAIN_CLASS_NAME" value="plming.board.ApplicationServiceTest" />
-      <option name="METHOD_NAME" value="cancelApplied" />
+      <option name="METHOD_NAME" value="findAppliedUserIdByBoardId" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -248,19 +258,19 @@
     </configuration>
     <list>
       <item itemvalue="Gradle.board [build]" />
-      <item itemvalue="JUnit.ApplicationServiceTest.cancelApplied" />
+      <item itemvalue="Gradle.board [compileJava]" />
       <item itemvalue="JUnit.BoardServiceTest.save" />
       <item itemvalue="JUnit.CommentTest.save" />
       <item itemvalue="Spring Boot.BoardApplication" />
-      <item itemvalue="Gradle.board [compileJava]" />
+      <item itemvalue="JUnit.ApplicationServiceTest.findAppliedUserIdByBoardId" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.board [compileJava]" />
+        <item itemvalue="JUnit.ApplicationServiceTest.findAppliedUserIdByBoardId" />
         <item itemvalue="Gradle.board [build]" />
+        <item itemvalue="Gradle.board [compileJava]" />
         <item itemvalue="JUnit.CommentTest.save" />
         <item itemvalue="JUnit.BoardServiceTest.save" />
-        <item itemvalue="JUnit.ApplicationServiceTest.cancelApplied" />
       </list>
     </recent_temporary>
   </component>
@@ -290,6 +300,8 @@
       <workItem from="1649199122720" duration="12673000" />
       <workItem from="1649240276045" duration="5278000" />
       <workItem from="1649248696060" duration="1501000" />
+      <workItem from="1649509859437" duration="590000" />
+      <workItem from="1649550479109" duration="17555000" />
     </task>
     <servers />
   </component>
@@ -307,7 +319,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="develope" />
+                        <option value="feature-board-new" />
                       </list>
                     </value>
                   </entry>
