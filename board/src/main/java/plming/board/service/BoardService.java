@@ -82,7 +82,11 @@ public class BoardService {
     public void delete(final Long id, final Long userId) {
 
         if(boardRepository.getById(id).getUser().getId().equals(userId)) {
+
             Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
+            if(entity.getDeleteYn() == '1') {
+                throw new CustomException(ErrorCode.ALREADY_DELETE);
+            }
             entity.delete();
             boardTagRepository.deleteAllByBoardId(id);
         }

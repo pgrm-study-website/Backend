@@ -41,7 +41,7 @@ public enum ErrorCode {
     /*
      * 400 BAD_REQUEST: 잘못된 요청
      */
-    BAD_SEARCH(HttpStatus.BAD_REQUEST, "입력된 검색어가 없습니다."),
+    ALREADY_DELETE(HttpStatus.BAD_REQUEST, "이미 삭제된 게시글입니다."),
 
     /*
      * 404 NOT_FOUND: 리소스를 찾을 수 없음
