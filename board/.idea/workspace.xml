@@ -5,11 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd26514-9bde-418e-8bb5-6a38047c07f1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/comment/dto/RecommentResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/comment/repository/CommentCustomRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/comment/repository/CommentCustomRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/plming/comment/CommentServictTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/controller/CommentApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/controller/CommentApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/dto/CommentRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/dto/CommentRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/dto/CommentResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/dto/CommentResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/entity/CommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/entity/CommentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/service/CommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/service/CommentServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/SearchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/SearchTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/comment/CommentTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,88 +157,86 @@
       <recent name="plming.auth.config" />
       <recent name="plming" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="plming.comment.dto" />
+    </key>
   </component>
-  <component name="RunManager" selected="Gradle.board [build]">
-    <configuration name="board [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="ApplicationServiceTest.findAppliedBoardByUserId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.SearchTest.searchAllCondition">
+    <configuration name="CommentServictTest.findAllByBoardId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="plming.board.*" />
+          <option name="PATTERN" value="plming.comment.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="plming.board" />
-      <option name="MAIN_CLASS_NAME" value="plming.board.ApplicationServiceTest" />
-      <option name="METHOD_NAME" value="findAppliedBoardByUserId" />
+      <option name="PACKAGE_NAME" value="plming.comment" />
+      <option name="MAIN_CLASS_NAME" value="plming.comment.CommentServictTest" />
+      <option name="METHOD_NAME" value="findAllByBoardId" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ApplicationServiceTest.findAppliedUserIdByBoardId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CommentServictTest.findRecommentByBoardId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="plming.board.*" />
+          <option name="PATTERN" value="plming.comment.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="plming.board" />
-      <option name="MAIN_CLASS_NAME" value="plming.board.ApplicationServiceTest" />
-      <option name="METHOD_NAME" value="findAppliedUserIdByBoardId" />
+      <option name="PACKAGE_NAME" value="plming.comment" />
+      <option name="MAIN_CLASS_NAME" value="plming.comment.CommentServictTest" />
+      <option name="METHOD_NAME" value="findRecommentByBoardId" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ApplicationServiceTest.update" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CommentServictTest.save" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="plming.board.*" />
+          <option name="PATTERN" value="plming.comment.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="plming.board" />
-      <option name="MAIN_CLASS_NAME" value="plming.board.ApplicationServiceTest" />
-      <option name="METHOD_NAME" value="update" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BoardServiceTest.save" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="board.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="plming.board.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="plming.board" />
-      <option name="MAIN_CLASS_NAME" value="plming.board.BoardServiceTest" />
+      <option name="PACKAGE_NAME" value="plming.comment" />
+      <option name="MAIN_CLASS_NAME" value="plming.comment.CommentServictTest" />
       <option name="METHOD_NAME" value="save" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CommentTest.save" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="board.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="plming.comment.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="plming.comment" />
+      <option name="MAIN_CLASS_NAME" value="plming.comment.CommentTest" />
+      <option name="METHOD_NAME" value="save" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SearchTest.searchAllCondition" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="board.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="plming.board.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="plming.board" />
+      <option name="MAIN_CLASS_NAME" value="plming.board.SearchTest" />
+      <option name="METHOD_NAME" value="searchAllCondition" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -243,20 +251,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.board [build]" />
-      <item itemvalue="JUnit.ApplicationServiceTest.findAppliedUserIdByBoardId" />
-      <item itemvalue="JUnit.ApplicationServiceTest.update" />
       <item itemvalue="Spring Boot.BoardApplication" />
-      <item itemvalue="JUnit.BoardServiceTest.save" />
-      <item itemvalue="JUnit.ApplicationServiceTest.findAppliedBoardByUserId" />
+      <item itemvalue="JUnit.CommentTest.save" />
+      <item itemvalue="JUnit.CommentServictTest.save" />
+      <item itemvalue="JUnit.CommentServictTest.findAllByBoardId" />
+      <item itemvalue="JUnit.CommentServictTest.findRecommentByBoardId" />
+      <item itemvalue="JUnit.SearchTest.searchAllCondition" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.board [build]" />
-        <item itemvalue="JUnit.ApplicationServiceTest.findAppliedBoardByUserId" />
-        <item itemvalue="JUnit.ApplicationServiceTest.update" />
-        <item itemvalue="JUnit.BoardServiceTest.save" />
-        <item itemvalue="JUnit.ApplicationServiceTest.findAppliedUserIdByBoardId" />
+        <item itemvalue="JUnit.SearchTest.searchAllCondition" />
+        <item itemvalue="JUnit.CommentServictTest.findRecommentByBoardId" />
+        <item itemvalue="JUnit.CommentServictTest.findAllByBoardId" />
+        <item itemvalue="JUnit.CommentServictTest.save" />
+        <item itemvalue="JUnit.CommentTest.save" />
       </list>
     </recent_temporary>
   </component>
@@ -288,7 +296,7 @@
       <workItem from="1649248696060" duration="1501000" />
       <workItem from="1649509859437" duration="590000" />
       <workItem from="1649550479109" duration="27454000" />
-      <workItem from="1649636203194" duration="18376000" />
+      <workItem from="1649636203194" duration="29960000" />
     </task>
     <servers />
   </component>
@@ -306,7 +314,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="feature-board-new" />
+                        <option value="develope" />
                       </list>
                     </value>
                   </entry>

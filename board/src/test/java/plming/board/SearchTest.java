@@ -90,22 +90,74 @@
 //    @Test
 //    @DisplayName("모든 조건 적용한 검색")
 //    void searchAllCondition() {
-////
-////        // given
-////        SearchRequestDto search = new SearchRequestDto();
-////        search.setSearchType("제목+내용");
-////        search.setKeyword("user");
-////        search.setCategory(List.of("스터디"));
-////        search.setStatus(List.of("모집 중"));
-////        search.setTagIds(List.of(10, 40));
-////        search.setPeriod(List.of(1, 2));
-////        search.setParticipantMax(List.of(1, 5));
-////
-////        // when
-////        List<Board> result = boardRepository.searchAllCondition(search);
-////
-////        // then
-////        assertEquals(1, result.size());
+//
+//        // given
+//        SearchRequestDto search1 = SearchRequestDto.builder()
+//                .searchType(null).keyword(null)
+//                .category(List.of("스터디", "프로젝트")).status(List.of("모집 중"))
+//                .tagIds(List.of(10, 40)).period(List.of(1, 5))
+//                .participantMax(List.of(1, 5))
+//                .build();
+//
+//        SearchRequestDto search2 = SearchRequestDto.builder()
+//                .searchType("titlecontent").keyword("user")
+//                .category(null).status(List.of("모집 중"))
+//                .tagIds(List.of(10, 40)).period(List.of(1, 5))
+//                .participantMax(List.of(1, 5))
+//                .build();
+//
+//        SearchRequestDto search3 = SearchRequestDto.builder()
+//                .searchType("titlecontent").keyword("user")
+//                .category(List.of("스터디", "프로젝트")).status(null)
+//                .tagIds(List.of(10, 40)).period(List.of(1, 5))
+//                .participantMax(List.of(1, 5))
+//                .build();
+//
+//        SearchRequestDto search4 = SearchRequestDto.builder()
+//                .searchType("titlecontent").keyword("user")
+//                .category(List.of("스터디", "프로젝트")).status(List.of("모집 중"))
+//                .tagIds(null).period(List.of(1, 5))
+//                .participantMax(List.of(1, 5))
+//                .build();
+//
+//        SearchRequestDto search5 = SearchRequestDto.builder()
+//                .searchType("titlecontent").keyword("user")
+//                .category(List.of("스터디", "프로젝트")).status(List.of("모집 중"))
+//                .tagIds(List.of(10, 40)).period(null)
+//                .participantMax(List.of(1, 5))
+//                .build();
+//
+//        SearchRequestDto search6 = SearchRequestDto.builder()
+//                .searchType("titlecontent").keyword("user")
+//                .category(List.of("스터디", "프로젝트")).status(List.of("모집 중"))
+//                .tagIds(List.of(10, 40)).period(List.of(1, 5))
+//                .participantMax(null)
+//                .build();
+//
+//        SearchRequestDto search7 = SearchRequestDto.builder()
+//                .searchType(null).keyword(null)
+//                .category(null).status(List.of("모집 중"))
+//                .tagIds(null).period(List.of(1, 5))
+//                .participantMax(null)
+//                .build();
+//
+//        // when
+//        List<Board> result1 = boardRepository.searchAllConditionTest(search1);
+//        List<Board> result2 = boardRepository.searchAllConditionTest(search2);
+//        List<Board> result3 = boardRepository.searchAllConditionTest(search3);
+//        List<Board> result4 = boardRepository.searchAllConditionTest(search4);
+//        List<Board> result5 = boardRepository.searchAllConditionTest(search5);
+//        List<Board> result6 = boardRepository.searchAllConditionTest(search6);
+//        List<Board> result7 = boardRepository.searchAllConditionTest(search7);
+//
+//        // then
+//        assertEquals(3, result1.size());
+//        assertEquals(2, result2.size());
+//        assertEquals(2, result3.size());
+//        assertEquals(2, result4.size());
+//        assertEquals(2, result5.size());
+//        assertEquals(2, result6.size());
+//        assertEquals(3, result7.size());
 //    }
 //
 //}
