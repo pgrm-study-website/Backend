@@ -41,12 +41,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource(){
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedOrigin("http://localhost:3000");
+        config.addAllowedOrigin("https://plming.netlify.app");
+        config.addAllowedOrigin("https://localhost:3000");
+        config.setAllowCredentials(true);
+        config.addAllowedMethod("POST");
+        config.addAllowedMethod("OPTIONS");
+        config.addAllowedHeader("*");
+        source.registerCorsConfiguration("/**",config);
+        return source;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http
+                .cors()
+                .configurationSource(corsConfigurationSource())
+                .and()
                 .authorizeRequests()
                 .anyRequest().permitAll()
                 .and()
