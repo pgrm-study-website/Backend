@@ -96,9 +96,10 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
                     .leftJoin(board.boardTags, boardTag)
                     .fetchJoin()
                     .where(keywordInCategory(params.getCategory())
-                            .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTagIds()))
-                            .and(isPeriod(params.getPeriod())).and(isParticipantMax(params.getParticipantMax()))
-                            .and(board.deleteYn.eq('0')))
+                            , keywordInStatus(params.getStatus()), keywordInTag(params.getTagIds())
+                            , isPeriod(params.getPeriod()), isParticipantMax(params.getParticipantMax())
+                            , board.deleteYn.eq('0'))
+                    .distinct()
                     .orderBy(board.id.desc(), board.createDate.desc())
                     .offset(pageable.getOffset())
                     .limit(pageable.getPageSize())
@@ -108,9 +109,10 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
             JPQLQuery<Board> count = jpaQueryFactory.selectFrom(board)
                     .leftJoin(board.boardTags, boardTag)
                     .where(keywordInCategory(params.getCategory())
-                            .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTagIds()))
-                            .and(isPeriod(params.getPeriod())).and(isParticipantMax(params.getParticipantMax()))
-                            .and(board.deleteYn.eq('0')));
+                            , keywordInStatus(params.getStatus()), keywordInTag(params.getTagIds())
+                            , isPeriod(params.getPeriod()), isParticipantMax(params.getParticipantMax())
+                            , board.deleteYn.eq('0'))
+                    .distinct();
 
             return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
 
@@ -121,10 +123,11 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
                     .select(board).from(board)
                     .leftJoin(board.boardTags, boardTag)
                     .fetchJoin()
-                    .where(keywordInTitle(params.getKeyword()).and(keywordInCategory(params.getCategory()))
-                            .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTagIds()))
-                            .and(isPeriod(params.getPeriod())).and(isParticipantMax(params.getParticipantMax()))
-                            .and(board.deleteYn.eq('0')))
+                    .where(keywordInTitle(params.getKeyword()), keywordInCategory(params.getCategory())
+                            , keywordInStatus(params.getStatus()), keywordInTag(params.getTagIds())
+                            , isPeriod(params.getPeriod()), isParticipantMax(params.getParticipantMax())
+                            , board.deleteYn.eq('0'))
+                    .distinct()
                     .orderBy(board.id.desc(), board.createDate.desc())
                     .offset(pageable.getOffset())
                     .limit(pageable.getPageSize())
@@ -133,10 +136,11 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
             // count만 가져오는 쿼리
             JPQLQuery<Board> count = jpaQueryFactory.selectFrom(board)
                     .leftJoin(board.boardTags, boardTag)
-                    .where(keywordInTitle(params.getKeyword()).and(keywordInCategory(params.getCategory()))
-                            .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTagIds()))
-                            .and(isPeriod(params.getPeriod())).and(isParticipantMax(params.getParticipantMax()))
-                            .and(board.deleteYn.eq('0')));
+                    .where(keywordInTitle(params.getKeyword()), keywordInCategory(params.getCategory())
+                            , keywordInStatus(params.getStatus()), keywordInTag(params.getTagIds())
+                            , isPeriod(params.getPeriod()), isParticipantMax(params.getParticipantMax())
+                            , board.deleteYn.eq('0'))
+                    .distinct();
 
             return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
 
@@ -147,10 +151,11 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
                     .select(board).from(board)
                     .leftJoin(board.boardTags, boardTag)
                     .fetchJoin()
-                    .where(keywordInContent(params.getKeyword()).and(keywordInCategory(params.getCategory()))
-                            .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTagIds()))
-                            .and(isPeriod(params.getPeriod())).and(isParticipantMax(params.getParticipantMax()))
-                            .and(board.deleteYn.eq('0')))
+                    .where(keywordInContent(params.getKeyword()), keywordInCategory(params.getCategory())
+                            , keywordInStatus(params.getStatus()), keywordInTag(params.getTagIds())
+                            , isPeriod(params.getPeriod()), isParticipantMax(params.getParticipantMax())
+                            , board.deleteYn.eq('0'))
+                    .distinct()
                     .orderBy(board.id.desc(), board.createDate.desc())
                     .offset(pageable.getOffset())
                     .limit(pageable.getPageSize())
@@ -159,10 +164,11 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
             // count만 가져오는 쿼리
             JPQLQuery<Board> count = jpaQueryFactory.selectFrom(board)
                     .leftJoin(board.boardTags, boardTag)
-                    .where(keywordInContent(params.getKeyword()).and(keywordInCategory(params.getCategory()))
-                            .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTagIds()))
-                            .and(isPeriod(params.getPeriod())).and(isParticipantMax(params.getParticipantMax()))
-                            .and(board.deleteYn.eq('0')));
+                    .where(keywordInContent(params.getKeyword()), keywordInCategory(params.getCategory())
+                            , keywordInStatus(params.getStatus()), keywordInTag(params.getTagIds())
+                            , isPeriod(params.getPeriod()), isParticipantMax(params.getParticipantMax())
+                            , board.deleteYn.eq('0'))
+                    .distinct();
 
             return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
 
@@ -173,10 +179,11 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
                     .select(board).from(board)
                     .leftJoin(board.boardTags, boardTag)
                     .fetchJoin()
-                    .where(keywordInTitleAndContent(params.getKeyword()).and(keywordInCategory(params.getCategory()))
-                            .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTagIds()))
-                            .and(isPeriod(params.getPeriod())).and(isParticipantMax(params.getParticipantMax()))
-                            .and(board.deleteYn.eq('0')))
+                    .where(keywordInTitleAndContent(params.getKeyword()), keywordInCategory(params.getCategory())
+                            , keywordInStatus(params.getStatus()), keywordInTag(params.getTagIds())
+                            , isPeriod(params.getPeriod()), isParticipantMax(params.getParticipantMax())
+                            , board.deleteYn.eq('0'))
+                    .distinct()
                     .orderBy(board.id.desc(), board.createDate.desc())
                     .offset(pageable.getOffset())
                     .limit(pageable.getPageSize())
@@ -185,10 +192,11 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
             // count만 가져오는 쿼리
             JPQLQuery<Board> count = jpaQueryFactory.selectFrom(board)
                     .leftJoin(board.boardTags, boardTag)
-                    .where(keywordInTitleAndContent(params.getKeyword()).and(keywordInCategory(params.getCategory()))
-                            .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTagIds()))
-                            .and(isPeriod(params.getPeriod())).and(isParticipantMax(params.getParticipantMax()))
-                            .and(board.deleteYn.eq('0')));
+                    .where(keywordInTitleAndContent(params.getKeyword()), keywordInCategory(params.getCategory())
+                            , keywordInStatus(params.getStatus()), keywordInTag(params.getTagIds())
+                            , isPeriod(params.getPeriod()), isParticipantMax(params.getParticipantMax())
+                            , board.deleteYn.eq('0'))
+                    .distinct();
 
             return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
         }
@@ -216,6 +224,11 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
         return keyword != null ? board.content.contains(keyword) : null;
     }
 
+    private BooleanExpression keywordInTitleAndContent(String keyword) {
+
+        return keyword != null ? keywordInTitle(keyword).or(keywordInContent(keyword)) : null;
+    }
+
     private BooleanBuilder keywordInCategory(List<String> keywords) {
 
         if(keywords != null ) {
@@ -238,11 +251,6 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
         }
 
         return null;
-    }
-
-    private BooleanExpression keywordInTitleAndContent(String keyword) {
-
-        return keywordInTitle(keyword).or(keywordInContent(keyword));
     }
 
     private BooleanExpression isPeriod(List<Integer> period) {
