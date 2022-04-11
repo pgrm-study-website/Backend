@@ -1,15 +1,11 @@
 package plming.board.dto;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class SearchRequestDto {
 
     private String searchType;
@@ -19,4 +15,15 @@ public class SearchRequestDto {
     private List<Integer> tagIds;
     private List<Integer> period;
     private List<Integer> participantMax;
+
+    @Builder
+    public SearchRequestDto(String searchType, String keyword, List<String> category, List<String> status, List<Integer> tagIds, List<Integer> period, List<Integer> participantMax) {
+        this.searchType = searchType;
+        this.keyword = keyword;
+        this.category = category;
+        this.status = status;
+        this.tagIds = tagIds;
+        this.period = period;
+        this.participantMax = participantMax;
+    }
 }

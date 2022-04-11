@@ -6,9 +6,14 @@
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
+//import org.springframework.data.domain.Page;
+//import org.springframework.data.domain.Pageable;
+//import org.springframework.transaction.annotation.Transactional;
+//import plming.board.dto.BoardListResponseDto;
 //import plming.board.entity.ApplicationRepository;
 //import plming.board.entity.Board;
 //import plming.board.entity.BoardRepository;
+//import plming.board.service.ApplicationService;
 //import plming.board.service.BoardService;
 //import plming.user.dto.UserListResponseDto;
 //import plming.user.entity.User;
@@ -34,6 +39,9 @@
 //    @Autowired
 //    private BoardService boardService;
 //
+//    @Autowired
+//    private ApplicationService applicationService;
+//
 //    private User user1;
 //    private User user2;
 //    private Board post1;
@@ -48,7 +56,7 @@
 //                .social(0)
 //                .build();
 //        user2 = User.builder()
-//                .nickname("nickname1")
+//                .nickname("nickname2")
 //                .email("email@gmail1.com")
 //                .role("ROLE_USER")
 //                .social(0)
@@ -70,9 +78,9 @@
 //
 //    @AfterEach
 //    void afterEach() {
-//        applicationRepository.deleteAll();
-//        boardRepository.deleteAll();
-//        userRepository.deleteAll();
+////        applicationRepository.deleteAll();
+////        boardRepository.deleteAll();
+////        userRepository.deleteAll();
 //    }
 //
 //    @Test
@@ -105,7 +113,7 @@
 ////        boardService.apply(post2.getId(), user1.getId());
 ////
 ////        // when
-////        List<BoardListResponseDto> appliedBoards = boardService.findAppliedBoardByUserId(user1.getId());
+////        List<BoardListResponseDto> appliedBoards = boardService.findAppliedBoardByUserIdTest(user2.getId());
 ////
 ////        // then
 ////        assertEquals(1, appliedBoards.size());
@@ -126,21 +134,21 @@
 //        assertEquals(appliedUsers.get(0).get("user").getClass(), UserListResponseDto.class);
 //    }
 //
-////    @Test
-////    @DisplayName("지원 상태 업데이트")
-////    void update() {
-////        // given
-////        boardService.apply(post1.getId(), user2.getId());
-////        boardService.apply(post2.getId(), user1.getId());
-////
-////        // when
-////        String status1 = boardService.updateAppliedStatus(post1.getId(), user2.getId(), "승인");
-////        String status2 = boardService.updateAppliedStatus(post2.getId(), user1.getId(), "거절");
-////
-////        // then
-////        assertEquals("승인", status1);
-////        assertEquals("거절", status2);
-////    }
+//    @Test
+//    @DisplayName("지원 상태 업데이트")
+//    void update() {
+//        // given
+//        boardService.apply(post1.getId(), user2.getId());
+//        boardService.apply(post2.getId(), user1.getId());
+//
+//        // when
+//        String status1 = boardService.updateAppliedStatus(post1.getId(), user1.getId(), user2.getNickname(), "승인");
+//        String status2 = boardService.updateAppliedStatus(post2.getId(), user2.getId(), user1.getNickname(), "거절");
+//
+//        // then
+//        assertEquals("승인", status1);
+//        assertEquals("거절", status2);
+//    }
 //
 ////    @Test
 ////    @DisplayName("참여자 수 계산")

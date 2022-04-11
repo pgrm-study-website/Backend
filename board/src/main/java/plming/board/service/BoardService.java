@@ -15,7 +15,6 @@ import plming.board.exception.ErrorCode;
 import plming.board.entity.BoardRepository;
 import plming.board.entity.BoardTagRepository;
 import plming.user.dto.UserListResponseDto;
-import plming.user.dto.UserResponseDto;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 import plming.user.service.UserService;
@@ -81,9 +80,9 @@ public class BoardService {
     @Transactional
     public void delete(final Long id, final Long userId) {
 
-        if(boardRepository.getById(id).getUser().getId().equals(userId)) {
+        Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
 
-            Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
+        if(entity.getUser().getId().equals(userId)) {
             if(entity.getDeleteYn() == '1') {
                 throw new CustomException(ErrorCode.ALREADY_DELETE);
             }
@@ -158,6 +157,21 @@ public class BoardService {
     }
 
     /**
+     * 각 게시글의 태그 이름 조회 후 BoardListResponseDto 반환
+     */
+    public List<BoardListResponseDto> getBoardListResponseFromPageTest(List<Board> list) {
+
+        List<BoardListResponseDto> result = new ArrayList<BoardListResponseDto>();
+        // List<Board> boards = list.getContent();
+        for (Board post : list) {
+            Integer participantNum = applicationService.countParticipantNum(post.getId());
+            result.add(new BoardListResponseDto(post, participantNum));
+        }
+
+        return result;
+    }
+
+    /**
      * 게시글 신청 하기
      */
     @Transactional
@@ -169,6 +183,7 @@ public class BoardService {
     /**
      * 신청 게시글 리스트 조회 - (사용자 ID 기준)
      */
+    @Transactional
     public Page<BoardListResponseDto> findAppliedBoardByUserId(final Long userId, final Pageable pageable) {
 
         Page<Board> appliedBoards = applicationService.findAppliedBoardByUserId(userId, pageable);
@@ -222,9 +237,10 @@ public class BoardService {
     /**
      * 게시글 신청 정보 업데이트
      */
+    @Transactional
     public String updateAppliedStatus(final Long boardId, final Long userId, final String nickname, final String status) {
 
-        if(userId.equals(boardRepository.getById(boardId).getUser().getId())) {
+        if(boardRepository.getById(boardId).getUser().getId().equals(userId)) {
             Application application = applicationService.updateAppliedStatus(boardId, nickname, status);
 
             return application.getStatus();

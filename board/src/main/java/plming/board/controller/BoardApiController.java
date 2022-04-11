@@ -14,10 +14,6 @@ import plming.board.exception.CustomException;
 import plming.board.exception.ErrorCode;
 import plming.board.exception.ErrorResponse;
 import plming.board.service.BoardService;
-import plming.user.dto.UserListResponseDto;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/posts")
@@ -69,15 +65,6 @@ public class BoardApiController {
         return ResponseEntity.ok().build();
     }
 
-//    /**
-//     * 게시글 리스트 조회
-//     */
-//    @GetMapping
-//    public Page<BoardListResponseDto> findAll(Pageable pageable) {
-//
-//        return boardService.findAllByDeleteYn(pageable);
-//    }
-
     /**
      * 게시글 리스트 조회 - 사용자 ID 기준
      */
@@ -128,6 +115,7 @@ public class BoardApiController {
      */
     @GetMapping("/application")
     public Page<BoardListResponseDto> findAppliedBoardByUserID(@CookieValue final String token, Pageable pageable) {
+
         return boardService.findAppliedBoardByUserId(jwtTokenProvider.getUserId(token), pageable);
     }
 
@@ -141,30 +129,16 @@ public class BoardApiController {
         return ResponseEntity.status(200).body(boardService.findAppliedUsers(id, jwtTokenProvider.getUserId(token)));
     }
 
-//    /**
-//     * 신청 사용자 리스트 조회 - 게시글 ID 기준
-//     */
-//    @GetMapping("/{id}/application")
-//    public List<Map<String, Object>> findAppliedUserByBoardId(@PathVariable final Long id) {
-//
-//        return boardService.findAppliedUserByBoardId(id);
-//    }
-//
-//    /**
-//     * 참여 사용자 리스트 조회 - 게시글 ID 기준
-//     */
-//    @GetMapping("/{id}/participant")
-//    public List<UserListResponseDto> findParticipantUserByBoardId(@PathVariable final Long id) {
-//
-//        return boardService.findParticipantUserByBoardId(id);
-//    }
-
     /**
      * 게시글 신청 상태 업데이트
      */
     @PatchMapping("/{id}/application")
-    public String updateAppliedStatus(@PathVariable final Long id, @CookieValue final String token, @RequestBody final ApplicationStatusRequestDto body) {
+    public String updateAppliedStatus(@PathVariable final Long id, @CookieValue final String token,
+                                      @RequestParam final String status, @RequestParam final String nickname) {
 
-        return boardService.updateAppliedStatus(id, jwtTokenProvider.getUserId(token), body.getNickname(), body.getStatus());
+        ApplicationStatusRequestDto body = ApplicationStatusRequestDto.builder().status(status).nickname(nickname).build();
+        String result = boardService.updateAppliedStatus(id, jwtTokenProvider.getUserId(token), body.getNickname(), body.getStatus());
+
+        return result;
     }
 }

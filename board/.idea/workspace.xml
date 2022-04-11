@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd26514-9bde-418e-8bb5-6a38047c07f1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/exception/GlobalExceptionHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +148,7 @@
       <recent name="plming" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ApplicationServiceTest.findAppliedUserIdByBoardId">
+  <component name="RunManager" selected="Gradle.board [build]">
     <configuration name="board [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -167,26 +170,21 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="board [compileJava]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="compileJava" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
+    <configuration name="ApplicationServiceTest.findAppliedBoardByUserId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="board.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="plming.board.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="plming.board" />
+      <option name="MAIN_CLASS_NAME" value="plming.board.ApplicationServiceTest" />
+      <option name="METHOD_NAME" value="findAppliedBoardByUserId" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="ApplicationServiceTest.findAppliedUserIdByBoardId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
@@ -199,6 +197,22 @@
       <option name="PACKAGE_NAME" value="plming.board" />
       <option name="MAIN_CLASS_NAME" value="plming.board.ApplicationServiceTest" />
       <option name="METHOD_NAME" value="findAppliedUserIdByBoardId" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ApplicationServiceTest.update" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="board.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="plming.board.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="plming.board" />
+      <option name="MAIN_CLASS_NAME" value="plming.board.ApplicationServiceTest" />
+      <option name="METHOD_NAME" value="update" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -220,22 +234,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CommentTest.save" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="board.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="plming.comment.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="plming.comment" />
-      <option name="MAIN_CLASS_NAME" value="plming.comment.CommentTest" />
-      <option name="METHOD_NAME" value="save" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="BoardApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="board.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="plming.BoardApplication" />
@@ -246,19 +244,19 @@
     </configuration>
     <list>
       <item itemvalue="Gradle.board [build]" />
-      <item itemvalue="Gradle.board [compileJava]" />
-      <item itemvalue="JUnit.BoardServiceTest.save" />
-      <item itemvalue="JUnit.CommentTest.save" />
-      <item itemvalue="Spring Boot.BoardApplication" />
       <item itemvalue="JUnit.ApplicationServiceTest.findAppliedUserIdByBoardId" />
+      <item itemvalue="JUnit.ApplicationServiceTest.update" />
+      <item itemvalue="Spring Boot.BoardApplication" />
+      <item itemvalue="JUnit.BoardServiceTest.save" />
+      <item itemvalue="JUnit.ApplicationServiceTest.findAppliedBoardByUserId" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ApplicationServiceTest.findAppliedUserIdByBoardId" />
         <item itemvalue="Gradle.board [build]" />
-        <item itemvalue="Gradle.board [compileJava]" />
-        <item itemvalue="JUnit.CommentTest.save" />
+        <item itemvalue="JUnit.ApplicationServiceTest.findAppliedBoardByUserId" />
+        <item itemvalue="JUnit.ApplicationServiceTest.update" />
         <item itemvalue="JUnit.BoardServiceTest.save" />
+        <item itemvalue="JUnit.ApplicationServiceTest.findAppliedUserIdByBoardId" />
       </list>
     </recent_temporary>
   </component>
@@ -289,7 +287,8 @@
       <workItem from="1649240276045" duration="5278000" />
       <workItem from="1649248696060" duration="1501000" />
       <workItem from="1649509859437" duration="590000" />
-      <workItem from="1649550479109" duration="20663000" />
+      <workItem from="1649550479109" duration="27454000" />
+      <workItem from="1649636203194" duration="18376000" />
     </task>
     <servers />
   </component>
@@ -342,7 +341,7 @@
     </pin-to-top-manager>
     <watches-manager>
       <configuration name="JUnit">
-        <watch expression="boardId" />
+        <watch expression="boardId" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

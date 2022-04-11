@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.StringUtils;
 import plming.board.dto.SearchRequestDto;
 import plming.board.entity.Board;
 import plming.board.entity.BoardTag;
@@ -89,7 +88,33 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
     @Override
     public Page<Board> searchAllCondition(SearchRequestDto params, Pageable pageable) {
 
-        if(params.getSearchType().equals("title")) {
+        if(params.getKeyword() == null) {
+
+            // content를 가져오는 쿼리
+            List<Board> query = jpaQueryFactory
+                    .select(board).from(board)
+                    .leftJoin(board.boardTags, boardTag)
+                    .fetchJoin()
+                    .where(keywordInCategory(params.getCategory())
+                            .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTagIds()))
+                            .and(isPeriod(params.getPeriod())).and(isParticipantMax(params.getParticipantMax()))
+                            .and(board.deleteYn.eq('0')))
+                    .orderBy(board.id.desc(), board.createDate.desc())
+                    .offset(pageable.getOffset())
+                    .limit(pageable.getPageSize())
+                    .fetch();
+
+            // count만 가져오는 쿼리
+            JPQLQuery<Board> count = jpaQueryFactory.selectFrom(board)
+                    .leftJoin(board.boardTags, boardTag)
+                    .where(keywordInCategory(params.getCategory())
+                            .and(keywordInStatus(params.getStatus())).and(keywordInTag(params.getTagIds()))
+                            .and(isPeriod(params.getPeriod())).and(isParticipantMax(params.getParticipantMax()))
+                            .and(board.deleteYn.eq('0')));
+
+            return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
+
+        } else if(params.getSearchType().equals("title")) {
 
             // content를 가져오는 쿼리
             List<Board> query = jpaQueryFactory
@@ -183,12 +208,12 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
 
     private BooleanExpression keywordInTitle(String keyword) {
 
-        return StringUtils.hasText(keyword) ? board.title.contains(keyword) : null;
+        return keyword != null ? board.title.contains(keyword) : null;
     }
 
     private BooleanExpression keywordInContent(String keyword) {
 
-        return StringUtils.hasText(keyword) ? board.content.contains(keyword) : null;
+        return keyword != null ? board.content.contains(keyword) : null;
     }
 
     private BooleanBuilder keywordInCategory(List<String> keywords) {
