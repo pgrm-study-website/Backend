@@ -7,6 +7,9 @@
     <list default="true" id="2dd26514-9bde-418e-8bb5-6a38047c07f1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/ApplicationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/ApplicationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java" afterDir="false" />
     </list>
@@ -147,7 +150,7 @@
       <recent name="plming" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ApplicationServiceTest.update">
+  <component name="RunManager" selected="JUnit.ApplicationServiceTest.findAppliedBoardByUserId">
     <configuration name="board [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -251,9 +254,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ApplicationServiceTest.update" />
-        <item itemvalue="Gradle.board [build]" />
         <item itemvalue="JUnit.ApplicationServiceTest.findAppliedBoardByUserId" />
+        <item itemvalue="Gradle.board [build]" />
+        <item itemvalue="JUnit.ApplicationServiceTest.update" />
         <item itemvalue="JUnit.BoardServiceTest.save" />
         <item itemvalue="JUnit.ApplicationServiceTest.findAppliedUserIdByBoardId" />
       </list>
@@ -287,7 +290,7 @@
       <workItem from="1649248696060" duration="1501000" />
       <workItem from="1649509859437" duration="590000" />
       <workItem from="1649550479109" duration="27454000" />
-      <workItem from="1649636203194" duration="15114000" />
+      <workItem from="1649636203194" duration="16533000" />
     </task>
     <servers />
   </component>
@@ -305,7 +308,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="develope" />
+                        <option value="feature-board-new" />
                       </list>
                     </value>
                   </entry>

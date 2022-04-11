@@ -157,6 +157,21 @@ public class BoardService {
     }
 
     /**
+     * 각 게시글의 태그 이름 조회 후 BoardListResponseDto 반환
+     */
+    public List<BoardListResponseDto> getBoardListResponseFromPageTest(List<Board> list) {
+
+        List<BoardListResponseDto> result = new ArrayList<BoardListResponseDto>();
+        // List<Board> boards = list.getContent();
+        for (Board post : list) {
+            Integer participantNum = applicationService.countParticipantNum(post.getId());
+            result.add(new BoardListResponseDto(post, participantNum));
+        }
+
+        return result;
+    }
+
+    /**
      * 게시글 신청 하기
      */
     @Transactional
@@ -168,6 +183,7 @@ public class BoardService {
     /**
      * 신청 게시글 리스트 조회 - (사용자 ID 기준)
      */
+    @Transactional
     public Page<BoardListResponseDto> findAppliedBoardByUserId(final Long userId, final Pageable pageable) {
 
         Page<Board> appliedBoards = applicationService.findAppliedBoardByUserId(userId, pageable);

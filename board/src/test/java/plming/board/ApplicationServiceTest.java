@@ -113,7 +113,7 @@
 ////        boardService.apply(post2.getId(), user1.getId());
 ////
 ////        // when
-////        List<Board> appliedBoards = applicationRepository.findAppliedBoardByUserIdTest(user2.getId());
+////        List<BoardListResponseDto> appliedBoards = boardService.findAppliedBoardByUserIdTest(user2.getId());
 ////
 ////        // then
 ////        assertEquals(1, appliedBoards.size());
