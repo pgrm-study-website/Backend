@@ -142,12 +142,12 @@
 //        boardService.apply(post2.getId(), user1.getId());
 //
 //        // when
-//        String status1 = applicationService.updateAppliedStatus(post1.getId(), user2.getNickname(), "승인").getStatus();
-////        String status2 = boardService.updateAppliedStatus(post2.getId(), user1.getId(), "거절");
+//        String status1 = boardService.updateAppliedStatus(post1.getId(), user1.getId(), user2.getNickname(), "승인");
+//        String status2 = boardService.updateAppliedStatus(post2.getId(), user2.getId(), user1.getNickname(), "거절");
 //
 //        // then
 //        assertEquals("승인", status1);
-////        assertEquals("거절", status2);
+//        assertEquals("거절", status2);
 //    }
 //
 ////    @Test

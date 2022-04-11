@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd26514-9bde-418e-8bb5-6a38047c07f1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/SearchApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/SearchApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/ApplicationServiceTest.java" afterDir="false" />
     </list>
@@ -256,9 +252,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ApplicationServiceTest.update" />
+        <item itemvalue="Gradle.board [build]" />
         <item itemvalue="JUnit.ApplicationServiceTest.findAppliedBoardByUserId" />
         <item itemvalue="JUnit.BoardServiceTest.save" />
-        <item itemvalue="Gradle.board [build]" />
         <item itemvalue="JUnit.ApplicationServiceTest.findAppliedUserIdByBoardId" />
       </list>
     </recent_temporary>
@@ -291,7 +287,7 @@
       <workItem from="1649248696060" duration="1501000" />
       <workItem from="1649509859437" duration="590000" />
       <workItem from="1649550479109" duration="27454000" />
-      <workItem from="1649636203194" duration="12736000" />
+      <workItem from="1649636203194" duration="15114000" />
     </task>
     <servers />
   </component>
@@ -309,7 +305,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="feature-board-new" />
+                        <option value="develope" />
                       </list>
                     </value>
                   </entry>

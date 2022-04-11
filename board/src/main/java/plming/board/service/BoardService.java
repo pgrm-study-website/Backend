@@ -221,6 +221,7 @@ public class BoardService {
     /**
      * 게시글 신청 정보 업데이트
      */
+    @Transactional
     public String updateAppliedStatus(final Long boardId, final Long userId, final String nickname, final String status) {
 
         if(boardRepository.getById(boardId).getUser().getId().equals(userId)) {
