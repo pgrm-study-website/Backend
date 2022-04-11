@@ -10,7 +10,6 @@ import java.util.List;
 public class BoardResponseDto {
 
     private Long id;
-    private Long userId;
     private String category;
     private String status;
     private Integer period;
@@ -26,7 +25,6 @@ public class BoardResponseDto {
 
     public BoardResponseDto(Board entity, Integer participantNum, List<String> tags) {
         this.id = entity.getId();
-        this.userId = entity.getUser().getId();
         this.category = entity.getCategory();
         this.status = entity.getStatus();
         this.period = entity.getPeriod();

@@ -128,6 +128,7 @@ public class BoardApiController {
      */
     @GetMapping("/application")
     public Page<BoardListResponseDto> findAppliedBoardByUserID(@CookieValue final String token, Pageable pageable) {
+
         return boardService.findAppliedBoardByUserId(jwtTokenProvider.getUserId(token), pageable);
     }
 
@@ -163,8 +164,10 @@ public class BoardApiController {
      * 게시글 신청 상태 업데이트
      */
     @PatchMapping("/{id}/application")
-    public String updateAppliedStatus(@PathVariable final Long id, @CookieValue final String token, @RequestBody final ApplicationStatusRequestDto body) {
+    public String updateAppliedStatus(@PathVariable final Long id, @CookieValue final String token,
+                                      @RequestParam final String status, @RequestParam final String nickname) {
 
+        ApplicationStatusRequestDto body = ApplicationStatusRequestDto.builder().status(status).nickname(nickname).build();
         return boardService.updateAppliedStatus(id, jwtTokenProvider.getUserId(token), body.getNickname(), body.getStatus());
     }
 }

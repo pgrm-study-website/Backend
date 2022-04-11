@@ -61,18 +61,18 @@
 //                .participantMax(3)
 //                .build();
 //
-//        userRepository.save(user1);
-//        userRepository.save(user2);
-//        boardRepository.save(post1);
-//        boardRepository.save(post2);
+////        userRepository.save(user1);
+////        userRepository.save(user2);
+////        boardRepository.save(post1);
+////        boardRepository.save(post2);
 //
 //    }
 //
 //    @AfterEach
 //    void afterEach() {
 //
-//        boardRepository.deleteAll();
-//        userRepository.deleteAll();
+//        //boardRepository.deleteAll();
+//        //userRepository.deleteAll();
 //    }
 //
 //
@@ -141,29 +141,29 @@
 //        assertEquals(boardRepository.count(), boardList.size());
 //    }
 //
-//    @Test
-//    @DisplayName("게시글 리스트 조회 - 삭제 여부 기준")
-//    public void findAllByDeleteYn() {
+////    @Test
+////    @DisplayName("게시글 리스트 조회 - 삭제 여부 기준")
+////    public void findAllByDeleteYn() {
+////
+////        // when
+////        boardService.delete(post1.getId());
+////        List<Board> boardList = boardRepository.findAllByDeleteYn('0', Sort.by(DESC, "id", "createDate"));
+////
+////        // then
+////        assertEquals(1, boardList.size());
+////    }
 //
-//        // when
-//        boardService.delete(post1.getId());
-//        List<Board> boardList = boardRepository.findAllByDeleteYn('0', Sort.by(DESC, "id", "createDate"));
-//
-//        // then
-//        assertEquals(1, boardList.size());
-//    }
-//
-//    @Test
-//    @DisplayName("게시글 리스트 조회 - 사용자 id 기준")
-//    public void findAllByUserId() {
-//
-//        // when
-//        List<Board> boardList = boardRepository.findAllByUserId(user1.getId(), Sort.by(DESC, "id", "createDate"));
-//
-//        // then
-//        assertEquals(1, boardList.size());
-//
-//    }
+////    @Test
+////    @DisplayName("게시글 리스트 조회 - 사용자 id 기준")
+////    public void findAllByUserId() {
+////
+////        // when
+////        List<Board> boardList = boardRepository.findAllByUserId(user1.getId(), Sort.by(DESC, "id", "createDate"));
+////
+////        // then
+////        assertEquals(1, boardList.size());
+////
+////    }
 //
 //    @Test
 //    @DisplayName("게시글 상세 정보 조회")

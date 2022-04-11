@@ -81,9 +81,9 @@ public class BoardService {
     @Transactional
     public void delete(final Long id, final Long userId) {
 
-        if(boardRepository.getById(id).getUser().getId().equals(userId)) {
+        Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
 
-            Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
+        if(entity.getUser().getId().equals(userId)) {
             if(entity.getDeleteYn() == '1') {
                 throw new CustomException(ErrorCode.ALREADY_DELETE);
             }
@@ -224,7 +224,7 @@ public class BoardService {
      */
     public String updateAppliedStatus(final Long boardId, final Long userId, final String nickname, final String status) {
 
-        if(userId.equals(boardRepository.getById(boardId).getUser().getId())) {
+        if(boardRepository.getById(boardId).getUser().getId().equals(userId)) {
             Application application = applicationService.updateAppliedStatus(boardId, nickname, status);
 
             return application.getStatus();
