@@ -37,9 +37,15 @@ public class UserService{
         return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
     }
 
-    public UserResponseDto getUser(String nickName) {
+    public UserResponseDto getUserByNickName(String nickName) {
         User user = userRepository.findByNickname(nickName)
-          .orElseThrow(()-> new CustomException(ErrorCode.NO_CONTENT));
+          .orElseThrow(()-> new CustomException(ErrorCode.USER_NOT_FOUND));
+        return new UserResponseDto(user);
+    }
+
+    public UserResponseDto getUserByUserId(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(()-> new CustomException(ErrorCode.USER_NOT_FOUND));
         return new UserResponseDto(user);
     }
 
