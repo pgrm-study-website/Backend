@@ -129,24 +129,6 @@ public class BoardApiController {
         return ResponseEntity.status(200).body(boardService.findAppliedUsers(id, jwtTokenProvider.getUserId(token)));
     }
 
-//    /**
-//     * 신청 사용자 리스트 조회 - 게시글 ID 기준
-//     */
-//    @GetMapping("/{id}/application")
-//    public List<Map<String, Object>> findAppliedUserByBoardId(@PathVariable final Long id) {
-//
-//        return boardService.findAppliedUserByBoardId(id);
-//    }
-//
-//    /**
-//     * 참여 사용자 리스트 조회 - 게시글 ID 기준
-//     */
-//    @GetMapping("/{id}/participant")
-//    public List<UserListResponseDto> findParticipantUserByBoardId(@PathVariable final Long id) {
-//
-//        return boardService.findParticipantUserByBoardId(id);
-//    }
-
     /**
      * 게시글 신청 상태 업데이트
      */
