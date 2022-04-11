@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/email")
+@RequestMapping("/users/email")
 public class EmailController {
 
     @Autowired
