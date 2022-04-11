@@ -26,6 +26,7 @@ public interface ApplicationCustomRepository {
      */
     List<User> findParticipantByBoardId(final Long boardId);
 
+
     /**
      * 게시글 신청 조회
      */

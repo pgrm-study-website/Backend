@@ -15,7 +15,6 @@ import plming.board.exception.ErrorCode;
 import plming.board.entity.BoardRepository;
 import plming.board.entity.BoardTagRepository;
 import plming.user.dto.UserListResponseDto;
-import plming.user.dto.UserResponseDto;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 import plming.user.service.UserService;

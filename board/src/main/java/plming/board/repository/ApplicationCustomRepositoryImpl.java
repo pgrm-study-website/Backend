@@ -1,11 +1,13 @@
 package plming.board.repository;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import plming.board.entity.Application;
 import plming.board.entity.Board;
 import plming.user.entity.User;
@@ -13,7 +15,7 @@ import plming.user.entity.User;
 import java.util.List;
 
 import static plming.board.entity.QApplication.application;
-import static plming.board.entity.QBoard.board;
+import static plming.user.entity.QUser.user;
 
 @Repository
 public class ApplicationCustomRepositoryImpl implements ApplicationCustomRepository {
@@ -35,7 +37,7 @@ public class ApplicationCustomRepositoryImpl implements ApplicationCustomReposit
         List<Board> query = jpaQueryFactory
                 .select(application.board).from(application)
                 .where(application.user.id.eq(userId))
-                .orderBy(board.id.desc(), board.createDate.desc())
+                .orderBy(application.board.id.desc(), application.board.createDate.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
@@ -81,11 +83,16 @@ public class ApplicationCustomRepositoryImpl implements ApplicationCustomReposit
     }
 
     @Override
+    @Transactional
     public Application updateAppliedStatus(Long boardId, String nickname, String status) {
+
+        Long userId = jpaQueryFactory.select(user.id).from(user).where(user.nickname.eq(nickname)).fetchOne();
+
         jpaQueryFactory.update(application)
                 .set(application.status, status)
-                .where(application.board.id.eq(boardId), application.user.nickname.eq(nickname))
+                .where(application.board.id.eq(boardId), application.user.id.eq(userId))
                 .execute();
+
         return jpaQueryFactory.selectFrom(application)
                 .where(application.board.id.eq(boardId), application.user.nickname.eq(nickname))
                 .fetchOne();
@@ -96,5 +103,15 @@ public class ApplicationCustomRepositoryImpl implements ApplicationCustomReposit
         jpaQueryFactory.delete(application)
                 .where(application.board.id.eq(boardId), application.user.id.eq(userId))
                 .execute();
+    }
+
+    private BooleanExpression isBoard(Long boardId) {
+
+        return boardId != null ? application.board.id.eq(boardId) : null;
+    }
+
+    private BooleanExpression isUser(Long userId) {
+
+        return userId != null ? application.user.id.eq(userId) : null;
     }
 }

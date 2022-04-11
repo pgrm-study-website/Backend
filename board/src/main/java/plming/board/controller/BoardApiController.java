@@ -14,10 +14,6 @@ import plming.board.exception.CustomException;
 import plming.board.exception.ErrorCode;
 import plming.board.exception.ErrorResponse;
 import plming.board.service.BoardService;
-import plming.user.dto.UserListResponseDto;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/posts")
@@ -68,15 +64,6 @@ public class BoardApiController {
 
         return ResponseEntity.ok().build();
     }
-
-//    /**
-//     * 게시글 리스트 조회
-//     */
-//    @GetMapping
-//    public Page<BoardListResponseDto> findAll(Pageable pageable) {
-//
-//        return boardService.findAllByDeleteYn(pageable);
-//    }
 
     /**
      * 게시글 리스트 조회 - 사용자 ID 기준
@@ -168,6 +155,8 @@ public class BoardApiController {
                                       @RequestParam final String status, @RequestParam final String nickname) {
 
         ApplicationStatusRequestDto body = ApplicationStatusRequestDto.builder().status(status).nickname(nickname).build();
-        return boardService.updateAppliedStatus(id, jwtTokenProvider.getUserId(token), body.getNickname(), body.getStatus());
+        String result = boardService.updateAppliedStatus(id, jwtTokenProvider.getUserId(token), body.getNickname(), body.getStatus());
+
+        return result;
     }
 }
