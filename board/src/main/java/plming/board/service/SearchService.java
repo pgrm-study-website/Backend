@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import plming.board.dto.SearchRequestDto;
 import plming.board.entity.BoardRepository;
 import plming.exception.exception.CustomException;
 import plming.exception.exception.ErrorCode;
 
+import javax.persistence.Table;
 import java.util.Collections;
 import java.util.List;
 
@@ -55,7 +57,8 @@ public class SearchService {
     /**
      * 모든 조건 적용해서 검색
      */
-    private ResponseEntity<Object> searchAllCondition(final SearchRequestDto params, final Pageable pageable) {
+    @Transactional
+    public ResponseEntity<Object> searchAllCondition(final SearchRequestDto params, final Pageable pageable) {
 
         return ResponseEntity.ok(boardService.getBoardListResponseFromPage(boardRepository.searchAllCondition(params, pageable)));
     }

@@ -16,6 +16,7 @@ import plming.exception.exception.CustomException;
 import plming.exception.exception.ErrorCode;
 import plming.board.entity.BoardRepository;
 import plming.board.entity.BoardTagRepository;
+import plming.tag.entity.Tag;
 import plming.user.dto.UserListResponseDto;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
@@ -127,7 +128,6 @@ public class BoardService {
     /**
      * 댓글 단 게시글 리스트 조회 - (사용자 Id 기준)
      */
-
     private List<BoardListResponseDto> findCommentBoardByUserId(final Long userId) {
 
         List<Long> boardId = commentService.findCommentBoardByUserId(userId);
@@ -157,13 +157,14 @@ public class BoardService {
     /**
      * 각 게시글의 태그 이름 조회 후 BoardListResponseDto 반환
      */
+    @Transactional
     public Page<BoardListResponseDto> getBoardListResponseFromPage(Page<Board> list) {
 
         List<BoardListResponseDto> result = new ArrayList<BoardListResponseDto>();
         List<Board> boards = list.getContent();
         for (Board post : boards) {
             Integer participantNum = applicationService.countParticipantNum(post.getId());
-            result.add(new BoardListResponseDto(post, participantNum));
+            result.add(new BoardListResponseDto(post, participantNum, getTagNameByBoardId(post.getId())));
         }
 
         return new PageImpl<>(result);
@@ -176,11 +177,17 @@ public class BoardService {
 
         List<BoardListResponseDto> result = new ArrayList<BoardListResponseDto>();
         for(int i = 0; i < list.size(); i++) {
+
             Integer participantNum = applicationService.countParticipantNum(list.get(i).getId());
-            result.add(new BoardListResponseDto(list.get(i), participantNum));
+            result.add(new BoardListResponseDto(list.get(i), participantNum, getTagNameByBoardId(list.get(0).getId())));
         }
 
         return result;
+    }
+
+    private List<String> getTagNameByBoardId(Long boardId) {
+        Board board = boardRepository.findById(boardId).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
+        return board.getBoardTags().stream().map(BoardTag::getTag).map(Tag::getName).collect(Collectors.toList());
     }
 
     /**

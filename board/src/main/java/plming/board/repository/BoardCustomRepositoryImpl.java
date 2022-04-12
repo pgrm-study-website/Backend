@@ -192,6 +192,20 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
         }
     }
 
+    @Override
+    public List<Board> searchTag(SearchRequestDto params) {
+
+        return jpaQueryFactory
+                .select(board).from(board)
+                .leftJoin(board.boardTags, boardTag)
+                .fetchJoin()
+                .where(keywordInTag(params.getTagIds()))
+                .distinct()
+                .orderBy(board.id.desc(), board.createDate.desc())
+                .fetch();
+
+    }
+
     private BooleanBuilder keywordInStatus(List<String> keywords) {
 
         if(keywords != null ) {

@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd26514-9bde-418e-8bb5-6a38047c07f1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/UserBoardListResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/UserBoardListResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardListResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardListResponseDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/SearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/SearchService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/SearchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/SearchTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +148,7 @@
       <recent name="plming.comment.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.board [build]">
+  <component name="RunManager" selected="Spring Boot.BoardApplication">
     <configuration name="board [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -161,27 +161,6 @@
         <option name="taskNames">
           <list>
             <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="board [compileJava]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="compileJava" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -239,6 +218,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SearchTest.searchAllCondition" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="board.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="plming.board.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="plming.board" />
+      <option name="MAIN_CLASS_NAME" value="plming.board.SearchTest" />
+      <option name="METHOD_NAME" value="searchAllCondition" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BoardApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="board.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="plming.BoardApplication" />
@@ -249,19 +244,19 @@
     </configuration>
     <list>
       <item itemvalue="Gradle.board [build]" />
-      <item itemvalue="Gradle.board [compileJava]" />
       <item itemvalue="JUnit.CommentServictTest.save" />
       <item itemvalue="JUnit.CommentServictTest.deleteCommentByBoardId" />
       <item itemvalue="JUnit.CommentServictTest.findCommentByUserId" />
       <item itemvalue="Spring Boot.BoardApplication" />
+      <item itemvalue="JUnit.SearchTest.searchAllCondition" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.SearchTest.searchAllCondition" />
         <item itemvalue="Gradle.board [build]" />
         <item itemvalue="JUnit.CommentServictTest.findCommentByUserId" />
         <item itemvalue="JUnit.CommentServictTest.deleteCommentByBoardId" />
         <item itemvalue="JUnit.CommentServictTest.save" />
-        <item itemvalue="Gradle.board [compileJava]" />
       </list>
     </recent_temporary>
   </component>

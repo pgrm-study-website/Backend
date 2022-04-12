@@ -37,4 +37,9 @@ public interface BoardCustomRepository {
      */
     Page<Board> searchAllCondition(final SearchRequestDto params, final Pageable pageable);
 
+    /**
+     * 태그로 검색
+     */
+    List<Board> searchTag(final SearchRequestDto params);
+
 }
