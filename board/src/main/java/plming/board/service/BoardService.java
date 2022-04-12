@@ -16,7 +16,6 @@ import plming.exception.exception.CustomException;
 import plming.exception.exception.ErrorCode;
 import plming.board.entity.BoardRepository;
 import plming.board.entity.BoardTagRepository;
-import plming.tag.entity.Tag;
 import plming.user.dto.UserListResponseDto;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
@@ -164,7 +163,7 @@ public class BoardService {
         List<Board> boards = list.getContent();
         for (Board post : boards) {
             Integer participantNum = applicationService.countParticipantNum(post.getId());
-            result.add(new BoardListResponseDto(post, participantNum, getTagNameByBoardId(post.getId())));
+            result.add(new BoardListResponseDto(post, participantNum, boardTagService.findTagNameByBoardId(post.getId())));
         }
 
         return new PageImpl<>(result);
@@ -179,15 +178,10 @@ public class BoardService {
         for(int i = 0; i < list.size(); i++) {
 
             Integer participantNum = applicationService.countParticipantNum(list.get(i).getId());
-            result.add(new BoardListResponseDto(list.get(i), participantNum, getTagNameByBoardId(list.get(0).getId())));
+            result.add(new BoardListResponseDto(list.get(i), participantNum, boardTagService.findTagNameByBoardId(list.get(0).getId())));
         }
 
         return result;
-    }
-
-    private List<String> getTagNameByBoardId(Long boardId) {
-        Board board = boardRepository.findById(boardId).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
-        return board.getBoardTags().stream().map(BoardTag::getTag).map(Tag::getName).collect(Collectors.toList());
     }
 
     /**

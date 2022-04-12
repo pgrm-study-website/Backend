@@ -10,7 +10,6 @@ import plming.board.entity.BoardRepository;
 import plming.exception.exception.CustomException;
 import plming.exception.exception.ErrorCode;
 
-import javax.persistence.Table;
 import java.util.Collections;
 import java.util.List;
 

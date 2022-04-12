@@ -18,7 +18,7 @@ public class SearchApiController {
     private final SearchService searchService;
 
     @GetMapping
-    public ResponseEntity<Object> search(@RequestParam(required = false) final String searchType,
+    public ResponseEntity<Object> search(@Nullable @RequestParam final String searchType,
             @Nullable @RequestParam final String keyword, @Nullable @RequestParam final List<String> category,
             @Nullable @RequestParam final List<String> status, @Nullable @RequestParam final List<Integer> tagIds,
             @Nullable @RequestParam final List<Integer> period, @Nullable @RequestParam final List<Integer> participantMax
