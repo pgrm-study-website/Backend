@@ -2,7 +2,6 @@ package plming.comment.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import plming.comment.entity.Comment;
 
 import java.util.List;
@@ -38,11 +37,12 @@ public class CommentCustomRepositoryImpl implements CommentCustomRepository {
     }
 
     @Override
-    public List<Comment> findCommentByBUserId(Long userId) {
+    public List<Long> findCommentBoardByUserId(Long userId) {
 
-        return jpaQueryFactory.selectFrom(comment)
+        return jpaQueryFactory.select(comment.board.id).from(comment)
                 .where(comment.user.id.eq(userId), comment.deleteYn.eq('0'))
-                .orderBy(comment.id.desc())
+                .distinct()
+                .orderBy(comment.board.id.desc())
                 .fetch();
     }
 

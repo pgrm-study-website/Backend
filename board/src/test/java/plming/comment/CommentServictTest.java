@@ -7,12 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 import plming.board.entity.Board;
 import plming.board.entity.BoardRepository;
 import plming.comment.dto.CommentOneResponseDto;
-import plming.comment.dto.RecommentResponseDto;
 import plming.exception.exception.CustomException;
 import plming.comment.entity.Comment;
 import plming.comment.entity.CommentRepository;
 import plming.comment.service.CommentService;
-import plming.exception.exception.GlobalExceptionHandler;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 
@@ -93,7 +91,6 @@ public class CommentServictTest {
 
     @Test
     @DisplayName("댓글 생성")
-    @Transactional
     void save() {
 
         // when
@@ -106,7 +103,7 @@ public class CommentServictTest {
         commentRepository.save(comment3);
 
         // then
-        assertEquals(comment1.getId(), commentRepository.getById(comment3.getId()).getParentId());
+        assertEquals(comment1.getId(), commentRepository.findById(comment3.getId()).get().getParentId());
     }
 
     @Test
@@ -165,12 +162,14 @@ public class CommentServictTest {
         commentRepository.save(comment3);
 
         // when
-        List<CommentOneResponseDto> commentList1 = commentService.findCommentByUserId(user2.getId());
-        List<CommentOneResponseDto> commentList2 = commentService.findCommentByUserId(user1.getId());
+        List<Long> commentList1 = commentService.findCommentBoardByUserId(user2.getId());
+        List<Long> commentList2 = commentService.findCommentBoardByUserId(user1.getId());
 
         // then
-        assertEquals(2, commentList1.size());
+        assertEquals(1, commentList1.size());
         assertEquals(1, commentList2.size());
+        assertEquals(post1.getId(), commentList1.get(0));
+        assertEquals(post2.getId(), commentList2.get(0));
 
     }
 
@@ -187,8 +186,8 @@ public class CommentServictTest {
     }
 
     @Test
-    @DisplayName("댓글 삭제")
-    void deleteComment() {
+    @DisplayName("댓글 id 기준 댓글 삭제")
+    void deleteCommentByCommentId() {
 
         // when
         Long commentId = commentService.deleteCommentByCommentId(comment1.getId(), user2.getId());

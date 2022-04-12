@@ -23,17 +23,6 @@ public class BoardListResponseDto {
     private List<String> tags;
     private Integer participantNum;
 
-    public BoardListResponseDto(Board entity, Integer participantNum, List<String> tags) {
-        this.id = entity.getId();
-        this.category = entity.getCategory();
-        this.status = entity.getStatus();
-        this.title = entity.getTitle();
-        this.participantMax = entity.getParticipantMax();
-        this.participantNum = participantNum;
-        this.viewCnt = entity.getViewCnt();
-        this.tags = tags;
-    }
-
     public BoardListResponseDto(Board entity, Integer participantNum) {
         this.id = entity.getId();
         this.category = entity.getCategory();

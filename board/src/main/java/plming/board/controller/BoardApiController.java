@@ -6,10 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import plming.auth.service.JwtTokenProvider;
-import plming.board.dto.ApplicationStatusRequestDto;
-import plming.board.dto.BoardListResponseDto;
-import plming.board.dto.BoardRequestDto;
-import plming.board.dto.BoardResponseDto;
+import plming.board.dto.*;
 import plming.exception.exception.CustomException;
 import plming.exception.exception.ErrorCode;
 import plming.exception.exception.ErrorResponse;
@@ -69,7 +66,7 @@ public class BoardApiController {
      * 게시글 리스트 조회 - 사용자 ID 기준
      */
     @GetMapping("/user")
-    public Page<BoardListResponseDto> findAllByUserId(@CookieValue final String token, final Pageable pageable) {
+    public UserBoardListResponseDto findAllByUserId(@CookieValue final String token, final Pageable pageable) {
 
         return boardService.findAllByUserId(jwtTokenProvider.getUserId(token), pageable);
     }

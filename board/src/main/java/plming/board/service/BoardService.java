@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import plming.board.dto.BoardListResponseDto;
 import plming.board.dto.BoardRequestDto;
 import plming.board.dto.BoardResponseDto;
+import plming.board.dto.UserBoardListResponseDto;
 import plming.board.entity.*;
+import plming.comment.service.CommentService;
 import plming.exception.exception.CustomException;
 import plming.exception.exception.ErrorCode;
 import plming.board.entity.BoardRepository;
@@ -33,6 +35,7 @@ public class BoardService {
     private final BoardTagService boardTagService;
     private final UserService userService;
     private final ApplicationService applicationService;
+    private final CommentService commentService;
 
     /**
      * 게시글 생성
@@ -101,26 +104,35 @@ public class BoardService {
     }
 
     /**
+     * 사용자 Id 기준 댓글 단 게시글 리스트 + 작성한 게시글 리스트 반환
+     */
+    public UserBoardListResponseDto findAllByUserId(final Long userId, final Pageable pageable) {
+
+        return UserBoardListResponseDto.builder()
+                .write(findBoardByUserId(userId, pageable))
+                .comment(findCommentBoardByUserId(userId))
+                .build();
+    }
+
+    /**
      * 게시글 리스트 조회 - (사용자 ID 기준)
      */
-    public Page<BoardListResponseDto> findAllByUserId(final Long userId, final Pageable pageable) {
+    private Page<BoardListResponseDto> findBoardByUserId(final Long userId, final Pageable pageable) {
 
         Page<Board> list = boardRepository.findAllByUserId(userId, pageable);
         return getBoardListResponseFromPage(list);
     }
 
     /**
-     * 각 게시글의 태그 이름 조회 후 BoardListResponseDto 반환
+     * 댓글 단 게시글 리스트 조회 - (사용자 Id 기준)
      */
-    public List<BoardListResponseDto> getBoardListResponse(List<Board> list) {
 
-        List<BoardListResponseDto> result = new ArrayList<BoardListResponseDto>();
-        for (Board post : list) {
-            List<String> tagName = boardTagService.findTagNameByBoardId(post.getId());
-            Integer participantNum = applicationService.countParticipantNum(post.getId());
-            result.add(new BoardListResponseDto(post, participantNum, tagName));
-        }
-        return result;
+    private Page<BoardListResponseDto> findCommentBoardByUserId(final Long userId) {
+
+        List<Long> boardId = commentService.findCommentBoardByUserId(userId);
+        List<Board> boardList = boardId.stream().map(id -> boardRepository.findById(id).get()).collect(Collectors.toList());
+
+        return getBoardListResponseFromBoardList(boardList);
     }
 
     /**
@@ -159,16 +171,15 @@ public class BoardService {
     /**
      * 각 게시글의 태그 이름 조회 후 BoardListResponseDto 반환
      */
-    public List<BoardListResponseDto> getBoardListResponseFromPageTest(List<Board> list) {
+    public Page<BoardListResponseDto> getBoardListResponseFromBoardList(List<Board> list) {
 
         List<BoardListResponseDto> result = new ArrayList<BoardListResponseDto>();
-        // List<Board> boards = list.getContent();
-        for (Board post : list) {
-            Integer participantNum = applicationService.countParticipantNum(post.getId());
-            result.add(new BoardListResponseDto(post, participantNum));
+        for(int i = 0; i < list.size(); i++) {
+            Integer participantNum = applicationService.countParticipantNum(list.get(i).getId());
+            result.add(new BoardListResponseDto(list.get(i), participantNum));
         }
 
-        return result;
+        return new PageImpl<>(result);
     }
 
     /**

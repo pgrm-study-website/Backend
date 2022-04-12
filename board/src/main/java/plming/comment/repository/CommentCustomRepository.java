@@ -20,7 +20,7 @@ public interface CommentCustomRepository {
     /**
      * 사용자 id 기준 댓글 불러오기
      */
-    List<Comment> findCommentByBUserId(final Long userId);
+    List<Long> findCommentBoardByUserId(final Long userId);
 
     /**
      * 댓글 수정하기
@@ -29,7 +29,7 @@ public interface CommentCustomRepository {
     Long updateCommentByCommentId(final Long commentId, final String content);
 
     /**
-     * 댓글 삭제하기
+     * 댓글 Id로 댓글 삭제하기
      */
     @Transactional
     Long deleteCommentByCommentId(final Long commentId);

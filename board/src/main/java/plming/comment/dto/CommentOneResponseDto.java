@@ -3,7 +3,6 @@ package plming.comment.dto;
 import lombok.Builder;
 import lombok.Getter;
 import plming.comment.entity.Comment;
-import plming.user.entity.User;
 
 import java.time.LocalDateTime;
 

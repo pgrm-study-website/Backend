@@ -56,9 +56,9 @@ public class CommentService{
         return result;
     }
 
-    public List<CommentOneResponseDto> findCommentByUserId(final Long userId) {
+    public List<Long> findCommentBoardByUserId(final Long userId) {
 
-        return toCommentOneResponseDto(commentRepository.findCommentByBUserId(userId));
+        return commentRepository.findCommentBoardByUserId(userId);
     }
 
     private CommentResponseDto toCommentResponseDto(Comment comment, List<RecommentResponseDto> recommentList) {
@@ -98,8 +98,13 @@ public class CommentService{
         Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new CustomException(ErrorCode.COMMENTS_NOT_FOUND));
 
         if(comment.getUser().getNickname().equals(user.getNickname())) {
+
+            if(comment.getDeleteYn() == '1') {
+                throw new CustomException(ErrorCode.ALREADY_DELETE);
+            }
             return commentRepository.deleteCommentByCommentId(commentId);
-        } else {
+        }
+        else {
             throw new CustomException(ErrorCode.FORBIDDEN);
         }
     }
