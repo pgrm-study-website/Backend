@@ -50,25 +50,15 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
     }
 
     @Override
-    public Page<Board> findAllByUserId(Long userId, Pageable pageable) {
+    public List<Board> findAllByUserId(Long userId) {
 
-        // content를 가져오는 쿼리
-        List<Board> query = jpaQueryFactory
+        return jpaQueryFactory
                 .select(board).from(board)
                 .leftJoin(board.boardTags, boardTag)
                 .fetchJoin()
                 .where(board.user.id.eq(userId).and(board.deleteYn.eq('0')))
                 .orderBy(board.id.desc(), board.createDate.desc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
                 .fetch();
-
-        // count만 가져오는 쿼리
-        JPQLQuery<Board> count = jpaQueryFactory.selectFrom(board)
-                .leftJoin(board.boardTags, boardTag)
-                .where(board.deleteYn.eq('0'));
-
-        return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
     }
 
     @Override

@@ -107,10 +107,10 @@ public class BoardService {
      * 사용자 Id 기준 댓글 단 게시글 리스트 + 작성한 게시글 리스트 반환
      */
     @Transactional
-    public UserBoardListResponseDto findAllByUserId(final Long userId, final Pageable pageable) {
+    public UserBoardListResponseDto findAllByUserId(final Long userId) {
 
         return UserBoardListResponseDto.builder()
-                .write(findBoardByUserId(userId, pageable))
+                .write(findBoardByUserId(userId))
                 .comment(findCommentBoardByUserId(userId))
                 .build();
     }
@@ -118,17 +118,17 @@ public class BoardService {
     /**
      * 게시글 리스트 조회 - (사용자 ID 기준)
      */
-    private Page<BoardListResponseDto> findBoardByUserId(final Long userId, final Pageable pageable) {
+    private List<BoardListResponseDto> findBoardByUserId(final Long userId) {
 
-        Page<Board> list = boardRepository.findAllByUserId(userId, pageable);
-        return getBoardListResponseFromPage(list);
+        List<Board> list = boardRepository.findAllByUserId(userId);
+        return getBoardListResponseFromBoardList(list);
     }
 
     /**
      * 댓글 단 게시글 리스트 조회 - (사용자 Id 기준)
      */
 
-    private Page<BoardListResponseDto> findCommentBoardByUserId(final Long userId) {
+    private List<BoardListResponseDto> findCommentBoardByUserId(final Long userId) {
 
         List<Long> boardId = commentService.findCommentBoardByUserId(userId);
         List<Board> boardList = boardId.stream().map(id -> boardRepository.findById(id).get()).collect(Collectors.toList());
@@ -172,7 +172,7 @@ public class BoardService {
     /**
      * 각 게시글의 태그 이름 조회 후 BoardListResponseDto 반환
      */
-    public Page<BoardListResponseDto> getBoardListResponseFromBoardList(List<Board> list) {
+    public List<BoardListResponseDto> getBoardListResponseFromBoardList(List<Board> list) {
 
         List<BoardListResponseDto> result = new ArrayList<BoardListResponseDto>();
         for(int i = 0; i < list.size(); i++) {
@@ -180,7 +180,7 @@ public class BoardService {
             result.add(new BoardListResponseDto(list.get(i), participantNum));
         }
 
-        return new PageImpl<>(result);
+        return result;
     }
 
     /**

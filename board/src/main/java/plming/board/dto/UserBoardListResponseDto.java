@@ -6,15 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserBoardListResponseDto {
 
-    Page<BoardListResponseDto> write;
-    Page<BoardListResponseDto> comment;
+    List<BoardListResponseDto> write;
+    List<BoardListResponseDto> comment;
 
     @Builder
-    public UserBoardListResponseDto(Page<BoardListResponseDto> write, Page<BoardListResponseDto> comment) {
+    public UserBoardListResponseDto(List<BoardListResponseDto> write, List<BoardListResponseDto> comment) {
         this.write = write;
         this.comment = comment;
     }

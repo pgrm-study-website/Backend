@@ -66,9 +66,9 @@ public class BoardApiController {
      * 게시글 리스트 조회 - 사용자 ID 기준
      */
     @GetMapping("/user")
-    public UserBoardListResponseDto findAllByUserId(@CookieValue final String token, final Pageable pageable) {
+    public UserBoardListResponseDto findAllByUserId(@CookieValue final String token) {
 
-        return boardService.findAllByUserId(jwtTokenProvider.getUserId(token), pageable);
+        return boardService.findAllByUserId(jwtTokenProvider.getUserId(token));
     }
 
     /**
