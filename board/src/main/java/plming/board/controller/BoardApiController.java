@@ -10,9 +10,9 @@ import plming.board.dto.ApplicationStatusRequestDto;
 import plming.board.dto.BoardListResponseDto;
 import plming.board.dto.BoardRequestDto;
 import plming.board.dto.BoardResponseDto;
-import plming.board.exception.CustomException;
-import plming.board.exception.ErrorCode;
-import plming.board.exception.ErrorResponse;
+import plming.exception.exception.CustomException;
+import plming.exception.exception.ErrorCode;
+import plming.exception.exception.ErrorResponse;
 import plming.board.service.BoardService;
 
 @RestController

@@ -5,21 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd26514-9bde-418e-8bb5-6a38047c07f1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/comment/dto/RecommentResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/comment/repository/CommentCustomRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/comment/repository/CommentCustomRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/plming/comment/CommentServictTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/comment/dto/CommentOneResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/comment/dto/UpdateCommentRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/auth/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/auth/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/auth/service/JwtTokenProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/auth/service/JwtTokenProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/exception/CustomException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/exception/exception/CustomException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/exception/exception/ErrorCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/exception/ErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/exception/exception/ErrorResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/exception/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/ApplicationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/ApplicationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/SearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/SearchService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/controller/CommentApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/controller/CommentApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/dto/CommentRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/dto/CommentRequestDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/dto/CommentResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/dto/CommentResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/entity/CommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/entity/CommentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/dto/RecommentResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/dto/RecommentResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/repository/CommentCustomRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/repository/CommentCustomRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/repository/CommentCustomRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/repository/CommentCustomRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/service/CommentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/service/CommentServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/SearchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/SearchTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/plming/comment/CommentTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/comment/CommentServictTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/comment/CommentServictTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,8 +168,29 @@
       <recent name="plming.comment.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SearchTest.searchAllCondition">
-    <configuration name="CommentServictTest.findAllByBoardId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.CommentServictTest.deleteComment">
+    <configuration name="board [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="CommentServictTest.deleteComment" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
         <pattern>
@@ -172,13 +200,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="plming.comment" />
       <option name="MAIN_CLASS_NAME" value="plming.comment.CommentServictTest" />
-      <option name="METHOD_NAME" value="findAllByBoardId" />
+      <option name="METHOD_NAME" value="deleteComment" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CommentServictTest.findRecommentByBoardId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CommentServictTest.findCommentByUserId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
         <pattern>
@@ -188,13 +216,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="plming.comment" />
       <option name="MAIN_CLASS_NAME" value="plming.comment.CommentServictTest" />
-      <option name="METHOD_NAME" value="findRecommentByBoardId" />
+      <option name="METHOD_NAME" value="findCommentByUserId" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CommentServictTest.save" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CommentServictTest.updateComment" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
         <pattern>
@@ -204,23 +232,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="plming.comment" />
       <option name="MAIN_CLASS_NAME" value="plming.comment.CommentServictTest" />
-      <option name="METHOD_NAME" value="save" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CommentTest.save" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="board.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="plming.comment.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="plming.comment" />
-      <option name="MAIN_CLASS_NAME" value="plming.comment.CommentTest" />
-      <option name="METHOD_NAME" value="save" />
+      <option name="METHOD_NAME" value="updateComment" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -251,20 +263,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Spring Boot.BoardApplication" />
-      <item itemvalue="JUnit.CommentTest.save" />
-      <item itemvalue="JUnit.CommentServictTest.save" />
-      <item itemvalue="JUnit.CommentServictTest.findAllByBoardId" />
-      <item itemvalue="JUnit.CommentServictTest.findRecommentByBoardId" />
+      <item itemvalue="Gradle.board [build]" />
       <item itemvalue="JUnit.SearchTest.searchAllCondition" />
+      <item itemvalue="JUnit.CommentServictTest.updateComment" />
+      <item itemvalue="Spring Boot.BoardApplication" />
+      <item itemvalue="JUnit.CommentServictTest.deleteComment" />
+      <item itemvalue="JUnit.CommentServictTest.findCommentByUserId" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CommentServictTest.deleteComment" />
+        <item itemvalue="JUnit.CommentServictTest.findCommentByUserId" />
+        <item itemvalue="JUnit.CommentServictTest.updateComment" />
+        <item itemvalue="Gradle.board [build]" />
         <item itemvalue="JUnit.SearchTest.searchAllCondition" />
-        <item itemvalue="JUnit.CommentServictTest.findRecommentByBoardId" />
-        <item itemvalue="JUnit.CommentServictTest.findAllByBoardId" />
-        <item itemvalue="JUnit.CommentServictTest.save" />
-        <item itemvalue="JUnit.CommentTest.save" />
       </list>
     </recent_temporary>
   </component>
@@ -296,7 +308,8 @@
       <workItem from="1649248696060" duration="1501000" />
       <workItem from="1649509859437" duration="590000" />
       <workItem from="1649550479109" duration="27454000" />
-      <workItem from="1649636203194" duration="29960000" />
+      <workItem from="1649636203194" duration="33116000" />
+      <workItem from="1649717609763" duration="7267000" />
     </task>
     <servers />
   </component>
@@ -314,7 +327,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="develope" />
+                        <option value="feature-comment" />
                       </list>
                     </value>
                   </entry>

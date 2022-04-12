@@ -2,6 +2,7 @@ package plming.comment.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import plming.comment.entity.Comment;
 
 import java.util.List;
@@ -18,12 +19,12 @@ public class CommentCustomRepositoryImpl implements CommentCustomRepository {
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
-
     @Override
     public List<Comment> findCommentByBoardId(Long boardId) {
 
         return jpaQueryFactory.selectFrom(comment)
                 .where(comment.board.id.eq(boardId), comment.parentId.isNull())
+                .orderBy(comment.id.desc())
                 .fetch();
     }
 
@@ -32,6 +33,43 @@ public class CommentCustomRepositoryImpl implements CommentCustomRepository {
 
         return jpaQueryFactory.selectFrom(comment)
                 .where(comment.parentId.eq(commentId))
+                .orderBy(comment.id.desc())
                 .fetch();
+    }
+
+    @Override
+    public List<Comment> findCommentByBUserId(Long userId) {
+
+        return jpaQueryFactory.selectFrom(comment)
+                .where(comment.user.id.eq(userId), comment.deleteYn.eq('0'))
+                .orderBy(comment.id.desc())
+                .fetch();
+    }
+
+    @Override
+    public Long updateCommentByCommentId(Long commentId, String content) {
+
+        jpaQueryFactory.update(comment)
+                .set(comment.content, content)
+                .where(comment.id.eq(commentId))
+                .execute();
+
+        return jpaQueryFactory.select(comment.id).from(comment)
+                .where(comment.id.eq(commentId))
+                .fetchOne();
+    }
+
+    @Override
+    public Long deleteCommentByCommentId(Long commentId) {
+
+        jpaQueryFactory.update(comment)
+                .set(comment.content, "삭제된 댓글입니다.")
+                .set(comment.deleteYn, '1')
+                .where(comment.id.eq(commentId))
+                .execute();
+
+        return jpaQueryFactory.select(comment.id).from(comment)
+                .where(comment.id.eq(commentId))
+                .fetchOne();
     }
 }

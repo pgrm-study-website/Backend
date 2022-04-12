@@ -8,22 +8,20 @@ import plming.user.entity.User;
 import java.time.LocalDateTime;
 
 @Getter
-public class RecommentResponseDto {
+public class CommentOneResponseDto {
 
     private Long id;
-    private Long userId;
+    private Long postId;
     private Long parentId;
     private String content;
     private LocalDateTime createDate;
-    private char deleteYn;
 
     @Builder
-    public RecommentResponseDto(Comment entity, User user) {
+    public CommentOneResponseDto(Comment entity) {
         this.id = entity.getId();
-        this.userId = user.getId();
+        this.postId = entity.getBoard().getId();
         this.parentId = entity.getParentId();
         this.content = entity.getContent();
         this.createDate = entity.getCreateDate();
-        this.deleteYn = entity.getDeleteYn();
     }
 }

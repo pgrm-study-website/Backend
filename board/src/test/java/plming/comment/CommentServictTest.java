@@ -6,8 +6,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import plming.board.entity.Board;
 import plming.board.entity.BoardRepository;
+import plming.comment.dto.CommentOneResponseDto;
+import plming.comment.dto.RecommentResponseDto;
+import plming.exception.exception.CustomException;
 import plming.comment.entity.Comment;
 import plming.comment.entity.CommentRepository;
+import plming.comment.service.CommentService;
+import plming.exception.exception.GlobalExceptionHandler;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 
@@ -27,6 +32,9 @@ public class CommentServictTest {
     @Autowired
     private CommentRepository commentRepository;
 
+    @Autowired
+    private CommentService commentService;
+
     private Board post1;
     private Board post2;
     private User user1;
@@ -44,7 +52,7 @@ public class CommentServictTest {
                 .social(0)
                 .build();
         user2 = User.builder()
-                .nickname("nickname1")
+                .nickname("nickname2")
                 .email("email@gmail1.com")
                 .role("ROLE_USER")
                 .social(0)
@@ -72,13 +80,15 @@ public class CommentServictTest {
         userRepository.save(user2);
         boardRepository.save(post1);
         boardRepository.save(post2);
+        commentRepository.save(comment1);
+        commentRepository.save(comment2);
     }
 
     @AfterEach
     void afterEach() {
-//        commentRepository.deleteAll();
-//        boardRepository.deleteAll();
-//        userRepository.deleteAll();
+        commentRepository.deleteAll();
+        boardRepository.deleteAll();
+        userRepository.deleteAll();
     }
 
     @Test
@@ -142,4 +152,51 @@ public class CommentServictTest {
         assertEquals(1, recommentList.size());
         assertEquals(comment1.getId(), recommentList.get(0).getParentId());
     }
+
+    @Test
+    @DisplayName("사용자가 작성한 댓글 조회")
+    void findCommentByUserId() {
+
+        // given
+        comment3 = Comment.builder()
+                .content("user2가 남기는 post1의 첫 번째 댓글의 대댓글입니다.")
+                .parentId(comment1.getId()).board(post1).user(user2)
+                .build();
+        commentRepository.save(comment3);
+
+        // when
+        List<CommentOneResponseDto> commentList1 = commentService.findCommentByUserId(user2.getId());
+        List<CommentOneResponseDto> commentList2 = commentService.findCommentByUserId(user1.getId());
+
+        // then
+        assertEquals(2, commentList1.size());
+        assertEquals(1, commentList2.size());
+
+    }
+
+    @Test
+    @DisplayName("댓글 수정")
+    void updateComment() {
+
+        // when
+        Long commentId = commentService.updateCommentByCommentId(comment1.getId(), user2.getId(), "수정된 댓글입니다.");
+
+        // then
+        assertEquals("수정된 댓글입니다.", commentRepository.findById(commentId).get().getContent());
+        assertThrows(CustomException.class, () -> commentService.updateCommentByCommentId(comment2.getId(), user2.getId(), "수정된 댓글입니다."));
+    }
+
+    @Test
+    @DisplayName("댓글 삭제")
+    void deleteComment() {
+
+        // when
+        Long commentId = commentService.deleteCommentByCommentId(comment1.getId(), user2.getId());
+
+        // then
+        assertEquals("삭제된 댓글입니다.", commentRepository.findById(commentId).get().getContent());
+        assertEquals('1', commentRepository.findById(commentId).get().getDeleteYn());
+        assertThrows(CustomException.class, () -> commentService.deleteCommentByCommentId(comment1.getId(), user1.getId()));
+    }
+
 }

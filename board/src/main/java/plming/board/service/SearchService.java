@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import plming.board.dto.SearchRequestDto;
 import plming.board.entity.BoardRepository;
-import plming.board.exception.CustomException;
-import plming.board.exception.ErrorCode;
+import plming.exception.exception.CustomException;
+import plming.exception.exception.ErrorCode;
 
 import java.util.Collections;
 import java.util.List;

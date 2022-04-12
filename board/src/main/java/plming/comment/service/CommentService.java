@@ -5,8 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import plming.board.entity.Board;
 import plming.board.entity.BoardRepository;
-import plming.board.exception.CustomException;
-import plming.board.exception.ErrorCode;
+import plming.comment.dto.CommentOneResponseDto;
+import plming.exception.exception.CustomException;
+import plming.exception.exception.ErrorCode;
 import plming.comment.dto.CommentRequestDto;
 import plming.comment.dto.CommentResponseDto;
 import plming.comment.dto.RecommentResponseDto;
@@ -55,16 +56,51 @@ public class CommentService{
         return result;
     }
 
+    public List<CommentOneResponseDto> findCommentByUserId(final Long userId) {
+
+        return toCommentOneResponseDto(commentRepository.findCommentByBUserId(userId));
+    }
+
     private CommentResponseDto toCommentResponseDto(Comment comment, List<RecommentResponseDto> recommentList) {
 
         return CommentResponseDto.builder().entity(comment).user(comment.getUser())
                 .recomment(recommentList).recommentSize(Long.valueOf(recommentList.size()))
                 .build();
-
     }
 
     private List<RecommentResponseDto> toReCommentResponseDto(List<Comment> recommentList) {
 
         return recommentList.stream().map(comment -> new RecommentResponseDto(comment, comment.getUser())).collect(Collectors.toList());
+    }
+
+    private List<CommentOneResponseDto> toCommentOneResponseDto(List<Comment> list) {
+
+        return list.stream().map(comment -> new CommentOneResponseDto(comment)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public Long updateCommentByCommentId(final Long commentId, final Long userId, final String content) {
+
+        User user = userRepository.findById(userId).orElseThrow(() -> new CustomException(ErrorCode.USERS_NOT_FOUND));
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new CustomException(ErrorCode.COMMENTS_NOT_FOUND));
+
+        if(comment.getUser().getNickname().equals(user.getNickname())) {
+            return commentRepository.updateCommentByCommentId(commentId, content);
+        } else {
+            throw new CustomException(ErrorCode.FORBIDDEN);
+        }
+    }
+
+    @Transactional
+    public Long deleteCommentByCommentId(final Long commentId, final Long userId) {
+
+        User user = userRepository.findById(userId).orElseThrow(() -> new CustomException(ErrorCode.USERS_NOT_FOUND));
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new CustomException(ErrorCode.COMMENTS_NOT_FOUND));
+
+        if(comment.getUser().getNickname().equals(user.getNickname())) {
+            return commentRepository.deleteCommentByCommentId(commentId);
+        } else {
+            throw new CustomException(ErrorCode.FORBIDDEN);
+        }
     }
 }
