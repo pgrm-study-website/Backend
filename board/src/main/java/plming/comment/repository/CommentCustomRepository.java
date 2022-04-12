@@ -32,5 +32,5 @@ public interface CommentCustomRepository {
      * 댓글 Id로 댓글 삭제하기
      */
     @Transactional
-    Long deleteCommentByCommentId(final Long commentId);
+    void deleteCommentByCommentId(final Long commentId);
 }

@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import plming.auth.service.JwtTokenProvider;
-import plming.comment.dto.CommentOneResponseDto;
 import plming.comment.dto.CommentRequestDto;
 import plming.comment.dto.CommentResponseDto;
 import plming.comment.dto.UpdateCommentRequestDto;
@@ -38,8 +37,9 @@ public class CommentApiController {
     }
 
     @DeleteMapping("/comments")
-    public ResponseEntity<Long> deleteCommentByCommentId(@CookieValue final String token, @RequestParam final Long commentId) {
+    public ResponseEntity deleteCommentByCommentId(@CookieValue final String token, @RequestParam final Long commentId) {
 
-        return ResponseEntity.ok(commentService.deleteCommentByCommentId(commentId, jwtTokenProvider.getUserId(token)));
+        commentService.deleteCommentByCommentId(commentId, jwtTokenProvider.getUserId(token));
+        return ResponseEntity.ok().build();
     }
 }

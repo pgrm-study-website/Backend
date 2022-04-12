@@ -106,6 +106,7 @@ public class BoardService {
     /**
      * 사용자 Id 기준 댓글 단 게시글 리스트 + 작성한 게시글 리스트 반환
      */
+    @Transactional
     public UserBoardListResponseDto findAllByUserId(final Long userId, final Pageable pageable) {
 
         return UserBoardListResponseDto.builder()

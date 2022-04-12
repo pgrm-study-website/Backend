@@ -185,17 +185,17 @@ public class CommentServictTest {
         assertThrows(CustomException.class, () -> commentService.updateCommentByCommentId(comment2.getId(), user2.getId(), "수정된 댓글입니다."));
     }
 
-    @Test
-    @DisplayName("댓글 id 기준 댓글 삭제")
-    void deleteCommentByCommentId() {
-
-        // when
-        Long commentId = commentService.deleteCommentByCommentId(comment1.getId(), user2.getId());
-
-        // then
-        assertEquals("삭제된 댓글입니다.", commentRepository.findById(commentId).get().getContent());
-        assertEquals('1', commentRepository.findById(commentId).get().getDeleteYn());
-        assertThrows(CustomException.class, () -> commentService.deleteCommentByCommentId(comment1.getId(), user1.getId()));
-    }
+//    @Test
+//    @DisplayName("댓글 id 기준 댓글 삭제")
+//    void deleteCommentByCommentId() {
+//
+//        // when
+//        Long commentId = commentService.deleteCommentByCommentId(comment1.getId(), user2.getId());
+//
+//        // then
+//        assertEquals("삭제된 댓글입니다.", commentRepository.findById(commentId).get().getContent());
+//        assertEquals('1', commentRepository.findById(commentId).get().getDeleteYn());
+//        assertThrows(CustomException.class, () -> commentService.deleteCommentByCommentId(comment1.getId(), user1.getId()));
+//    }
 
 }

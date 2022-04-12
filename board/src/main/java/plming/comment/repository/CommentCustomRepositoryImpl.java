@@ -60,7 +60,7 @@ public class CommentCustomRepositoryImpl implements CommentCustomRepository {
     }
 
     @Override
-    public Long deleteCommentByCommentId(Long commentId) {
+    public void deleteCommentByCommentId(Long commentId) {
 
         jpaQueryFactory.update(comment)
                 .set(comment.content, "삭제된 댓글입니다.")
@@ -68,8 +68,5 @@ public class CommentCustomRepositoryImpl implements CommentCustomRepository {
                 .where(comment.id.eq(commentId))
                 .execute();
 
-        return jpaQueryFactory.select(comment.id).from(comment)
-                .where(comment.id.eq(commentId))
-                .fetchOne();
     }
 }

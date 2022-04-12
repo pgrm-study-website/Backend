@@ -92,7 +92,7 @@ public class CommentService{
     }
 
     @Transactional
-    public Long deleteCommentByCommentId(final Long commentId, final Long userId) {
+    public void deleteCommentByCommentId(final Long commentId, final Long userId) {
 
         User user = userRepository.findById(userId).orElseThrow(() -> new CustomException(ErrorCode.USERS_NOT_FOUND));
         Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new CustomException(ErrorCode.COMMENTS_NOT_FOUND));
@@ -102,7 +102,7 @@ public class CommentService{
             if(comment.getDeleteYn() == '1') {
                 throw new CustomException(ErrorCode.ALREADY_DELETE);
             }
-            return commentRepository.deleteCommentByCommentId(commentId);
+            commentRepository.deleteCommentByCommentId(commentId);
         }
         else {
             throw new CustomException(ErrorCode.FORBIDDEN);

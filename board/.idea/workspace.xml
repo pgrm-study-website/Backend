@@ -5,18 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd26514-9bde-418e-8bb5-6a38047c07f1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/UserBoardListResponseDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardListResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardListResponseDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/controller/CommentApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/controller/CommentApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/dto/CommentOneResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/dto/CommentOneResponseDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/repository/CommentCustomRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/repository/CommentCustomRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/repository/CommentCustomRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/repository/CommentCustomRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/service/CommentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/exception/exception/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/exception/exception/ErrorCode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/plming/comment/CommentServictTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/comment/CommentServictTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,6 +77,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -153,7 +149,7 @@
       <recent name="plming.comment.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CommentServictTest.findCommentByUserId">
+  <component name="RunManager" selected="Gradle.board [build]">
     <configuration name="board [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -254,18 +250,18 @@
     </configuration>
     <list>
       <item itemvalue="Gradle.board [build]" />
-      <item itemvalue="Spring Boot.BoardApplication" />
       <item itemvalue="Gradle.board [compileJava]" />
       <item itemvalue="JUnit.CommentServictTest.save" />
       <item itemvalue="JUnit.CommentServictTest.deleteCommentByBoardId" />
       <item itemvalue="JUnit.CommentServictTest.findCommentByUserId" />
+      <item itemvalue="Spring Boot.BoardApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.board [build]" />
         <item itemvalue="JUnit.CommentServictTest.findCommentByUserId" />
         <item itemvalue="JUnit.CommentServictTest.deleteCommentByBoardId" />
         <item itemvalue="JUnit.CommentServictTest.save" />
-        <item itemvalue="Gradle.board [build]" />
         <item itemvalue="Gradle.board [compileJava]" />
       </list>
     </recent_temporary>
@@ -335,6 +331,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fix: 사용자 ID 기준 게시글 리스트 조회 반환 결과 수정" />
+    <MESSAGE value="Fix: 사용자 ID 기준 게시글 리스트 조회 반환 결과 수정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
