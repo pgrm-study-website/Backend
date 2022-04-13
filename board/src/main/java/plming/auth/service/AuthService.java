@@ -35,10 +35,6 @@ public class AuthService {
         return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
     }
 
-    public void logout(HttpServletResponse response){
-        jwtTokenProvider.deleteTokenInCookie(response);
-    }
-
     public UserJoinResponseDto autoLogin(HttpServletRequest request){
         String token = jwtTokenProvider.validateTokenForAutoLogin(request);
         Long userId = jwtTokenProvider.getUserId(token);

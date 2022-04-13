@@ -39,12 +39,7 @@ public class AuthController {
         return null;
     }
 
-    @PostMapping("/logout")
-    public void logout(HttpServletResponse response){
-        authService.logout(response);
-    }
-
-    @PostMapping("/check")
+    @GetMapping("/check")
     public void autoLogin(HttpServletRequest request){
         authService.autoLogin(request);
     }
