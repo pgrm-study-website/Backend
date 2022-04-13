@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
 import plming.auth.config.PrincipalDetailsService;
-import plming.board.exception.CustomException;
-import plming.board.exception.ErrorCode;
+import plming.exception.exception.CustomException;
+import plming.exception.exception.ErrorCode;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;

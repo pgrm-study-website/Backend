@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import plming.exception.exception.CustomException;
+import plming.exception.exception.ErrorCode;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
