@@ -57,9 +57,11 @@ public class JwtTokenProvider {
         }
     }
 
-    public boolean validateTokenAndUserId(HttpServletRequest request, Long userId){
+    public void validateTokenAndUserId(HttpServletRequest request, Long userId){
         Long userIdFromToken = getUserId(resolveToken(request));
-        return userIdFromToken == userId;
+        if(userIdFromToken.equals(userId)){
+            throw new CustomException(ErrorCode.FORBIDDEN);
+        }
     }
 
     // 인증 성공시 SecurityContextHolder에 저장할 Authentication 객체 생성
@@ -119,10 +121,6 @@ public class JwtTokenProvider {
         Collection<String> headers = response.getHeaders(HttpHeaders.SET_COOKIE);
         for(String header : headers){
             response.setHeader(HttpHeaders.SET_COOKIE,header+"; "+"SameSite=None;Secure");
-        }
-        System.out.println("start header : ");
-        for(String header : headers){
-            System.out.println(header);
         }
     }
 
