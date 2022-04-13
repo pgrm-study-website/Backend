@@ -6,6 +6,11 @@
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
+<<<<<<< HEAD
+=======
+//import org.springframework.data.domain.Page;
+//import org.springframework.data.domain.PageRequest;
+>>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //import org.springframework.data.domain.Sort;
 //import plming.board.dto.BoardResponseDto;
 //import plming.board.entity.Board;
@@ -15,8 +20,15 @@
 //import plming.user.entity.UserRepository;
 //
 //import java.util.List;
+<<<<<<< HEAD
 //
 //import static org.assertj.core.api.Assertions.*;
+=======
+//import java.util.stream.Collectors;
+//
+//import static org.assertj.core.api.Assertions.*;
+//import static org.junit.jupiter.api.Assertions.assertAll;
+>>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //import static org.springframework.data.domain.Sort.Direction.*;
 //
@@ -34,6 +46,11 @@
 //
 //    private Board post1;
 //    private Board post2;
+<<<<<<< HEAD
+=======
+//    private Board post3;
+//    private Board post4;
+>>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //    private User user1;
 //    private User user2;
 //
@@ -52,11 +69,16 @@
 //                .social(0)
 //                .build();
 //
+<<<<<<< HEAD
 //        post1 = Board.builder().user(user1).content("사용자1의 첫 번째 게시글입니다.")
+=======
+//        post1 = Board.builder().user(user1).content("user1의 첫 번째 게시글입니다.")
+>>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //                .period(1).category("스터디").status("모집 중").title("사용자1의 게시글1")
 //                .participantMax(5)
 //                .build();
 //        post2 = Board.builder().user(user2).content("사용자2의 첫 번째 게시글입니다.")
+<<<<<<< HEAD
 //                .period(1).category("프로젝트").status("모집 중").title("사용자2의 게시글 1")
 //                .participantMax(3)
 //                .build();
@@ -65,6 +87,26 @@
 ////        userRepository.save(user2);
 ////        boardRepository.save(post1);
 ////        boardRepository.save(post2);
+=======
+//                .period(2).category("프로젝트").status("모집 중").title("user2의 게시글 1")
+//                .participantMax(3)
+//                .build();
+//        post3 = Board.builder().user(user1).content("user1의 두 번째 게시글입니다.")
+//                .period(3).category("공모전").status("모집 중").title("사용자1의 게시글2")
+//                .participantMax(5)
+//                .build();
+//        post4 = Board.builder().user(user2).content("사용자2의 두 번째 게시글입니다.")
+//                .period(4).category("기타").status("모집 중").title("user2의 게시글 2")
+//                .participantMax(3)
+//                .build();
+//
+//        userRepository.save(user1);
+//        userRepository.save(user2);
+//        boardRepository.save(post1);
+//        boardRepository.save(post2);
+//        boardRepository.save(post3);
+//        boardRepository.save(post4);
+>>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //
 //    }
 //
@@ -111,6 +153,7 @@
 //    @Test
 //    @DisplayName("게시글 삭제 - 실제 DB에서 삭제)")
 //    void delete() {
+<<<<<<< HEAD
 //
 //        // when
 //        boardRepository.deleteById(post1.getId());
@@ -164,6 +207,65 @@
 ////        assertEquals(1, boardList.size());
 ////
 ////    }
+=======
+//
+//        // when
+//        boardRepository.deleteById(post1.getId());
+//
+//        // then
+//        assertEquals(1, boardRepository.count());
+//    }
+//
+//    @Test
+//    @DisplayName("게시글 삭제 - deleteYn 값 변경")
+//    void deleteYn() {
+//
+//        // when
+//        post1.delete();
+//
+//        // then
+//        assertEquals('1', post1.getDeleteYn());
+//    }
+//
+//    @Test
+//    @DisplayName("게시글 리스트 조회")
+//    void findAll() {
+//
+//        // when
+//        List<Board> boardList = boardRepository.findAll();
+//
+//        // then
+//        assertEquals(boardRepository.count(), boardList.size());
+//    }
+//
+//    @Test
+//    @DisplayName("페이징 적용된 게시글 리스트 조회 테스트")
+//    public void findAllPageSort() {
+//
+//        // when
+//        Page<Board> results = boardRepository.findAllPageSort(PageRequest.of(1, 2));
+//
+//        Board board1 = results.get().collect(Collectors.toList()).get(0);
+//        Board board2 = results.get().collect(Collectors.toList()).get(1);
+//
+//        // then
+//        assertAll("page : 1, size : 2",
+//                () -> assertEquals(board1.getId(), post2.getId()),
+//                () -> assertEquals(board2.getId(), post1.getId()));
+//    }
+//
+//    @Test
+//    @DisplayName("게시글 리스트 조회 - 사용자 id 기준")
+//    public void findAllByUserId() {
+////
+////        // when
+////        List<Board> boardList = boardRepository.findAllByUserId(user1.getId());
+////
+////        // then
+////        assertEquals(1, boardList.size());
+//
+//    }
+>>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //
 //    @Test
 //    @DisplayName("게시글 상세 정보 조회")
@@ -181,4 +283,8 @@
 //        assertThat(board1.getTitle().equals(post2.getTitle())).isFalse();
 //        assertThat(board2.getContent().equals(post1.getContent())).isFalse();
 //    }
+<<<<<<< HEAD
+=======
+//
+>>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //}

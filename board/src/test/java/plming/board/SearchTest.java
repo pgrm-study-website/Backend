@@ -3,14 +3,20 @@
 //import org.junit.jupiter.api.*;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
+<<<<<<< HEAD
 //import org.springframework.data.domain.Page;
 //import org.springframework.data.domain.Pageable;
 //import plming.board.dto.BoardListResponseDto;
+=======
+>>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //import plming.board.dto.SearchRequestDto;
 //import plming.board.entity.Board;
 //import plming.board.entity.BoardRepository;
 //import plming.board.entity.BoardTagRepository;
+<<<<<<< HEAD
 //import plming.board.service.BoardService;
+=======
+>>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //import plming.board.service.BoardTagService;
 //import plming.user.entity.User;
 //import plming.user.entity.UserRepository;
@@ -34,9 +40,12 @@
 //    @Autowired
 //    private BoardTagRepository boardTagRepository;
 //
+<<<<<<< HEAD
 //    @Autowired
 //    private BoardService boardService;
 //
+=======
+>>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //    private User user1;
 //    private User user2;
 //    private Board post1;
@@ -89,14 +98,21 @@
 //
 //    @AfterEach
 //    void afterEach() {
+<<<<<<< HEAD
 ////        boardTagRepository.deleteAll();
 ////        boardRepository.deleteAll();
 ////        userRepository.deleteAll();
+=======
+//        boardTagRepository.deleteAll();
+//        boardRepository.deleteAll();
+//        userRepository.deleteAll();
+>>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //    }
 //
 //    @Test
 //    @DisplayName("모든 조건 적용한 검색")
 //    void searchAllCondition() {
+<<<<<<< HEAD
 //
 //        // given
 //        SearchRequestDto search1 = SearchRequestDto.builder()
@@ -131,6 +147,24 @@
 //        assertEquals(post1.getId(), result1.getContent().get(0).getId());
 //        assertEquals(post2.getId(), result2.getContent().get(0).getId());
 //        assertEquals(post3.getId(), result3.getContent().get(0).getId());
+=======
+////
+////        // given
+////        SearchRequestDto search = new SearchRequestDto();
+////        search.setSearchType("제목+내용");
+////        search.setKeyword("user");
+////        search.setCategory(List.of("스터디"));
+////        search.setStatus(List.of("모집 중"));
+////        search.setTagIds(List.of(10, 40));
+////        search.setPeriod(List.of(1, 2));
+////        search.setParticipantMax(List.of(1, 5));
+////
+////        // when
+////        List<Board> result = boardRepository.searchAllCondition(search);
+////
+////        // then
+////        assertEquals(1, result.size());
+>>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //    }
 //
 //}

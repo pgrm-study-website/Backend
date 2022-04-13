@@ -53,17 +53,26 @@
 //                .social(0)
 //                .build();
 //
+<<<<<<< HEAD
 //        post1 = Board.builder().user(user1).content("사용자1의 첫 번째 게시글입니다.")
 //                .period(1).category("스터디").status("모집 중").title("사용자1의 게시글1")
 //                .build();
 //        post2 = Board.builder().user(user2).content("사용자2의 첫 번째 게시글입니다.")
 //                .period(1).category("프로젝트").status("모집 중").title("사용자2의 게시글 1")
+=======
+//        post1 = Board.builder().user(user1).content("user1의 첫 번째 게시글입니다.")
+//                .period(1).category("스터디").status("모집 중").title("사용자1의 게시글1")
+//                .build();
+//        post2 = Board.builder().user(user2).content("사용자2의 첫 번째 게시글입니다.")
+//                .period(1).category("프로젝트").status("모집 중").title("user2의 게시글 1")
+>>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //                .build();
 //
 //        userRepository.save(user1);
 //        userRepository.save(user2);
 //        boardRepository.save(post1);
 //        boardRepository.save(post2);
+<<<<<<< HEAD
 //        boardTagService.save(List.of(post1TagIds), post1);
 //        boardTagService.save(List.of(post2TagIds), post2);
 //
@@ -83,6 +92,27 @@
 //        // when
 //        boardTagService.save(List.of(post1TagIds), post1);
 //        boardTagService.save(List.of(post2TagIds), post2);
+=======
+////        boardTagService.save(List.of(post1TagIds), post1);
+////        boardTagService.save(List.of(post2TagIds), post2);
+//
+//    }
+//
+//    @AfterEach
+//    void afterEach() {
+////        boardTagRepository.deleteAll();
+////        boardRepository.deleteAll();
+////        userRepository.deleteAll();
+//    }
+//
+//    @Test
+//    @DisplayName("태그 저장")
+//    void save() {
+//
+//        // when
+//        boardTagService.save(List.of(post1TagIds), post1);
+//        boardTagService.save(List.of(post2TagIds), post2);
+>>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //    }
 //
 //    @Test
