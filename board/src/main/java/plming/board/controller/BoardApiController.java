@@ -138,4 +138,9 @@ public class BoardApiController {
 
         return result;
     }
+
+    @DeleteMapping("/{id}/application")
+    public void canceledApply(@PathVariable final Long id, @CookieValue final String token) {
+        boardService.cancelApplied(id, jwtTokenProvider.getUserId(token));
+    }
 }
