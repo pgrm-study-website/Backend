@@ -174,11 +174,10 @@ public class BoardService {
      */
     public List<BoardListResponseDto> getBoardListResponseFromBoardList(List<Board> list) {
 
-        List<BoardListResponseDto> result = new ArrayList<BoardListResponseDto>();
+        List<BoardListResponseDto> result = new ArrayList<>();
         for(int i = 0; i < list.size(); i++) {
-
             Integer participantNum = applicationService.countParticipantNum(list.get(i).getId());
-            result.add(new BoardListResponseDto(list.get(i), participantNum, boardTagService.findTagNameByBoardId(list.get(0).getId())));
+            result.add(new BoardListResponseDto(list.get(i), participantNum, boardTagService.findTagNameByBoardId(list.get(i).getId())));
         }
 
         return result;
