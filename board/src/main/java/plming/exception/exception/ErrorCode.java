@@ -46,7 +46,7 @@ public enum ErrorCode {
     /*
      * 401 UNAUTHORIZED: 로그인 실패
      */
-    LOGIN_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "계정정보가 틀렸습니다."),
+    LOGIN_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "계정정보가 잘못되었습니다."),
 
     /*
      * 403 FORBIDDEN: 권한이 없음
@@ -56,12 +56,12 @@ public enum ErrorCode {
     /*
      * 400 BAD_REQUEST: 잘못된 요청
      */
-    BAD_SEARCH(HttpStatus.BAD_REQUEST, "입력된 검색어가 없습니다."),
+    ALREADY_DELETE(HttpStatus.BAD_REQUEST, "이미 삭제되었습니다."),
 
     /*
-     * 404 NOT_FOUND: 사용자 조회 실패
+     * 400 BAD_REQUEST: 잘못된 요청
      */
-    USER_NOT_FOUND(HttpStatus.NOT_FOUND,"사용자 정보를 찾을 수 없습니다."),
+    BAD_SEARCH(HttpStatus.BAD_REQUEST, "잘못된 검색 입니다."),
 
     /*
      * 404 NOT_FOUND: 리소스를 찾을 수 없음
@@ -69,9 +69,19 @@ public enum ErrorCode {
     POSTS_NOT_FOUND(HttpStatus.NOT_FOUND, "게시글 정보를 찾을 수 없습니다."),
 
     /*
+     * 404 NOT_FOUND: 리소스를 찾을 수 없음
+     */
+    USERS_NOT_FOUND(HttpStatus.NOT_FOUND,"사용자 정보를 찾을 수 없습니다."),
+
+    /*
      * 404 NOT_FOUND: 이메일 인증코드 확인 불가
      */
     EMAIL_CODE_NOT_FOUND(HttpStatus.NOT_FOUND,"인증코드를 확인할 수 없습니다."),
+
+    /*
+     * 404 NOT_FOUND: 리소스를 찾을 수 없음
+     */
+    COMMENTS_NOT_FOUND(HttpStatus.NOT_FOUND, "댓글 정보를 찾을 수 없습니다."),
 
     /*
      * 405 METHOD_NOT_ALLOWED: 허용되지 않은 Request Method 호출

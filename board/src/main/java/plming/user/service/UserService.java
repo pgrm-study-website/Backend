@@ -39,13 +39,13 @@ public class UserService{
 
     public UserResponseDto getUserByNickName(String nickName) {
         User user = userRepository.findByNickname(nickName)
-          .orElseThrow(()-> new CustomException(ErrorCode.USER_NOT_FOUND));
+                .orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
         return new UserResponseDto(user);
     }
 
     public UserResponseDto getUserByUserId(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(()-> new CustomException(ErrorCode.USER_NOT_FOUND));
+                .orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
         return new UserResponseDto(user);
     }
 
@@ -69,12 +69,15 @@ public class UserService{
 
     @Transactional
     public void deleteUser(HttpServletRequest request,Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(()-> new CustomException(ErrorCode.USER_NOT_FOUND));
+        User user = userRepository.findById(userId).orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
+        if(user.getDeleteYn() == '1'){
+            throw new CustomException(ErrorCode.ALREADY_DELETE);
+        }
         user.delete();
     }
 
     public void checkPassword(Long userId, String password) {
-        User user = userRepository.findById(userId).orElseThrow(()->new CustomException(ErrorCode.USER_NOT_FOUND));
+        User user = userRepository.findById(userId).orElseThrow(()->new CustomException(ErrorCode.USERS_NOT_FOUND));
         if(!bCryptPasswordEncoder.matches(password,user.getPassword())){
             throw new CustomException(ErrorCode.BAD_REQUEST);
         }
@@ -83,7 +86,7 @@ public class UserService{
     @Transactional
     public void updatePassword(Long userId,String password) {
         User updateUser = userRepository.findById(userId)
-                .orElseThrow(()->new CustomException(ErrorCode.USER_NOT_FOUND));
+                .orElseThrow(()->new CustomException(ErrorCode.USERS_NOT_FOUND));
         updateUser.updatePassword(bCryptPasswordEncoder.encode(password));
     }
 
