@@ -74,16 +74,25 @@ public class UserService{
     }
 
     @Transactional
+<<<<<<< HEAD
     public void deleteUser(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
         if(user.getDeleteYn() == '1'){
             throw new CustomException(ErrorCode.ALREADY_DELETE);
         }
+=======
+    public void deleteUser(HttpServletRequest request,Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(()-> new CustomException(ErrorCode.USER_NOT_FOUND));
+>>>>>>> ce79537... Fix: 닉네임 중복 오류 및 사용자 삭제 deleteYn 추가
         user.delete();
     }
 
     public void checkPassword(Long userId, String password) {
+<<<<<<< HEAD
         User user = userRepository.findById(userId).orElseThrow(()->new CustomException(ErrorCode.USERS_NOT_FOUND));
+=======
+        User user = userRepository.findById(userId).orElseThrow(()->new CustomException(ErrorCode.USER_NOT_FOUND));
+>>>>>>> ce79537... Fix: 닉네임 중복 오류 및 사용자 삭제 deleteYn 추가
         if(!bCryptPasswordEncoder.matches(password,user.getPassword())){
             throw new CustomException(ErrorCode.BAD_REQUEST);
         }
@@ -92,7 +101,11 @@ public class UserService{
     @Transactional
     public void updatePassword(Long userId,String password) {
         User updateUser = userRepository.findById(userId)
+<<<<<<< HEAD
                 .orElseThrow(()->new CustomException(ErrorCode.USERS_NOT_FOUND));
+=======
+                .orElseThrow(()->new CustomException(ErrorCode.USER_NOT_FOUND));
+>>>>>>> ce79537... Fix: 닉네임 중복 오류 및 사용자 삭제 deleteYn 추가
         updateUser.updatePassword(bCryptPasswordEncoder.encode(password));
     }
 
