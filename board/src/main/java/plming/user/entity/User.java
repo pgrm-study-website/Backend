@@ -38,8 +38,14 @@ public class User {
     @Column(name= "social", nullable = false)
     private int social; // 회원가입방법(0 : 기본, 1 : 구글, 2 : 카카오, 3 : 깃허브), 수정X
 
+    @Column(name= "social_id")
+    private String socialId;
+
+    @Column(columnDefinition = "enum")
+    private char deleteYn = '0';
+
     @Builder
-    public User(Long id,String nickname, String email, String password, String image, String introduce, String github, String role, int social){
+    public User(Long id,String nickname, String email, String password, String image, String introduce, String github, String role, int social, String socialId){
         Assert.hasText(nickname,"nickname must not be null");
         Assert.hasText(email,"email must not be null");
         Assert.hasText(role,"role must not be null");
@@ -52,6 +58,7 @@ public class User {
         this.github = github;
         this.role = role;
         this.social = social;
+        this.socialId = socialId;
     }
 
     public void update(UserUpdateRequestDto userUpdateDto){
@@ -63,5 +70,15 @@ public class User {
 
     public void updatePassword(String password){
         this.password = password;
+    }
+
+    public void delete(){
+        this.deleteYn = '1';
+        this.nickname = "(알수없음)";
+        this.email = "";
+        this.password = "";
+        this.introduce = "";
+        this.github = "";
+        this.socialId = "";
     }
 }
