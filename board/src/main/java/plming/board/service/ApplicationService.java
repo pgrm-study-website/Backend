@@ -134,6 +134,11 @@ public class ApplicationService {
     @Transactional
     public void cancelApplied(final Long boardId, final Long userId) {
 
-        applicationRepository.cancelApplied(boardId, userId);
+        Application application = applicationRepository.findApplication(boardId, userId);
+        if (application == null) {
+            throw new CustomException(ErrorCode.BAD_REQUEST);
+        } else {
+            applicationRepository.cancelApplied(boardId, userId);
+        }
     }
 }
