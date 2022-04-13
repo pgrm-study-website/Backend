@@ -39,19 +39,26 @@ public class UserService{
 
     public UserResponseDto getUserByNickName(String nickName) {
         User user = userRepository.findByNickname(nickName)
+<<<<<<< HEAD
                 .orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
+=======
+          .orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
+>>>>>>> 5fbd76f... Fix: ErrorCode에 충돌난 부분 수정
         return new UserResponseDto(user);
     }
 
     public UserResponseDto getUserByUserId(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
+<<<<<<< HEAD
         return new UserResponseDto(user);
     }
 
     public UserResponseDto getUserByUserEmail(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
+=======
+>>>>>>> 5fbd76f... Fix: ErrorCode에 충돌난 부분 수정
         return new UserResponseDto(user);
     }
 
@@ -82,17 +89,28 @@ public class UserService{
         }
 =======
     public void deleteUser(HttpServletRequest request,Long userId) {
+<<<<<<< HEAD
         User user = userRepository.findById(userId).orElseThrow(()-> new CustomException(ErrorCode.USER_NOT_FOUND));
 >>>>>>> ce79537... Fix: 닉네임 중복 오류 및 사용자 삭제 deleteYn 추가
+=======
+        User user = userRepository.findById(userId).orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
+        if(user.getDeleteYn() == '1'){
+            throw new CustomException(ErrorCode.ALREADY_DELETE);
+        }
+>>>>>>> 5fbd76f... Fix: ErrorCode에 충돌난 부분 수정
         user.delete();
     }
 
     public void checkPassword(Long userId, String password) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         User user = userRepository.findById(userId).orElseThrow(()->new CustomException(ErrorCode.USERS_NOT_FOUND));
 =======
         User user = userRepository.findById(userId).orElseThrow(()->new CustomException(ErrorCode.USER_NOT_FOUND));
 >>>>>>> ce79537... Fix: 닉네임 중복 오류 및 사용자 삭제 deleteYn 추가
+=======
+        User user = userRepository.findById(userId).orElseThrow(()->new CustomException(ErrorCode.USERS_NOT_FOUND));
+>>>>>>> 5fbd76f... Fix: ErrorCode에 충돌난 부분 수정
         if(!bCryptPasswordEncoder.matches(password,user.getPassword())){
             throw new CustomException(ErrorCode.BAD_REQUEST);
         }
@@ -102,10 +120,14 @@ public class UserService{
     public void updatePassword(Long userId,String password) {
         User updateUser = userRepository.findById(userId)
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .orElseThrow(()->new CustomException(ErrorCode.USERS_NOT_FOUND));
 =======
                 .orElseThrow(()->new CustomException(ErrorCode.USER_NOT_FOUND));
 >>>>>>> ce79537... Fix: 닉네임 중복 오류 및 사용자 삭제 deleteYn 추가
+=======
+                .orElseThrow(()->new CustomException(ErrorCode.USERS_NOT_FOUND));
+>>>>>>> 5fbd76f... Fix: ErrorCode에 충돌난 부분 수정
         updateUser.updatePassword(bCryptPasswordEncoder.encode(password));
     }
 
