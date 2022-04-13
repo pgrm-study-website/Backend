@@ -8,9 +8,8 @@ import plming.exception.exception.ErrorCode;
 import plming.user.dto.UserJoinResponseDto;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
-
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Service
 public class AuthService {
@@ -26,17 +25,21 @@ public class AuthService {
 
 
 
-    public Map<String,Object> loginWithEmail(String email, String password){
-        User user = userRepository.findByEmail(email);
-        if(user == null || !bCryptPasswordEncoder.matches(password,user.getPassword())){
-            throw new CustomException(ErrorCode.LOGIN_UNAUTHORIZED);
+    public UserJoinResponseDto loginWithEmail(String email, String password, HttpServletResponse response){
+        User user = userRepository.findByEmail(email).orElseThrow(()->new CustomException(ErrorCode.LOGIN_UNAUTHORIZED_EMAIL));
+        if(!bCryptPasswordEncoder.matches(password,user.getPassword())){
+            throw new CustomException(ErrorCode.LOGIN_UNAUTHORIZED_PASSWORD);
         }
         String token = jwtTokenProvider.createToken(user.getId());
-        UserJoinResponseDto userJoinResponseDto = new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
-        Map<String,Object> resultMap = new HashMap<>();
-        resultMap.put("token",token);
-        resultMap.put("responseDto",userJoinResponseDto);
-        return resultMap;
+        jwtTokenProvider.setTokenInCookie(response,token);
+        return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
+    }
+
+    public UserJoinResponseDto autoLogin(HttpServletRequest request){
+        String token = jwtTokenProvider.validateTokenForAutoLogin(request);
+        Long userId = jwtTokenProvider.getUserId(token);
+        User user = userRepository.findById(userId).orElseThrow(()-> new CustomException(ErrorCode.INTERNAL_SERVER_ERROR));
+        return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
     }
 
 //    public void loginWithGoogle(String code){

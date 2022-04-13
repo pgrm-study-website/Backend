@@ -37,9 +37,15 @@ public class UserService{
         return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
     }
 
-    public UserResponseDto getUser(String nickName) {
+    public UserResponseDto getUserByNickName(String nickName) {
         User user = userRepository.findByNickname(nickName)
-          .orElseThrow(()-> new CustomException(ErrorCode.NO_CONTENT));
+          .orElseThrow(()-> new CustomException(ErrorCode.USER_NOT_FOUND));
+        return new UserResponseDto(user);
+    }
+
+    public UserResponseDto getUserByUserId(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(()-> new CustomException(ErrorCode.USER_NOT_FOUND));
         return new UserResponseDto(user);
     }
 
@@ -51,30 +57,24 @@ public class UserService{
 
     @Transactional
     public UserResponseDto updateUser(UserUpdateRequestDto userUpdateDto, HttpServletRequest request) {
-        if(!jwtTokenProvider.validateTokenAndUserId(request,userUpdateDto.getId())){
-            throw new CustomException(ErrorCode.FORBIDDEN);
-        }
-      
-        if(isNickNameOverlap(userUpdateDto.getNickname())){
-            throw new CustomException(ErrorCode.NICKNAME_OVERLAP);
-        }
-
+//        jwtTokenProvider.validateTokenAndUserId(request,userUpdateDto.getId());
         User user = userRepository.findById(userUpdateDto.getId())
                 .orElseThrow(()-> new CustomException(ErrorCode.INTERNAL_SERVER_ERROR));
+        if(!user.getNickname().equals(userUpdateDto.getNickname()) && isNickNameOverlap(userUpdateDto.getNickname())){
+            throw new CustomException(ErrorCode.NICKNAME_OVERLAP);
+        }
         user.update(userUpdateDto);
         return new UserResponseDto(user);
     }
 
     @Transactional
-    public void deleteUser(Long userId) {
-        if(!userRepository.existsById(userId)){
-            throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR);
-        }
-        userRepository.deleteById(userId);
+    public void deleteUser(HttpServletRequest request,Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(()-> new CustomException(ErrorCode.USER_NOT_FOUND));
+        user.delete();
     }
 
     public void checkPassword(Long userId, String password) {
-        User user = userRepository.findById(userId).orElseThrow(()->new CustomException(ErrorCode.INTERNAL_SERVER_ERROR));
+        User user = userRepository.findById(userId).orElseThrow(()->new CustomException(ErrorCode.USER_NOT_FOUND));
         if(!bCryptPasswordEncoder.matches(password,user.getPassword())){
             throw new CustomException(ErrorCode.BAD_REQUEST);
         }
@@ -83,7 +83,7 @@ public class UserService{
     @Transactional
     public void updatePassword(Long userId,String password) {
         User updateUser = userRepository.findById(userId)
-                .orElseThrow(()->new CustomException(ErrorCode.INTERNAL_SERVER_ERROR));
+                .orElseThrow(()->new CustomException(ErrorCode.USER_NOT_FOUND));
         updateUser.updatePassword(bCryptPasswordEncoder.encode(password));
     }
 

@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import plming.exception.exception.CustomException;
+import plming.exception.exception.ErrorCode;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -54,12 +56,15 @@ public class EmailService {
     }
 
     // 이메일 인증코드 체크
-    public boolean certificateEmailCode(HttpSession session, String email, String inputCode){
-        String originalCode = (String) session.getAttribute(email);
-        if(originalCode.equals(inputCode)){
-            return true;
+    public void certificateEmailCode(HttpSession session, String email, String inputCode){
+        try{
+            String originalCode = (String) session.getAttribute(email);
+            if(originalCode.equals(inputCode)){
+                throw new CustomException(ErrorCode.BAD_REQUEST_EMAIL);
+            }
+        }catch (Exception e){
+            throw new CustomException(ErrorCode.EMAIL_CODE_NOT_FOUND);
         }
-        return false;
     }
 
 }

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/email")
+@RequestMapping("/users/email")
 public class EmailController {
 
     @Autowired
@@ -30,10 +30,7 @@ public class EmailController {
         HttpSession session = request.getSession();
         String email = requestBody.get("email");
         String code = requestBody.get("code");
-
-        if(emailService.certificateEmailCode(session,email,code)){
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.badRequest().build();
+        emailService.certificateEmailCode(session,email,code);
+        return ResponseEntity.ok().build();
     }
 }

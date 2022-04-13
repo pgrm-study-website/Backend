@@ -1,6 +1,7 @@
 package plming.auth.service;
 
 import io.jsonwebtoken.*;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +14,7 @@ import plming.exception.exception.ErrorCode;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 @Component
@@ -55,19 +57,18 @@ public class JwtTokenProvider {
         }
     }
 
-    public boolean validateTokenAndUserId(HttpServletRequest request, Long userId){
+    public void validateTokenAndUserId(HttpServletRequest request, Long userId){
         Long userIdFromToken = getUserId(resolveToken(request));
-        if(userIdFromToken != userId){
-            return false;
+        if(userIdFromToken.equals(userId)){
+            throw new CustomException(ErrorCode.FORBIDDEN);
         }
-        return true;
     }
 
     // 인증 성공시 SecurityContextHolder에 저장할 Authentication 객체 생성
     public Authentication getAuthentication(String token){
         UserDetails userDetails = principalDetailsService.loadUserByUsername(this.getUserId(token).toString());
         return new UsernamePasswordAuthenticationToken(userDetails, "",userDetails.getAuthorities());
-    } // 난 UserDetails에 jpa entity를 연동하지 않았는데 괜찮은가?
+    }
 
     // Request Header에서 토큰 값 추출
     private String resolveToken(HttpServletRequest request){
@@ -88,4 +89,39 @@ public class JwtTokenProvider {
             throw new CustomException(ErrorCode.FORBIDDEN);
         }
     }
+
+    public String validateTokenForAutoLogin(HttpServletRequest request){
+        try{
+            String jwtToken = resolveToken(request);
+
+            Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
+            return jwtToken;
+        }catch (Exception e){
+            throw new CustomException(ErrorCode.LOGIN_UNAUTHORIZED);
+        }
+    }
+
+    public void setTokenInCookie(HttpServletResponse response,String token){
+        Cookie cookie = new Cookie("token",token);
+        cookie.setPath("/");
+        cookie.setMaxAge(365* 24 * 60 * 60);
+        response.addCookie(cookie);
+
+        Collection<String> headers = response.getHeaders(HttpHeaders.SET_COOKIE);
+        for(String header : headers){
+            response.setHeader(HttpHeaders.SET_COOKIE,header+"; "+"SameSite=None;Secure");
+        }
+    }
+
+    public void deleteTokenInCookie(HttpServletResponse response){
+        Cookie cookie = new Cookie("token",null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        Collection<String> headers = response.getHeaders(HttpHeaders.SET_COOKIE);
+        for(String header : headers){
+            response.setHeader(HttpHeaders.SET_COOKIE,header+"; "+"SameSite=None;Secure");
+        }
+    }
+
 }

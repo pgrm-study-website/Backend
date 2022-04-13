@@ -19,24 +19,23 @@ public interface ApplicationCustomRepository {
     /**
      * 신청 사용자 리스트 조회 - (게시글 ID 기준)
      */
-    List<Application> findAppliedUserByBoardId(final Long boardId);
+    List<User> findAppliedUserByBoardId(final Long boardId);
 
     /**
      * 참여 사용자 리스트 조회 - (게시글 ID 기준)
      */
     List<User> findParticipantByBoardId(final Long boardId);
 
-
     /**
      * 게시글 신청 조회
      */
-    Application findApplication(final Long boardId, final Long userId);
+    List<Application> findApplication(final Long boardId, final Long userId);
 
     /**
      * 게시글 신청 상태 업데이트
      */
     @Transactional
-    Application updateAppliedStatus(final Long boardId, final String nickname, final String status);
+    List<Application> updateAppliedStatus(final Long boardId, final Long userId, final String status);
 
     /**
      * 게시글 신청 취소

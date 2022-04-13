@@ -37,9 +37,15 @@ public class UserController {
     }
 
     // R
-    @GetMapping("/{nickName}")
-    public UserResponseDto getUser(@NotNull @PathVariable String nickName){
-        return userService.getUser(nickName);
+    @GetMapping("/nickname/{nickName}")
+    public UserResponseDto getUserByNickName(@NotNull @PathVariable String nickName){
+        return userService.getUserByNickName(nickName);
+    }
+
+    // R
+    @GetMapping("/id/{userId}")
+    public UserResponseDto getUserById(@NotNull @PathVariable String userId){
+        return userService.getUserByUserId(Long.parseLong(userId));
     }
 
     // U
@@ -57,8 +63,8 @@ public class UserController {
      */
     // D
     @DeleteMapping("/{userId}")
-    public ResponseEntity deleteUser(@NotNull @PathVariable Long userId){
-        userService.deleteUser(userId);
+    public ResponseEntity deleteUser(@NotNull @PathVariable Long userId,HttpServletRequest request){
+        userService.deleteUser(request,userId);
         return ResponseEntity.ok().build();
     }
 
