@@ -39,7 +39,7 @@ public class UserService{
 
     public UserResponseDto getUserByNickName(String nickName) {
         User user = userRepository.findByNickname(nickName)
-          .orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
+                .orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
         return new UserResponseDto(user);
     }
 
