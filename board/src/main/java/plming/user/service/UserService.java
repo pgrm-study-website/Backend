@@ -9,9 +9,11 @@ import plming.exception.ErrorCode;
 import plming.user.dto.*;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
+import plming.user.entity.UserTagRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class UserService{
@@ -24,6 +26,12 @@ public class UserService{
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
+    private UserTagService userTagService;
+
+    @Autowired
+    private UserTagRepository userTagRepository;
 
     @Transactional
     public UserJoinResponseDto createUser(UserJoinRequestDto userJoinRequestDto) {
@@ -40,19 +48,24 @@ public class UserService{
     public UserResponseDto getUserByNickName(String nickName) {
         User user = userRepository.findByNickname(nickName)
                 .orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
-        return new UserResponseDto(user);
+        return toUserResponseDto(user);
     }
 
     public UserResponseDto getUserByUserId(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
-        return new UserResponseDto(user);
+        return toUserResponseDto(user);
     }
 
     public UserResponseDto getUserByUserEmail(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
-        return new UserResponseDto(user);
+        return toUserResponseDto(user);
+    }
+
+    private UserResponseDto toUserResponseDto(User user) {
+        List<String> tagsList = userTagService.findTagNameByUser(user);
+        return new UserResponseDto(user, tagsList);
     }
 
     public UserListResponseDto getUserList(Long userId) {
@@ -62,15 +75,17 @@ public class UserService{
     }
 
     @Transactional
-    public UserResponseDto updateUser(UserUpdateRequestDto userUpdateDto, HttpServletRequest request) {
+    public UserResponseDto updateUser(UserUpdateRequestDto userUpdateDto) {
 //        jwtTokenProvider.validateTokenAndUserId(request,userUpdateDto.getId());
         User user = userRepository.findById(userUpdateDto.getId())
                 .orElseThrow(()-> new CustomException(ErrorCode.INTERNAL_SERVER_ERROR));
         if(!user.getNickname().equals(userUpdateDto.getNickname()) && isNickNameOverlap(userUpdateDto.getNickname())){
             throw new CustomException(ErrorCode.NICKNAME_OVERLAP);
         }
+        userTagRepository.deleteAllByUser(user);
+        userTagService.save(userUpdateDto.getTagIds(),user);
         user.update(userUpdateDto);
-        return new UserResponseDto(user);
+        return toUserResponseDto(user);
     }
 
     @Transactional
@@ -79,6 +94,7 @@ public class UserService{
         if(user.getDeleteYn() == '1'){
             throw new CustomException(ErrorCode.ALREADY_DELETE);
         }
+        userTagRepository.deleteAllByUser(user);
         user.delete();
     }
 
