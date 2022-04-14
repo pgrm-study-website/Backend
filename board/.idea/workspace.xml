@@ -5,45 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5def202e-793b-46ba-b6ce-3189932351a7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/ApplicationStatusRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/UserBoardListResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/comment/dto/CommentOneResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/comment/dto/RecommentResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/comment/dto/UpdateCommentRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/comment/repository/CommentCustomRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/plming/comment/repository/CommentCustomRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/BoardApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/controller/SearchApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/controller/SearchApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardListResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardListResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/BoardResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/dto/SearchRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/dto/SearchRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/ApplicationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/ApplicationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/BoardRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/BoardRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/BoardTag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/BoardTag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/entity/BoardTagRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/entity/BoardTagRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/ApplicationCustomRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/repository/BoardCustomRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/ApplicationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/ApplicationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardTagService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/BoardTagService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/board/service/SearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/board/service/SearchService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/controller/CommentApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/controller/CommentApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/dto/CommentRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/dto/CommentRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/dto/CommentResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/dto/CommentResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/entity/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/entity/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/entity/CommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/entity/CommentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/comment/service/CommentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/comment/service/CommentServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/config/CorsConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/config/QueryDslConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/config/QueryDslConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/exception/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/exception/ErrorCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/plming/user/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/plming/user/service/EmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/BoardServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/BoardServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

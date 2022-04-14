@@ -111,7 +111,6 @@
 //    @Test
 //    @DisplayName("게시글 삭제 - 실제 DB에서 삭제)")
 //    void delete() {
-<<<<<<< HEAD
 //
 //        // when
 //        boardRepository.deleteById(post1.getId());
