@@ -23,7 +23,7 @@ public class BoardListResponseDto {
     private List<String> tags;
     private Integer participantNum;
 
-    public BoardListResponseDto(Board entity, Integer participantNum, List<String> tagNames) {
+    public BoardListResponseDto(Board entity, Integer participantNum, List<String> tags) {
         this.id = entity.getId();
         this.category = entity.getCategory();
         this.status = entity.getStatus();
@@ -31,6 +31,17 @@ public class BoardListResponseDto {
         this.participantMax = entity.getParticipantMax();
         this.participantNum = participantNum;
         this.viewCnt = entity.getViewCnt();
-        this.tags = tagNames;
+        this.tags = tags;
+    }
+
+    public BoardListResponseDto(Board entity, Integer participantNum) {
+        this.id = entity.getId();
+        this.category = entity.getCategory();
+        this.status = entity.getStatus();
+        this.title = entity.getTitle();
+        this.participantMax = entity.getParticipantMax();
+        this.participantNum = participantNum;
+        this.viewCnt = entity.getViewCnt();
+        this.tags = entity.getBoardTags().stream().map(BoardTag::getTag).map(Tag::getName).collect(Collectors.toList());;
     }
 }

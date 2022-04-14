@@ -35,4 +35,11 @@ public class Application {
         this.board = board;
         this.status = status;
     }
+
+    /**
+     * 게시글 신청 상태 업데이트
+     */
+    public void update(String status) {
+        this.status = status;
+    }
 }

@@ -18,8 +18,4 @@
 //                )
 //                .allowCredentials(true);
 //    }
-<<<<<<< HEAD
 //}
-=======
-//}
->>>>>>> f88fa7d... Fix: logout 로직 및 반환코드 수정

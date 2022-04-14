@@ -6,7 +6,6 @@
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
-<<<<<<< HEAD
 //import org.springframework.data.domain.Page;
 //import org.springframework.data.domain.Pageable;
 //import org.springframework.transaction.annotation.Transactional;
@@ -15,21 +14,13 @@
 //import plming.board.entity.Board;
 //import plming.board.entity.BoardRepository;
 //import plming.board.service.ApplicationService;
-=======
-//import plming.board.entity.ApplicationRepository;
-//import plming.board.entity.Board;
-//import plming.board.entity.BoardRepository;
->>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //import plming.board.service.BoardService;
 //import plming.user.dto.UserListResponseDto;
 //import plming.user.entity.User;
 //import plming.user.entity.UserRepository;
 //
 //import java.util.List;
-<<<<<<< HEAD
 //import java.util.Map;
-=======
->>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //
 //import static org.junit.jupiter.api.Assertions.*;
 //
@@ -48,12 +39,9 @@
 //    @Autowired
 //    private BoardService boardService;
 //
-<<<<<<< HEAD
 //    @Autowired
 //    private ApplicationService applicationService;
 //
-=======
->>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //    private User user1;
 //    private User user2;
 //    private Board post1;
@@ -68,11 +56,7 @@
 //                .social(0)
 //                .build();
 //        user2 = User.builder()
-<<<<<<< HEAD
 //                .nickname("nickname2")
-=======
-//                .nickname("nickname1")
->>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //                .email("email@gmail1.com")
 //                .role("ROLE_USER")
 //                .social(0)
@@ -94,15 +78,9 @@
 //
 //    @AfterEach
 //    void afterEach() {
-<<<<<<< HEAD
 ////        applicationRepository.deleteAll();
 ////        boardRepository.deleteAll();
 ////        userRepository.deleteAll();
-=======
-//        applicationRepository.deleteAll();
-//        boardRepository.deleteAll();
-//        userRepository.deleteAll();
->>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //    }
 //
 //    @Test
@@ -126,34 +104,20 @@
 //        assertEquals("신청", board4Id);
 //    }
 //
-<<<<<<< HEAD
 ////    @Test
 ////    @DisplayName("사용자가 신청한 게시글 조회")
 ////    void findAppliedBoardByUserId() {
-=======
-//    @Test
-//    @DisplayName("사용자가 신청한 게시글 조회")
-//    void findAppliedBoardByUserId() {
->>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 ////
 ////        // given
 ////        boardService.apply(post1.getId(), user2.getId());
 ////        boardService.apply(post2.getId(), user1.getId());
 ////
 ////        // when
-<<<<<<< HEAD
 ////        List<BoardListResponseDto> appliedBoards = boardService.findAppliedBoardByUserIdTest(user2.getId());
 ////
 ////        // then
 ////        assertEquals(1, appliedBoards.size());
 ////    }
-=======
-////        Page<BoardListResponseDto> appliedBoards = boardService.findAppliedBoardByUserId(user1.getId());
-////
-////        // then
-////        assertEquals(1, appliedBoards.getTotalElements());
-//    }
->>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //
 //    @Test
 //    @DisplayName("게시글 신청한 사용자 리스트 조회")
@@ -164,17 +128,10 @@
 //        boardService.apply(post2.getId(), user1.getId());
 //
 //        // when
-<<<<<<< HEAD
 //        List<Map<String, Object>> appliedUsers = boardService.findAppliedUserByBoardId(post1.getId());
 //
 //        // then
 //        assertEquals(appliedUsers.get(0).get("user").getClass(), UserListResponseDto.class);
-=======
-//        List<UserListResponseDto> appliedUsers = boardService.findAppliedUserByBoardId(post1.getId());
-//
-//        // then
-//        assertEquals(user2.getNickname(), appliedUsers.get(0).getNickname());
->>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //    }
 //
 //    @Test
@@ -185,20 +142,14 @@
 //        boardService.apply(post2.getId(), user1.getId());
 //
 //        // when
-<<<<<<< HEAD
 //        String status1 = boardService.updateAppliedStatus(post1.getId(), user1.getId(), user2.getNickname(), "승인");
 //        String status2 = boardService.updateAppliedStatus(post2.getId(), user2.getId(), user1.getNickname(), "거절");
-=======
-//        String status1 = boardService.updateAppliedStatus(post1.getId(), user2.getId(), "승인");
-//        String status2 = boardService.updateAppliedStatus(post2.getId(), user1.getId(), "거절");
->>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //
 //        // then
 //        assertEquals("승인", status1);
 //        assertEquals("거절", status2);
 //    }
 //
-<<<<<<< HEAD
 ////    @Test
 ////    @DisplayName("참여자 수 계산")
 ////    void findParticipateNum() {
@@ -216,41 +167,6 @@
 ////        assertEquals(1, post1ParticipateNum);
 ////        assertEquals(0, post2ParticipateNum);
 ////    }
-=======
-//    @Test
-//    @DisplayName("게시글 참여한 사용자 리스트 조회")
-//    void findParticipantByBoardId() {
-//
-//        // given
-//        boardService.apply(post1.getId(), user2.getId());
-//        boardService.apply(post2.getId(), user1.getId());
-//        boardService.updateAppliedStatus(post1.getId(), user2.getId(), "승인");
-//
-//        // when
-//        List<UserListResponseDto> appliedUsers = boardService.findParticipantUserByBoardId(post1.getId());
-//
-//        // then
-//        assertEquals(user2.getNickname(), appliedUsers.get(0).getNickname());
-//    }
-//
-//    @Test
-//    @DisplayName("참여자 수 계산")
-//    void findParticipateNum() {
-//        // given
-//        boardService.apply(post1.getId(), user2.getId());
-//        boardService.apply(post2.getId(), user1.getId());
-//        boardService.updateAppliedStatus(post1.getId(), user2.getId(), "승인");
-//        boardService.updateAppliedStatus(post2.getId(), user1.getId(), "거절");
-//
-//        // when
-//        Integer post1ParticipateNum = boardService.countParticipantNum(post1.getId());
-//        Integer post2ParticipateNum = boardService.countParticipantNum(post2.getId());
-//
-//        // then
-//        assertEquals(1, post1ParticipateNum);
-//        assertEquals(0, post2ParticipateNum);
-//    }
->>>>>>> 3507393... Fix: 테스트 파일 주석 처리
 //
 //    @Test
 //    @DisplayName("신청 취소하기")

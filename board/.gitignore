@@ -36,9 +36,5 @@ out/
 ### VS Code ###
 .vscode/
 
-<<<<<<< HEAD
-application.properties
-=======
 keystore.p12
 application.properties
->>>>>>> 3507393... Fix: 테스트 파일 주석 처리
