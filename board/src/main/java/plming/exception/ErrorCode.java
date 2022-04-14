@@ -34,6 +34,11 @@ public enum ErrorCode {
     EMAIL_OVERLAP(HttpStatus.BAD_REQUEST, "중복된 이메일입니다."),
 
     /*
+     * 400 BAD_REQUEST: 유저 태그 개수 초과
+     */
+    USER_TAG_EXCESS(HttpStatus.BAD_REQUEST,"유저 태그 개수를 초과하였습니다."),
+
+    /*
      * 401 UNAUTHORIZED: 로그인 실패(이메일 없음)
      */
     LOGIN_UNAUTHORIZED_EMAIL(HttpStatus.UNAUTHORIZED, "존재하지 않는 이메일입니다."),
