@@ -61,6 +61,7 @@ public class EmailService {
             String originalCode = (String) session.getAttribute(email);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             if(!originalCode.equals(inputCode)){
                 throw new CustomException(ErrorCode.BAD_REQUEST_EMAIL);
             }
@@ -76,6 +77,13 @@ public class EmailService {
         }catch (Exception e){
             throw new CustomException(ErrorCode.EMAIL_CODE_NOT_FOUND);
 >>>>>>> 25a4201... Fix: 이메일 api 반환 코드 수정
+=======
+            if(!originalCode.equals(inputCode)){
+                throw new CustomException(ErrorCode.BAD_REQUEST_EMAIL);
+            }
+        }catch (Exception e){
+            throw new CustomException(ErrorCode.BAD_REQUEST_EMAIL);
+>>>>>>> 6237f46... Fix: user API 수정사항 적용
         }
     }
 }

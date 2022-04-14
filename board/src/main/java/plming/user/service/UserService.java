@@ -69,6 +69,12 @@ public class UserService{
         return new UserResponseDto(user);
     }
 
+    public UserResponseDto getUserByUserEmail(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
+        return new UserResponseDto(user);
+    }
+
     public UserListResponseDto getUserList(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(()-> new CustomException(ErrorCode.NO_CONTENT));
@@ -89,6 +95,7 @@ public class UserService{
 
     @Transactional
 <<<<<<< HEAD
+<<<<<<< HEAD
     public void deleteUser(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
         if(user.getDeleteYn() == '1'){
@@ -103,6 +110,9 @@ public class UserService{
 =======
 =======
 >>>>>>> 67d88c8... Fix: ErrorCode에 충돌난 부분 수정
+=======
+    public void deleteUser(Long userId) {
+>>>>>>> 6237f46... Fix: user API 수정사항 적용
         User user = userRepository.findById(userId).orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
         if(user.getDeleteYn() == '1'){
             throw new CustomException(ErrorCode.ALREADY_DELETE);
