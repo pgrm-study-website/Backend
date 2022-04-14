@@ -59,12 +59,11 @@ public class EmailService {
     public void certificateEmailCode(HttpSession session, String email, String inputCode){
         try{
             String originalCode = (String) session.getAttribute(email);
-            if(originalCode.equals(inputCode)){
+            if(!originalCode.equals(inputCode)){
                 throw new CustomException(ErrorCode.BAD_REQUEST_EMAIL);
             }
         }catch (Exception e){
-            throw new CustomException(ErrorCode.EMAIL_CODE_NOT_FOUND);
+            throw new CustomException(ErrorCode.BAD_REQUEST_EMAIL);
         }
     }
-
 }

@@ -21,7 +21,7 @@ public enum ErrorCode {
     /*
      * 400 BAD_REQUEST: 이메일 인증코드 불일치
      */
-    BAD_REQUEST_EMAIL(HttpStatus.BAD_REQUEST,"인증코드가 일치하지 않습니다."),
+    BAD_REQUEST_EMAIL(HttpStatus.BAD_REQUEST,"인증코드가 틀렸습니다."),
 
     /*
      * 400 BAD_REQUEST: 닉네임 중복
