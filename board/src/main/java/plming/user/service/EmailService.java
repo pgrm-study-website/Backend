@@ -60,6 +60,7 @@ public class EmailService {
         try{
             String originalCode = (String) session.getAttribute(email);
 <<<<<<< HEAD
+<<<<<<< HEAD
             if(!originalCode.equals(inputCode)){
                 throw new CustomException(ErrorCode.BAD_REQUEST_EMAIL);
             }
@@ -67,6 +68,9 @@ public class EmailService {
             throw new CustomException(ErrorCode.BAD_REQUEST_EMAIL);
 =======
             if(originalCode.equals(inputCode)){
+=======
+            if(!originalCode.equals(inputCode)){
+>>>>>>> 95eac2b... Fix: 이메일 인증코드 수정
                 throw new CustomException(ErrorCode.BAD_REQUEST_EMAIL);
             }
         }catch (Exception e){
