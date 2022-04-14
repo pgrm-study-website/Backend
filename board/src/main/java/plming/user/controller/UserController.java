@@ -48,6 +48,12 @@ public class UserController {
         return userService.getUserByUserId(Long.parseLong(userId));
     }
 
+    // R
+    @GetMapping("/email/{email}")
+    public UserResponseDto getUserByEmail(@NotNull @PathVariable String email){
+        return userService.getUserByUserEmail(email);
+    }
+
     // U
     @PatchMapping("/{userId}")
     public UserResponseDto updateUser(@NotNull @PathVariable Long userId, @RequestBody UserUpdateRequestDto userUpdateDto, HttpServletRequest request){
@@ -63,8 +69,8 @@ public class UserController {
      */
     // D
     @DeleteMapping("/{userId}")
-    public ResponseEntity deleteUser(@NotNull @PathVariable Long userId,HttpServletRequest request){
-        userService.deleteUser(request,userId);
+    public ResponseEntity deleteUser(@NotNull @PathVariable Long userId){
+        userService.deleteUser(userId);
         return ResponseEntity.ok().build();
     }
 

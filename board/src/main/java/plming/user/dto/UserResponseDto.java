@@ -9,6 +9,7 @@ import plming.user.entity.User;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserResponseDto {
+    private Long id;
     private String nickname;
     private String image;
     private String email;
@@ -16,6 +17,7 @@ public class UserResponseDto {
     private String github;
 
     public UserResponseDto(User user){
+        this.id = user.getId();
         this.nickname = user.getNickname();
         this.email = user.getEmail();
         this.image = user.getImage();
