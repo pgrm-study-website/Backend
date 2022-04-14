@@ -104,7 +104,7 @@ public class JwtTokenProvider {
     public void setTokenInCookie(HttpServletResponse response,String token){
         Cookie cookie = new Cookie("token",token);
         cookie.setPath("/");
-        cookie.setMaxAge(365* 24 * 60 * 60);
+        cookie.setMaxAge(30 * 24 * 60 * 60);
         response.addCookie(cookie);
 
         Collection<String> headers = response.getHeaders(HttpHeaders.SET_COOKIE);
@@ -123,5 +123,4 @@ public class JwtTokenProvider {
             response.setHeader(HttpHeaders.SET_COOKIE,header+"; "+"SameSite=None;Secure");
         }
     }
-
 }

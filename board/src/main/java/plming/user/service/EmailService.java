@@ -63,8 +63,7 @@ public class EmailService {
                 throw new CustomException(ErrorCode.BAD_REQUEST_EMAIL);
             }
         }catch (Exception e){
-            throw new CustomException(ErrorCode.EMAIL_CODE_NOT_FOUND);
+            throw new CustomException(ErrorCode.BAD_REQUEST_EMAIL);
         }
     }
-
 }
