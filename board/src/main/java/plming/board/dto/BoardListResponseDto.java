@@ -4,11 +4,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import plming.board.entity.Board;
-import plming.board.entity.BoardTag;
-import plming.tag.entity.Tag;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -23,7 +20,7 @@ public class BoardListResponseDto {
     private List<String> tags;
     private Integer participantNum;
 
-    public BoardListResponseDto(Board entity, Integer participantNum, List<String> tags) {
+    public BoardListResponseDto(Board entity, Integer participantNum, List<String> tagNames) {
         this.id = entity.getId();
         this.category = entity.getCategory();
         this.status = entity.getStatus();
@@ -31,17 +28,6 @@ public class BoardListResponseDto {
         this.participantMax = entity.getParticipantMax();
         this.participantNum = participantNum;
         this.viewCnt = entity.getViewCnt();
-        this.tags = tags;
-    }
-
-    public BoardListResponseDto(Board entity, Integer participantNum) {
-        this.id = entity.getId();
-        this.category = entity.getCategory();
-        this.status = entity.getStatus();
-        this.title = entity.getTitle();
-        this.participantMax = entity.getParticipantMax();
-        this.participantNum = participantNum;
-        this.viewCnt = entity.getViewCnt();
-        this.tags = entity.getBoardTags().stream().map(BoardTag::getTag).map(Tag::getName).collect(Collectors.toList());;
+        this.tags = tagNames;
     }
 }

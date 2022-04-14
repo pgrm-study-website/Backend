@@ -1,4 +1,4 @@
-package plming.exception.exception;
+package plming.exception;
 
 import lombok.Getter;
 

@@ -6,27 +6,24 @@ import plming.comment.entity.Comment;
 import plming.user.entity.User;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
-public class CommentResponseDto {
+public class RecommentResponseDto {
 
     private final Long id;
     private final Long userId;
+    private final Long parentId;
     private final String content;
     private final LocalDateTime createDate;
     private final char deleteYn;
-    private final List<RecommentResponseDto> recomment;
-    private final Long recommentSize;
 
     @Builder
-    public CommentResponseDto(Comment entity, User user, List<RecommentResponseDto> recomment, Long recommentSize) {
+    public RecommentResponseDto(Comment entity, User user) {
         this.id = entity.getId();
         this.userId = user.getId();
+        this.parentId = entity.getParentId();
         this.content = entity.getContent();
         this.createDate = entity.getCreateDate();
         this.deleteYn = entity.getDeleteYn();
-        this.recomment = recomment;
-        this.recommentSize = recommentSize;
     }
 }
