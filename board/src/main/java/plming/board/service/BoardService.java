@@ -277,4 +277,3 @@ public class BoardService {
         applicationService.cancelApplied(boardId, userId);
     }
 }
-

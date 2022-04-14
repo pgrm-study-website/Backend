@@ -9,24 +9,22 @@ import java.util.List;
 @Getter
 public class BoardResponseDto {
 
-    private Long id;
-    private Long userId;
-    private String category;
-    private String status;
-    private Integer period;
-    private String title;
-    private String content;
-    private Integer participantMax;
-    private Integer participantNum;
-    private Long viewCnt;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
-    private char deleteYn;
-    private List<String> tags;
+    private final Long id;
+    private final String category;
+    private final String status;
+    private final Integer period;
+    private final String title;
+    private final String content;
+    private final Integer participantMax;
+    private final Integer participantNum;
+    private final Long viewCnt;
+    private final LocalDateTime createDate;
+    private final LocalDateTime updateDate;
+    private final char deleteYn;
+    private final List<String> tags;
 
     public BoardResponseDto(Board entity, Integer participantNum, List<String> tags) {
         this.id = entity.getId();
-        this.userId = entity.getUser().getId();
         this.category = entity.getCategory();
         this.status = entity.getStatus();
         this.period = entity.getPeriod();

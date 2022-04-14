@@ -57,25 +57,11 @@ public enum ErrorCode {
      * 400 BAD_REQUEST: 잘못된 요청
      */
     ALREADY_DELETE(HttpStatus.BAD_REQUEST, "이미 삭제되었습니다."),
-<<<<<<< HEAD:board/src/main/java/plming/exception/ErrorCode.java
-<<<<<<< HEAD:board/src/main/java/plming/exception/ErrorCode.java
-=======
->>>>>>> 67d88c8... Fix: ErrorCode에 충돌난 부분 수정:board/src/main/java/plming/exception/exception/ErrorCode.java
 
     /*
      * 400 BAD_REQUEST: 잘못된 요청
      */
     BAD_SEARCH(HttpStatus.BAD_REQUEST, "잘못된 검색 입니다."),
-<<<<<<< HEAD:board/src/main/java/plming/exception/ErrorCode.java
-=======
->>>>>>> 5fbd76f... Fix: ErrorCode에 충돌난 부분 수정:board/src/main/java/plming/exception/exception/ErrorCode.java
-
-    /*
-     * 400 BAD_REQUEST: 잘못된 요청
-     */
-    BAD_SEARCH(HttpStatus.BAD_REQUEST, "잘못된 검색 입니다."),
-=======
->>>>>>> 67d88c8... Fix: ErrorCode에 충돌난 부분 수정:board/src/main/java/plming/exception/exception/ErrorCode.java
 
     /*
      * 404 NOT_FOUND: 리소스를 찾을 수 없음

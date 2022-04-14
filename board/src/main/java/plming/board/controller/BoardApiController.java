@@ -10,13 +10,7 @@ import plming.board.dto.*;
 import plming.exception.CustomException;
 import plming.exception.ErrorCode;
 import plming.exception.ErrorResponse;
-import plming.board.dto.BoardListResponseDto;
-import plming.board.dto.BoardRequestDto;
-import plming.board.dto.BoardResponseDto;
 import plming.board.service.BoardService;
-import plming.user.dto.UserListResponseDto;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/posts")

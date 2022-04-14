@@ -65,6 +65,5 @@ public class EmailService {
         }catch (Exception e){
             throw new CustomException(ErrorCode.BAD_REQUEST_EMAIL);
         }
-        return false;
     }
 }
