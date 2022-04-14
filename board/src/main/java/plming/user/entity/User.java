@@ -5,6 +5,7 @@ import org.springframework.util.Assert;
 import plming.user.dto.UserUpdateRequestDto;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -44,8 +45,11 @@ public class User {
     @Column(columnDefinition = "enum")
     private char deleteYn = '0';
 
+    @OneToMany(mappedBy = "user")
+    private List<UserTag> userTags;
+
     @Builder
-    public User(Long id,String nickname, String email, String password, String image, String introduce, String github, String role, int social, String socialId){
+    public User(Long id,String nickname, String email, String password, String image, String introduce, String github, String role, int social, String socialId, List<UserTag> userTags){
         Assert.hasText(nickname,"nickname must not be null");
         Assert.hasText(email,"email must not be null");
         Assert.hasText(role,"role must not be null");
@@ -59,6 +63,7 @@ public class User {
         this.role = role;
         this.social = social;
         this.socialId = socialId;
+        this.userTags = userTags;
     }
 
     public void update(UserUpdateRequestDto userUpdateDto){
