@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import plming.board.dto.SearchRequestDto;
 import plming.board.entity.BoardRepository;
-import plming.exception.exception.CustomException;
-import plming.exception.exception.ErrorCode;
+import plming.exception.CustomException;
+import plming.exception.ErrorCode;
 
 import java.util.Collections;
 import java.util.List;

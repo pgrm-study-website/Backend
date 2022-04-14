@@ -9,8 +9,8 @@ import plming.board.entity.Application;
 import plming.board.entity.ApplicationRepository;
 import plming.board.entity.Board;
 import plming.board.entity.BoardRepository;
-import plming.exception.exception.CustomException;
-import plming.exception.exception.ErrorCode;
+import plming.exception.CustomException;
+import plming.exception.ErrorCode;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 

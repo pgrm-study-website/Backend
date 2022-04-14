@@ -7,9 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import plming.auth.service.JwtTokenProvider;
 import plming.board.dto.*;
-import plming.exception.exception.CustomException;
-import plming.exception.exception.ErrorCode;
-import plming.exception.exception.ErrorResponse;
+import plming.exception.CustomException;
+import plming.exception.ErrorCode;
+import plming.exception.ErrorResponse;
 import plming.board.service.BoardService;
 
 @RestController

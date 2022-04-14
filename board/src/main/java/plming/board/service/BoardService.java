@@ -12,8 +12,8 @@ import plming.board.dto.BoardResponseDto;
 import plming.board.dto.UserBoardListResponseDto;
 import plming.board.entity.*;
 import plming.comment.service.CommentService;
-import plming.exception.exception.CustomException;
-import plming.exception.exception.ErrorCode;
+import plming.exception.CustomException;
+import plming.exception.ErrorCode;
 import plming.board.entity.BoardRepository;
 import plming.board.entity.BoardTagRepository;
 import plming.user.dto.UserListResponseDto;
@@ -23,7 +23,6 @@ import plming.user.service.UserService;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
 
 @Service
 @RequiredArgsConstructor
