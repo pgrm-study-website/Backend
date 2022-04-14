@@ -9,8 +9,8 @@ import plming.board.entity.Application;
 import plming.board.entity.ApplicationRepository;
 import plming.board.entity.Board;
 import plming.board.entity.BoardRepository;
-import plming.exception.exception.CustomException;
-import plming.exception.exception.ErrorCode;
+import plming.exception.CustomException;
+import plming.exception.ErrorCode;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 
@@ -27,7 +27,7 @@ public class ApplicationService {
     @Transactional
     public String save(final Long boardId, final Long userId) {
 
-        if (findApplication(boardId, userId).size() == 0 && isMaxNum(boardId) && isStatusTrue(boardId, userId)) {
+        if (findApplication(boardId, userId) == null && isMaxNum(boardId) && isStatusTrue(boardId, userId)) {
             Application application = Application.builder()
                     .board(boardRepository.getById(boardId))
                     .user(userRepository.getById(userId))
@@ -46,7 +46,7 @@ public class ApplicationService {
             board.updateStatus("모집 완료");
         }
 
-        if ((findApplication(boardId, userId).size() == 0 && !isMaxNum(boardId))) {
+        if ((findApplication(boardId, userId) == null && !isMaxNum(boardId))) {
             return "마감";
         } else if (!isStatusTrue(boardId, userId)) {
             return "거절";
@@ -73,11 +73,11 @@ public class ApplicationService {
      * 신청 상태가 거절이 아닌 경우 true 반환
      */
     public boolean isStatusTrue(final Long boardId, final Long userId) {
-        if (findApplication(boardId, userId).size() == 0) {
+        if (findApplication(boardId, userId) == null) {
             return true;
         }
 
-        return !findApplication(boardId, userId).get(0).getStatus().equals("거절") ? true : false;
+        return !findApplication(boardId, userId).getStatus().equals("거절") ? true : false;
     }
 
     /**
@@ -91,7 +91,7 @@ public class ApplicationService {
     /**
      * 게시글 신청자 리스트 조회
      */
-    public List<User> findAppliedUserByBoardId(final Long boardId) {
+    public List<Application> findAppliedUserByBoardId(final Long boardId) {
 
         return applicationRepository.findAppliedUserByBoardId(boardId);
     }
@@ -115,7 +115,7 @@ public class ApplicationService {
     /**
      * 게시글 신청 조회
      */
-    private List<Application> findApplication(final Long boardId, final Long userId) {
+    private Application findApplication(final Long boardId, final Long userId) {
 
         return applicationRepository.findApplication(boardId, userId);
     }
@@ -123,9 +123,9 @@ public class ApplicationService {
     /**
      * 게시글 신청 상태 업데이트
      */
-    public Application updateAppliedStatus(final Long boardId, final Long userId, final String status) {
+    public Application updateAppliedStatus(final Long boardId, final String nickname, final String status) {
 
-        return applicationRepository.updateAppliedStatus(boardId, userId, status).get(0);
+        return applicationRepository.updateAppliedStatus(boardId, nickname, status);
     }
 
     /**
@@ -134,6 +134,11 @@ public class ApplicationService {
     @Transactional
     public void cancelApplied(final Long boardId, final Long userId) {
 
-        applicationRepository.cancelApplied(boardId, userId);
+        Application application = applicationRepository.findApplication(boardId, userId);
+        if (application == null) {
+            throw new CustomException(ErrorCode.BAD_REQUEST);
+        } else {
+            applicationRepository.cancelApplied(boardId, userId);
+        }
     }
 }

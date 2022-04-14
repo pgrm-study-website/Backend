@@ -19,7 +19,7 @@ public interface BoardCustomRepository {
     /**
      * 게시글 리스트 조회 - (사용자 Id 기준)
      */
-    Page<Board> findAllByUserId(final Long userId, final Pageable pageable);
+    List<Board> findAllByUserId(final Long userId);
 
     /**
      * 게시글 ID 기준 태그 id 리스트 조회
