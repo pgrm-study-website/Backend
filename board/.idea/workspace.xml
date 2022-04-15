@@ -5,9 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5def202e-793b-46ba-b6ce-3189932351a7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/notification/controller/NotificationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/notification/dto/NotificationResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/notification/entity/EntityDate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/notification/entity/Notification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/notification/entity/NotificationContent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/notification/entity/NotificationType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/notification/entity/RelatedURL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/notification/exception/InvalidNotificationContentException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/notification/exception/InvalidRelatedURLException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/notification/repository/EmitterRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/notification/repository/EmitterRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/notification/repository/NotificationCustomRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/notification/repository/NotificationCustomRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/notification/repository/NotificationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/plming/notification/service/NotificationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/plming/ProdTestData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/plming/ServiceIntegrationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/plming/TestDB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/plming/TestData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/plming/notification/entity/NotificationContentTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/plming/notification/entity/RelatedURLTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/plming/notification/repository/EmitterRepositoryImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/plming/notification/service/NotificationServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/plming/board/BoardServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/board/BoardServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/plming/BoardApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/plming/BoardApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +68,12 @@
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="board" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -68,7 +99,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="feature-comment" />
+        <entry key="$PROJECT_DIR$/.." value="develope" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -135,6 +166,7 @@
       <recent name="plming.auth.config" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\slc\Desktop\plming\Backend\board\src\main\java\plming\notification" />
       <recent name="C:\Users\slc\Desktop\plming\Backend\board\src\main\resources\templates" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -146,8 +178,8 @@
       <recent name="plming.comment.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.board [build]">
-    <configuration name="board [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="JUnit.NotificationServiceTest.findAllNotifications">
+    <configuration name="board [compileJava]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -158,7 +190,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="build" />
+            <option value="compileJava" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -168,65 +200,64 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="CommentServictTest.deleteCommentByBoardId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EmitterRepositoryImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="plming.comment.*" />
+          <option name="PATTERN" value="plming.notification.repository.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="plming.comment" />
-      <option name="MAIN_CLASS_NAME" value="plming.comment.CommentServictTest" />
-      <option name="METHOD_NAME" value="deleteCommentByBoardId" />
+      <option name="PACKAGE_NAME" value="plming.notification.repository" />
+      <option name="MAIN_CLASS_NAME" value="plming.notification.repository.EmitterRepositoryImplTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NotificationServiceTest.findAllNotifications" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="board.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="plming.notification.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="plming.notification.service" />
+      <option name="MAIN_CLASS_NAME" value="plming.notification.service.NotificationServiceTest" />
+      <option name="METHOD_NAME" value="findAllNotifications" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CommentServictTest.findCommentByUserId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="NotificationServiceTest.send" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="plming.comment.*" />
+          <option name="PATTERN" value="plming.notification.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="plming.comment" />
-      <option name="MAIN_CLASS_NAME" value="plming.comment.CommentServictTest" />
-      <option name="METHOD_NAME" value="findCommentByUserId" />
+      <option name="PACKAGE_NAME" value="plming.notification.service" />
+      <option name="MAIN_CLASS_NAME" value="plming.notification.service.NotificationServiceTest" />
+      <option name="METHOD_NAME" value="send" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CommentServictTest.save" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="NotificationServiceTest.subscribe" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="board.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="plming.comment.*" />
+          <option name="PATTERN" value="plming.notification.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="plming.comment" />
-      <option name="MAIN_CLASS_NAME" value="plming.comment.CommentServictTest" />
-      <option name="METHOD_NAME" value="save" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SearchTest.searchAllCondition" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="board.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="plming.board.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="plming.board" />
-      <option name="MAIN_CLASS_NAME" value="plming.board.SearchTest" />
-      <option name="METHOD_NAME" value="searchAllCondition" />
+      <option name="PACKAGE_NAME" value="plming.notification.service" />
+      <option name="MAIN_CLASS_NAME" value="plming.notification.service.NotificationServiceTest" />
+      <option name="METHOD_NAME" value="subscribe" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -241,20 +272,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.board [build]" />
-      <item itemvalue="JUnit.CommentServictTest.save" />
-      <item itemvalue="JUnit.CommentServictTest.deleteCommentByBoardId" />
-      <item itemvalue="JUnit.CommentServictTest.findCommentByUserId" />
-      <item itemvalue="JUnit.SearchTest.searchAllCondition" />
+      <item itemvalue="Gradle.board [compileJava]" />
+      <item itemvalue="JUnit.EmitterRepositoryImplTest" />
+      <item itemvalue="JUnit.NotificationServiceTest.subscribe" />
+      <item itemvalue="JUnit.NotificationServiceTest.send" />
+      <item itemvalue="JUnit.NotificationServiceTest.findAllNotifications" />
       <item itemvalue="Spring Boot.BoardApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.board [build]" />
-        <item itemvalue="JUnit.SearchTest.searchAllCondition" />
-        <item itemvalue="JUnit.CommentServictTest.findCommentByUserId" />
-        <item itemvalue="JUnit.CommentServictTest.deleteCommentByBoardId" />
-        <item itemvalue="JUnit.CommentServictTest.save" />
+        <item itemvalue="JUnit.NotificationServiceTest.findAllNotifications" />
+        <item itemvalue="JUnit.NotificationServiceTest.send" />
+        <item itemvalue="JUnit.NotificationServiceTest.subscribe" />
+        <item itemvalue="Gradle.board [compileJava]" />
+        <item itemvalue="JUnit.EmitterRepositoryImplTest" />
       </list>
     </recent_temporary>
   </component>
@@ -264,7 +295,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2dd26514-9bde-418e-8bb5-6a38047c07f1" name="Changes" comment="" />
+      <changelist id="5def202e-793b-46ba-b6ce-3189932351a7" name="Changes" comment="" />
       <created>1648519152901</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -289,6 +320,9 @@
       <workItem from="1649636203194" duration="33116000" />
       <workItem from="1649717609763" duration="7267000" />
       <workItem from="1649804051289" duration="20160000" />
+      <workItem from="1649979437804" duration="15461000" />
+      <workItem from="1650013365830" duration="10909000" />
+      <workItem from="1650027326098" duration="1039000" />
     </task>
     <servers />
   </component>
@@ -306,7 +340,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="develope" />
+                        <option value="feature-notification" />
                       </list>
                     </value>
                   </entry>
@@ -335,6 +369,10 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="13" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.sql.SQLSyntaxErrorException" package="java.sql" />
+          <option name="timeStamp" value="14" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
