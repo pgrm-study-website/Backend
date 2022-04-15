@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import plming.auth.service.JwtTokenProvider;
 import plming.exception.CustomException;
 import plming.exception.ErrorCode;
+import plming.storage.service.StorageService;
 import plming.user.dto.*;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
@@ -32,6 +33,9 @@ public class UserService{
 
     @Autowired
     private UserTagRepository userTagRepository;
+
+    @Autowired
+    private StorageService storageService;
 
     @Transactional
     public UserJoinResponseDto createUser(UserJoinRequestDto userJoinRequestDto) {
@@ -78,10 +82,25 @@ public class UserService{
     public UserResponseDto updateUser(UserUpdateRequestDto userUpdateDto) {
 //        jwtTokenProvider.validateTokenAndUserId(request,userUpdateDto.getId());
         User user = userRepository.findById(userUpdateDto.getId())
-                .orElseThrow(()-> new CustomException(ErrorCode.INTERNAL_SERVER_ERROR));
+                .orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
+        if(user.getDeleteYn() == '1'){
+            throw new CustomException(ErrorCode.ALREADY_DELETE);
+        }
         if(!user.getNickname().equals(userUpdateDto.getNickname()) && isNickNameOverlap(userUpdateDto.getNickname())){
             throw new CustomException(ErrorCode.NICKNAME_OVERLAP);
         }
+        if(userUpdateDto.getTagIds().size() > 5){
+            throw new CustomException(ErrorCode.USER_TAG_EXCESS);
+        }
+        if(userUpdateDto.getImage() != null && !storageService.isFileExist(userUpdateDto.getImage())){
+            throw new CustomException(ErrorCode.FILE_NOT_FOUND);
+        }
+        if(user.getImage() != null){
+            if(userUpdateDto.getImage() == null || !user.getImage().equals(userUpdateDto.getImage())){
+                storageService.deleteImage(user.getImage());
+            }
+        }
+
         userTagRepository.deleteAllByUser(user);
         userTagService.save(userUpdateDto.getTagIds(),user);
         user.update(userUpdateDto);
