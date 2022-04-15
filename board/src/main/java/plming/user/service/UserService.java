@@ -120,7 +120,7 @@ public class UserService{
     public void checkPassword(Long userId, String password) {
         User user = userRepository.findById(userId).orElseThrow(()->new CustomException(ErrorCode.USERS_NOT_FOUND));
         if(!bCryptPasswordEncoder.matches(password,user.getPassword())){
-            throw new CustomException(ErrorCode.BAD_REQUEST);
+            throw new CustomException(ErrorCode.LOGIN_UNAUTHORIZED_PASSWORD);
         }
     }
 
