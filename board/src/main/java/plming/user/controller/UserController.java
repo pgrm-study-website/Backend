@@ -56,9 +56,9 @@ public class UserController {
 
     // U
     @PatchMapping("/{userId}")
-    public UserResponseDto updateUser(@NotNull @PathVariable Long userId, @RequestBody UserUpdateRequestDto userUpdateDto, HttpServletRequest request){
+    public UserResponseDto updateUser(@NotNull @PathVariable Long userId, @RequestBody UserUpdateRequestDto userUpdateDto){
         userUpdateDto.setId(userId);
-        return userService.updateUser(userUpdateDto, request);
+        return userService.updateUser(userUpdateDto);
     }
 
     /*
