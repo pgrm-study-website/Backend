@@ -74,6 +74,11 @@ public enum ErrorCode {
     USERS_NOT_FOUND(HttpStatus.NOT_FOUND,"사용자 정보를 찾을 수 없습니다."),
 
     /*
+     * 404 NOT_FOUND: 메시지 찾을 수 없음
+     */
+    MESSAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "메시지 정보를 찾을 수 없습니다."),
+
+    /*
      * 404 NOT_FOUND: 이메일 인증코드 확인 불가
      */
     EMAIL_CODE_NOT_FOUND(HttpStatus.NOT_FOUND,"인증코드를 확인할 수 없습니다."),
