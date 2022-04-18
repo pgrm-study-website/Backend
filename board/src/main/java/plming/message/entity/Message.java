@@ -47,4 +47,22 @@ public class Message implements Comparable<Message> {
     public int compareTo(Message message) {
         return createDate.compareTo(message.createDate);
     }
+
+    @Override
+    public String toString(){
+        return id.toString() + " " + getSender().getId().toString() + " " + getReceiver().getId().toString()
+                + " " + getCreateDate().toString();
+    }
+
+    public void setSenderDeleted() {
+        this.senderDeleteYn = '1';
+    }
+
+    public void setReceiverDeleted() {
+        this.receiverDeleteYn = '1';
+    }
+
+    public boolean hasToBeDeleted(){
+        return senderDeleteYn == '1' && receiverDeleteYn == '1';
+    }
 }

@@ -1,10 +1,10 @@
 package plming.message.repository;
 
-import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 import plming.message.entity.Message;
+import plming.user.entity.User;
 
 import java.util.*;
 
@@ -19,59 +19,52 @@ public class MessageCustomRepositoryImpl implements MessageCustomRepository{
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
+    /*
+     * QueryDsl을 통해 senderId와 receiverId를 기준으로 메시지들을 그룹핑하여 조회하고,
+     * 조회된 리스트에서 (senderId, receiverId)를 순서가 없는 조합으로 다시 그룹핑한다.
+     * 이후, 그룹핑된 Map객체에서 createDate를 기준으로 정렬한다.
+     */
     @Override
-    public List<Message> findMessageAllListByUserId(Long userId){
-        List<Message> list = jpaQueryFactory.selectFrom(message)
+    public List<Message> findMessageAllListByUser(User user){
+        List<Message> unOrganizedList = jpaQueryFactory.selectFrom(message)
                 .where(message.id.in(
                         JPAExpressions.select(message.id.max())
                                 .from(message)
-                                .where(isSenderIdEq(userId)
-                                        .and(message.sender.id.eq(userId).or(message.receiver.id.eq(userId))))
+                                .where(
+                                        message.sender.eq(user).and(message.senderDeleteYn.eq('0'))
+                                                .or(message.receiver.eq(user).and(message.receiverDeleteYn.eq('0'))))
                                 .groupBy(message.sender,message.receiver)
-                ))
-                .fetch();
-        Map<Long, List<Message>> map = new HashMap<>();
-        for(Message item : list){
-            Long id = item.getSender().getId() == userId ? item.getReceiver().getId() : item.getSender().getId();
-            if(map.containsKey(id)){
-                map.get(id).add(item);
+                )).fetch();
+
+        Map<Long, List<Message>> messageGroup = new HashMap<>();
+        for(Message m : unOrganizedList){
+            Long id = m.getSender().getId() == user.getId() ? m.getReceiver().getId() : m.getSender().getId();
+            if(messageGroup.containsKey(id)){
+                messageGroup.get(id).add(m);
             }else{
-                map.put(id,new ArrayList<>());
-                map.get(id).add(item);
+                messageGroup.put(id,new ArrayList<>());
+                messageGroup.get(id).add(m);
             }
         }
-        List<Message> returnList = new ArrayList<>();
-        map.forEach((key,value)->{
-            Message max = null;
-            for(Message i : value) {
-                if(max != null){
-                    Math.max(i.getId(), max.getId());
-                }
-                max = i;
-            }
-            returnList.add(max);
+
+        List<Message> messageList = new ArrayList<>();
+        messageGroup.forEach((key,unSortedMessageList)->{
+            unSortedMessageList.sort(Collections.reverseOrder());
+            messageList.add(unSortedMessageList.get(0));
             }
         );
-        Collections.sort(returnList,Collections.reverseOrder());
-        return returnList;
+        messageList.sort(Collections.reverseOrder());
+        return messageList;
     }
 
     @Override
-    public List<Message> findMessageListByUserIdAndOtherId(Long userId, Long otherId){
+    public List<Message> findMessageListByUserAndOther(User user, User other){
         return jpaQueryFactory.selectFrom(message)
-                .where(message.sender.id.eq(userId).and(message.receiver.id.eq(otherId))
-                        .or(message.sender.id.eq(otherId).and(message.receiver.id.eq(userId)))
-                ).orderBy(message.id.desc())
+                .where(
+                        message.sender.eq(user).and(message.receiver.eq(other)).and(message.senderDeleteYn.eq('0'))
+                                .or(message.sender.eq(other).and(message.receiver.eq(user)).and(message.receiverDeleteYn.eq('0')))
+                )
+                .orderBy(message.id.desc())
                 .fetch();
     }
-
-    // 사용자가 삭제하지 않은 메시지인지 확인
-    public BooleanExpression isSenderIdEq(Long userId){
-        if(message.sender.id.equals(userId)){
-            return message.senderDeleteYn.eq('0');
-        }else{
-            return message.receiverDeleteYn.eq('0');
-        }
-    }
-
 }
