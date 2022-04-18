@@ -43,12 +43,14 @@
 //                .nickname("nickname1")
 //                .email("email1@gmail.com")
 //                .role("ROLE_USER")
+//                .password("password")
 //                .social(0)
 //                .build();
 //        user2 = User.builder()
 //                .nickname("nickname1")
-//                .email("email@gmail1.com")
+//                .email("email@gmail.com")
 //                .role("ROLE_USER")
+//                .password("password")
 //                .social(0)
 //                .build();
 //

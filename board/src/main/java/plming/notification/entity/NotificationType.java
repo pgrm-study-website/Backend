@@ -2,7 +2,7 @@ package plming.notification.entity;
 
 public enum NotificationType {
 
-    APPLY("게시글에 참여 신청이 도착했습니다.", "/posts"),
+    APPLY("게시글에 참여 신청이 왔습니다.", "/posts"),
     ACCEPT("게시글에 참여가 승인되었습니다.", "/posts"),
     REJECT("게시글에 참여가 거절되었습니다.", "/posts"),
     COMMENT("에 댓글이 달렸습니다.", "/posts"),
@@ -22,6 +22,6 @@ public enum NotificationType {
     }
 
     public String makeUrl(Long id) {
-        return url + id;
+        return url + "/" + id;
     }
 }

@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-import plming.notification.dto.NotificationResponseDto;
+import plming.notification.dto.NotificationDto;
 import plming.notification.entity.Notification;
 import plming.notification.entity.NotificationType;
 import plming.notification.repository.EmitterRepository;
@@ -57,18 +57,18 @@ public class NotificationService {
         emitters.forEach(
                 (key, emitter) -> {
                     emitterRepository.saveEventCache(key, notification);
-                    sendNotification(emitter, eventId, key, NotificationResponseDto.create(notification));
+                    sendNotification(emitter, eventId, key, NotificationDto.create(notification));
                 }
         );
     }
 
     @Transactional
-    public List<NotificationResponseDto> findAllNotifications(Long userId) {
+    public List<NotificationDto> findAllNotifications(Long userId) {
 
         List<Notification> notifications = notificationRepository.findAllByUserId(userId);
         notifications.stream().forEach(notification -> notification.read());
 
-        return notifications.stream().map(NotificationResponseDto::create).collect(Collectors.toList());
+        return notifications.stream().map(NotificationDto::create).collect(Collectors.toList());
     }
 
     public Long countUnReadNotifications(Long userId) {

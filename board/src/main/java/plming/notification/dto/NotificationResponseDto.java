@@ -3,7 +3,6 @@ package plming.notification.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import plming.notification.entity.Notification;
 
 @Data
 @NoArgsConstructor
@@ -14,8 +13,8 @@ public class NotificationResponseDto {
     private String content;
     private String url;
 
-    public static NotificationResponseDto create(Notification notification) {
-        return new NotificationResponseDto(notification.getId(), notification.getContent(),
-                notification.getUrl());
+    public static NotificationResponseDto create(NotificationDto notificationDto) {
+        return new NotificationResponseDto(notificationDto.getId(), notificationDto.getContent()
+                , notificationDto.getUrl());
     }
 }

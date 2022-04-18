@@ -1,6 +1,7 @@
 package plming.board.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,10 @@ import plming.board.entity.Board;
 import plming.board.entity.BoardRepository;
 import plming.exception.CustomException;
 import plming.exception.ErrorCode;
+import plming.notification.dto.NotificationRequestDto;
+import plming.notification.dto.NotificationResponseDto;
+import plming.notification.entity.NotificationType;
+import plming.notification.service.NotificationService;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 
@@ -23,6 +28,9 @@ public class ApplicationService {
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
     private final ApplicationRepository applicationRepository;
+    private final NotificationService notificationService;
+
+    private final ApplicationEventPublisher eventPublisher;
 
     @Transactional
     public String save(final Long boardId, final Long userId) {
@@ -34,6 +42,7 @@ public class ApplicationService {
                     .status("대기")
                     .build();
             applicationRepository.save(application);
+            sendNotification(toNotificationRequestDto(application, application.getBoard().getUser(), NotificationType.APPLY));
 
             return applicationRepository.getById(application.getId()).getBoard().getId().toString();
         }
@@ -65,7 +74,7 @@ public class ApplicationService {
         Integer participantMax = board.getParticipantMax();
         Integer participantNum = countParticipantNum(boardId);
 
-        return (participantNum == 0) || (participantMax > participantNum) ? true : false;
+        return (participantNum == 0) || (participantMax > participantNum);
     }
 
     /**
@@ -77,7 +86,7 @@ public class ApplicationService {
             return true;
         }
 
-        return !findApplication(boardId, userId).getStatus().equals("거절") ? true : false;
+        return !findApplication(boardId, userId).getStatus().equals("거절");
     }
 
     /**
@@ -125,7 +134,15 @@ public class ApplicationService {
      */
     public Application updateAppliedStatus(final Long boardId, final String nickname, final String status) {
 
-        return applicationRepository.updateAppliedStatus(boardId, nickname, status);
+        Application application = applicationRepository.updateAppliedStatus(boardId, nickname, status);
+
+        if(application.getStatus().equals("승인")) {
+            sendNotification(toNotificationRequestDto(application, application.getUser(), NotificationType.ACCEPT));
+        } else {
+            sendNotification(toNotificationRequestDto(application, application.getUser(), NotificationType.REJECT));
+        }
+
+        return application;
     }
 
     /**
@@ -140,5 +157,18 @@ public class ApplicationService {
         } else {
             applicationRepository.cancelApplied(boardId, userId);
         }
+    }
+
+    private NotificationRequestDto toNotificationRequestDto(Application application, User receiver, NotificationType notificationType) {
+
+        return new NotificationRequestDto(receiver, notificationType,
+                notificationType.makeContent(application.getBoard().getTitle()),
+                notificationType.makeUrl(application.getBoard().getId()));
+    }
+
+    private void sendNotification(NotificationRequestDto requestDto) {
+
+        notificationService.send(requestDto.getUser(), requestDto.getNotificationType(),
+                requestDto.getContent(), requestDto.getUrl());
     }
 }

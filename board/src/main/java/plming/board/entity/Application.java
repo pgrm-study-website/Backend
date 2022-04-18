@@ -4,6 +4,9 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
+import plming.notification.dto.NotificationRequestDto;
+import plming.notification.entity.NotificationType;
 import plming.user.entity.User;
 
 import javax.persistence.*;
