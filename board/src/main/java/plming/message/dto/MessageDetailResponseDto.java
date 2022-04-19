@@ -6,13 +6,13 @@ import plming.message.entity.Message;
 import java.time.LocalDateTime;
 
 @Getter
-public class MessageResponseDto {
+public class MessageDetailResponseDto {
     private Long messageId;
     private String type;
     private String content;
     private LocalDateTime createDate;
 
-    public MessageResponseDto(Message message, Long userId){
+    public MessageDetailResponseDto(Message message, Long userId){
         this.messageId = message.getId();
         this.content = message.getContent();
         this.createDate = message.getCreateDate();

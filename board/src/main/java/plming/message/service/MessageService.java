@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import plming.exception.CustomException;
 import plming.exception.ErrorCode;
-import plming.message.dto.MessageListResponseDto;
+import plming.message.dto.MessageGroupResponseDto;
 import plming.message.dto.MessageRequestDto;
-import plming.message.dto.MessageResponseDto;
+import plming.message.dto.MessageDetailResponseDto;
 import plming.message.entity.Message;
 import plming.message.entity.MessageRepository;
 import plming.user.entity.User;
@@ -25,25 +25,25 @@ public class MessageService {
     @Autowired
     private UserService userService;
 
-    public List<MessageListResponseDto> getMessageAllList(Long userId){
+    public List<MessageGroupResponseDto> getMessageGroupList(Long userId){
         User user = userService.getUserById(userId);
-        List<Message> messageList = messageRepository.findMessageAllListByUser(user);
-        return messageList.stream().map(m -> new MessageListResponseDto(m, userId)).collect(Collectors.toList());
+        List<Message> messageList = messageRepository.findMessageGroupByUser(user);
+        return messageList.stream().map(m -> new MessageGroupResponseDto(m, userId)).collect(Collectors.toList());
     }
 
-    public List<MessageResponseDto> getMessageList(Long userId, Long otherId){
+    public List<MessageDetailResponseDto> getMessageDetailList(Long userId, Long otherId){
         User user = userService.getUserById(userId);
         User other = userService.getUserById(otherId);
-        List<Message> messageList = messageRepository.findMessageListByUserAndOther(user,other);
-        return messageList.stream().map(m -> new MessageResponseDto(m,userId)).collect(Collectors.toList());
+        List<Message> messageList = messageRepository.findMessageByUserAndOther(user,other);
+        return messageList.stream().map(m -> new MessageDetailResponseDto(m,userId)).collect(Collectors.toList());
     }
 
     @Transactional
-    public MessageResponseDto postMessage(MessageRequestDto messageRequestDto){
+    public MessageDetailResponseDto postMessage(MessageRequestDto messageRequestDto){
         User user = userService.getUserById(messageRequestDto.getUserId());
         User other = userService.getUserById(messageRequestDto.getOtherId());
         Message message = messageRepository.save(messageRequestDto.toEntity(user,other));
-        return new MessageResponseDto(message,messageRequestDto.getUserId());
+        return new MessageDetailResponseDto(message,messageRequestDto.getUserId());
     }
 
     @Transactional
@@ -51,7 +51,7 @@ public class MessageService {
         User user = userService.getUserById(userId);
         User other = userService.getUserById(otherId);
 
-        List<Message> messageList = messageRepository.findMessageListByUserAndOther(user,other);
+        List<Message> messageList = messageRepository.findMessageByUserAndOther(user,other);
         for(Message m : messageList){
             if(m.getSender().getId().equals(userId)){
                 m.setSenderDeleted();

@@ -1,6 +1,10 @@
 package plming.message.repository;
 
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
+import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 import plming.message.entity.Message;
@@ -19,52 +23,66 @@ public class MessageCustomRepositoryImpl implements MessageCustomRepository{
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
-    /*
-     * QueryDsl을 통해 senderId와 receiverId를 기준으로 메시지들을 그룹핑하여 조회하고,
-     * 조회된 리스트에서 (senderId, receiverId)를 순서가 없는 조합으로 다시 그룹핑한다.
-     * 이후, 그룹핑된 Map객체에서 createDate를 기준으로 정렬한다.
-     */
     @Override
-    public List<Message> findMessageAllListByUser(User user){
-        List<Message> unOrganizedList = jpaQueryFactory.selectFrom(message)
-                .where(message.id.in(
-                        JPAExpressions.select(message.id.max())
-                                .from(message)
-                                .where(
-                                        message.sender.eq(user).and(message.senderDeleteYn.eq('0'))
-                                                .or(message.receiver.eq(user).and(message.receiverDeleteYn.eq('0'))))
-                                .groupBy(message.sender,message.receiver)
-                )).fetch();
+    public List<Message> findMessageGroupByUser(User user){
+        JPQLQuery<Long> subQuery = JPAExpressions.select(message.id.max())
+                .from(message)
+                .where(sendMessageCond(user).or(receiveMessageCond(user)))
+                .groupBy(Expressions.stringTemplate("least(sender_id,receiver_id),greatest(sender_id,receiver_id)"));
 
-        Map<Long, List<Message>> messageGroup = new HashMap<>();
-        for(Message m : unOrganizedList){
-            Long id = m.getSender().getId() == user.getId() ? m.getReceiver().getId() : m.getSender().getId();
-            if(messageGroup.containsKey(id)){
-                messageGroup.get(id).add(m);
-            }else{
-                messageGroup.put(id,new ArrayList<>());
-                messageGroup.get(id).add(m);
-            }
-        }
-
-        List<Message> messageList = new ArrayList<>();
-        messageGroup.forEach((key,unSortedMessageList)->{
-            unSortedMessageList.sort(Collections.reverseOrder());
-            messageList.add(unSortedMessageList.get(0));
-            }
-        );
-        messageList.sort(Collections.reverseOrder());
-        return messageList;
+        return jpaQueryFactory.selectFrom(message)
+                .where(message.id.in(subQuery))
+                .orderBy(message.id.desc())
+                .fetch();
     }
 
     @Override
-    public List<Message> findMessageListByUserAndOther(User user, User other){
+    public List<Message> findMessageByUserAndOther(User user, User other){
         return jpaQueryFactory.selectFrom(message)
-                .where(
-                        message.sender.eq(user).and(message.receiver.eq(other)).and(message.senderDeleteYn.eq('0'))
-                                .or(message.sender.eq(other).and(message.receiver.eq(user)).and(message.receiverDeleteYn.eq('0')))
-                )
+                .where(sendMessageCondWithOther(user,other).or(receiveMessageCondWithOther(user, other)))
                 .orderBy(message.id.desc())
                 .fetch();
+    }
+
+    private BooleanBuilder sendMessageCond(User user){
+        return new BooleanBuilder()
+                .and(senderUserEq(user))
+                .and(senderDeleteYnEq());
+    }
+
+    private BooleanBuilder receiveMessageCond(User user){
+        return new BooleanBuilder()
+                .and(receiverUserEq(user))
+                .and(receiverDeleteYnEq());
+    }
+
+    private BooleanBuilder sendMessageCondWithOther(User user, User other){
+        return new BooleanBuilder()
+                .and(senderUserEq(user))
+                .and(receiverUserEq(other))
+                .and(senderDeleteYnEq());
+    }
+
+    private BooleanBuilder receiveMessageCondWithOther(User user, User other){
+        return new BooleanBuilder()
+                .and(senderUserEq(other))
+                .and(receiverUserEq(user))
+                .and(receiverDeleteYnEq());
+    }
+
+    private BooleanExpression senderUserEq(User user){
+        return user != null ? message.sender.eq(user)  : null;
+    }
+
+    private BooleanExpression receiverUserEq(User user){
+        return user != null ? message.receiver.eq(user)  : null;
+    }
+
+    private BooleanExpression senderDeleteYnEq(){
+        return message.senderDeleteYn.eq('0');
+    }
+
+    private BooleanExpression receiverDeleteYnEq(){
+        return message.receiverDeleteYn.eq('0');
     }
 }
