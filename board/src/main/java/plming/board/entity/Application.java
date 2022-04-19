@@ -12,8 +12,8 @@ import plming.user.entity.User;
 import javax.persistence.*;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "application")
 public class Application {
 
@@ -38,4 +38,5 @@ public class Application {
         this.board = board;
         this.status = status;
     }
+
 }

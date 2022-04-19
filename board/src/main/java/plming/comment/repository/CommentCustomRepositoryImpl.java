@@ -67,6 +67,5 @@ public class CommentCustomRepositoryImpl implements CommentCustomRepository {
                 .set(comment.deleteYn, '1')
                 .where(comment.id.eq(commentId))
                 .execute();
-
     }
 }

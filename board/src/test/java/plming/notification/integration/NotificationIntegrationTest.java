@@ -1,7 +1,11 @@
 //package plming.notification.integration;
 //
+//import lombok.extern.slf4j.Slf4j;
+//import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.DisplayName;
 //import org.junit.jupiter.api.Test;
+//import org.springframework.test.annotation.Commit;
+//import org.springframework.test.context.transaction.TestTransaction;
 //import plming.ServiceIntegrationTest;
 //import plming.comment.dto.CommentRequestDto;
 //import plming.notification.dto.NotificationDto;
@@ -28,6 +32,7 @@
 //
 //    @Test
 //    @DisplayName("게시글 승인, 거절 알림 보내기")
+//    @Commit
 //    void updateStatus() {
 //
 //        // given
@@ -35,8 +40,11 @@
 //        applicationService.save(study.getId(), generalMember.getId());
 //        applicationService.updateAppliedStatus(study.getId(), studyApplyMember.getNickname(), "승인");
 //        applicationService.updateAppliedStatus(study.getId(), generalMember.getNickname(), "거절");
+//        TestTransaction.flagForCommit();
+//        TestTransaction.end();
 //
 //        // when
+//        TestTransaction.start();
 //        List<NotificationDto> notifications1 = notificationService.findAllNotifications(study.getUser().getId());
 //        List<NotificationDto> notifications2 = notificationService.findAllNotifications(studyApplyMember.getId());
 //        List<NotificationDto> notifications3 = notificationService.findAllNotifications(generalMember.getId());
@@ -58,7 +66,11 @@
 //        CommentRequestDto commentRequestDto2 = new CommentRequestDto("첫 번째 댓글의 대댓글", comment1Id);
 //        commentService.registerComment(study.getId(), studyApplyMember.getId(), commentRequestDto2);
 //
+//        TestTransaction.flagForCommit();
+//        TestTransaction.end();
+//
 //        // when
+//        TestTransaction.start();
 //        List<NotificationDto> notifications1 = notificationService.findAllNotifications(study.getUser().getId());
 //        List<NotificationDto> notifications2 = notificationService.findAllNotifications(generalMember.getId());
 //        List<NotificationDto> notifications3 = notificationService.findAllNotifications(studyApplyMember.getId());

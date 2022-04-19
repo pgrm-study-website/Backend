@@ -1,13 +1,14 @@
 package plming.comment.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import plming.board.entity.Application;
 import plming.board.entity.Board;
 import plming.board.entity.BoardRepository;
 import plming.comment.dto.CommentOneResponseDto;
+import plming.event.ApplicationCreateEvent;
+import plming.event.CommentCreateEvent;
 import plming.exception.CustomException;
 import plming.exception.ErrorCode;
 import plming.comment.dto.CommentRequestDto;
@@ -15,9 +16,7 @@ import plming.comment.dto.CommentResponseDto;
 import plming.comment.dto.RecommentResponseDto;
 import plming.comment.entity.Comment;
 import plming.comment.entity.CommentRepository;
-import plming.notification.dto.NotificationRequestDto;
 import plming.notification.entity.NotificationType;
-import plming.notification.service.NotificationService;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 
@@ -32,7 +31,7 @@ public class CommentService{
     private final CommentRepository commentRepository;
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
-    private final NotificationService notificationService;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Transactional
     public Long registerComment(final Long boardId, final Long userId, final CommentRequestDto params) {
@@ -45,10 +44,10 @@ public class CommentService{
         commentRepository.save(entity);
 
         if(commentRepository.getById(entity.getId()).getParentId() == null) {
-            sendNotification(toNotificationRequestDto(entity, entity.getBoard().getUser(), NotificationType.comment));
+            eventPublisher.publishEvent(new CommentCreateEvent(entity, entity.getBoard().getUser(), NotificationType.comment));
         } else {
             Comment comment = commentRepository.getById(entity.getParentId());
-            sendNotification(toNotificationRequestDto(entity, comment.getUser(), NotificationType.recomment));
+            eventPublisher.publishEvent(new CommentCreateEvent(entity, comment.getUser(), NotificationType.recomment));
         }
 
         return entity.getId();
@@ -116,18 +115,5 @@ public class CommentService{
         else {
             throw new CustomException(ErrorCode.FORBIDDEN);
         }
-    }
-
-    private NotificationRequestDto toNotificationRequestDto(Comment comment, User receiver, NotificationType notificationType) {
-
-        return new NotificationRequestDto(receiver, notificationType,
-                notificationType.makeContent(comment.getBoard().getTitle()),
-                notificationType.makeUrl(comment.getBoard().getId()));
-    }
-
-    private void sendNotification(NotificationRequestDto requestDto) {
-
-        notificationService.send(requestDto.getUser(), requestDto.getNotificationType(),
-                requestDto.getContent(), requestDto.getUrl());
     }
 }
