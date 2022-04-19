@@ -57,6 +57,7 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
                 .leftJoin(board.boardTags, boardTag)
                 .fetchJoin()
                 .where(board.user.id.eq(userId).and(board.deleteYn.eq('0')))
+                .distinct()
                 .orderBy(board.id.desc(), board.createDate.desc())
                 .fetch();
     }
