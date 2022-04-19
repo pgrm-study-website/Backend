@@ -1,6 +1,7 @@
 package plming.comment.dto;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import plming.board.entity.Board;
@@ -9,6 +10,7 @@ import plming.user.entity.User;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
+@AllArgsConstructor
 public class CommentRequestDto {
 
     private String content;

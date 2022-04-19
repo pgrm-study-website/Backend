@@ -15,6 +15,7 @@ public class BoardResponseDto {
     private final Integer period;
     private final String title;
     private final String content;
+    private final Long userId;
     private final Integer participantMax;
     private final Integer participantNum;
     private final Long viewCnt;
@@ -30,6 +31,7 @@ public class BoardResponseDto {
         this.period = entity.getPeriod();
         this.title = entity.getTitle();
         this.content = entity.getContent();
+        this.userId = entity.getUser().getId();
         this.participantNum = participantNum;
         this.participantMax = entity.getParticipantMax();
         this.viewCnt = entity.getViewCnt();

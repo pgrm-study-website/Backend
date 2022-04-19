@@ -40,13 +40,15 @@ dependencies {
 	/*QueryDsl*/
 	implementation "com.querydsl:querydsl-jpa"
 	implementation "com.querydsl:querydsl-apt"
+    implementation 'org.projectlombok:lombok:1.18.20'
 
-	compileOnly 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 }
 
 // QueryDsl

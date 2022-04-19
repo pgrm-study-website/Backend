@@ -78,6 +78,29 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
     @Override
     public Page<Board> searchAllCondition(SearchRequestDto params, Pageable pageable) {
 
+        if(params.getSearchType().equals("viewCnt")) {
+
+            // content를 가져오는 쿼리
+            List<Board> query = jpaQueryFactory
+                    .select(board).from(board)
+                    .leftJoin(board.boardTags, boardTag)
+                    .fetchJoin()
+                    .where(board.deleteYn.eq('0'))
+                    .distinct()
+                    .orderBy(board.viewCnt.desc(), board.id.desc())
+                    .offset(pageable.getOffset())
+                    .limit(pageable.getPageSize())
+                    .fetch();
+
+            // count만 가져오는 쿼리
+            JPQLQuery<Board> count = jpaQueryFactory.selectFrom(board)
+                    .leftJoin(board.boardTags, boardTag)
+                    .where(board.deleteYn.eq('0'))
+                    .distinct();
+
+            return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
+        }
+
         if(params.getKeyword() == null) {
 
             // content를 가져오는 쿼리
