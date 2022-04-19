@@ -6,6 +6,7 @@
 //
 //import javax.servlet.http.Cookie;
 //
+//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 //import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -33,7 +34,7 @@
 //        String accessToken = jwtTokenProvider.createToken(studyMember.getId());
 //
 //        // when
-//        notificationService.send(studyMember, NotificationType.APPLY, "게시글에 참여를 신청했습니다.",
+//        notificationService.send(studyMember, NotificationType.apply, "게시글에 참여를 신청했습니다.",
 //                "localhost:8080/posts/59");
 //
 //        // then
@@ -51,7 +52,7 @@
 //        String accessToken = jwtTokenProvider.createToken(studyAdminMember.getId());
 //
 //        // when
-//        notificationService.send(studyAdminMember, NotificationType.APPLY, "게시글에 참여를 신청한 사용자가 있습니다.",
+//        notificationService.send(studyAdminMember, NotificationType.apply, "게시글에 참여를 신청한 사용자가 있습니다.",
 //                "localhost:8080/posts/60");
 //
 //        // then
@@ -67,7 +68,7 @@
 //
 //        // given
 //        String accessToken = jwtTokenProvider.createToken(studyMember.getId());
-//        notificationService.send(studyMember, NotificationType.APPLY, "게시글에 참여를 신청한 사용자가 있습니다.",
+//        notificationService.send(studyMember, NotificationType.apply, "게시글에 참여를 신청한 사용자가 있습니다.",
 //                "localhost:8080/posts/60");
 //
 //        // when
@@ -78,5 +79,57 @@
 //                        .cookie(new Cookie("token", accessToken)))
 //                .andExpect(status().isOk())
 //                .andExpect(jsonPath("$.data").value(0L));
+//    }
+//
+//    @Test
+//    @DisplayName("알림 하나 삭제")
+//    void deleteNotification() throws Exception {
+//
+//        // given
+//        String accessToken = jwtTokenProvider.createToken(studyMember.getId());
+//        notificationService.send(studyMember, NotificationType.apply, "게시글에 참여를 신청한 사용자가 있습니다.",
+//                "localhost:8080/posts/60");
+//        Long id = notificationService.findAllNotifications(studyMember.getId()).get(0).getId();
+//        mockMvc.perform(get("/notifications")
+//                        .cookie(new Cookie("token", accessToken)))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.data.length()").value(1));
+//
+//        // when
+//        mockMvc.perform(delete("/notifications")
+//                        .param("id", String.valueOf(id))
+//                        .cookie(new Cookie("token", accessToken)))
+//                .andExpect(status().isOk());
+//
+//        // then
+//        mockMvc.perform(get("/notifications")
+//                        .cookie(new Cookie("token", accessToken)))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.data.length()").value(0));
+//    }
+//
+//    @Test
+//    @DisplayName("알림 모두 삭제")
+//    void deleteAllByUserId() throws Exception {
+//
+//        // given
+//        String accessToken = jwtTokenProvider.createToken(studyMember.getId());
+//        notificationService.send(studyMember, NotificationType.apply, "게시글에 참여를 신청한 사용자가 있습니다.",
+//                "localhost:8080/posts/60");
+//        mockMvc.perform(get("/notifications")
+//                        .cookie(new Cookie("token", accessToken)))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.data.length()").value(1));
+//
+//        // when
+//        mockMvc.perform(delete("/notifications")
+//                        .cookie(new Cookie("token", accessToken)))
+//                .andExpect(status().isOk());
+//
+//        // then
+//        mockMvc.perform(get("/notifications")
+//                        .cookie(new Cookie("token", accessToken)))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.data.length()").value(0));
 //    }
 //}

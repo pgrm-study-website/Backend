@@ -30,8 +30,6 @@ public class ApplicationService {
     private final ApplicationRepository applicationRepository;
     private final NotificationService notificationService;
 
-    private final ApplicationEventPublisher eventPublisher;
-
     @Transactional
     public String save(final Long boardId, final Long userId) {
 
@@ -42,7 +40,7 @@ public class ApplicationService {
                     .status("대기")
                     .build();
             applicationRepository.save(application);
-            sendNotification(toNotificationRequestDto(application, application.getBoard().getUser(), NotificationType.APPLY));
+            sendNotification(toNotificationRequestDto(application, application.getBoard().getUser(), NotificationType.apply));
 
             return applicationRepository.getById(application.getId()).getBoard().getId().toString();
         }
@@ -137,9 +135,9 @@ public class ApplicationService {
         Application application = applicationRepository.updateAppliedStatus(boardId, nickname, status);
 
         if(application.getStatus().equals("승인")) {
-            sendNotification(toNotificationRequestDto(application, application.getUser(), NotificationType.ACCEPT));
+            sendNotification(toNotificationRequestDto(application, application.getUser(), NotificationType.accept));
         } else {
-            sendNotification(toNotificationRequestDto(application, application.getUser(), NotificationType.REJECT));
+            sendNotification(toNotificationRequestDto(application, application.getUser(), NotificationType.reject));
         }
 
         return application;

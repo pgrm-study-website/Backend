@@ -1,8 +1,10 @@
 package plming.notification.controller;
 
+import com.sun.istack.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import plming.auth.service.JwtTokenProvider;
@@ -27,7 +29,7 @@ public class NotificationController {
 
     @GetMapping(value = "/subscribe", produces = "text/event-stream")
     @ResponseStatus(HttpStatus.OK)
-    public SseEmitter subscribe(@CookieValue String token,
+    public SseEmitter subscribe(@CookieValue final String token,
                                 @RequestHeader(value = "Last-Event-ID", required = false, defaultValue = "") String lastEventId) {
 
         return notificationService.subscribe(jwtTokenProvider.getUserId(token), lastEventId);
@@ -35,7 +37,7 @@ public class NotificationController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public MultipleResult<NotificationResponseDto> findAllNotification(@CookieValue String token) {
+    public MultipleResult<NotificationResponseDto> findAllNotification(@CookieValue final String token) {
 
         List<NotificationDto> notifications = notificationService.findAllNotifications(jwtTokenProvider.getUserId(token));
         List<NotificationResponseDto> responseDto = responseService.convertToControllerDto(notifications, NotificationResponseDto::create);
@@ -44,9 +46,20 @@ public class NotificationController {
 
     @GetMapping("/count")
     @ResponseStatus(HttpStatus.OK)
-    public SingleResult<Long> countUnReadNotifications(@CookieValue String token) {
+    public SingleResult<Long> countUnReadNotifications(@CookieValue final String token) {
 
         Long count = notificationService.countUnReadNotifications(jwtTokenProvider.getUserId(token));
         return responseService.getSingleResult(count);
+    }
+
+    @DeleteMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteNotification(@Nullable @RequestParam final Long id, @NotNull @CookieValue final String token) {
+
+        if(id == null) {
+            notificationService.deleteAllByUserId(jwtTokenProvider.getUserId(token));
+        } else {
+            notificationService.deleteNotification(id);
+        }
     }
 }

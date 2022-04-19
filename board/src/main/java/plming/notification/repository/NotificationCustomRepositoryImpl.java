@@ -38,4 +38,12 @@ public class NotificationCustomRepositoryImpl implements NotificationCustomRepos
                 .orderBy(notification.id.desc())
                 .stream().count();
     }
+
+    @Override
+    public void deleteAllByUserId(Long userId) {
+
+        jpaQueryFactory.delete(notification)
+                .where(notification.receiver.id.eq(userId))
+                .execute();
+    }
 }

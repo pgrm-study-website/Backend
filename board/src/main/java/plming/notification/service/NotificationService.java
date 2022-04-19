@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+import plming.exception.CustomException;
+import plming.exception.ErrorCode;
 import plming.notification.dto.NotificationDto;
 import plming.notification.entity.Notification;
 import plming.notification.entity.NotificationType;
@@ -74,6 +76,24 @@ public class NotificationService {
     public Long countUnReadNotifications(Long userId) {
 
         return notificationRepository.countUnReadNotification(userId);
+    }
+
+    /**
+     * 알림 하나 삭제
+     */
+    @Transactional
+    public void deleteNotification(Long notificationId) {
+
+        notificationRepository.deleteById(notificationId);
+    }
+
+    /**
+     * 전체 알림 삭제
+     */
+    @Transactional
+    public void deleteAllByUserId(Long userId) {
+
+        notificationRepository.deleteAllByUserId(userId);
     }
 
     private String makeTimeIncludeId(Long userId) {

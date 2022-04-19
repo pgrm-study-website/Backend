@@ -10,4 +10,6 @@ public interface NotificationCustomRepository {
     List<Notification> findAllByUserId(@Param("userId") Long userId);
 
     Long countUnReadNotification(@Param("userId") Long userId);
+
+    void deleteAllByUserId(@Param("userId") Long userId);
 }

@@ -45,10 +45,10 @@ public class CommentService{
         commentRepository.save(entity);
 
         if(commentRepository.getById(entity.getId()).getParentId() == null) {
-            sendNotification(toNotificationRequestDto(entity, entity.getBoard().getUser(), NotificationType.COMMENT));
+            sendNotification(toNotificationRequestDto(entity, entity.getBoard().getUser(), NotificationType.comment));
         } else {
             Comment comment = commentRepository.getById(entity.getParentId());
-            sendNotification(toNotificationRequestDto(entity, comment.getUser(), NotificationType.RECOMMENT));
+            sendNotification(toNotificationRequestDto(entity, comment.getUser(), NotificationType.recomment));
         }
 
         return entity.getId();

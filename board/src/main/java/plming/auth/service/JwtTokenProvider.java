@@ -107,10 +107,10 @@ public class JwtTokenProvider {
         cookie.setMaxAge(30 * 24 * 60 * 60);
         response.addCookie(cookie);
 
-        Collection<String> headers = response.getHeaders(HttpHeaders.SET_COOKIE);
-        for(String header : headers){
-            response.setHeader(HttpHeaders.SET_COOKIE,header+"; "+"SameSite=None;Secure");
-        }
+//        Collection<String> headers = response.getHeaders(HttpHeaders.SET_COOKIE);
+//        for(String header : headers){
+//            response.setHeader(HttpHeaders.SET_COOKIE,header+"; "+"SameSite=None;Secure");
+//        }
     }
 
     public void deleteTokenInCookie(HttpServletResponse response){
