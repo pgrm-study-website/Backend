@@ -38,3 +38,4 @@ out/
 
 keystore.p12
 application.properties
+workspace.xml
