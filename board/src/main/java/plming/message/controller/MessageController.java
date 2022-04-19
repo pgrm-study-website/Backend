@@ -19,7 +19,7 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @GetMapping("/{userId}")
+    @GetMapping("/user/{userId}")
     public List<MessageGroupResponseDto> getMessageGroupList(@PathVariable Long userId){
         return messageService.getMessageGroupList(userId);
     }
