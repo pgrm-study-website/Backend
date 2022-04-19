@@ -56,9 +56,11 @@ public class UserService{
     }
 
     public UserResponseDto getUserByUserId(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
-        return toUserResponseDto(user);
+        return toUserResponseDto(getUserById(userId));
+    }
+
+    public User getUserById(Long userId){
+        return userRepository.findById(userId).orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
     }
 
     public UserResponseDto getUserByUserEmail(String email) {
