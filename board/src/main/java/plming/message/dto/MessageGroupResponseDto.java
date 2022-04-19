@@ -6,13 +6,13 @@ import plming.message.entity.Message;
 import java.time.LocalDateTime;
 
 @Getter
-public class MessageListResponseDto {
+public class MessageGroupResponseDto {
     private Long otherPersonId;
     private String otherPersonNickname;
     private String content;
     private LocalDateTime createDate;
 
-    public MessageListResponseDto(Message message, Long userId){
+    public MessageGroupResponseDto(Message message, Long userId){
         if (message.getSender().getId().equals(userId)){
             this.otherPersonId = message.getReceiver().getId();
             this.otherPersonNickname = message.getReceiver().getNickname();
