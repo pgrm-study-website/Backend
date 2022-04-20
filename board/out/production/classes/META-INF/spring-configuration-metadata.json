@@ -5,6 +5,11 @@
       "type": "com.zaxxer.hikari.HikariConfig",
       "sourceType": "plming.config.DatabaseConfig",
       "sourceMethod": "hikariConfig()"
+    },
+    {
+      "name": "storage",
+      "type": "plming.config.StorageProperties",
+      "sourceType": "plming.config.StorageProperties"
     }
   ],
   "properties": [

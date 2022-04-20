@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
-import plming.comment.entity.Comment;
 import plming.event.ApplicationCreateEvent;
 import plming.event.CommentCreateEvent;
+import plming.event.MessageCreateEvent;
 import plming.notification.service.NotificationService;
 
 @Component
@@ -29,5 +29,13 @@ public class NotificationEventListener {
         notificationService.send(event.getReceiver(), event.getNotificationType(),
                 event.getNotificationType().makeContent(event.getComment().getBoard().getTitle()),
                 event.getNotificationType().makeUrl(event.getComment().getBoard().getId()));
+    }
+
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT, fallbackExecution = true)
+    public void handleMessageCreateEvent(MessageCreateEvent event) {
+
+        notificationService.send(event.getReceiver(), event.getNotificationType(),
+                event.getNotificationType().makeContent(event.getMessage().getSender().getNickname()),
+                event.getNotificationType().makeUrl(event.getReceiver().getId()));
     }
 }

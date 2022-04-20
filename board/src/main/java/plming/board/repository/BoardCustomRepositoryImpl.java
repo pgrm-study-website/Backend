@@ -79,7 +79,7 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
     @Override
     public Page<Board> searchAllCondition(SearchRequestDto params, Pageable pageable) {
 
-        if(params.getSearchType().equals("viewCnt")) {
+        if(params.getSearchType() != null && params.getSearchType().equals("viewCnt")) {
 
             // content를 가져오는 쿼리
             List<Board> query = jpaQueryFactory
