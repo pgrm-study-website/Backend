@@ -1,9 +1,12 @@
 package plming.notification.entity;
 
+<<<<<<< HEAD
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+=======
+>>>>>>> 0a98514152bd4537a29ad2a539acda888e95a9dc
 public enum NotificationType {
 
     apply("게시글에 참여 신청이 왔습니다.", "/posts"),

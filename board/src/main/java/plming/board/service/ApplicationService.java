@@ -2,6 +2,11 @@ package plming.board.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
+<<<<<<< HEAD
+=======
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+>>>>>>> 0a98514152bd4537a29ad2a539acda888e95a9dc
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import plming.board.entity.Application;
@@ -11,7 +16,14 @@ import plming.board.entity.BoardRepository;
 import plming.event.ApplicationCreateEvent;
 import plming.exception.CustomException;
 import plming.exception.ErrorCode;
+<<<<<<< HEAD
 import plming.notification.entity.NotificationType;
+=======
+import plming.notification.dto.NotificationRequestDto;
+import plming.notification.dto.NotificationResponseDto;
+import plming.notification.entity.NotificationType;
+import plming.notification.service.NotificationService;
+>>>>>>> 0a98514152bd4537a29ad2a539acda888e95a9dc
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 
@@ -24,7 +36,11 @@ public class ApplicationService {
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
     private final ApplicationRepository applicationRepository;
+<<<<<<< HEAD
     private final ApplicationEventPublisher eventPublisher;
+=======
+    private final NotificationService notificationService;
+>>>>>>> 0a98514152bd4537a29ad2a539acda888e95a9dc
 
     @Transactional
     public String save(final Long boardId, final Long userId) {
@@ -35,8 +51,13 @@ public class ApplicationService {
                     .user(userRepository.getById(userId))
                     .status("대기")
                     .build();
+<<<<<<< HEAD
             Application savedApplication = applicationRepository.save(application);
             eventPublisher.publishEvent(new ApplicationCreateEvent(savedApplication, application.getBoard().getUser(), NotificationType.apply));
+=======
+            applicationRepository.save(application);
+            sendNotification(toNotificationRequestDto(application, application.getBoard().getUser(), NotificationType.apply));
+>>>>>>> 0a98514152bd4537a29ad2a539acda888e95a9dc
 
             return applicationRepository.getById(application.getId()).getBoard().getId().toString();
         }
@@ -131,9 +152,15 @@ public class ApplicationService {
         Application application = applicationRepository.updateAppliedStatus(boardId, nickname, status);
 
         if(application.getStatus().equals("승인")) {
+<<<<<<< HEAD
             eventPublisher.publishEvent(new ApplicationCreateEvent(application, application.getUser(), NotificationType.accept));
         } else {
             eventPublisher.publishEvent(new ApplicationCreateEvent(application, application.getUser(), NotificationType.reject));
+=======
+            sendNotification(toNotificationRequestDto(application, application.getUser(), NotificationType.accept));
+        } else {
+            sendNotification(toNotificationRequestDto(application, application.getUser(), NotificationType.reject));
+>>>>>>> 0a98514152bd4537a29ad2a539acda888e95a9dc
         }
 
         return application;
@@ -151,5 +178,18 @@ public class ApplicationService {
         } else {
             applicationRepository.cancelApplied(boardId, userId);
         }
+    }
+
+    private NotificationRequestDto toNotificationRequestDto(Application application, User receiver, NotificationType notificationType) {
+
+        return new NotificationRequestDto(receiver, notificationType,
+                notificationType.makeContent(application.getBoard().getTitle()),
+                notificationType.makeUrl(application.getBoard().getId()));
+    }
+
+    private void sendNotification(NotificationRequestDto requestDto) {
+
+        notificationService.send(requestDto.getUser(), requestDto.getNotificationType(),
+                requestDto.getContent(), requestDto.getUrl());
     }
 }

@@ -4,7 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+<<<<<<< HEAD
 import org.springframework.transaction.annotation.Propagation;
+=======
+>>>>>>> 0a98514152bd4537a29ad2a539acda888e95a9dc
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import plming.exception.CustomException;
@@ -50,7 +53,10 @@ public class NotificationService {
         return emitter;
     }
 
+<<<<<<< HEAD
     @Transactional(propagation = Propagation.REQUIRES_NEW)
+=======
+>>>>>>> 0a98514152bd4537a29ad2a539acda888e95a9dc
     public void send(User receiver, NotificationType notificationType, String content, String url) {
 
         Notification notification = notificationRepository.save(createNotification(receiver, notificationType, content, url));
