@@ -1,4 +1,4 @@
-//package plming.notification.controller;
+//package plming.common;
 //
 //import org.junit.jupiter.api.BeforeEach;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,10 @@
 //import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 //import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.web.context.WebApplicationContext;
-//import plming.TestDB;
+//import plming.board.entity.Board;
+//import plming.board.service.ApplicationService;
+//import plming.board.service.BoardService;
+//import plming.common.TestDB;
 //import plming.auth.service.JwtTokenProvider;
 //import plming.board.entity.ApplicationRepository;
 //import plming.board.entity.BoardRepository;
@@ -24,6 +27,7 @@
 //@AutoConfigureMockMvc
 //public class ControllerIntegrationTest {
 //
+//    protected Board study;
 //    protected User studyMember;
 //    protected User anotherStudyMember;
 //    protected User notStudyMember;
@@ -31,6 +35,7 @@
 //    protected User studyAdminMember;
 //    protected User hasNoResourceMember;
 //    protected User studyApplyMember;
+//    protected User studyWriter;
 //
 //    @Autowired
 //    protected WebApplicationContext context;
@@ -42,6 +47,8 @@
 //    protected UserRepository memberRepository;
 //    @Autowired
 //    protected BoardRepository boardRepository;
+//    @Autowired
+//    protected BoardService boardService;
 //    @Autowired
 //    protected ApplicationRepository applicationRepository;
 //    @Autowired
@@ -61,7 +68,9 @@
 //        notStudyMember = testDB.findNotStudyMember();
 //        webAdminMember = testDB.findAdminMember();
 //        studyAdminMember = testDB.findAdminMember();
+//        studyWriter = testDB.findWriteMember();
 //        hasNoResourceMember = testDB.findNoAuthMember();
 //        studyApplyMember = testDB.findApplyMember();
+//        study = testDB.getBoard();
 //    }
 //}

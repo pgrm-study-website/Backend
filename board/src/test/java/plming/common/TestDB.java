@@ -1,4 +1,4 @@
-//package plming;
+//package plming.common;
 //
 //import lombok.Getter;
 //import org.springframework.beans.factory.annotation.Autowired;

@@ -2,8 +2,6 @@ package plming.board.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import plming.board.entity.Application;
@@ -88,9 +86,9 @@ public class ApplicationService {
     /**
      * 신청한 게시글 리스트 조회
      */
-    public Page<Board> findAppliedBoardByUserId(final Long userId, final Pageable pageable) {
+    public List<Board> findAppliedBoard(final Long userId) {
 
-        return applicationRepository.findAppliedBoardByUserId(userId, pageable);
+        return applicationRepository.findAppliedBoard(userId);
     }
 
     /**
@@ -120,7 +118,7 @@ public class ApplicationService {
     /**
      * 게시글 신청 조회
      */
-    private Application findApplication(final Long boardId, final Long userId) {
+    protected Application findApplication(final Long boardId, final Long userId) {
 
         return applicationRepository.findApplication(boardId, userId);
     }

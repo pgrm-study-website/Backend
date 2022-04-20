@@ -1,4 +1,4 @@
-//package plming;
+//package plming.common;
 //
 //import lombok.RequiredArgsConstructor;
 //import org.springframework.context.annotation.Profile;

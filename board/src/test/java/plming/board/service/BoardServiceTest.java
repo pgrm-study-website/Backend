@@ -7,7 +7,10 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.data.domain.Sort;
+//import plming.board.dto.BoardRequestDto;
 //import plming.board.dto.BoardResponseDto;
+//import plming.board.entity.Application;
+//import plming.board.entity.ApplicationRepository;
 //import plming.board.entity.Board;
 //import plming.board.entity.BoardRepository;
 //import plming.board.service.BoardService;
@@ -28,6 +31,9 @@
 //
 //    @Autowired
 //    private UserRepository userRepository;
+//
+//    @Autowired
+//    private ApplicationRepository applicationRepository;
 //
 //    @Autowired
 //    private BoardService boardService;
@@ -80,7 +86,7 @@
 //
 //    @Test
 //    @DisplayName("게시글 생성")
-//    public void save() {
+//    void save() {
 //
 //        // given
 //        userRepository.save(user1);

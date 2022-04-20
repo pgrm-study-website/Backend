@@ -31,6 +31,7 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
     private final BoardTagRepository boardTagRepository;
+    private final ApplicationRepository applicationRepository;
     private final BoardTagService boardTagService;
     private final UserService userService;
     private final ApplicationService applicationService;
@@ -46,6 +47,9 @@ public class BoardService {
         Board entity = boardRepository.save(params.toEntity(user));
         List<Long> boardTagIds = params.getTagIds();
         boardTagService.save(boardTagIds, entity);
+
+        // 게시글 작성자는 자동으로 참여 승인
+        applicationRepository.save(new Application(user, entity, "승인"));
 
         return entity.getId();
     }
@@ -96,6 +100,9 @@ public class BoardService {
         }
     }
 
+    /**
+     * 삭제되지 않은 게시글 리스트 조회
+     */
     public Page<BoardListResponseDto> findAllByDeleteYn(final Pageable pageable) {
 
         Page<Board> list = boardRepository.findAllPageSort(pageable);
@@ -103,7 +110,7 @@ public class BoardService {
     }
 
     /**
-     * 사용자 Id 기준 댓글 단 게시글 리스트 + 작성한 게시글 리스트 반환
+     * 사용자 Id 기준 댓글 단 게시글 리스트 + 작성한 게시글 리스트 + 신청한 게시글 리스트 반환
      */
     @Transactional
     public UserBoardListResponseDto findAllByUserId(final Long userId) {
@@ -111,6 +118,7 @@ public class BoardService {
         return UserBoardListResponseDto.builder()
                 .write(findBoardByUserId(userId))
                 .comment(findCommentBoardByUserId(userId))
+                .apply(findAppliedBoard(userId))
                 .build();
     }
 
@@ -135,6 +143,15 @@ public class BoardService {
     }
 
     /**
+     * 신청 게시글 리스트 조회 - (사용자 ID 기준)
+     */
+    @Transactional
+    public List<BoardListResponseDto> findAppliedBoard(final Long userId) {
+
+        return getBoardListResponseFromBoardList(applicationService.findAppliedBoard(userId));
+    }
+
+    /**
      * 게시글 상세 정보 조회
      */
     @Transactional
@@ -153,36 +170,6 @@ public class BoardService {
     }
 
     /**
-     * 각 게시글의 태그 이름 조회 후 BoardListResponseDto 반환
-     */
-    @Transactional
-    public Page<BoardListResponseDto> getBoardListResponseFromPage(Page<Board> list) {
-
-        List<BoardListResponseDto> result = new ArrayList<BoardListResponseDto>();
-        List<Board> boards = list.getContent();
-        for (Board post : boards) {
-            Integer participantNum = applicationService.countParticipantNum(post.getId());
-            result.add(new BoardListResponseDto(post, participantNum, boardTagService.findTagNameByBoardId(post.getId())));
-        }
-
-        return new PageImpl<>(result);
-    }
-
-    /**
-     * 각 게시글의 태그 이름 조회 후 BoardListResponseDto 반환
-     */
-    public List<BoardListResponseDto> getBoardListResponseFromBoardList(List<Board> list) {
-
-        List<BoardListResponseDto> result = new ArrayList<>();
-        for(int i = 0; i < list.size(); i++) {
-            Integer participantNum = applicationService.countParticipantNum(list.get(i).getId());
-            result.add(new BoardListResponseDto(list.get(i), participantNum, boardTagService.findTagNameByBoardId(list.get(i).getId())));
-        }
-
-        return result;
-    }
-
-    /**
      * 게시글 신청 하기
      */
     @Transactional
@@ -192,18 +179,7 @@ public class BoardService {
     }
 
     /**
-     * 신청 게시글 리스트 조회 - (사용자 ID 기준)
-     */
-    @Transactional
-    public Page<BoardListResponseDto> findAppliedBoardByUserId(final Long userId, final Pageable pageable) {
-
-        Page<Board> appliedBoards = applicationService.findAppliedBoardByUserId(userId, pageable);
-
-        return getBoardListResponseFromPage(appliedBoards);
-    }
-
-    /**
-     * 신청 사용자 리스트 조회 + 참여자 리스트 조회
+     * 신청 사용자 리스트 조회 + 참여자 리스트 조회 - (사용자 ID 기준)
      */
     public Object findAppliedUsers(final Long boardId, final Long userId) {
 
@@ -275,5 +251,49 @@ public class BoardService {
     public void cancelApplied(final Long boardId, final Long userId) {
 
         applicationService.cancelApplied(boardId, userId);
+    }
+
+    /**
+     * 지원 상태 확인하기
+     */
+    public String findApplicationStatus(final Long boardId, final Long userId) {
+
+        Application application = applicationService.findApplication(boardId, userId);
+
+        if(application == null) {
+            return "미신청";
+        } else{
+            return application.getStatus();
+        }
+    }
+
+    /**
+     * 각 게시글의 태그 이름 조회 후 BoardListResponseDto 반환
+     */
+    @Transactional
+    public Page<BoardListResponseDto> getBoardListResponseFromPage(Page<Board> list) {
+
+        List<BoardListResponseDto> result = new ArrayList<BoardListResponseDto>();
+        List<Board> boards = list.getContent();
+        for (Board post : boards) {
+            Integer participantNum = applicationService.countParticipantNum(post.getId());
+            result.add(new BoardListResponseDto(post, participantNum, boardTagService.findTagNameByBoardId(post.getId())));
+        }
+
+        return new PageImpl<>(result);
+    }
+
+    /**
+     * 각 게시글의 태그 이름 조회 후 BoardListResponseDto 반환
+     */
+    public List<BoardListResponseDto> getBoardListResponseFromBoardList(List<Board> list) {
+
+        List<BoardListResponseDto> result = new ArrayList<>();
+        for(int i = 0; i < list.size(); i++) {
+            Integer participantNum = applicationService.countParticipantNum(list.get(i).getId());
+            result.add(new BoardListResponseDto(list.get(i), participantNum, boardTagService.findTagNameByBoardId(list.get(i).getId())));
+        }
+
+        return result;
     }
 }

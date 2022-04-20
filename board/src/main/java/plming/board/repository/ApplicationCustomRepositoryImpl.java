@@ -1,11 +1,6 @@
 package plming.board.repository;
 
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import plming.board.entity.Application;
@@ -31,22 +26,11 @@ public class ApplicationCustomRepositoryImpl implements ApplicationCustomReposit
      * 신청 게시글 리스트 조회 - (사용자 Id 기준)
      */
     @Override
-    public Page<Board> findAppliedBoardByUserId(Long userId, Pageable pageable) {
-
-        // content를 가져오는 쿼리
-        List<Board> query = jpaQueryFactory
-                .select(application.board).from(application)
-                .where(application.user.id.eq(userId))
+    public List<Board> findAppliedBoard(Long userId) {
+        return jpaQueryFactory.select(application.board).from(application)
+                .where(application.user.id.eq(userId), application.board.deleteYn.eq('0'))
                 .orderBy(application.board.id.desc(), application.board.createDate.desc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
                 .fetch();
-
-        // count만 가져오는 쿼리
-        JPQLQuery<Board> count = jpaQueryFactory.selectFrom(application.board)
-                .where(application.user.id.eq(userId));
-
-        return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
     }
 
     /**
@@ -56,7 +40,7 @@ public class ApplicationCustomRepositoryImpl implements ApplicationCustomReposit
     public List<Application> findAppliedUserByBoardId(Long boardId) {
 
         return jpaQueryFactory.selectFrom(application)
-                .where(application.board.id.eq(boardId))
+                .where(application.board.id.eq(boardId), application.board.deleteYn.eq('0'))
                 .fetch();
     }
 
@@ -67,7 +51,8 @@ public class ApplicationCustomRepositoryImpl implements ApplicationCustomReposit
     public List<User> findParticipantByBoardId(Long boardId) {
 
         return jpaQueryFactory.select(application.user).from(application)
-                .where(application.board.id.eq(boardId), application.status.eq("승인"))
+                .where(application.board.id.eq(boardId), application.status.eq("승인"),
+                        application.user.deleteYn.eq('0'))
                 .fetch();
     }
 
@@ -103,15 +88,5 @@ public class ApplicationCustomRepositoryImpl implements ApplicationCustomReposit
         jpaQueryFactory.delete(application)
                 .where(application.board.id.eq(boardId), application.user.id.eq(userId))
                 .execute();
-    }
-
-    private BooleanExpression isBoard(Long boardId) {
-
-        return boardId != null ? application.board.id.eq(boardId) : null;
-    }
-
-    private BooleanExpression isUser(Long userId) {
-
-        return userId != null ? application.user.id.eq(userId) : null;
     }
 }

@@ -3,6 +3,7 @@ package plming.board.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import plming.auth.service.JwtTokenProvider;
@@ -106,16 +107,6 @@ public class BoardApiController {
         return ResponseEntity.status(201).body(appliedStatus);
     }
 
-
-    /**
-     * 신청 게시글 리스트 조회 - 사용자 ID 기준 (User 부분으로 옮겨져야 할 것 같음)
-     */
-    @GetMapping("/application")
-    public Page<BoardListResponseDto> findAppliedBoardByUserID(@CookieValue final String token, Pageable pageable) {
-
-        return boardService.findAppliedBoardByUserId(jwtTokenProvider.getUserId(token), pageable);
-    }
-
     /**
      * 게시글 신청자 리스트 + 참여자 리스트 통합
      */
@@ -124,6 +115,16 @@ public class BoardApiController {
     public ResponseEntity<Object> findAppliedUserByBoardId(@PathVariable final Long id, @CookieValue final String token) {
 
         return ResponseEntity.status(200).body(boardService.findAppliedUsers(id, jwtTokenProvider.getUserId(token)));
+    }
+
+    /**
+     * 특정 게시글 신청 상태 조회
+     */
+    @GetMapping("/{id}/application")
+    @ResponseStatus(HttpStatus.OK)
+    public String findApplicationStatus(@PathVariable final Long id, @CookieValue String token) {
+
+        return boardService.findApplicationStatus(id, jwtTokenProvider.getUserId(token));
     }
 
     /**
@@ -139,6 +140,9 @@ public class BoardApiController {
         return result;
     }
 
+    /**
+     * 게시글 신청 취소
+     */
     @DeleteMapping("/{id}/application")
     public void canceledApply(@PathVariable final Long id, @CookieValue final String token) {
         boardService.cancelApplied(id, jwtTokenProvider.getUserId(token));

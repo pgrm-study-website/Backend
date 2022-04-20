@@ -1,4 +1,4 @@
-//package plming.board;
+//package plming.board.service;
 //
 //import org.junit.jupiter.api.AfterEach;
 //import org.junit.jupiter.api.BeforeEach;
@@ -76,12 +76,12 @@
 //
 //    }
 //
-//    @AfterEach
-//    void afterEach() {
+////    @AfterEach
+////    void afterEach() {
 ////        applicationRepository.deleteAll();
 ////        boardRepository.deleteAll();
 ////        userRepository.deleteAll();
-//    }
+////    }
 //
 //    @Test
 //    @DisplayName("게시글 신청")
@@ -182,5 +182,21 @@
 //
 //        // then
 //        assertEquals(count - 1, applicationRepository.count());
+//    }
+//
+//    @Test
+//    @DisplayName("신청상태 확인")
+//    void findApplicationStatus() {
+//
+//        // given
+//        boardService.apply(post1.getId(), user2.getId());
+//
+//        // when
+//        String status1 = boardService.findApplicationStatus(post1.getId(), user2.getId());
+//        String status2 = boardService.findApplicationStatus(post2.getId(), user1.getId());
+//
+//        // then
+//        assertEquals("대기", status1);
+//        assertEquals("미신청", status2);
 //    }
 //}

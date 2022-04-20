@@ -13,10 +13,14 @@ public class UserBoardListResponseDto {
 
     List<BoardListResponseDto> write;
     List<BoardListResponseDto> comment;
+    List<BoardListResponseDto> apply;
 
     @Builder
-    public UserBoardListResponseDto(List<BoardListResponseDto> write, List<BoardListResponseDto> comment) {
+    public UserBoardListResponseDto(List<BoardListResponseDto> write, List<BoardListResponseDto> comment,
+                                    List<BoardListResponseDto> apply)
+    {
         this.write = write;
         this.comment = comment;
+        this.apply = apply;
     }
 }
