@@ -49,7 +49,7 @@
 //                .social(0)
 //                .build();
 //        user2 = User.builder()
-//                .nickname("nickname1")
+//                .nickname("nickname2")
 //                .email("email@gmail.com")
 //                .role("ROLE_USER")
 //                .password("password")
