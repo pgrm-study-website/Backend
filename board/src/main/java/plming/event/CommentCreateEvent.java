@@ -1,7 +1,7 @@
 package plming.event;
 
 import lombok.Getter;
-import plming.comment.entity.Comment;
+import plming.board.boardComment.entity.Comment;
 import plming.notification.entity.NotificationType;
 import plming.user.entity.User;
 

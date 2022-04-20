@@ -2,7 +2,7 @@
 //
 //import org.junit.jupiter.api.DisplayName;
 //import org.junit.jupiter.api.Test;
-//import plming.ServiceIntegrationTest;
+//import plming.common.ServiceIntegrationTest;
 //import plming.notification.dto.NotificationDto;
 //import plming.notification.entity.NotificationType;
 //

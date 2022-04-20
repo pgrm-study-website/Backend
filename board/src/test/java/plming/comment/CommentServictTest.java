@@ -3,12 +3,12 @@
 //import org.junit.jupiter.api.*;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
-//import plming.board.entity.Board;
-//import plming.board.entity.BoardRepository;
+//import plming.board.board.entity.Board;
+//import plming.board.board.repository.BoardRepository;
 //import plming.exception.CustomException;
-//import plming.comment.entity.Comment;
-//import plming.comment.entity.CommentRepository;
-//import plming.comment.service.CommentService;
+//import plming.board.boardComment.entity.Comment;
+//import plming.board.boardComment.entity.CommentRepository;
+//import plming.board.boardComment.service.CommentService;
 //import plming.user.entity.User;
 //import plming.user.entity.UserRepository;
 //

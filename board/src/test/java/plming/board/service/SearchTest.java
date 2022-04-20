@@ -5,13 +5,13 @@
 //import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.data.domain.Page;
 //import org.springframework.data.domain.Pageable;
-//import plming.board.dto.BoardListResponseDto;
-//import plming.board.dto.SearchRequestDto;
-//import plming.board.entity.Board;
-//import plming.board.entity.BoardRepository;
-//import plming.board.entity.BoardTagRepository;
-//import plming.board.service.BoardService;
-//import plming.board.service.BoardTagService;
+//import plming.board.board.dto.response.BoardListResponseDto;
+//import plming.board.boardSearch.dto.SearchRequestDto;
+//import plming.board.board.entity.Board;
+//import plming.board.board.repository.BoardRepository;
+//import plming.board.boardTag.repository.BoardTagRepository;
+//import plming.board.board.service.BoardService;
+//import plming.board.boardTag.service.BoardTagService;
 //import plming.user.entity.User;
 //import plming.user.entity.UserRepository;
 //

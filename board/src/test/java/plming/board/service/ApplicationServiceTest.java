@@ -1,20 +1,15 @@
 //package plming.board.service;
 //
-//import org.junit.jupiter.api.AfterEach;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.DisplayName;
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.data.domain.Page;
-//import org.springframework.data.domain.Pageable;
-//import org.springframework.transaction.annotation.Transactional;
-//import plming.board.dto.BoardListResponseDto;
-//import plming.board.entity.ApplicationRepository;
-//import plming.board.entity.Board;
-//import plming.board.entity.BoardRepository;
-//import plming.board.service.ApplicationService;
-//import plming.board.service.BoardService;
+//import plming.board.board.service.BoardService;
+//import plming.board.boardApply.repository.ApplicationRepository;
+//import plming.board.board.entity.Board;
+//import plming.board.board.repository.BoardRepository;
+//import plming.board.boardApply.service.ApplicationService;
 //import plming.user.dto.UserListResponseDto;
 //import plming.user.entity.User;
 //import plming.user.entity.UserRepository;

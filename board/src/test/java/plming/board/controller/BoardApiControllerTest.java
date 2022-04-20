@@ -2,7 +2,7 @@
 //
 //import org.junit.jupiter.api.DisplayName;
 //import org.junit.jupiter.api.Test;
-//import plming.board.entity.Application;
+//import plming.board.boardApply.entity.Application;
 //import plming.common.ControllerIntegrationTest;
 //
 //import javax.servlet.http.Cookie;

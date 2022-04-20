@@ -1,15 +1,10 @@
 //package plming.notification.integration;
-
-//import lombok.extern.slf4j.Slf4j;
-//import org.junit.jupiter.api.BeforeEach;
+//
 //import org.junit.jupiter.api.DisplayName;
 //import org.junit.jupiter.api.Test;
-//import org.springframework.test.annotation.Commit;
 //import org.springframework.test.context.transaction.TestTransaction;
-//import org.junit.jupiter.api.DisplayName;
-//import org.junit.jupiter.api.Test;
-//import plming.ServiceIntegrationTest;
-//import plming.comment.dto.CommentRequestDto;
+//import plming.common.ServiceIntegrationTest;
+//import plming.board.boardComment.dto.CommentRequestDto;
 //import plming.notification.dto.NotificationDto;
 //
 //import java.util.List;
@@ -66,7 +61,7 @@
 //
 //        CommentRequestDto commentRequestDto2 = new CommentRequestDto("첫 번째 댓글의 대댓글", comment1Id);
 //        commentService.registerComment(study.getId(), studyApplyMember.getId(), commentRequestDto2);
-
+//
 //        TestTransaction.flagForCommit();
 //        TestTransaction.end();
 //

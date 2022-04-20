@@ -4,12 +4,11 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Component;
 //import org.springframework.transaction.annotation.Transactional;
-//import plming.board.entity.Application;
-//import plming.board.entity.ApplicationRepository;
-//import plming.board.entity.Board;
-//import plming.board.entity.BoardRepository;
-//import plming.comment.entity.Comment;
-//import plming.comment.entity.CommentRepository;
+//import plming.board.boardApply.repository.ApplicationRepository;
+//import plming.board.board.entity.Board;
+//import plming.board.board.repository.BoardRepository;
+//import plming.board.boardComment.entity.Comment;
+//import plming.board.boardComment.entity.CommentRepository;
 //import plming.exception.CustomException;
 //import plming.exception.ErrorCode;
 //import plming.notification.repository.NotificationRepository;

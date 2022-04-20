@@ -1,19 +1,17 @@
 //package plming;
 //
 //import lombok.RequiredArgsConstructor;
-//import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.context.annotation.Profile;
 //import org.springframework.stereotype.Component;
 //import org.springframework.transaction.annotation.Transactional;
-//import plming.board.entity.*;
-//import plming.board.service.ApplicationService;
-//import plming.comment.entity.CommentRepository;
-//import plming.notification.repository.NotificationRepository;
+//import plming.board.board.entity.Board;
+//import plming.board.board.repository.BoardRepository;
+//import plming.board.boardApply.entity.Application;
+//import plming.board.boardApply.repository.ApplicationRepository;
 //import plming.user.entity.User;
 //import plming.user.entity.UserRepository;
 //
 //import javax.annotation.PostConstruct;
-//import java.util.List;
 //
 //@Component
 //@RequiredArgsConstructor

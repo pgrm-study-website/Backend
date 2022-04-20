@@ -6,14 +6,11 @@
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.data.domain.Sort;
-//import plming.board.dto.BoardRequestDto;
-//import plming.board.dto.BoardResponseDto;
-//import plming.board.entity.Application;
-//import plming.board.entity.ApplicationRepository;
-//import plming.board.entity.Board;
-//import plming.board.entity.BoardRepository;
-//import plming.board.service.BoardService;
+//import plming.board.board.dto.response.BoardResponseDto;
+//import plming.board.boardApply.repository.ApplicationRepository;
+//import plming.board.board.entity.Board;
+//import plming.board.board.repository.BoardRepository;
+//import plming.board.board.service.BoardService;
 //import plming.user.entity.User;
 //import plming.user.entity.UserRepository;
 //
@@ -21,7 +18,6 @@
 //
 //import static org.assertj.core.api.Assertions.*;
 //import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.springframework.data.domain.Sort.Direction.*;
 //
 //@SpringBootTest
 //public class BoardServiceTest {

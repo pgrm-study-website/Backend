@@ -3,10 +3,11 @@
 //import org.junit.jupiter.api.*;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
-//import plming.board.entity.Board;
-//import plming.board.entity.BoardRepository;
-//import plming.board.entity.BoardTag;
-//import plming.board.entity.BoardTagRepository;
+//import plming.board.board.entity.Board;
+//import plming.board.board.repository.BoardRepository;
+//import plming.board.boardTag.entity.BoardTag;
+//import plming.board.boardTag.repository.BoardTagRepository;
+//import plming.board.boardTag.service.BoardTagService;
 //import plming.tag.entity.Tag;
 //import plming.user.entity.User;
 //import plming.user.entity.UserRepository;
@@ -29,7 +30,7 @@
 //    private BoardTagRepository boardTagRepository;
 //
 //    @Autowired
-//    private plming.board.service.BoardTagService boardTagService;
+//    private BoardTagService boardTagService;
 //
 //    private User user1;
 //    private User user2;

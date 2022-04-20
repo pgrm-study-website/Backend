@@ -44,7 +44,7 @@
 //        // given
 //        Long userId = 1L;
 //        String eventCached = userId + "_" + System.currentTimeMillis();
-//        Notification notification = new Notification(user, NotificationType.APPLY, "게시글에 참여 신청 요청이 왔습니다.", "url", false);
+//        Notification notification = new Notification(user, NotificationType.apply, "게시글에 참여 신청 요청이 왔습니다.", "url", false);
 //
 //        // when, then
 //        assertDoesNotThrow(() -> emitterRepository.saveEventCache(eventCached, notification));
@@ -87,17 +87,17 @@
 //                .build();
 //        Long userId = 1L;
 //        String eventCacheId1 = userId + "_" + System.currentTimeMillis();
-//        Notification notification1 = new Notification(user, NotificationType.APPLY, "게시글에 참여 신청이 왔습니다", "url", false);
+//        Notification notification1 = new Notification(user, NotificationType.apply, "게시글에 참여 신청이 왔습니다", "url", false);
 //        emitterRepository.saveEventCache(eventCacheId1, notification1);
 //
 //        Thread.sleep(100);
 //        String eventCacheId2 = userId + "_" + System.currentTimeMillis();
-//        Notification notification2 = new Notification(user, NotificationType.ACCEPT, "게시글 참여가 승인되었습니다.", "url", false);
+//        Notification notification2 = new Notification(user, NotificationType.accept, "게시글 참여가 승인되었습니다.", "url", false);
 //        emitterRepository.saveEventCache(eventCacheId2, notification2);
 //
 //        Thread.sleep(100);
 //        String eventCacheId3 = userId + "_" + System.currentTimeMillis();
-//        Notification notification3 = new Notification(user, NotificationType.REJECT, "게시글 참여가 거절되었습니다..", "url", false);
+//        Notification notification3 = new Notification(user, NotificationType.reject, "게시글 참여가 거절되었습니다..", "url", false);
 //        emitterRepository.saveEventCache(eventCacheId3, notification3);
 //
 //        // when
@@ -157,12 +157,12 @@
 //                .build();
 //        Long userId = 1L;
 //        String eventCacheId1 = userId + "_" + System.currentTimeMillis();
-//        Notification notification1 = new Notification(user, NotificationType.APPLY, "게시글에 참여 신청이 왔습니다.", "url", false);
+//        Notification notification1 = new Notification(user, NotificationType.apply, "게시글에 참여 신청이 왔습니다.", "url", false);
 //        emitterRepository.saveEventCache(eventCacheId1, notification1);
 //
 //        Thread.sleep(100);
 //        String eventCacheId2 = userId + "_" + System.currentTimeMillis();
-//        Notification notification2 = new Notification(user, NotificationType.ACCEPT, "게시글 참여가 승인되었습니다.", "url", false);
+//        Notification notification2 = new Notification(user, NotificationType.accept, "게시글 참여가 승인되었습니다.", "url", false);
 //        emitterRepository.saveEventCache(eventCacheId2, notification2);
 //
 //        // when

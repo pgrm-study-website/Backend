@@ -11,7 +11,7 @@ public enum NotificationType {
     reject("게시글에 참여가 거절되었습니다.", "/posts/"),
     comment("에 댓글이 달렸습니다.", "/posts/"),
     recomment("에 대댓글이 달렸습니다.", "/posts/"),
-    message(" 회원에게 메세지가 도착했습니다.", "/messages/user/");
+    message(" 회원에게 메세지가 도착했습니다.", "/messages");
 
     private String content;
     private String url;
@@ -27,5 +27,8 @@ public enum NotificationType {
 
     public String makeUrl(Long id) {
         return url + id;
+    }
+    public String makeUrl() {
+        return url;
     }
 }

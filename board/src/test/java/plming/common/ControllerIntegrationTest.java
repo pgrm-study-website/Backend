@@ -8,13 +8,11 @@
 //import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 //import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.web.context.WebApplicationContext;
-//import plming.board.entity.Board;
-//import plming.board.service.ApplicationService;
-//import plming.board.service.BoardService;
-//import plming.common.TestDB;
+//import plming.board.board.entity.Board;
+//import plming.board.board.service.BoardService;
 //import plming.auth.service.JwtTokenProvider;
-//import plming.board.entity.ApplicationRepository;
-//import plming.board.entity.BoardRepository;
+//import plming.board.boardApply.repository.ApplicationRepository;
+//import plming.board.board.repository.BoardRepository;
 //import plming.notification.repository.NotificationRepository;
 //import plming.notification.service.NotificationService;
 //import plming.user.entity.User;
