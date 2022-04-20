@@ -110,7 +110,7 @@ public class BoardService {
     public Page<BoardListResponseDto> findAllByDeleteYn(final Pageable pageable) {
 
         Page<Board> list = boardRepository.findAllPageSort(pageable);
-        return getBoardListResponseFromPage(list);
+        return getBoardListResponseFromPage(list, pageable);
     }
 
     /**
@@ -275,16 +275,18 @@ public class BoardService {
      * 각 게시글의 태그 이름 조회 후 BoardListResponseDto 반환
      */
     @Transactional
-    public Page<BoardListResponseDto> getBoardListResponseFromPage(Page<Board> list) {
+    public Page<BoardListResponseDto> getBoardListResponseFromPage(Page<Board> list, Pageable pageable) {
 
         List<BoardListResponseDto> result = new ArrayList<BoardListResponseDto>();
+
         List<Board> boards = list.getContent();
         for (Board post : boards) {
             Integer participantNum = applicationService.countParticipantNum(post.getId());
             result.add(new BoardListResponseDto(post, participantNum, boardTagService.findTagNameByBoardId(post.getId())));
         }
 
-        return new PageImpl<>(result);
+
+        return new PageImpl<>(result, pageable, list.getTotalElements());
     }
 
     /**

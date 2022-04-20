@@ -60,6 +60,6 @@ public class SearchService {
     @Transactional
     public ResponseEntity<Object> searchAllCondition(final SearchRequestDto params, final Pageable pageable) {
 
-        return ResponseEntity.ok(boardService.getBoardListResponseFromPage(boardRepository.searchAllCondition(params, pageable)));
+        return ResponseEntity.ok(boardService.getBoardListResponseFromPage(boardRepository.searchAllCondition(params, pageable), pageable));
     }
 }

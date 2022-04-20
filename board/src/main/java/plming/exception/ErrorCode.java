@@ -66,6 +66,11 @@ public enum ErrorCode {
     /*
      * 400 BAD_REQUEST: 잘못된 요청
      */
+    ALREADY_CANCELED(HttpStatus.BAD_REQUEST, "참여 신청한 사용자가 이미 신청을 취소했습니다."),
+
+    /*
+     * 400 BAD_REQUEST: 잘못된 요청
+     */
     BAD_SEARCH(HttpStatus.BAD_REQUEST, "잘못된 검색 입니다."),
 
     /*

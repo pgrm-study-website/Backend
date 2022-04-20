@@ -128,6 +128,13 @@ public class ApplicationService {
      */
     public Application updateAppliedStatus(final Long boardId, final String nickname, final String status) {
 
+        User user = userRepository.findByNickname(nickname).orElseThrow(() -> new CustomException(ErrorCode.USERS_NOT_FOUND));
+        Application beforeApplication = applicationRepository.findApplication(boardId, user.getId());
+
+        if(beforeApplication == null) {
+            throw new CustomException(ErrorCode.ALREADY_CANCELED);
+        }
+
         Application application = applicationRepository.updateAppliedStatus(boardId, nickname, status);
 
         if(application.getStatus().equals("승인")) {
