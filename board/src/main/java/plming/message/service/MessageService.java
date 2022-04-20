@@ -1,7 +1,9 @@
 package plming.message.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import plming.event.MessageCreateEvent;
 import plming.exception.CustomException;
 import plming.exception.ErrorCode;
 import plming.message.dto.MessageGroupResponseDto;
@@ -9,6 +11,7 @@ import plming.message.dto.MessageRequestDto;
 import plming.message.dto.MessageDetailResponseDto;
 import plming.message.entity.Message;
 import plming.message.entity.MessageRepository;
+import plming.notification.entity.NotificationType;
 import plming.user.entity.User;
 import plming.user.service.UserService;
 
@@ -24,6 +27,9 @@ public class MessageService {
 
     @Autowired
     private UserService userService;
+
+    private ApplicationEventPublisher eventPublisher;
+
 
     public List<MessageGroupResponseDto> getMessageGroupList(Long userId){
         User user = userService.getUserById(userId);
@@ -43,6 +49,7 @@ public class MessageService {
         User user = userService.getUserById(messageRequestDto.getUserId());
         User other = userService.getUserById(messageRequestDto.getOtherId());
         Message message = messageRepository.save(messageRequestDto.toEntity(user,other));
+        eventPublisher.publishEvent(new MessageCreateEvent(message, message.getReceiver(), NotificationType.message));
         return new MessageDetailResponseDto(message,messageRequestDto.getUserId());
     }
 

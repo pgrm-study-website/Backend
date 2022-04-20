@@ -1,20 +1,20 @@
 package plming.event;
 
 import lombok.Getter;
-import plming.comment.entity.Comment;
+import plming.message.entity.Message;
 import plming.notification.entity.NotificationType;
 import plming.user.entity.User;
 
 @Getter
-public class CommentCreateEvent {
+public class MessageCreateEvent {
 
-    private final Comment comment;
+    private final Message message;
     private final NotificationType notificationType;
     private final User receiver;
 
-    public CommentCreateEvent(Comment comment, User receiver, NotificationType notificationType) {
-        this.comment = comment;
-        this.receiver = receiver;
+    public MessageCreateEvent(Message message, User receiver, NotificationType notificationType) {
+        this.message = message;
         this.notificationType = notificationType;
+        this.receiver = receiver;
     }
 }
