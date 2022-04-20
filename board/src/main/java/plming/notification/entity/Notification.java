@@ -33,10 +33,6 @@ public class Notification extends EntityDate {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-<<<<<<< HEAD
-=======
-    @OnDelete(action = OnDeleteAction.CASCADE)
->>>>>>> 0a98514152bd4537a29ad2a539acda888e95a9dc
     private User receiver;
 
     @Builder
