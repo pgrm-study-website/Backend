@@ -8,8 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import plming.board.board.service.BoardService;
 import plming.board.boardSearch.dto.SearchRequestDto;
 import plming.board.board.repository.BoardRepository;
-import plming.exception.CustomException;
-import plming.exception.ErrorCode;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,7 +18,6 @@ public class SearchService {
 
     private final BoardRepository boardRepository;
     private final BoardService boardService;
-    private final CustomException e = new CustomException(ErrorCode.BAD_SEARCH);
 
     public ResponseEntity<Object> search(final SearchRequestDto params, final Pageable pageable) {
 
@@ -46,7 +43,7 @@ public class SearchService {
     }
 
     /**
-     * 모든 조건이 null인지 검사
+     * 모든 조건이 null 값인지 검사
      */
     private boolean isConditionNull(SearchRequestDto params) {
         return params.getSearchType() == null && params.getKeyword() == null
