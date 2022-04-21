@@ -43,7 +43,7 @@ public class SearchService {
     }
 
     /**
-     * 모든 조건이 null인지 검사
+     * 모든 조건이 null 값인지 검사
      */
     private boolean isConditionNull(SearchRequestDto params) {
         return params.getSearchType() == null && params.getKeyword() == null

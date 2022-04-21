@@ -2,11 +2,9 @@ package plming.board.board.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import plming.board.board.entity.Board;
 import plming.board.boardApply.entity.Application;
@@ -251,7 +249,7 @@ public class BoardService {
     }
 
     /**
-     * 지원 취소하기 - Application에서 데이터 삭제
+     * 지원 취소하기 - application 테이블에서 데이터 삭제
      */
     public void cancelApplied(final Long boardId, final Long userId) {
 
@@ -278,7 +276,7 @@ public class BoardService {
     @Transactional
     public Page<BoardListResponseDto> getBoardListResponseFromPage(Page<Board> list, Pageable pageable) {
 
-        List<BoardListResponseDto> result = new ArrayList<BoardListResponseDto>();
+        List<BoardListResponseDto> result = new ArrayList<>();
 
         List<Board> boards = list.getContent();
         for (Board post : boards) {
@@ -286,7 +284,7 @@ public class BoardService {
             result.add(new BoardListResponseDto(post, participantNum, boardTagService.findTagNameByBoardId(post.getId())));
         }
 
-        return PageableExecutionUtils.getPage(result, pageable, () -> list.getTotalElements());
+        return PageableExecutionUtils.getPage(result, pageable, list::getTotalElements);
     }
 
     /**
@@ -295,9 +293,9 @@ public class BoardService {
     public List<BoardListResponseDto> getBoardListResponseFromBoardList(List<Board> list) {
 
         List<BoardListResponseDto> result = new ArrayList<>();
-        for(int i = 0; i < list.size(); i++) {
-            Integer participantNum = applicationService.countParticipantNum(list.get(i).getId());
-            result.add(new BoardListResponseDto(list.get(i), participantNum, boardTagService.findTagNameByBoardId(list.get(i).getId())));
+        for (Board board : list) {
+            Integer participantNum = applicationService.countParticipantNum(board.getId());
+            result.add(new BoardListResponseDto(board, participantNum, boardTagService.findTagNameByBoardId(board.getId())));
         }
 
         return result;

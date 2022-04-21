@@ -32,23 +32,25 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
     @Override
     public Page<Board> findAllPageSort(Pageable pageable) {
 
-        // content를 가져오는 쿼리
+        // content 가져오는 쿼리
         List<Board> query = jpaQueryFactory
                 .select(board).from(board)
                 .leftJoin(board.boardTags, boardTag)
                 .fetchJoin()
                 .where(board.deleteYn.eq('0'))
+                .distinct()
                 .orderBy(board.id.desc(), board.createDate.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
 
-        // count만 가져오는 쿼리
+        // count 가져오는 쿼리
         JPQLQuery<Board> count = jpaQueryFactory.selectFrom(board)
                 .leftJoin(board.boardTags, boardTag)
-                .where(board.deleteYn.eq('0'));
+                .where(board.deleteYn.eq('0'))
+                .distinct();
 
-        return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
+        return PageableExecutionUtils.getPage(query, pageable, count::fetchCount);
     }
 
     @Override
@@ -83,7 +85,7 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
 
         if(params.getSearchType() != null && params.getSearchType().equals("viewCnt")) {
 
-            // content를 가져오는 쿼리
+            // content 가져오는 쿼리
             List<Board> query = jpaQueryFactory
                     .select(board).from(board)
                     .leftJoin(board.boardTags, boardTag)
@@ -95,13 +97,13 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
                     .limit(pageable.getPageSize())
                     .fetch();
 
-            // count만 가져오는 쿼리
+            // count 가져오는 쿼리
             JPQLQuery<Board> count = jpaQueryFactory.selectFrom(board)
                     .leftJoin(board.boardTags, boardTag)
                     .where(board.deleteYn.eq('0'))
                     .distinct();
 
-            return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
+            return PageableExecutionUtils.getPage(query, pageable, count::fetchCount);
         }
 
         if(params.getKeyword() == null) {
@@ -123,7 +125,7 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
 
     private Page<Board> resultSearch(SearchRequestDto params, Pageable pageable, BooleanExpression condition) {
 
-        // content를 가져오는 쿼리
+        // content 가져오는 쿼리
         List<Board> query = jpaQueryFactory
                 .select(board).from(board)
                 .leftJoin(board.boardTags, boardTag)
@@ -138,7 +140,7 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
                 .limit(pageable.getPageSize())
                 .fetch();
 
-        // count만 가져오는 쿼리
+        // count 가져오는 쿼리
         JPQLQuery<Board> count = jpaQueryFactory.selectFrom(board)
                 .leftJoin(board.boardTags, boardTag)
                 .where(condition, keywordInCategory(params.getCategory())
@@ -147,7 +149,7 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
                         , board.deleteYn.eq('0'))
                 .distinct();
 
-        return PageableExecutionUtils.getPage(query, pageable, () -> count.fetchCount());
+        return PageableExecutionUtils.getPage(query, pageable, count::fetchCount);
     }
 
     private BooleanBuilder keywordInStatus(List<String> keywords) {
