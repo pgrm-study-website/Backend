@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -285,8 +286,7 @@ public class BoardService {
             result.add(new BoardListResponseDto(post, participantNum, boardTagService.findTagNameByBoardId(post.getId())));
         }
 
-
-        return new PageImpl<>(result, pageable, list.getTotalElements());
+        return PageableExecutionUtils.getPage(result, pageable, () -> list.getTotalElements());
     }
 
     /**
