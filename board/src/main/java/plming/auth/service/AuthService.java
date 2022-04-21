@@ -3,26 +3,37 @@ package plming.auth.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import plming.auth.Oauth.entity.SocialLoginType;
+import plming.auth.Oauth.service.OauthService;
 import plming.exception.CustomException;
 import plming.exception.ErrorCode;
+import plming.user.dto.UserJoinRequestDto;
 import plming.user.dto.UserJoinResponseDto;
+import plming.user.dto.UserSocialJoinRequestDto;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
+import plming.user.service.NicknameService;
+import plming.user.service.UserService;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.UUID;
 
 @Service
 public class AuthService {
 
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
-
+    @Autowired
+    private OauthService oauthService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private NicknameService nicknameService;
 
 
     public UserJoinResponseDto loginWithEmail(String email, String password, HttpServletResponse response){
@@ -35,14 +46,26 @@ public class AuthService {
         return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
     }
 
+    public UserJoinResponseDto loginWithSocial(int socialType, String authorizeCode, HttpServletResponse response){
+        String userSocialId = oauthService.requestOauthUserId(socialType, authorizeCode);
+        User user = userRepository.findBySocialAndSocialId(socialType,userSocialId).orElse(null);
+        if(user == null){
+            // 회원가입
+            UserSocialJoinRequestDto userSocialJoinRequestDto = new UserSocialJoinRequestDto(
+                    nicknameService.createRandomNickname(),socialType,userSocialId);
+            userService.createSocialUser(userSocialJoinRequestDto);
+            user = userRepository.findBySocialAndSocialId(socialType,userSocialId).orElseThrow(()->new RuntimeException());
+        }
+
+        String token = jwtTokenProvider.createToken(user.getId());
+        jwtTokenProvider.setTokenInCookie(response,token);
+        return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
+    }
+
     public UserJoinResponseDto autoLogin(HttpServletRequest request){
         String token = jwtTokenProvider.validateTokenForAutoLogin(request);
         Long userId = jwtTokenProvider.getUserId(token);
         User user = userRepository.findById(userId).orElseThrow(()-> new CustomException(ErrorCode.INTERNAL_SERVER_ERROR));
         return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
     }
-
-//    public void loginWithGoogle(String code){
-//        googleOauth.requestAccessToken(code);
-//    }
 }

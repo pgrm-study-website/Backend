@@ -10,8 +10,6 @@ public class UserJoinRequestDto {
     private String nickname;
     private String password;
     private String email;
-    private int social;
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -22,6 +20,7 @@ public class UserJoinRequestDto {
                 .email(email)
                 .password(password)
                 .role("ROLE_USER")
-                .social(social).build();
+                .social('0')
+                .build();
     }
 }

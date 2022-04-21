@@ -26,15 +26,8 @@ public class AuthController {
             String password = requestBody.get("password");
             return authService.loginWithEmail(email, password, response);
         } else if (social > 0 && social < 4) {
-            // 소셜 로그인
-            if(social == 1){
-                // 구글 oauth
-            }else if(social == 2){
-                // 카카오 oauth
-            }else if(social == 3){
-                // 깃허브 oauth
-            }
-
+            String code = requestBody.get("code");
+            return authService.loginWithSocial(social,code, response);
         }
         return null;
     }
