@@ -1,5 +1,6 @@
 package plming.board.boardApply.repository;
 
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import plming.board.boardApply.entity.Application;
 import plming.board.board.entity.Board;
@@ -34,7 +35,13 @@ public interface ApplicationCustomRepository {
      * 게시글 신청 상태 업데이트
      */
     @Transactional
-    Application updateAppliedStatus(final Long boardId, final String nickname, final String status);
+    void updateAppliedStatus(final Long boardId, final String nickname, final String status);
+
+    /**
+     * 게시글 모집 상태 업데이트
+     */
+    @Transactional
+    void updateBoardStatus(final Long boardId, final String status);
 
     /**
      * 게시글 신청 취소

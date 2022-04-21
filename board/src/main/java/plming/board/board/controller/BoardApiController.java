@@ -132,13 +132,12 @@ public class BoardApiController {
      * 게시글 신청 상태 업데이트
      */
     @PatchMapping("/{id}/application")
-    public String updateAppliedStatus(@PathVariable final Long id, @CookieValue final String token,
+    @ResponseStatus(HttpStatus.OK)
+    public void updateAppliedStatus(@PathVariable final Long id, @CookieValue final String token,
                                       @RequestParam final String status, @RequestParam final String nickname) {
 
         ApplicationStatusRequestDto body = ApplicationStatusRequestDto.builder().status(status).nickname(nickname).build();
-        String result = boardService.updateAppliedStatus(id, jwtTokenProvider.getUserId(token), body.getNickname(), body.getStatus());
-
-        return result;
+        boardService.updateAppliedStatus(id, jwtTokenProvider.getUserId(token), body.getNickname(), body.getStatus());
     }
 
     /**

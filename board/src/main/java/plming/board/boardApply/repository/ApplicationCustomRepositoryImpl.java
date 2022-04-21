@@ -9,6 +9,7 @@ import plming.user.entity.User;
 
 import java.util.List;
 
+import static plming.board.board.entity.QBoard.board;
 import static plming.board.boardApply.entity.QApplication.application;
 import static plming.user.entity.QUser.user;
 
@@ -68,8 +69,7 @@ public class ApplicationCustomRepositoryImpl implements ApplicationCustomReposit
     }
 
     @Override
-    @Transactional
-    public Application updateAppliedStatus(Long boardId, String nickname, String status) {
+    public void updateAppliedStatus(Long boardId, String nickname, String status) {
 
         Long userId = jpaQueryFactory.select(user.id).from(user).where(user.nickname.eq(nickname)).fetchOne();
 
@@ -77,10 +77,15 @@ public class ApplicationCustomRepositoryImpl implements ApplicationCustomReposit
                 .set(application.status, status)
                 .where(application.board.id.eq(boardId), application.user.id.eq(userId))
                 .execute();
+    }
 
-        return jpaQueryFactory.selectFrom(application)
-                .where(application.board.id.eq(boardId), application.user.nickname.eq(nickname))
-                .fetchOne();
+    @Override
+    public void updateBoardStatus(Long boardId, String status) {
+
+        jpaQueryFactory.update(board)
+                .set(board.status, status)
+                .where(board.id.eq(boardId))
+                .execute();
     }
 
     @Override

@@ -41,14 +41,6 @@ public class ApplicationService {
             return applicationRepository.getById(application.getId()).getBoard().getId().toString();
         }
 
-        /**
-         * 신청 인원이 가득 찼을 경우 자동으로 모집 완료 상태로 변경
-         */
-        if(!isMaxNum(boardId)) {
-            Board board = boardRepository.getById(boardId);
-            board.updateStatus("모집 완료");
-        }
-
         if ((findApplication(boardId, userId) == null && !isMaxNum(boardId))) {
             return "마감";
         } else if (!isStatusTrue(boardId, userId)) {
@@ -126,24 +118,27 @@ public class ApplicationService {
     /**
      * 게시글 신청 상태 업데이트
      */
-    public Application updateAppliedStatus(final Long boardId, final String nickname, final String status) {
+    public void updateAppliedStatus(final Long boardId, final String nickname, final String status) {
 
         User user = userRepository.findByNickname(nickname).orElseThrow(() -> new CustomException(ErrorCode.USERS_NOT_FOUND));
-        Application beforeApplication = applicationRepository.findApplication(boardId, user.getId());
+        Application application = applicationRepository.findApplication(boardId, user.getId());
 
-        if(beforeApplication == null) {
+        if(application == null) {
             throw new CustomException(ErrorCode.ALREADY_CANCELED);
         }
 
-        Application application = applicationRepository.updateAppliedStatus(boardId, nickname, status);
+        applicationRepository.updateAppliedStatus(boardId, nickname, status);
 
-        if(application.getStatus().equals("승인")) {
-            eventPublisher.publishEvent(new ApplicationCreateEvent(application, application.getUser(), NotificationType.accept));
-        } else {
-            eventPublisher.publishEvent(new ApplicationCreateEvent(application, application.getUser(), NotificationType.reject));
+        // 신청 인원이 가득 찼을 경우 자동으로 모집 완료 상태로 변경
+        if(!isMaxNum(boardId)) {
+            applicationRepository.updateBoardStatus(boardId, "모집 완료");
         }
 
-        return application;
+        if(status.equals("승인")) {
+            eventPublisher.publishEvent(new ApplicationCreateEvent(application, application.getUser(), NotificationType.accept));
+        } else if(status.equals("거절")){
+            eventPublisher.publishEvent(new ApplicationCreateEvent(application, application.getUser(), NotificationType.reject));
+        }
     }
 
     /**

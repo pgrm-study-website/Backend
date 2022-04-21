@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import plming.board.board.entity.Board;
 import plming.board.boardApply.entity.Application;
@@ -229,12 +230,11 @@ public class BoardService {
      * 게시글 신청 정보 업데이트
      */
     @Transactional
-    public String updateAppliedStatus(final Long boardId, final Long userId, final String nickname, final String status) {
+    public void updateAppliedStatus(final Long boardId, final Long userId, final String nickname, final String status) {
 
         if(boardRepository.getById(boardId).getUser().getId().equals(userId)) {
-            Application application = applicationService.updateAppliedStatus(boardId, nickname, status);
 
-            return application.getStatus();
+            applicationService.updateAppliedStatus(boardId, nickname, status);
         }
         else {
             throw new CustomException(ErrorCode.FORBIDDEN);
