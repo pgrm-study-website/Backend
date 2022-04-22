@@ -50,7 +50,9 @@ public class BoardApiController {
                     .body(new ErrorResponse(e1.getErrorCode(), "현재 게시글은 모집 완료된 게시글로 수정이 불가능합니다."));
         }
 
-        return ResponseEntity.status(200).body(boardService.update(id, userId, post));
+        Long boardId = Long.valueOf(boardService.update(id, userId, post));
+
+        return ResponseEntity.status(200).body(boardService.updateBoardStatus(boardId));
     }
 
     /**

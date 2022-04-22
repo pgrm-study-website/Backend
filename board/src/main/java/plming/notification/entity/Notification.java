@@ -1,8 +1,6 @@
 package plming.notification.entity;
 
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import plming.user.entity.User;
 
 import javax.persistence.*;
