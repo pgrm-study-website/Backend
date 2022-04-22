@@ -97,7 +97,7 @@ public class UserService{
         if(!user.getNickname().equals(userUpdateDto.getNickname()) && isNickNameOverlap(userUpdateDto.getNickname())){
             throw new CustomException(ErrorCode.NICKNAME_OVERLAP);
         }
-        if(userUpdateDto.getTagIds().size() > 5){
+        if(userUpdateDto.getTagIds().size() > 10){
             throw new CustomException(ErrorCode.USER_TAG_EXCESS);
         }
         if(userUpdateDto.getImage() != null && !storageService.isFileExist(userUpdateDto.getImage())){
