@@ -18,6 +18,7 @@ public class UserSocialJoinRequestDto {
                 .nickname(nickname)
                 .social(social)
                 .socialId(socialId)
+                .role("ROLE_USER")
                 .build();
     }
 }
