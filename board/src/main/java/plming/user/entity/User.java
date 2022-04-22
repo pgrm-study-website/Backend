@@ -17,7 +17,7 @@ public class User {
     @Column(name= "nickname", nullable = false)
     private String nickname; // 닉네임, 수정O
 
-    @Column(name= "email", nullable = false)
+    @Column(name= "email")
     private String email; // 이메일, 수정X
 
     @Column(name= "password")
@@ -47,7 +47,6 @@ public class User {
     @Builder
     public User(Long id,String nickname, String email, String password, String image, String introduce, String github, String role, int social, String socialId){
         Assert.hasText(nickname,"nickname must not be null");
-        Assert.hasText(email,"email must not be null");
         Assert.hasText(role,"role must not be null");
         Assert.isTrue(social >= 0 && social <= 3,"social must be '0 <= social <= 2'");
         this.nickname = nickname;

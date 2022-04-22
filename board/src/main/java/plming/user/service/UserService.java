@@ -12,7 +12,6 @@ import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 import plming.user.entity.UserTagRepository;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -39,12 +38,18 @@ public class UserService{
 
     @Transactional
     public UserJoinResponseDto createUser(UserJoinRequestDto userJoinRequestDto) {
+        if(isEmailOverlap(userJoinRequestDto.getEmail())) throw new CustomException(ErrorCode.EMAIL_OVERLAP);
+        if(isNickNameOverlap(userJoinRequestDto.getNickname())) throw new CustomException(ErrorCode.NICKNAME_OVERLAP);
         userJoinRequestDto.setPassword(bCryptPasswordEncoder.encode(userJoinRequestDto.getPassword()));
         User user = userJoinRequestDto.toEntity();
+        userRepository.save(user);
+        return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
+    }
 
-        if(isEmailOverlap(user.getEmail())) throw new CustomException(ErrorCode.EMAIL_OVERLAP);
-        if(isNickNameOverlap(user.getNickname())) throw new CustomException(ErrorCode.NICKNAME_OVERLAP);
-
+    @Transactional
+    public UserJoinResponseDto createSocialUser(UserSocialJoinRequestDto userSocialJoinRequestDto){
+        if(isNickNameOverlap(userSocialJoinRequestDto.getNickname())) throw new CustomException(ErrorCode.NICKNAME_OVERLAP);
+        User user = userSocialJoinRequestDto.toEntity();
         userRepository.save(user);
         return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
     }
@@ -60,7 +65,8 @@ public class UserService{
     }
 
     public User getUserById(Long userId){
-        return userRepository.findById(userId).orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
+        User user = userRepository.findById(userId).orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
+        return user;
     }
 
     public UserResponseDto getUserByUserEmail(String email) {
