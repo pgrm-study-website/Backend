@@ -57,7 +57,7 @@ public class ApplicationService {
     public boolean isMaxNum(final Long boardId) {
 
         Board board = boardRepository.findById(boardId).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
-        Integer participantMax = board.getParticipantMax();
+        Integer participantMax = board.getParticipantMax() == null ? Integer.MAX_VALUE : board.getParticipantMax();
         Integer participantNum = countParticipantNum(boardId);
 
         return (participantNum == 0) || (participantMax > participantNum);
