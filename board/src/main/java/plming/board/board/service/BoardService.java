@@ -85,6 +85,20 @@ public class BoardService {
     }
 
     /**
+     * 게시글 모집 상태 자동 업데이트
+     */
+    @Transactional
+    public Long updateBoardStatus(final Long id) {
+
+        // 신청 인원이 가득 찼을 경우 자동으로 모집 완료 상태로 변경
+        if(!applicationService.isMaxNum(id)) {
+            applicationRepository.updateBoardStatus(id, "모집 완료");
+        }
+
+        return id;
+    }
+
+    /**
      * 게시글 삭제
      */
     @Transactional

@@ -28,6 +28,7 @@ public class MessageService {
     @Autowired
     private UserService userService;
 
+    @Autowired
     private ApplicationEventPublisher eventPublisher;
 
 

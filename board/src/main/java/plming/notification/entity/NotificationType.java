@@ -28,7 +28,7 @@ public enum NotificationType {
     public String makeUrl(Long id) {
         return url + id;
     }
-    public String makeUrl() {
+    public String getUrl() {
         return url;
     }
 }
