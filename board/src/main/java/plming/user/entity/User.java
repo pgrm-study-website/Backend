@@ -48,7 +48,7 @@ public class User {
     public User(Long id,String nickname, String email, String password, String image, String introduce, String github, String role, int social, String socialId){
         Assert.hasText(nickname,"nickname must not be null");
         Assert.hasText(role,"role must not be null");
-        Assert.isTrue(social >= 0 && social <= 3,"social must be '0 <= social <= 2'");
+        Assert.isTrue(social >= 0 && social <= 3,"social must be '0 <= social <= 3'");
         this.nickname = nickname;
         this.email = email;
         this.password = password;

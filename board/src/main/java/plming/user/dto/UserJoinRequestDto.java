@@ -20,7 +20,7 @@ public class UserJoinRequestDto {
                 .email(email)
                 .password(password)
                 .role("ROLE_USER")
-                .social('0')
+                .social(0)
                 .build();
     }
 }
