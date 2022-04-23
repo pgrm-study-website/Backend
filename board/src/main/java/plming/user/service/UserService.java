@@ -14,7 +14,6 @@ import plming.user.dto.*;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 import plming.user.entity.UserTagRepository;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -80,7 +79,6 @@ public class UserService{
 
     @Transactional
     public UserResponseDto updateUser(UserUpdateRequestDto userUpdateDto) {
-//        jwtTokenProvider.validateTokenAndUserId(request,userUpdateDto.getId());
         User user = userRepository.findById(userUpdateDto.getId())
                 .orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
         if(user.getDeleteYn() == '1'){
