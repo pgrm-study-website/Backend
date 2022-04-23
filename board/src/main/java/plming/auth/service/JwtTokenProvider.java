@@ -1,6 +1,7 @@
 package plming.auth.service;
 
 import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,7 +22,8 @@ import java.util.*;
 public class JwtTokenProvider {
 
     // 임시 비밀키
-    private String secretKey = "sdfeonxcvkongsersdf";
+    @Value("${security.jwt.key}")
+    private String secretKey;
 
     private final PrincipalDetailsService principalDetailsService;
 
