@@ -1,11 +1,14 @@
 package plming.user.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import plming.auth.service.JwtTokenProvider;
+import plming.board.boardApply.repository.ApplicationRepository;
 import plming.exception.CustomException;
 import plming.exception.ErrorCode;
+import plming.message.service.MessageService;
+import plming.notification.repository.NotificationRepository;
 import plming.storage.service.StorageService;
 import plming.user.dto.*;
 import plming.user.entity.User;
@@ -16,25 +19,18 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserService{
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-
-    @Autowired
-    private UserTagService userTagService;
-
-    @Autowired
-    private UserTagRepository userTagRepository;
-
-    @Autowired
-    private StorageService storageService;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final UserTagService userTagService;
+    private final UserTagRepository userTagRepository;
+    private final StorageService storageService;
+    private final MessageService messageService;
+    private final NotificationRepository notificationRepository;
+    private final ApplicationRepository applicationRepository;
 
     @Transactional
     public UserJoinResponseDto createUser(UserJoinRequestDto userJoinRequestDto) {
@@ -61,12 +57,8 @@ public class UserService{
     }
 
     public UserResponseDto getUserByUserId(Long userId) {
-        return toUserResponseDto(getUserById(userId));
-    }
-
-    public User getUserById(Long userId){
         User user = userRepository.findById(userId).orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
-        return user;
+        return toUserResponseDto(user);
     }
 
     public UserResponseDto getUserByUserEmail(String email) {
@@ -121,6 +113,12 @@ public class UserService{
         if(user.getDeleteYn() == '1'){
             throw new CustomException(ErrorCode.ALREADY_DELETE);
         }
+        if(user.getImage() != null){
+            storageService.deleteImage(user.getImage());
+        }
+        notificationRepository.deleteAllByUserId(userId);
+        applicationRepository.deleteAllByUser(user);
+        messageService.deleteAllMessageByUserId(userId);
         userTagRepository.deleteAllByUser(user);
         user.delete();
     }
