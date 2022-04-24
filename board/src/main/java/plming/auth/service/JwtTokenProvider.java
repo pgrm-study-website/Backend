@@ -61,7 +61,7 @@ public class JwtTokenProvider {
 
     public void validateTokenAndUserId(HttpServletRequest request, Long userId){
         Long userIdFromToken = getUserId(resolveToken(request));
-        if(userIdFromToken.equals(userId)){
+        if(!userIdFromToken.equals(userId)){
             throw new CustomException(ErrorCode.FORBIDDEN);
         }
     }
