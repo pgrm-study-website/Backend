@@ -43,11 +43,10 @@ public class AuthService {
         if(user == null){
             // 회원가입
             UserSocialJoinRequestDto userSocialJoinRequestDto = new UserSocialJoinRequestDto(
-                    nicknameService.createRandomNickname(),socialType,userSocialId);
+                    nicknameService.createRandomNickname(socialType),socialType,userSocialId);
             userService.createSocialUser(userSocialJoinRequestDto);
             user = userRepository.findBySocialAndSocialId(socialType,userSocialId).orElseThrow(() -> new CustomException(ErrorCode.USERS_NOT_FOUND));
         }
-
         String token = jwtTokenProvider.createToken(user.getId());
         jwtTokenProvider.setTokenInCookie(response,token);
         return new UserJoinResponseDto(user);
