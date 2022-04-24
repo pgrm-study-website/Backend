@@ -52,7 +52,7 @@ public class NotificationController {
         return responseService.getSingleResult(count);
     }
 
-    @DeleteMapping()
+    @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
     public void deleteNotification(@Nullable @RequestParam final Long id, @NotNull @CookieValue final String token) {
 
