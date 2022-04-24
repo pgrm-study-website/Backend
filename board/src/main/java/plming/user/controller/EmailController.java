@@ -1,6 +1,6 @@
 package plming.user.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import plming.user.service.EmailService;
@@ -11,10 +11,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/users/email")
+@RequiredArgsConstructor
 public class EmailController {
 
-    @Autowired
-    private EmailService emailService;
+    private final EmailService emailService;
 
     @PostMapping("/send-code")
     public ResponseEntity<String> emailAuth(HttpServletRequest request, @RequestBody Map<String, String> email) throws Exception {

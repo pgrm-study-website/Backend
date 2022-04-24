@@ -17,6 +17,7 @@ public class UserResponseDto {
     private String email;
     private String introduce;
     private String github;
+    private int social;
     private List<String> tagsList;
 
     public UserResponseDto(User user, List<String> tagsList){
@@ -26,6 +27,7 @@ public class UserResponseDto {
         this.image = user.getImage();
         this.introduce = user.getIntroduce();
         this.github = user.getGithub();
+        this.social = user.getSocial();
         this.tagsList = tagsList;
     }
 }

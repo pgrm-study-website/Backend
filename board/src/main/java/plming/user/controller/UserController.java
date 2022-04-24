@@ -1,7 +1,7 @@
 package plming.user.controller;
 
 import com.sun.istack.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import plming.auth.service.JwtTokenProvider;
@@ -17,18 +17,12 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+    private final UserService userService;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    /*
-     * 회원가입을 진행할 때 이메일 중복확인도 함께 진행한다.
-     * 이메일이 중복되어 있다면, userService.createUser()는 null을 반환한다.
-     * null check를 통해, 정상적으로 회원가입이 되었는지 확인한다.
-     */
     // C
     @PostMapping
     public ResponseEntity joinUser(@RequestBody UserJoinRequestDto userJoinRequestDto){

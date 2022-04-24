@@ -1,6 +1,6 @@
 package plming.message.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import plming.auth.service.JwtTokenProvider;
@@ -16,12 +16,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/messages")
+@RequiredArgsConstructor
 public class MessageController {
 
-    @Autowired
-    private MessageService messageService;
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+    private final MessageService messageService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @GetMapping("/user/{userId}")
     public List<MessageGroupResponseDto> getMessageGroupList(@PathVariable Long userId, HttpServletRequest request){

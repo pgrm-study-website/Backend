@@ -23,7 +23,6 @@ public class UserService{
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final JwtTokenProvider jwtTokenProvider;
     private final UserTagService userTagService;
     private final UserTagRepository userTagRepository;
     private final StorageService storageService;
@@ -38,7 +37,7 @@ public class UserService{
         userJoinRequestDto.setPassword(bCryptPasswordEncoder.encode(userJoinRequestDto.getPassword()));
         User user = userJoinRequestDto.toEntity();
         userRepository.save(user);
-        return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
+        return new UserJoinResponseDto(user);
     }
 
     @Transactional
@@ -46,7 +45,7 @@ public class UserService{
         if(isNickNameOverlap(userSocialJoinRequestDto.getNickname())) throw new CustomException(ErrorCode.NICKNAME_OVERLAP);
         User user = userSocialJoinRequestDto.toEntity();
         userRepository.save(user);
-        return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
+        return new UserJoinResponseDto(user);
     }
 
     public UserResponseDto getUserByNickName(String nickName) {

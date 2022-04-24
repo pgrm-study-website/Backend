@@ -13,4 +13,12 @@ public class UserJoinResponseDto {
     private Long id;
     private String nickname;
     private String image;
+    private int social;
+
+    public UserJoinResponseDto(User user){
+        this.id = user.getId();
+        this.nickname = user.getNickname();
+        this.image = user.getImage();
+        this.social = user.getSocial();
+    }
 }
