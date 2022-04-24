@@ -1,5 +1,6 @@
 package plming.auth.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,21 +21,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class AuthService {
-
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-    @Autowired
-    private OauthService oauthService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private NicknameService nicknameService;
-
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final OauthService oauthService;
+    private final UserService userService;
+    private final NicknameService nicknameService;
 
     public UserJoinResponseDto loginWithEmail(String email, String password, HttpServletResponse response){
         User user = userRepository.findByEmail(email).orElseThrow(()->new CustomException(ErrorCode.LOGIN_UNAUTHORIZED_EMAIL));
@@ -52,9 +46,9 @@ public class AuthService {
         if(user == null){
             // 회원가입
             UserSocialJoinRequestDto userSocialJoinRequestDto = new UserSocialJoinRequestDto(
-                    nicknameService.createRandomNickname(),socialType,userSocialId);
+                    nicknameService.createRandomNickname(socialType),socialType,userSocialId);
             userService.createSocialUser(userSocialJoinRequestDto);
-            user = userRepository.findBySocialAndSocialId(socialType,userSocialId).orElseThrow(()->new RuntimeException());
+            user = userRepository.findBySocialAndSocialId(socialType,userSocialId).orElseThrow(RuntimeException::new);
         }
 
         String token = jwtTokenProvider.createToken(user.getId());
