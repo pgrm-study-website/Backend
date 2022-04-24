@@ -45,7 +45,7 @@ public class AuthService {
             UserSocialJoinRequestDto userSocialJoinRequestDto = new UserSocialJoinRequestDto(
                     nicknameService.createRandomNickname(),socialType,userSocialId);
             userService.createSocialUser(userSocialJoinRequestDto);
-            user = userRepository.findBySocialAndSocialId(socialType,userSocialId).orElseThrow(RuntimeException::new);
+            user = userRepository.findBySocialAndSocialId(socialType,userSocialId).orElseThrow(() -> new CustomException(ErrorCode.USERS_NOT_FOUND));
         }
 
         String token = jwtTokenProvider.createToken(user.getId());
