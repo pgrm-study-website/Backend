@@ -54,7 +54,7 @@ public class UserController {
     // U
     @PatchMapping("/{userId}")
     public UserResponseDto updateUser(@NotNull @PathVariable Long userId, @RequestBody UserUpdateRequestDto userUpdateDto, HttpServletRequest request){
-        jwtTokenProvider.validateTokenAndUserId(request,userUpdateDto.getId());
+        jwtTokenProvider.validateTokenAndUserId(request,userId);
         userUpdateDto.setId(userId);
         return userService.updateUser(userUpdateDto);
     }
