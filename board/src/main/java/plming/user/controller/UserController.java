@@ -1,9 +1,10 @@
 package plming.user.controller;
 
 import com.sun.istack.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import plming.auth.service.JwtTokenProvider;
 import plming.user.dto.UserJoinResponseDto;
 import plming.user.dto.UserResponseDto;
 import plming.user.dto.UserJoinRequestDto;
@@ -16,16 +17,12 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    /*
-     * 회원가입을 진행할 때 이메일 중복확인도 함께 진행한다.
-     * 이메일이 중복되어 있다면, userService.createUser()는 null을 반환한다.
-     * null check를 통해, 정상적으로 회원가입이 되었는지 확인한다.
-     */
     // C
     @PostMapping
     public ResponseEntity joinUser(@RequestBody UserJoinRequestDto userJoinRequestDto){
@@ -56,7 +53,8 @@ public class UserController {
 
     // U
     @PatchMapping("/{userId}")
-    public UserResponseDto updateUser(@NotNull @PathVariable Long userId, @RequestBody UserUpdateRequestDto userUpdateDto){
+    public UserResponseDto updateUser(@NotNull @PathVariable Long userId, @RequestBody UserUpdateRequestDto userUpdateDto, HttpServletRequest request){
+        jwtTokenProvider.validateTokenAndUserId(request,userUpdateDto.getId());
         userUpdateDto.setId(userId);
         return userService.updateUser(userUpdateDto);
     }
@@ -69,14 +67,16 @@ public class UserController {
      */
     // D
     @DeleteMapping("/{userId}")
-    public ResponseEntity deleteUser(@NotNull @PathVariable Long userId){
+    public ResponseEntity deleteUser(@NotNull @PathVariable Long userId, HttpServletRequest request){
+        jwtTokenProvider.validateTokenAndUserId(request,userId);
         userService.deleteUser(userId);
         return ResponseEntity.ok().build();
     }
 
     // 비밀번호 확인
     @PostMapping("/{userId}/password-check")
-    public ResponseEntity checkPassword(@NotNull @PathVariable Long userId,@RequestBody Map<String,String> requestBody){
+    public ResponseEntity checkPassword(@NotNull @PathVariable Long userId,@RequestBody Map<String,String> requestBody, HttpServletRequest request){
+        jwtTokenProvider.validateTokenAndUserId(request,userId);
         String password = requestBody.get("password");
         userService.checkPassword(userId,password);
         return ResponseEntity.ok().build();
@@ -84,7 +84,8 @@ public class UserController {
 
     // 비밀번호 변경
     @PatchMapping("/{userId}/password")
-    public ResponseEntity updatePassword(@NotNull @PathVariable Long userId,@RequestBody Map<String,String> requestBody){
+    public ResponseEntity updatePassword(@NotNull @PathVariable Long userId,@RequestBody Map<String,String> requestBody, HttpServletRequest request){
+        jwtTokenProvider.validateTokenAndUserId(request,userId);
         String password = requestBody.get("password");
         userService.updatePassword(userId,password);
         return ResponseEntity.ok().build();

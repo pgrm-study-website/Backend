@@ -20,7 +20,7 @@ public class StorageService {
     private final StorageProperties storageProperties;
     private Path imagePath;
 
-    public StorageService(StorageProperties storageProperties, UserRepository userRepository) {
+    public StorageService(StorageProperties storageProperties) {
         this.storageProperties = storageProperties;
         imagePath = Paths.get(storageProperties.imagePath);
     }

@@ -1,6 +1,6 @@
 package plming.message.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import plming.event.MessageCreateEvent;
@@ -20,17 +20,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class MessageService {
 
-    @Autowired
-    private MessageRepository messageRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private ApplicationEventPublisher eventPublisher;
-
+    private final MessageRepository messageRepository;
+    private final UserRepository userRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
     public List<MessageGroupResponseDto> getMessageGroupList(Long userId){
         User user = getUserById(userId);
@@ -73,7 +68,7 @@ public class MessageService {
                 m.setReceiverDeleted();
             }
         }
-        messageList.stream().filter(Message::hasToBeDeleted).forEach(m -> messageRepository.delete(m));
+        messageList.stream().filter(Message::hasToBeDeleted).forEach(messageRepository::delete);
     }
 
     @Transactional
@@ -94,5 +89,4 @@ public class MessageService {
     private User getUserById(Long userId){
         return userRepository.findById(userId).orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
     }
-
 }

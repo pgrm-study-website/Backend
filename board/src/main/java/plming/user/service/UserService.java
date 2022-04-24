@@ -14,7 +14,6 @@ import plming.user.dto.*;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 import plming.user.entity.UserTagRepository;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -24,7 +23,6 @@ public class UserService{
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final JwtTokenProvider jwtTokenProvider;
     private final UserTagService userTagService;
     private final UserTagRepository userTagRepository;
     private final StorageService storageService;
@@ -39,7 +37,7 @@ public class UserService{
         userJoinRequestDto.setPassword(bCryptPasswordEncoder.encode(userJoinRequestDto.getPassword()));
         User user = userJoinRequestDto.toEntity();
         userRepository.save(user);
-        return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
+        return new UserJoinResponseDto(user);
     }
 
     @Transactional
@@ -47,7 +45,7 @@ public class UserService{
         if(isNickNameOverlap(userSocialJoinRequestDto.getNickname())) throw new CustomException(ErrorCode.NICKNAME_OVERLAP);
         User user = userSocialJoinRequestDto.toEntity();
         userRepository.save(user);
-        return new UserJoinResponseDto(user.getId(),user.getNickname(),user.getImage());
+        return new UserJoinResponseDto(user);
     }
 
     public UserResponseDto getUserByNickName(String nickName) {
@@ -80,7 +78,6 @@ public class UserService{
 
     @Transactional
     public UserResponseDto updateUser(UserUpdateRequestDto userUpdateDto) {
-//        jwtTokenProvider.validateTokenAndUserId(request,userUpdateDto.getId());
         User user = userRepository.findById(userUpdateDto.getId())
                 .orElseThrow(()-> new CustomException(ErrorCode.USERS_NOT_FOUND));
         if(user.getDeleteYn() == '1'){
