@@ -99,6 +99,11 @@ public enum ErrorCode {
     EMAIL_CODE_NOT_FOUND(HttpStatus.NOT_FOUND,"인증코드를 확인할 수 없습니다."),
 
     /*
+     * 404 NOT_FOUND: 이메일 인증되지 않음
+     */
+    EMAIL_AUTH_NOT_FOUND(HttpStatus.NOT_FOUND,"이메일 인증이 완료되지 않았습니다."),
+
+    /*
      * 404 NOT_FOUND: 리소스를 찾을 수 없음
      */
     COMMENTS_NOT_FOUND(HttpStatus.NOT_FOUND, "댓글 정보를 찾을 수 없습니다."),
