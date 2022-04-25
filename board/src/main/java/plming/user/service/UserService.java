@@ -3,7 +3,6 @@ package plming.user.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import plming.auth.service.JwtTokenProvider;
 import plming.board.boardApply.repository.ApplicationRepository;
 import plming.exception.CustomException;
 import plming.exception.ErrorCode;
@@ -14,6 +13,8 @@ import plming.user.dto.*;
 import plming.user.entity.User;
 import plming.user.entity.UserRepository;
 import plming.user.entity.UserTagRepository;
+
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class UserService{
     private final UserTagRepository userTagRepository;
     private final StorageService storageService;
     private final MessageService messageService;
+    private final EmailService emailService;
     private final NotificationRepository notificationRepository;
     private final ApplicationRepository applicationRepository;
 
@@ -128,17 +130,26 @@ public class UserService{
     }
 
     @Transactional
-    public void updatePassword(Long userId,String password) {
+    public void updatePassword(Long userId, String password) {
         User updateUser = userRepository.findById(userId)
                 .orElseThrow(()->new CustomException(ErrorCode.USERS_NOT_FOUND));
         updateUser.updatePassword(bCryptPasswordEncoder.encode(password));
     }
 
-    public boolean isEmailOverlap(String email) {
+    @Transactional
+    public void updatePasswordBySession(Long userId, String password, HttpSession session) {
+        User updateUser = userRepository.findById(userId)
+                .orElseThrow(()->new CustomException(ErrorCode.USERS_NOT_FOUND));
+        String email = updateUser.getEmail();
+        emailService.certificateEmailAndAuth(session,email);
+        updateUser.updatePassword(bCryptPasswordEncoder.encode(password));
+    }
+
+    private boolean isEmailOverlap(String email) {
         return userRepository.existsByEmail(email);
     }
 
-    public boolean isNickNameOverlap(String nickName){
+    private boolean isNickNameOverlap(String nickName){
         return userRepository.existsByNickname(nickName);
     }
 }
