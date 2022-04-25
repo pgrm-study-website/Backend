@@ -6,6 +6,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import plming.exception.CustomException;
 import plming.exception.ErrorCode;
+import plming.user.entity.UserRepository;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -17,6 +18,8 @@ import java.util.Random;
 public class EmailService {
 
     private final JavaMailSender emailSender;
+    private final UserRepository userRepository;
+    private final String authAttributeName = "auth";
 
     // 메시지 생성
     private MimeMessage createMessage(String email, String code)throws Exception{
@@ -49,6 +52,7 @@ public class EmailService {
             MimeMessage message = createMessage(email, code);
             emailSender.send(message);
             session.setAttribute(email,code);
+            session.setAttribute(authAttributeName,false);
             return true;
         }catch(MailException es){
             return false;
@@ -62,8 +66,19 @@ public class EmailService {
             if(!originalCode.equals(inputCode)){
                 throw new CustomException(ErrorCode.BAD_REQUEST_EMAIL);
             }
+            session.setAttribute(authAttributeName,true);
+            session.setMaxInactiveInterval(300);
         }catch (Exception e){
             throw new CustomException(ErrorCode.BAD_REQUEST_EMAIL);
         }
+    }
+
+    // 이메일 인증여부를 확인
+    public void certificateEmailAndAuth(HttpSession session, String email){
+        // 입력받은 이메일로 인증절차를 진행하였는지 확인
+        if(session.getAttribute(email) == null) throw new CustomException(ErrorCode.FORBIDDEN);
+        // 이메일 인증여부 확인
+        boolean isAuthed = (boolean)session.getAttribute(authAttributeName);
+        if(!isAuthed) throw new CustomException(ErrorCode.EMAIL_AUTH_NOT_FOUND);
     }
 }

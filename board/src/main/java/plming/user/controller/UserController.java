@@ -12,6 +12,7 @@ import plming.user.dto.UserUpdateRequestDto;
 import plming.user.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 
@@ -84,10 +85,14 @@ public class UserController {
 
     // 비밀번호 변경
     @PatchMapping("/{userId}/password")
-    public ResponseEntity updatePassword(@NotNull @PathVariable Long userId,@RequestBody Map<String,String> requestBody, HttpServletRequest request){
-        jwtTokenProvider.validateTokenAndUserId(request,userId);
+    public ResponseEntity updatePassword(@NotNull @PathVariable Long userId, @RequestBody Map<String,String> requestBody, HttpServletRequest request, HttpSession session){
         String password = requestBody.get("password");
-        userService.updatePassword(userId,password);
+        try {
+            jwtTokenProvider.validateTokenAndUserId(request,userId);
+            userService.updatePassword(userId,password);
+        }catch (Exception e){
+            userService.updatePasswordBySession(userId,password,session);
+        }
         return ResponseEntity.ok().build();
     }
 
