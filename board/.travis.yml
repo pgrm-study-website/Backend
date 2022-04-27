@@ -12,6 +12,5 @@ cache:
 
 script: "./gradlew clean build"
 
-
 notifications:
   slack: w1647304024-c1w704883:d3gvjHoW3psmzQcbZZqfwPJk
