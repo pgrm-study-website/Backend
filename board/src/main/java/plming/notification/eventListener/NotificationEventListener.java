@@ -36,6 +36,6 @@ public class NotificationEventListener {
 
         notificationService.send(event.getReceiver(), event.getNotificationType(),
                 event.getNotificationType().makeContent(event.getMessage().getSender().getNickname()),
-                event.getNotificationType().getUrl());
+                event.getNotificationType().makeUrl(event.getMessage().getSender().getId()));
     }
 }
