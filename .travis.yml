@@ -1,23 +1,24 @@
 language: java
 jdk:
-- openjdk11
+  - openjdk11
 branches:
   only:
-  - develope
+    - develope
 cache:
   directories:
-  - "$HOME/.m2/repository"
-  - "$HOME/.gradle"
+    - "$HOME/.m2/repository"
+    - "$HOME/.gradle"
 before_install:
-- cd ./board/src/main/resources
-- openssl aes-256-cbc -K $encrypted_a8b398283136_key -iv $encrypted_a8b398283136_iv
-  -in secretFile.tar.enc -out secretFile.tar -d
-- tar xvf secretFile.tar
-- cd ./secretFile
-- mv application.properties ./..
-- mv keystore.p12 ./..
-- cd ./../../../..
-- chmod +x gradlew
+  - cd ./board/src/main/resources
+  - openssl aes-256-cbc -K $encrypted_a8b398283136_key -iv $encrypted_a8b398283136_iv
+    -in secretFile.tar.enc -out secretFile.tar -d
+  - tar xvf secretFile.tar
+  - cd ./secretFile
+  - mv application.properties ./..
+  - mv keystore.p12 ./..
+  - cd ./../../../..
+  - chmod +x gradlew
 script: "./gradlew clean build"
-notifications:
-  slack: w1647304024-c1w704883:d3gvjHoW3psmzQcbZZqfwPJk
+notification:
+  slack:
+    secure: HUbiRj9c+kt5KrssdxGtZLmPu4nimvfyWC9/gkw61MlvIINkxY56xEnY9V2VKG0MOv9L7ugD21Hju6tV9bawofXM4/FVmvffFHMjHnl08ZBPkMs3qCAKDAHguWEehLSE6NcX9eIbV0t3GLFwc7psm6tvBC/E5rT34vJ/rcTVuCtxJmWady/Jvu26ALYmM4lnOUmn9rwdxxqJZywVc5ec95cOtOcWTrx7Kv8sBwQwao3ynwluoXE9vwnMrnCBn4TkMk65+9sS4IY/NvC/T1DCNRWtIl/EHUHB9XvWtXL0ckFNHIEmB8ksMdOxoF77lLr1VJlaQFErs+LsTOXX1UZemybIfGuNJNX7bUszVCXXhcbRkR0aB3fV2elqsjYycNNJRRAA+xqYw6c0dYCCrJZLzoopiKkIoMmFtMhG2Ek1lLaA6wzSN4lI/HQnRzAFNl14bjMPZ/2klxj/9XnzkD++44880PBlY/BFP6C9ht2j7gNXI6u3Syoi6WOYZcNb1bdHUf8iIXnlz23TzwlbcFLkMFY1/QPN9ETC8wkbRdfLv3wBFSfI9x7UeYHowNh/GTbMQrf6XCbOxN19RlW7Pe6Bj5W5xPiaWUSqw7yBdvuMqKKPq6VwlCX9sw+Ue2lyD4lDVRriSiUmcZR4SaUviHrOaSfjwmaO2hmwk9Qa3bjzhls=
