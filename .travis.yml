@@ -1,20 +1,23 @@
 language: java
 jdk:
-  - openjdk11
-
+- openjdk11
 branches:
   only:
-    - develope
+  - develope
 cache:
   directories:
-    - '$HOME/.m2/repository'
-    - '$HOME/.gradle'
-
+  - "$HOME/.m2/repository"
+  - "$HOME/.gradle"
 before_install:
-  - "cd ./board"
-  - "chmod +x gradlew"
-
+- cd ./board/src/main/resources
+- openssl aes-256-cbc -K $encrypted_a8b398283136_key -iv $encrypted_a8b398283136_iv
+  -in secretFile.tar.enc -out secretFile.tar -d
+- tar xvf secretFile.tar
+- cd ./secretFile
+- mv application.properties ./..
+- mv keystore.p12 ./..
+- cd ./../../../..
+- chmod +x gradlew
 script: "./gradlew clean build"
-
 notifications:
   slack: w1647304024-c1w704883:d3gvjHoW3psmzQcbZZqfwPJk
