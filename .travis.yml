@@ -10,6 +10,9 @@ cache:
     - '$HOME/.m2/repository'
     - '$HOME/.gradle'
 
+before_install:
+  - "cd ./board"
+
 script: "./gradlew clean build"
 
 notifications:
