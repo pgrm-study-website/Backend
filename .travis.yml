@@ -48,7 +48,7 @@ deploy:
     bucket: spring-deploy-build
     key: spring_deploy.zip
     bundle_type: zip
-    application: spring_deploy
+    application: spring-deploy
     deployment_group: spring-deploy-group
     region: ap-northeast-2
     wait-until-deployed: true
