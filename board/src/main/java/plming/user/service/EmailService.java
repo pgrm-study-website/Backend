@@ -24,11 +24,24 @@ public class EmailService {
     // 메시지 생성
     private MimeMessage createMessage(String email, String code)throws Exception{
         MimeMessage  message = emailSender.createMimeMessage();
-
+        String content =
+                "<div style= \"font-family: 'Apple SD Gothic Neo', 'sans-serif' !important; width: 540px; height: 600px; border-top: 4px solid #555; margin: 100px auto; padding: 30px 0; box-sizing: border-box;\">"
+                        +"<h1 style=\"margin: 0; padding: 0 5px; font-size: 28px; font-weight: 400;\">"
+                        +"<span style=\"font-size: 15px; margin: 0 0 10px 3px;\">Plming</span><br/>"
+                        +"<span style=\"color: #555;\">메일인증코드</span> 안내입니다."
+                        +"</h1>"
+                        +"<p style=\"font-size: 16px; line-height: 26px; margin-top: 30px; padding: 0 5px;\">"
+                        +"<b style=\"color: #555\">"+code+"</b>를 인증코드창에 기입하여 이메일 인증을 완료해주세요.<br/>"
+                        +"</p>"
+                        +"<div style=\"border-top: 1px solid #DDD; padding: 5px;\">"
+                        +"<p style=\"font-size: 13px; line-height: 21px; color: #555;\">"
+                        +"</p>"
+                        +"</div>"
+                        +"</div>";
         message.addRecipients(MimeMessage.RecipientType.TO, email); //보내는 대상
         message.setSubject("Plming 확인 코드: " + code); //제목
 
-        message.setText(code, "utf-8", "html"); //내용
+        message.setText(content, "utf-8", "html"); //내용
         message.setFrom(new InternetAddress("admin@plming.netfliy.com","plming")); //보내는 사람
 
         return message;
