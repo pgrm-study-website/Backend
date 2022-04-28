@@ -34,3 +34,5 @@ sudo chmod 755 $JAR_NAME
 echo "> $JAR_NAME 실행"
 
 sudo nohup java -jar $REPOSITORY/$JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
+
+ps ax | grep jar
