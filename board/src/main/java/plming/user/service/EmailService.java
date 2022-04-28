@@ -21,7 +21,7 @@ public class EmailService {
     private final UserRepository userRepository;
     private final String authAttributeName = "auth";
 
-    // 메시지 생성
+    // 메시지 생성.
     private MimeMessage createMessage(String email, String code)throws Exception{
         MimeMessage  message = emailSender.createMimeMessage();
         String content =
