@@ -14,7 +14,7 @@ CURRENT_PID=$(pgrep -f jar)
 echo "> 현재 구동 중인 스프링 어플리케이션 pid : $CURRENT_PID"
 
 if [ -z "$CURRENT_PID" ]; then
-  echo "> 현재 구동 중인 스프링 어플리케이션이 없으므로 종료하지 않습니다.";
+  echo "> 현재 구동 중인 스프링 어플리케이션이 없으므로 종료하지 않습니다";
 else
   echo "> sudo kill -9 $CURRENT_PID";
   sudo kill -9 $CURRENT_PID;
