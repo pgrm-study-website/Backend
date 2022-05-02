@@ -1,0 +1,60 @@
+language: java
+jdk:
+  - openjdk11
+branches:
+  only:
+    - develope
+cache:
+  directories:
+    - "$HOME/.m2/repository"
+    - "$HOME/.gradle"
+before_install:
+  - cd ./board/src/main/resources
+  - openssl aes-256-cbc -K $encrypted_a8b398283136_key -iv $encrypted_a8b398283136_iv
+    -in secretFile.tar.enc -out secretFile.tar -d
+  - tar xvf secretFile.tar
+  - cd ./secretFile
+  - mv application.properties ./..
+  - mv keystore.p12 ./..
+  - cd ./../../../..
+  - chmod +x gradlew
+script: "./gradlew clean build"
+notification:
+  slack:
+    secure: HUbiRj9c+kt5KrssdxGtZLmPu4nimvfyWC9/gkw61MlvIINkxY56xEnY9V2VKG0MOv9L7ugD21Hju6tV9bawofXM4/FVmvffFHMjHnl08ZBPkMs3qCAKDAHguWEehLSE6NcX9eIbV0t3GLFwc7psm6tvBC/E5rT34vJ/rcTVuCtxJmWady/Jvu26ALYmM4lnOUmn9rwdxxqJZywVc5ec95cOtOcWTrx7Kv8sBwQwao3ynwluoXE9vwnMrnCBn4TkMk65+9sS4IY/NvC/T1DCNRWtIl/EHUHB9XvWtXL0ckFNHIEmB8ksMdOxoF77lLr1VJlaQFErs+LsTOXX1UZemybIfGuNJNX7bUszVCXXhcbRkR0aB3fV2elqsjYycNNJRRAA+xqYw6c0dYCCrJZLzoopiKkIoMmFtMhG2Ek1lLaA6wzSN4lI/HQnRzAFNl14bjMPZ/2klxj/9XnzkD++44880PBlY/BFP6C9ht2j7gNXI6u3Syoi6WOYZcNb1bdHUf8iIXnlz23TzwlbcFLkMFY1/QPN9ETC8wkbRdfLv3wBFSfI9x7UeYHowNh/GTbMQrf6XCbOxN19RlW7Pe6Bj5W5xPiaWUSqw7yBdvuMqKKPq6VwlCX9sw+Ue2lyD4lDVRriSiUmcZR4SaUviHrOaSfjwmaO2hmwk9Qa3bjzhls=
+
+before_deploy:
+  - mkdir -p before_deploy
+  - cp scripts/*.sh before_deploy/
+  - cp appspec.yml before_deploy/
+  - cp build/libs/*.jar before_deploy/
+  - cd before_deploy && zip -r before_deploy *
+  - cd ../ && mkdir -p deploy
+  - mv before_deploy/before_deploy.zip deploy/spring_deploy.zip
+
+deploy:
+  # S3로 파일업로드
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: spring-deploy-build
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private
+    local_dir: deploy
+    wait-until-deployed: true
+    on:
+      all_branches: true
+
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: spring-deploy-build
+    key: spring_deploy.zip
+    bundle_type: zip
+    application: spring-deploy
+    deployment_group: spring-deploy-group
+    region: ap-northeast-2
+    wait-until-deployed: true
+    on:
+      all_branches: true
