@@ -27,9 +27,13 @@
 
 - 게시글 신청 CRUD
 
-  - Spring Data JPA를 활용해 게시글 CRUD API 구현
+  - Spring Data JPA를 활용해 게시글 신청 CRUD API 구현
   - 선택 이유: 게시글 CRUD 부분과 같다.
 
+
+- 게시글 댓글 CRUD
+  - Spring Data JPA를 활용해 게시글 댓글 CRUD API 구현
+  - 선택 이유: 게시글 CRUD 부분과 같다.
 
 
 ### 2. 사용자 관련 핵심 기능
