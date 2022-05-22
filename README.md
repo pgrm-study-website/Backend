@@ -33,7 +33,7 @@
 
 ### 2. 사용자 관련 핵심 기능
 
-- 이메일 로그인 + 소셜 로그인 <img src="https://avatars.githubusercontent.com/u/80041449?v=4" align="center" width="25" height="25"> [JMsuper](https://github.com/JMsuper)
+- 이메일 로그인 + 소셜 로그인 (<img src="https://avatars.githubusercontent.com/u/80041449?v=4" align="center" width="25" height="25"> [JMsuper](https://github.com/JMsuper))
 
   - cors문제를 해결하기 위해 Spring Security사용
   - 이메일 로그인과 소셜 로그인의 API를 통합하여 제공하기 위해, Spring Security Oauth를 사용하지 않고 직접 Oauth 서버와 통신하여 소셜 로그인을 구현하였다. 
@@ -41,7 +41,7 @@
   - JWT 토큰을 활용하여 '인가'를 구현
   - 선택 이유 : AWS EC2 프리티어를 활용하여 서버를 구축하여, 세션을 활용하여 인증 및 인가를 구현할 경우 서버에 부담이 될 것이다. 서버에 부담이 덜 가도록 하기 위해, JWT토큰 방식을 활용하였다.
 
-- 쪽지 기능 <img src="https://avatars.githubusercontent.com/u/80041449?v=4" align="center" width="25" height="25"> [JMsuper](https://github.com/JMsuper)
+- 쪽지 기능 (<img src="https://avatars.githubusercontent.com/u/80041449?v=4" align="center" width="25" height="25"> [JMsuper](https://github.com/JMsuper))
   - 복잡한 쿼리를 생성하기 위해 QueryDSL을 사용
   
 - 알림 기능 (<img src="https://avatars.githubusercontent.com/u/66582313?v=4" align="center" width="25" height="25"> [slchoi](https://github.com/SulimChoi))
