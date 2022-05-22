@@ -7,6 +7,18 @@
 
 </br>
 
+## 🛠 기술 스택
+
+- Spring Boot (API Server)
+- Spring Security (Security)
+- MySQL (RDB)
+- JPA & QueryDSL (ORM)
+- JUnit (Test)
+- AWS (Infra)
+- Travis CI (CI)
+
+</br>
+
 ## 🔍 핵심 기능
 
 ### 1. 게시글 관련 핵심 기능 (<img src="https://avatars.githubusercontent.com/u/66582313?v=4" align="center" width="25" height="25"> [slchoi](https://github.com/SulimChoi))
@@ -90,17 +102,6 @@
 |<img src="https://github.com/pgrm-study-website/.github/blob/main/images/메시지%20확인.gif"/>|<img src="https://github.com/pgrm-study-website/.github/blob/main/images/쪽지%20보내기.gif"/>|
 |   **알림 확인**   |  **회원 탈퇴**   |
 |<img src="https://github.com/pgrm-study-website/.github/blob/main/images/카카오%20로그인.gif"/>|<img src="https://github.com/pgrm-study-website/.github/blob/main/images/회원탈퇴.gif"/>|
-
-
-## 🛠 기술 스택
-
-- Spring Boot (API Server)
-- Spring Security (Security)
-- MySQL (RDB)
-- JPA & QueryDSL (ORM)
-- JUnit (Test)
-- AWS (Infra)
-- Travis CI (CI)
 
 </br>
 
