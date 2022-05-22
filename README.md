@@ -78,13 +78,13 @@
 | :---------------: | :---------------: |
 |                   |<img src="https://github.com/pgrm-study-website/.github/blob/main/images/로그인.gif"/>|
 |  **구글 로그인**  | **카카오 로그인** |
-|                   |<img src="https://github.com/pgrm-study-website/.github/blob/main/images/카카오%20로그인.gif"/>|
+|<img src="https://github.com/pgrm-study-website/.github/blob/main/images/구글%20로그인.gif"/>|<img src="https://github.com/pgrm-study-website/.github/blob/main/images/카카오%20로그인.gif"/>|
 | **깃허브 로그인** |  **마이페이지**   |
-|                   |<img src="https://github.com/pgrm-study-website/.github/blob/main/images/마이페이지.gif"/>|
+|<img src="https://github.com/pgrm-study-website/.github/blob/main/images/깃허브%20로그인.gif"/>|<img src="https://github.com/pgrm-study-website/.github/blob/main/images/마이페이지.gif"/>|
 |   **쪽지 확인**   |  **쪽지 보내기**  |
 |<img src="https://github.com/pgrm-study-website/.github/blob/main/images/메시지%20확인.gif"/>|<img src="https://github.com/pgrm-study-website/.github/blob/main/images/쪽지%20보내기.gif"/>|
 |   **알림 확인**   |  **회원 탈퇴**   |
-|                  |<img src="https://github.com/pgrm-study-website/.github/blob/main/images/회원탈퇴.gif"/>|
+|<img src="https://github.com/pgrm-study-website/.github/blob/main/images/카카오%20로그인.gif"/>|<img src="https://github.com/pgrm-study-website/.github/blob/main/images/회원탈퇴.gif"/>|
 
 
 ## 🛠 기술 스택
